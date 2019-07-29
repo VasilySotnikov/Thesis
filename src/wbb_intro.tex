@@ -93,15 +93,16 @@ This part of the thesis is organized as follows. In the present chapter, we give
 our calculational setup, details about coupling
 schemes and input parameters employed as well as the choices for the renormalization and
 factorization scales. In
-\chap~\ref{chap:wbb_validation}, we validate our new matrix elements
+\cref{chap:wbb_validation}, we validate our new matrix elements
 and provide thorough checks against automated tools and
-higher-precision targets. In \chap~\ref{chap:wbb_results}, we
+higher-precision targets. In \cref{chap:wbb_results}, we
 present and analyze the results obtained.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Implementation of Numerical Unitarity Methods with Massive Particles in \BlackHat{}}
+\label{sec:BHMassiveImpl}
 In this section we discuss he upgrade of \BlackHat{} which has been carried out in order to be able
 to evaluate one-loop amplitudes with massive quarks.
 \subsection{Additional Topologies}
@@ -168,7 +169,7 @@ amplitude to the 't Hooft-Veltman (HV) scheme~\cite{tHooft:1972tcz}.
 
 \todo{fix error in renormalization}
 
-In \tab{tab:renorm} we summarize the renormalization counterterms
+In \cref{tab:renorm} we summarize the renormalization counterterms
 in the FDH scheme. For all external states we use the on-shell
 scheme and for the QCD coupling we use the $\overline{MS}$ scheme. The gluon
 wave-function-renormalization counterterm receives contributions from all
@@ -256,7 +257,7 @@ quadruple precision~\cite{QD} ($d\sigma_V^\mathrm{HP}$), i.e. up to 32 digits of
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1.1]{plots/numstab3j}
-  \caption{As in \fig{fig:stabilityWbb2j} but for \Wbbjjj{} production,
+  \caption{As in \cref{fig:stabilityWbb2j} but for \Wbbjjj{} production,
   considering only the leading-color contributions to the one-loop matrix elements.
   On the left we show results associated to the six-quark and on the right the ones associated to
 four-quark matrix elements.}
@@ -271,7 +272,7 @@ We produce histograms of the logarithmic relative error $\delta$:
 for sample subprocesses of the most complex types in our calculations. 
 The superscripts ``prod'' and ``HP'' mean normal-production evaluation and
 quadruple floating-point evaluation respectively.
-In \figs{fig:stabilityWbb2j}{fig:stabilityWbb3j} we show a numerical stability plot for \Wbbjj{} and
+In \cref{fig:stabilityWbb2j,fig:stabilityWbb3j} we show a numerical stability plot for \Wbbjj{} and
 \Wbbjjj{} production respectively. For the \Wbbjj{} process we include the two types of
 subprocesses: those associated to the four-quark ($0\rightarrow Wb{\bar b}q{\bar q}'gg$)
 and the six-quark ($0\rightarrow Wb{\bar b}q{\bar q}'Q{\bar Q}$) matrix elements, respectively.
@@ -378,7 +379,7 @@ We use the flexible \texttt{ROOT}~\cite{ROOT} \ntuple{} file format to store our
 PDFs and choices of renormalization and factorization
 scales in our NLO QCD results. The \ntuple{} format was developed in
 Ref.~\cite{BH:Ntuples} and the correct definition of the weights for
-one-loop amplitudes involving massive particles can be found in \secn~\ref{sec:scaledep}.
+one-loop amplitudes involving massive particles can be found in \cref{sec:scaledep}.
 
 \subsection{Input Parameters: Partons Distributions, Couplings and Masses}
 \label{sec:base_setup}
@@ -388,7 +389,7 @@ implemented in the LHAPDF library~\cite{LHAPDF}. The corresponding strong
 coupling is given by $\alps(M_Z)=0.125$ at LO and
 $\alps(M_Z)=0.1128$ at NLO. We evolve $\alps(\mu)$ with
 the QCD beta function for four massless quark flavors, for all $\mu$. This is
-achieved by introducing a decoupling shift for massive quarks, see \chap~\ref{chap:renorm}. We
+achieved by introducing a decoupling shift for massive quarks, see \cref{chap:renorm}. We
 use a one-loop running of $\alps$ at LO and a two-loop running at NLO. We
 choose the quark masses consistent with the PDF sets and use a bottom-quark mass of $m_b=4.75$ GeV and a top-quark mass of $m_t=172$ GeV. The top-quark
 mass appears in closed-loop contributions.
@@ -397,7 +398,7 @@ mass appears in closed-loop contributions.
 The electroweak parameters are obtained in the $G_\mu$
 scheme \cite{Denner2000c} at leading order in the electroweak coupling. This fixes the
 $W$-boson couplings to fermions with the SM input
-parameters as specified in Table~\ref{tab:ewinput}. We compute the parameters $\alpf(M_Z)$,
+parameters as specified in \cref{tab:ewinput}. We compute the parameters $\alpf(M_Z)$,
 $\sin^2(\theta_W)$ and $g_W^2$ using the tree-level relations
 \begin{align}\label{eq:ewlorel}
 \sin^2(\theta_W) &= \left(1-\frac{M_W^2}{M_Z^2}\right)\ , & \alpf(M_Z)&=\frac{\sqrt{2}}{\pi}G_F M_W^2
@@ -427,7 +428,7 @@ g_W^2&=\frac{4\pi\alpf(M_Z) }{\sin^2(\theta_W)}\ .
     \label{tab:ewinput}
   \end{table}
 
-Mass and width of the $W$ boson are specified in Table \ref{tab:ewinput} and the lepton-pair invariant mass follows a relativistic Breit-Wigner distribution. We approximate the CKM matrix by a unit matrix. This
+Mass and width of the $W$ boson are specified in \cref{tab:ewinput} and the lepton-pair invariant mass follows a relativistic Breit-Wigner distribution. We approximate the CKM matrix by a unit matrix. This
 results in a small change of the total cross sections for the setup we use, as
 estimated by LO evaluations with the full CKM matrix. We find that these differences are of the order 1\% for \Wbb{} production and
 below 0.5\% for \Wbbnj[1]{} and \Wbbnj[2]{} production.
@@ -506,15 +507,15 @@ apply the following cuts
 The cuts are applied to both light  and
 $b$ jets. The renormalization and factorization scales are chosen to be equal and set on an
 event-by-event basis by $\mu=\HTpartonicp/2$, according to
-\eqn{eq:htpart}. We define our jets by employing the
+\cref{eq:htpart}. We define our jets by employing the
 anti-$k_T$ jet algorithm~\cite{antikT} with $R=0.4$, as implemented in the
 
 \texttt{FastJet} package~\cite{Cacciari:2011ma}.
 
 \subsection{Total Cross Section and Scale Dependence}
 \label{totalxsw}
-In \tab{tab_Wpj_total_xs}, we present total partonic cross sections,
-employing the kinematical cuts of \eqn{eq:Cuts}, for inclusive production of
+In \cref{tab_Wpj_total_xs}, we present total partonic cross sections,
+employing the kinematical cuts of \cref{eq:Cuts}, for inclusive production of
 both $W^-$ and $W^+$ accompanied by two $b$ jets and zero to three
 light jets. The numerical integration uncertainty is given in parenthesis and
 the scale dependence is quoted in superscripts and subscripts. We also show
@@ -540,7 +541,7 @@ the ratio of NLO over LO results, so called $K$-factors, in separate columns.
   \caption{LO and NLO QCD results for inclusive \Wbbpm+$0,1,2,3$-jet cross
     sections (in $pb$). Results with dynamical scale $\HTpartonicp/2$ are shown
     together with their respective $K$-factors.  The setup employed is specified in
-    section~\ref{sec:kin}, and kinematical cuts in \eqn{eq:Cuts}. Scale
+    section~\ref{sec:kin}, and kinematical cuts in \cref{eq:Cuts}. Scale
     dependence is shown in superscripts and subscripts. The number in parenthesis next to
     the central value gives the corresponding statistical integration
     error.\label{tab_Wpj_total_xs} }
@@ -592,11 +593,11 @@ up, but with milder impact, and for the larger multiplicity processes all
 subprocesses are present at LO. Hence, quantum corrections are milder
 for these processes. Furthermore, kinematical
 constraints at LO are only present for \Wbb{} production, as we will discuss for example for the $p_T^{b\bar b}$ and
-$p_T^W$ observables in section~\ref{sec:hw}. As a consequence, we expect quantum corrections for
+$p_T^W$ observables in \cref{sec:hw}. As a consequence, we expect quantum corrections for
 processes with even more light jets to be under relatively good pertubative control.
 
 
-In \tab{tab_xs_ratios} we show first, in columns 2 and 3, $W^+/W^-$ charge
+In \cref{tab_xs_ratios} we show first, in columns 2 and 3, $W^+/W^-$ charge
 ratios as a function of the number of jets. These ratios show a large stability
 with respect to the quantum corrections, which have been explored in similar
 processes as a way to make precise determinations of ratios of $u/d$ PDFs (see
@@ -605,7 +606,7 @@ of the number of jets, with a slight monotonic increase given the larger mean
 values of Bjorken $x$ sampled as a consequence of the larger invariant mass necessary to
 produce the corresponding final states.
 
-Finally we also explore in \tab{tab_xs_ratios} the jet ratios in $W^\pm
+Finally we also explore in \cref{tab_xs_ratios} the jet ratios in $W^\pm
 b\bar b$ production in association with light jets. Similarly to studies of these ratios in $W+n$-jet (light jet)
 production~\cite{BH:Wratios}, we observe that the results for $n=1$ are special
 given the large NLO corrections for \Wbb{} production. The opening of an
@@ -617,7 +618,7 @@ correction to $W+5$-jet production~\cite{BH:W5j}. Similarly, in \Wbb{} inclusive
 production, it might be interesting to explore the NLO QCD corrections to
 $W+b\bar b+4$-jet production in the future.
 
-In \fig{fig_Wjets_sdep} we study the dependence of total cross sections in
+In \cref{fig_Wjets_sdep} we study the dependence of total cross sections in
 \Wbbm{} and \Wbbp{} production in association with up to 3 light jets on the
 renormalization and factorization scale. We employ the central dynamical scale
 $\mu_0=\mu_\mathrm{R}=\mu_\mathrm{F}=\HTpartonicp/2$. The scale variations
@@ -704,12 +705,12 @@ structure of the corrections are similar between them.
   \centering
   \includegraphics[clip,scale=1]{plots/ptsubleading}
   \caption{The $\pT$ distributions of the subleading $b$ jet (ordered by $p_T$) in inclusive \Wbbm$+n$-jet
-    production at the LHC with $\sqrt{s}=13$~TeV. Format as in \fig{fig_Wmnjpt}.}
+    production at the LHC with $\sqrt{s}=13$~TeV. Format as in \cref{fig_Wmnjpt}.}
     \label{fig_Wmnjpt2}
   \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In \figs{fig_Wmnjpt}{fig_Wmnjpt2} we show the jet-$p_T$ spectra of the leading
+In \cref{fig_Wmnjpt,fig_Wmnjpt2} we show the jet-$p_T$ spectra of the leading
 and subleading $b$ jets (ordered by $p_T$) respectively, for inclusive
 \Wbbm{} production in association with $n=0,1,2,3$ jets. The upper panel
 of the
@@ -738,12 +739,12 @@ lie inside the LO bands.
   \includegraphics[clip,scale=1]{plots/softestpt}
   \caption{The $\pT$
     distributions of the softest light jet in inclusive \Wbbp$+n$-jet production.
-    Format as in \fig{fig_Wmnjpt}.}
+    Format as in \cref{fig_Wmnjpt}.}
     \label{fig_Wmnjptlight}
   \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In \fig{fig_Wmnjptlight} we show the $p_T$ distributions of the softest light jet in
+In \cref{fig_Wmnjptlight} we show the $p_T$ distributions of the softest light jet in
 inclusive \Wbbp{}$+1,2,3$-jet production. We observe a considerable reduction of the scale
 sensitivity with the inclusion of the QCD corrections, with overlap of the LO
 and NLO bands. It is important to note that for these distributions, which are
@@ -763,14 +764,14 @@ under study.
   \includegraphics[clip,scale=1.0]{plots/htjets.pdf}
   \caption{Distribution in the total transverse jet energy
     $H_T^{jets}$ of light  and $b$ jets for inclusive \Wbbm$+n$-jet
-    production at the LHC with $\sqrt{s}=13$~TeV. Format as in \fig{fig_Wmnjpt}.}
+    production at the LHC with $\sqrt{s}=13$~TeV. Format as in \cref{fig_Wmnjpt}.}
     \label{fig_Wmnjht}
   \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 An interesting observable for many scenarios of physics beyond the SM (BSM), as
 well as for experimental studies at hadron colliders, is that of the total
-hadronic activity in a detector. In \fig{fig_Wmnjht} we show the distribution in
+hadronic activity in a detector. In \cref{fig_Wmnjht} we show the distribution in
 this observable, including all hadronic activity from the light and $b$ jets in
 \Wbbm$+0,1,2,3$-jet production. Large and phase-space dependent NLO
 corrections appear for \Wbb{} as we would expect from previous discussions.
@@ -789,17 +790,17 @@ LO configurations, which contain any $W$ soft enhancements starting at LO.
   \includegraphics[clip,scale=1.0]{plots/drbl.pdf}
   \caption{Distribution in the $\Delta R_{bl^-}$ separation between the first
   $b$ jet (ordered in $p_T$) and the charged lepton for inclusive \Wbbm$+n$ jets
-  production.  Format as in \fig{fig_Wmnjpt}.}
+  production.  Format as in \cref{fig_Wmnjpt}.}
   \label{fig_Wmnjdrbl}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Finally, to end this section, we show in \fig{fig_Wmnjdrbl} the distribution
+Finally, to end this section, we show in \cref{fig_Wmnjdrbl} the distribution
 on the $\Delta R$ separation between the first $b$ jet and charged lepton $l^-$. Most
 of the angular variables that we have studied are similar to this one, which
 shows little structure in the QCD corrections. We only find effects
 when a certain kinematic constraint is imposed at LO and released by the corrections,
-as it is the case on the left most plots of \fig{fig_Wmnjdrbl}. 
+as it is the case on the left most plots of \cref{fig_Wmnjdrbl}. 
 In the case of the $\Delta R_{bl^-}$ at LO in \Wbbm{} production, the parent $W$
 and gluon that give rise to the leptons and $b$ jets are produced with $\Delta
 \phi$ (the difference in azimuthal angle) equal to $\pi$. Also, the $\Delta \eta$
@@ -833,7 +834,7 @@ refs.~\cite{Campbell:2008hh,Caola:2011pz}).
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In order to highlight these effects, in \fig{fig:ratWmmbb} we show the ratio of
+In order to highlight these effects, in \cref{fig:ratWmmbb} we show the ratio of
 a computation performed in the 4FNS consistently keeping the mass of the $b$
 quarks, to that of a corresponding massless calculation performed with massless
 $b$ quarks in the five-flavor number scheme (5FNS). In the latter we use the
@@ -856,7 +857,7 @@ corrections.
 The observed behavior is very similar at what was studied in
 ref.~\cite{FebresCordero:2006sj} in the case of \Wbb{} production, and here we
 extend it to \Wbbj{} production. It is important to mention that although the
-computations in \fig{fig:ratWmmbb} are consistent results in the 4FNS and in the
+computations in \cref{fig:ratWmmbb} are consistent results in the 4FNS and in the
 5FNS, they have the same diagrammatic content at Born level, and in
 particular there is no $b$-initiated subprocess in the massless
 calculation. For
@@ -979,12 +980,12 @@ be rather small, e.g. when compared to missing higher-order corrections.
 \begin{figure}[ht]
   \centering
   \includegraphics[clip,scale=1]{plots/excl_ptw_v4}
-  \caption{The $p_T$ of the $W$ boson in inclusive \Wbbm{} production. Format as in \fig{fig_Wmnjptbb}.}
+  \caption{The $p_T$ of the $W$ boson in inclusive \Wbbm{} production. Format as in \cref{fig_Wmnjptbb}.}
   \label{fig_Wmnjptw}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In \fig{fig_Wmnjptbb}, we show the transverse momentum distribution of
+In \cref{fig_Wmnjptbb}, we show the transverse momentum distribution of
 the $b\bar b$ system. In the upper panel, we show all of our predictions, including the central `NLO+' prediction as well as LO, NLO
 and NLO++. The second panel shows the corresponding scale-dependence bands at
 LO, NLO and NLO+, all normalized by NLO+, as well as the central value for
@@ -1017,12 +1018,12 @@ predictions~\cite{Ridder:2015dxa}.
 \begin{figure}[ht]
   \centering
   \includegraphics[clip,scale=1]{plots/excl_mbb_v4}
-  \caption{The invariant mass of the $b\bar b$ system in inclusive \Wbbm{} production. Format as in \fig{fig_Wmnjptbb}.}
+  \caption{The invariant mass of the $b\bar b$ system in inclusive \Wbbm{} production. Format as in \cref{fig_Wmnjptbb}.}
   \label{fig_Wmnjmbb}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In \fig{fig_Wmnjptw}, we show in the same manner the distribution in the transverse
+In \cref{fig_Wmnjptw}, we show in the same manner the distribution in the transverse
 momentum of the vector boson $p_T^W$. The results are again similar to what we
 encounter for $p_T^{b\bar b}$, with the NLO+ uncertainty estimation marginally
 overlapping with the NLO predictions and with its scale sensitivity of the order
@@ -1030,7 +1031,7 @@ of the NLO++ predictions. The estimation of theoretical uncertainties is about 1
 range of $p_T^W$ shown (as compared to the 25\% of the NLO results). Again, the PDF uncertainties are
 subleading, appearing at 3\% and below.
 
-Finally in \fig{fig_Wmnjmbb} we show the distributions in the $M_{b\bar b}$
+Finally in \cref{fig_Wmnjmbb} we show the distributions in the $M_{b\bar b}$
 observable, which exhibit similar features to the observables
 studied previously in this section. In this case, the uncertainties associated with scale
 sensitivity and missing higher-order effects appear at about 10\% or slightly

@@ -1,20 +1,9 @@
 %%% Definition der Dokumentklasse für A4-Papier und 12 Punkte Schriftgröße.
 %%% Ränder sind für Klebebindung sowohl im A4- als auch im herunterskalierten
 %%% A5-Ausdruck optimiert.
-
 \documentclass[a4paper,titlepage,bibliography=totoc,12pt,BCOR17mm,DIV12,headinclude,footinclude=false]{scrbook}
 
 \usepackage[utf8]{inputenc}
-%\usepackage{ifluatex}
-
-%\ifluatex
-  %%\usepackage{fontspec}
-  %\usepackage{fontenc}
-%\else
-  %%Packages for encoding of eg accented characters
-  %\usepackage[ansinew]{inputenc}
-%\usepackage[T1]{fontenc}
-%\fi
 
 \usepackage{easy-todo}
 
@@ -152,9 +141,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% for ranges of equations
-\usepackage{cleveref}
-
 %-- Defines a CAPTION for a set of equations and numbers
 %   the set of equations is numbered
 % note: the caption adapts the text alignment to the length. 
@@ -240,3 +226,10 @@
 %\ #1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{cmap}
+\usepackage{indentfirst}
+
+% for ranges of equations
+\usepackage{cleveref}
+

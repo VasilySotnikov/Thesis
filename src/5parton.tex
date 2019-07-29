@@ -1,223 +1,9 @@
+\section{Introduction}
 Here motivation and status, references to results.
-\todo{reference Wjj benchmark}
 
-\section{Definition of Amplitudes}
+Do not forget \todo{reference Wjj benchmark}
 
-\subsection{Construction of Cut Equations}
-
-\todo{here describe generation of hierarchies}
-
-%
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[ht] 
-  \begin{center}
-    \begin{tikzpicture}[scale=1.1]
-    % 5 point masters
-      \node at (2.5,0){\includegraphics[scale=0.4]{figures/topologies/BoxPentagon}};
-      \node at (5,0){\includegraphics[scale=0.4]{figures/topologies/TriangleHexagonRed1}};
-      \node at (7.5,0){\includegraphics[scale=0.4]{figures/topologies/BubbleHeptagon}};
-    % Level 2 
-      \node at
-      (0,-1.9){\includegraphics[scale=0.4]{figures/topologies/BoxBoxSG}};
-      \node at
-      (2.5,-2.0){\includegraphics[scale=0.4]{figures/topologies/BoxBox}};
-      \node at
-      (5,-2.0){\includegraphics[scale=0.35]{figures/topologies/BubbleHexagonRed1}};
-      \node at
-      (7.5,-2.0){\includegraphics[scale=0.35]{figures/topologies/BubbleHexagonRed2}};
-      \node at
-      (10,-2.0){\includegraphics[scale=0.35]{figures/topologies/BubbleHexagonRed3}};
-    %
-      \node at
-      (0,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed1}};
-      \node at
-      (2.5,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed2}};
-      \node at
-      (5,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed3}};
-      \node at
-      (7.5,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed4}};
-      \node at
-      (10,-3.6){\includegraphics[scale=0.4]{figures/topologies/BoxTriangle1LS}};
-    % Level 3
-      \node at
-      (0,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonG}};
-      \node at
-      (2,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed1}};
-      \node at
-      (4,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed2}};
-      \node at
-      (6,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed3}};
-      \node at
-      (8,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed4}};
-      \node at
-      (10,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed5}};
-    %
-      \node at
-      (0,-7){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed6}};
-      \node at
-      (2,-7){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed7}};
-      \node at
-      (4,-7){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed8}};
-      \node at
-      (6,-7){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleG}};
-      \node at
-      (8,-6.9){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleSG}};
-      \node at
-      (10,-6.9){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed1}};
-    %
-      \node at
-      (0,-8.4){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed2}};
-      \node at
-      (2,-8.4){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed3}};
-      \node at
-      (4,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed4}};
-      \node at
-      (6,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed5}};
-      \node at
-      (8,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed6}};
-      \node at
-      (10,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed7}};
-    %
-      \node at
-      (3,-9.8){\includegraphics[scale=0.4]{figures/topologies/BoxBubble1LS}};
-      \node at
-      (5,-9.8){\includegraphics[scale=0.35]{figures/topologies/TriangleTriangle1LS}};
-      \node at
-      (7,-9.8){\includegraphics[scale=0.35]{figures/topologies/TriangleTriangle1LSG}};
-    % Level 4
-      \node at
-      (0,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBox}};
-      \node at
-      (2,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBub}};
-      \node at
-      (4,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed1}};
-      \node at
-      (6,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed2}};
-      \node at
-      (8,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed3}};
-      \node at
-      (10,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed4}};
-    %
-      \node at
-      (0,-12.7){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed5}};
-      \node at
-      (2,-12.7){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed6}};
-      \node at
-      (4,-12.7){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGDiag}};
-      \node at
-      (6,-12.7){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGOffDiag}};
-      \node at
-      (8,-12.6){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleSG}};
-      \node at
-      (10.2,-12.75){\includegraphics[scale=0.45] {figures/topologies/TriangleTriangleRed1}};
-    %
-      \node at
-      (0,-13.8){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleRed2}};
-      \node at
-      (2.15,-13.8){\includegraphics[scale=0.45] {figures/topologies/TriangleTriangleRed3}};
-      \node at
-      (4.3,-13.8){\includegraphics[scale=0.45] {figures/topologies/TriangleTriangleRed4}};
-      \node at
-      (6.45,-13.95){\includegraphics[scale=0.4] {figures/topologies/BubbleTriangle1LS}};
-      \node at
-      (8.6,-13.95){\includegraphics[scale=0.4] {figures/topologies/BubbleTriangle1LS_2}};
-      \node at
-      (10.75,-13.95){\includegraphics[scale=0.4] {figures/topologies/BubbleTriangle1LSG}};
-    % Level 6
-      \node at
-      (0,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG1Mass}};
-      \node at
-      (1.8,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG2Mass}};
-      \node at
-      (3.6,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleSG}};
-      \node at
-      (5.4,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleRed1}};
-      \node at
-      (7.2,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleRed2}};
-      \node at
-      (9,-15.55){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS}};
-      \node at
-      (10.8,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS_2}};
-     % Level 7
-      \node at
-      (5.25,-17){\includegraphics[scale=0.6]{figures/topologies/Sunrise}};
-    \end{tikzpicture}
-  \end{center}
-  \caption{Hierarchy of topologies for two-loop five-parton scattering.
-    Only topologically inequivalent structures are shown. All lines
-  are massless, with massive external legs being denoted by two massless external lines entering a vertex.}
-  \label{fig:PropagatorStructures}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[ht] 
-  \begin{center}
-    \begin{tikzpicture}[scale=1.2]
-    % 5 point masters
-      \node at (5,0){\includegraphics[scale=0.4]{figures/topologies/BoxPentagon}};
-      \node at (5,-1){3 masters};
-    % Level 2 
-      \node at
-      (2.5,-1.5){\includegraphics[scale=0.4]{figures/topologies/BoxBoxSG}};
-      \node at (2.5,-2.3){3 masters};
-      \node at
-      (7.5,-1.6){\includegraphics[scale=0.4]{figures/topologies/BoxBox}};
-      \node at (7.5,-2.3){2 masters};
-    % Level 3
-      \node at
-      (0.5,-3.3){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonG}};
-      \node at (0.5,-4.1){2 masters};
-      \node at
-      (3.5,-3.3){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleG}};
-      \node at (3.5,-4.1){2 masters};
-      \node at
-      (6.5,-3.2){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleSG}};
-      \node at (6.5,-4.1){1 master};
-      \node at
-      (9.5,-3.3){\includegraphics[scale=0.4]{figures/topologies/BoxBubble1LS}};
-      \node at (9.5,-4.1){1 master};
-    % Level 4
-      \node at
-      (0,-4.9){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBox}};
-      \node at (0,-5.7){1 master};
-      \node at
-      (2.5,-4.9){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBub}};
-      \node at (2.5,-5.7){1 master};
-      \node at
-      (5,-4.9){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGDiag}};
-      \node at (5,-5.7){1 master};
-      \node at
-      (7.5,-4.9){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGOffDiag}};
-      \node at (7.5,-5.7){2 masters};
-      \node at
-      (10,-4.8){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleSG}};
-      \node at (10,-5.6){1 master};
-    % Level 6
-      \node at
-      (0.5,-6.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG1Mass}};
-      \node at (0.5,-7.3){1 master};
-      \node at
-      (3.5,-6.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG2Mass}};
-      \node at (3.5,-7.3){1 master};
-      \node at
-      (6.5,-6.5){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS}};
-      \node at (6.5,-7.3){1 master};
-      \node at
-      (9.5,-6.45){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS_2}};
-      \node at (9.5,-7.2){1 master};
-     % Level 7
-      \node at
-      (5,-8.2){\includegraphics[scale=0.6]{figures/topologies/Sunrise}};
-      \node at (5,-9){1 master};
-    \end{tikzpicture}
-  \end{center}
-  \caption{Topologies with master integrals}
-  \label{fig:MasterInt}
-\end{figure}
-
-\todo{reference \ref{fig:MasterInt} and \ref{fig:PropagatorStructures} from text}
+\section{Setup}
 
 \subsection{Colour Structures}
 The gluon and fermion amplitudes \eqref{eq:defAmpsTens}
@@ -367,6 +153,225 @@ contributing at order
 $N_f^0$, $N_f^1$ and $N_f^2$.}
 \label{fig_parents4q1g}
 \end{figure}
+
+
+\subsection{Construction of Cut Equations}
+
+\todo{here describe generation of hierarchies}
+
+\subsubsection{Unitarity-Compatible Color Decomposition}
+\todo{Process library belongs here or to the appendix?}
+Here describe the approach of how process library does the colour decomposition.
+
+%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
+\begin{figure}[ht] 
+  \begin{center}
+    \begin{tikzpicture}[scale=1.1]
+    % 5 point masters
+      \node at (2.5,0){\includegraphics[scale=0.4]{figures/topologies/BoxPentagon}};
+      \node at (5,0){\includegraphics[scale=0.4]{figures/topologies/TriangleHexagonRed1}};
+      \node at (7.5,0){\includegraphics[scale=0.4]{figures/topologies/BubbleHeptagon}};
+    % Level 2 
+      \node at
+      (0,-1.9){\includegraphics[scale=0.4]{figures/topologies/BoxBoxSG}};
+      \node at
+      (2.5,-2.0){\includegraphics[scale=0.4]{figures/topologies/BoxBox}};
+      \node at
+      (5,-2.0){\includegraphics[scale=0.35]{figures/topologies/BubbleHexagonRed1}};
+      \node at
+      (7.5,-2.0){\includegraphics[scale=0.35]{figures/topologies/BubbleHexagonRed2}};
+      \node at
+      (10,-2.0){\includegraphics[scale=0.35]{figures/topologies/BubbleHexagonRed3}};
+    %
+      \node at
+      (0,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed1}};
+      \node at
+      (2.5,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed2}};
+      \node at
+      (5,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed3}};
+      \node at
+      (7.5,-3.6){\includegraphics[scale=0.35]{figures/topologies/TrianglePentagonRed4}};
+      \node at
+      (10,-3.6){\includegraphics[scale=0.4]{figures/topologies/BoxTriangle1LS}};
+    % Level 3
+      \node at
+      (0,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonG}};
+      \node at
+      (2,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed1}};
+      \node at
+      (4,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed2}};
+      \node at
+      (6,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed3}};
+      \node at
+      (8,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed4}};
+      \node at
+      (10,-5.5){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed5}};
+    %
+      \node at
+      (0,-7){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed6}};
+      \node at
+      (2,-7){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed7}};
+      \node at
+      (4,-7){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonRed8}};
+      \node at
+      (6,-7){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleG}};
+      \node at
+      (8,-6.9){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleSG}};
+      \node at
+      (10,-6.9){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed1}};
+    %
+      \node at
+      (0,-8.4){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed2}};
+      \node at
+      (2,-8.4){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed3}};
+      \node at
+      (4,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed4}};
+      \node at
+      (6,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed5}};
+      \node at
+      (8,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed6}};
+      \node at
+      (10,-8.5){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleRed7}};
+    %
+      \node at
+      (3,-9.8){\includegraphics[scale=0.4]{figures/topologies/BoxBubble1LS}};
+      \node at
+      (5,-9.8){\includegraphics[scale=0.35]{figures/topologies/TriangleTriangle1LS}};
+      \node at
+      (7,-9.8){\includegraphics[scale=0.35]{figures/topologies/TriangleTriangle1LSG}};
+    % Level 4
+      \node at
+      (0,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBox}};
+      \node at
+      (2,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBub}};
+      \node at
+      (4,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed1}};
+      \node at
+      (6,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed2}};
+      \node at
+      (8,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed3}};
+      \node at
+      (10,-11.5){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed4}};
+    %
+      \node at
+      (0,-12.7){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed5}};
+      \node at
+      (2,-12.7){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleRed6}};
+      \node at
+      (4,-12.7){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGDiag}};
+      \node at
+      (6,-12.7){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGOffDiag}};
+      \node at
+      (8,-12.6){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleSG}};
+      \node at
+      (10.2,-12.75){\includegraphics[scale=0.45] {figures/topologies/TriangleTriangleRed1}};
+    %
+      \node at
+      (0,-13.8){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleRed2}};
+      \node at
+      (2.15,-13.8){\includegraphics[scale=0.45] {figures/topologies/TriangleTriangleRed3}};
+      \node at
+      (4.3,-13.8){\includegraphics[scale=0.45] {figures/topologies/TriangleTriangleRed4}};
+      \node at
+      (6.45,-13.95){\includegraphics[scale=0.4] {figures/topologies/BubbleTriangle1LS}};
+      \node at
+      (8.6,-13.95){\includegraphics[scale=0.4] {figures/topologies/BubbleTriangle1LS_2}};
+      \node at
+      (10.75,-13.95){\includegraphics[scale=0.4] {figures/topologies/BubbleTriangle1LSG}};
+    % Level 6
+      \node at
+      (0,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG1Mass}};
+      \node at
+      (1.8,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG2Mass}};
+      \node at
+      (3.6,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleSG}};
+      \node at
+      (5.4,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleRed1}};
+      \node at
+      (7.2,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleRed2}};
+      \node at
+      (9,-15.55){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS}};
+      \node at
+      (10.8,-15.5){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS_2}};
+     % Level 7
+      \node at
+      (5.25,-17){\includegraphics[scale=0.6]{figures/topologies/Sunrise}};
+    \end{tikzpicture}
+  \end{center}
+  \caption{Hierarchy of topologies for two-loop five-parton scattering.
+    Only topologically inequivalent structures are shown. All lines
+  are massless, with massive external legs being denoted by two massless external lines entering a vertex.}
+  \label{fig:PropagatorStructures}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
+\begin{figure}[ht] 
+  \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+    % 5 point masters
+      \node at (5,0){\includegraphics[scale=0.4]{figures/topologies/BoxPentagon}};
+      \node at (5,-1){3 masters};
+    % Level 2 
+      \node at
+      (2.5,-1.5){\includegraphics[scale=0.4]{figures/topologies/BoxBoxSG}};
+      \node at (2.5,-2.3){3 masters};
+      \node at
+      (7.5,-1.6){\includegraphics[scale=0.4]{figures/topologies/BoxBox}};
+      \node at (7.5,-2.3){2 masters};
+    % Level 3
+      \node at
+      (0.5,-3.3){\includegraphics[scale=0.35]{figures/topologies/BubblePentagonG}};
+      \node at (0.5,-4.1){2 masters};
+      \node at
+      (3.5,-3.3){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleG}};
+      \node at (3.5,-4.1){2 masters};
+      \node at
+      (6.5,-3.2){\includegraphics[scale=0.4]{figures/topologies/BoxTriangleSG}};
+      \node at (6.5,-4.1){1 master};
+      \node at
+      (9.5,-3.3){\includegraphics[scale=0.4]{figures/topologies/BoxBubble1LS}};
+      \node at (9.5,-4.1){1 master};
+    % Level 4
+      \node at
+      (0,-4.9){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBox}};
+      \node at (0,-5.7){1 master};
+      \node at
+      (2.5,-4.9){\includegraphics[scale=0.45]{figures/topologies/BoxBubbleGBub}};
+      \node at (2.5,-5.7){1 master};
+      \node at
+      (5,-4.9){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGDiag}};
+      \node at (5,-5.7){1 master};
+      \node at
+      (7.5,-4.9){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleGOffDiag}};
+      \node at (7.5,-5.7){2 masters};
+      \node at
+      (10,-4.8){\includegraphics[scale=0.45]{figures/topologies/TriangleTriangleSG}};
+      \node at (10,-5.6){1 master};
+    % Level 6
+      \node at
+      (0.5,-6.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG1Mass}};
+      \node at (0.5,-7.3){1 master};
+      \node at
+      (3.5,-6.5){\includegraphics[scale=0.5]{figures/topologies/BubbleTriangleG2Mass}};
+      \node at (3.5,-7.3){1 master};
+      \node at
+      (6.5,-6.5){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS}};
+      \node at (6.5,-7.3){1 master};
+      \node at
+      (9.5,-6.45){\includegraphics[scale=0.5]{figures/topologies/BubbleBubble1LS_2}};
+      \node at (9.5,-7.2){1 master};
+     % Level 7
+      \node at
+      (5,-8.2){\includegraphics[scale=0.6]{figures/topologies/Sunrise}};
+      \node at (5,-9){1 master};
+    \end{tikzpicture}
+  \end{center}
+  \caption{Topologies with master integrals}
+  \label{fig:MasterInt}
+\end{figure}
+
+\todo{reference \ref{fig:MasterInt} and \ref{fig:PropagatorStructures} from text}
 
 \subsection{Tensors}
 
@@ -635,11 +640,15 @@ the relations \eqref{eq:twoLoopUnRenorm}:
 
 \todo{possibly here section ``Implementation Details''}
 
+
 \section{Validation}
+\label{sec:Validation-5parton}
+\todo{restructure and add some missing items}
+
 We have validated our results by carrying out a set of
 checks. We verified that they satisfy the
 expected infrared pole structure \cite{Catani:1998bh}. We summarize the
-relevant formulae for this check in appendix~\ref{sec:IR}.
+relevant formulae for this check in \cref{sec:IR}.
 Furthermore, we have carried out a systematic
 validation of the $\epsilon^0$ contributions of all of 
 our results against their known analytic
@@ -647,20 +656,29 @@ expressions from refs.~\cite{Bern:2002tk,Bern:2003ck,
 DeFreitas:2004kmi,Glover:2004si}. 
 For the four-gluon amplitudes we have compared directly the
 $\epsilon^0$ pieces of our results with the analytic expressions
-of~\cite{Bern:2002tk}. For the
-two-quark two-gluon and four-quark amplitudes we have used the
-one-loop results given in appendix~\ref{sec:oneloopvalues}
+of~\cite{Bern:2002tk}.
+
+For the two-quark two-gluon and four-quark amplitudes we have used the one-loop results given in \cref{tab:results4parton1L}
 to compute the corresponding finite remainders $\CF^{(2)}$ as
-defined in eq.~\eqref{eq:remainderDef}. 
+defined in \cref{eq:remainderDef}. 
 After accounting for the different choices of 
 normalization for the $\mathbf{H}_{[n]}(\epsilon)$ operators 
-(see appendix~\ref{sec:IR})
+(see \cref{sec:IR})
 made in refs.~\cite{Bern:2003ck} and \cite{Glover:2004si},
 we have found perfect agreement.
 
 \section{Numerical Results}
 
-Once the coefficients $c_{\Gamma,i}$ in eq.~\eqref{eq:AL} are computed,
+Here provide details of how numerical evaluation has been performed.
+
+Floating point and finite fields coefficients.
+Cite numerical libraries qd and givaro.
+
+Different sources for integrals: PTW, based on pentagon functions in Caravel.
+
+
+
+Once the coefficients $c_{\Gamma,i}$ in \cref{eq:AL} are computed,
 we obtain a decomposition of the amplitude into master integrals,
 \begin{equation}
   \mathcal{A}^{(2)}=\sum_{\Gamma\in\Delta}
@@ -750,8 +768,7 @@ One-loop amplitudes were known. Five-parton to order $\mathcal{O}(\eps^2)$ are p
     \end{tabular}
   \end{adjustbox}
 \caption{The bare one-loop four-parton helicity amplitudes 
-  evaluated at the phase space point in 
-  eq.~\eqref{eq:EvalPoint4}. We set the
+  evaluated at the phase space point in \cref{eq:EvalPoint4}. We set the
     normalization factor $\CA^\mathrm{(norm)}$ to $\CA^{(1)[N_f^0]}(\epsilon=0)$ for the
     amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.}
   \label{tab:results4parton1L}
@@ -842,8 +859,7 @@ One-loop amplitudes were known. Five-parton to order $\mathcal{O}(\eps^2)$ are p
     \end{tabular}
   \end{adjustbox}
   \caption{The bare one-loop five-parton helicity amplitudes 
-  evaluated at the phase space point in 
-  eq.~\eqref{eq:EvalPoint5}. We set the
+  evaluated at the phase space point in \cref{eq:EvalPoint5}. We set the
     normalization factor $\CA^\mathrm{(norm)}$ to $\CA^{(1)[N_f^0]}(\epsilon=0)$ for the
     amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.}
   \label{tab:results5parton1L}
@@ -879,7 +895,7 @@ where $s_{ij}=(p_i+p_j)^2$.
 %
 We set the regularization scale $\mu$ to 1 and the normalization
 of the results is fixed by the expansion in 
-\eqns{eq:partials}{eq:nfdecomposition}. All results are presented
+\cref{eq:partials,eq:nfdecomposition}. All results are presented
 in the HV scheme.
 %
 \begin{table}[h]
@@ -932,7 +948,7 @@ in the HV scheme.
     \end{tabular}
   \end{adjustbox}
   \caption{The bare two-loop four-parton helicity amplitudes evaluated
-    at the phase space point in eq.~\eqref{eq:EvalPoint4}. We set the
+    at the phase space point in \cref{eq:EvalPoint4}. We set the
     normalization factor $\CA^\mathrm{(norm)}$ to $\CA^{(1)[N_f^0]}(\epsilon=0)$ for the
     amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.} 
   \label{tab:results4parton}
@@ -970,14 +986,16 @@ the phase-space point
   \label{eq:EvalPoint5}
 \end{equation}
 with corresponding invariants
-\begin{align}\begin{split}
-  s_{12} =& -1, \quad s_{23} = -8/13, \quad s_{34} = -1094/2431,\\
-  &s_{45} = -7/17, \quad s_{51} = -749/7293\ .
-\label{eq:Invs5pt}
-\end{split}\end{align}
+\begin{align}
+  \label{eq:Invs5pt}
+  \begin{split}
+    s_{12} =& -1, \quad s_{23} = -8/13, \quad s_{34} = -1094/2431,\\
+    &s_{45} = -7/17, \quad s_{51} = -749/7293\ .
+  \end{split}
+\end{align}
 We set the regularization scale~$\mu$ to 1 and the normalization
 of the results is fixed by the expansion in 
-\eqns{eq:partials}{eq:nfdecomposition}. All results have been computed in the 
+\cref{eq:partials,eq:nfdecomposition}. All results have been computed in the 
 HV scheme. Given that our integral coefficients are computed as 
 exact rational numbers, the final precision of our results is 
 determined by how many digits we require from 
@@ -1046,7 +1064,7 @@ significant digits.
     \end{tabular}
   \end{adjustbox}
   \caption{The bare two-loop five-parton helicity amplitudes evaluated
-    at the phase space point in eq.~\eqref{eq:EvalPoint5}. We set the
+    at the phase space point in \cref{eq:EvalPoint5}. We set the
     normalization factor $\CA^\mathrm{(norm)}$ to $\CA^{(1)[N_f^0]}(\epsilon=0)$ for the
     amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.} 
   \label{tab:results5parton}
@@ -1078,19 +1096,19 @@ our computational framework.
 \section{Analytic Form}
 \label{sec:AnalyticForm}
 In this section we describe how we obtain analytic expressions
-for finite remainers from numerical evaluations over finite fields.
+for finite remainders from numerical evaluations over finite fields.
 
 We apply three methods to reduce the complexity of the remainder
 functions and facilitate their reconstruction from numerical samples.
 %
-First, we introduce a particular ansatz for the coefficients $r_i$ of 
-eq.~\eqref{eq:remainderPentagon} which simplifies the reconstruction procedure by
+First, we introduce a particular ansatz for the coefficients $r_i$ of
+\cref{eq:remainderPentagon} which simplifies the reconstruction procedure by
 decreasing the required number of sample points. 
 %
 Next, we comment on how to remove redundancies
 in the large number of rational functions in a scattering amplitude. 
 
-\todo{Strucutre here is not yet finalized}
+\todo{Structure here is not yet finalized}
 
 \subsection{Pentagon Functions}
 \label{sec:pentagon}
@@ -1125,12 +1143,11 @@ relations than integration-by-parts relations and these are manifested by the pe
 function decomposition.
 The same basis $B$ can be used to express the terms
 $\mathbf{I}_{[n]}^{(1)}\mathcal{A}_R^{(1)}$
-and $\mathbf{I}_{[n]}^{(2)}\mathcal{A}_R^{(0)}$ in 
-eq.~\eqref{eq:remaindeDef}, and we can thus decompose the remainder
+and $\mathbf{I}_{[n]}^{(2)}\mathcal{A}_R^{(0)}$ in \cref{eq:remaindeDef}, and we can thus decompose the remainder
 in terms of pentagon functions:
 \begin{equation}
-\mathcal{R}^{(2)} = \sum_{i \in B} r_i h_i\,.
-\label{eq:remainderPentagon}
+  \mathcal{R}^{(2)} = \sum_{i \in B} r_i h_i\,.
+  \label{eq:remainderPentagon}
 \end{equation}
 Again, we suppress the dependence of the 
 algebraic coefficient functions $r_i$ and the pentagon functions $h_i$ on
@@ -1151,8 +1168,8 @@ to extend our results to any physical region.
 
 \subsection{Analytic Reconstruction}
 
-The coefficient functions $\{r_i\}_{i\in B}$ introduced in 
-eq.~\eqref{eq:remainderPentagon}  have a universal pole 
+The coefficient functions $\{r_i\}_{i\in B}$ introduced in
+\cref{eq:remainderPentagon}  have a universal pole 
 structure~\cite{Abreu:2018zmy} which we find to be expressible in terms of
 the so-called planar alphabet $A$ of the pentagon functions \cite{Gehrmann:2018yef}.
 The planar alphabet $A$ is given in terms
@@ -1191,6 +1208,13 @@ independent factors in a monomial such as $W^{\vec\alpha}$ as $A_\alpha$,
 \begin{equation}\label{eq:A_alp}
 		A_\alpha = \{ i\,|\, i \in A \quad \mbox{with} \quad \alpha_i\neq 0 \} \,.
 \end{equation}
+
+We define a monomial order for $W^{\vec\alpha}$ through,
+\begin{equation}
+  \label{eq:orderingNotation}
+  W^{\vec\alpha} < W^{\vec\beta}  \quad \Leftrightarrow \quad \vec\alpha < \vec\beta \,
+\end{equation}
+with lexicographic ordering of the exponent vectors $\vec\alpha < \vec\beta$.
 
 \begin{figure}[ht]
   \centering
@@ -1231,7 +1255,7 @@ remainder of each amplitude as
 where $r_i$ is a vector of rational coefficients and $K$ denotes
 the dimension of the space they span.
 The index $j$ runs over a subspace $\hat B$ of the space $B$ of all pentagon functions 
-introduced in eq.~\eqref{eq:remainderPentagon}, i.e., $\hat B\subseteq B$. 
+introduced in \cref{eq:remainderPentagon}, i.e., $\hat B\subseteq B$. 
 The constant matrix $M$, the rational functions $r_i$ 
 and the index sets $K$ and $\hat B$ are helicity-amplitude dependent.
 
@@ -1259,13 +1283,12 @@ section~\ref{sec:results}).
 \end{figure}
 
 
-
 \subsubsection{Partial Fractions}
 \label{sec:PartialFractions}
 
 Having chosen a basis of rational coefficients, we study the $\{r_i^\pm\}_{i\in K}$
 in a finite field, obtained with the strategy described 
-in section \eqref{sec:reconstructionInvs}.
+in \cref{sec:reconstructionInvs}.
 The next step is to lift the finite-field result to the rational numbers, 
 i.e., to rationally reconstruct the result. 
 The correctness of the rational reconstruction can
@@ -1309,13 +1332,13 @@ which are polynomials in the $\{\vec s\}$ variables.
 We construct the Leǐnartas decomposition 
 \eqref{eq:LeinartasDecomposition} coefficient-by-coefficient, such that the exponents in 
 $\vec\alpha\in D_i$ are non-vanishing only for the letters appearing 
-in the starting denominator $W^{\vec q_i}$, see eq.~\eqref{eq:DenominatorAnsatz}, 
+in the starting denominator $W^{\vec q_i}$, see \cref{eq:DenominatorAnsatz}, 
 which we recall are polynomials in the $\vec s$.
 The particular algorithm which we employ to uniquely specify the 
 Leǐnartas decomposition is related to the techniques 
 of \cite{Smirnov:2005ky}.
 
-A Leǐnartas decomposition \eqref{eq:LeinartasDecomposition}
+A Leǐnartas decomposition given by \cref{eq:LeinartasDecomposition}
 is characterized by exponents of the denominator factors. 
 All denominators $W^{\vec \alpha}$
 in a Leǐnartas decomposition  are `algebraically independent', in that
@@ -1454,7 +1477,7 @@ the $Q_j$ and write the polynomial $P(w)$ in the form
 	\sum_{\vec\gamma > \vec\beta} c_{\vec\gamma}\, w^{\vec\gamma}.
 \end{equation}
 That is, we distinguish the term of lowest monomial degree $\vec\beta$ 
-(we refer to the notation introduced in eq.~\eqref{eq:orderingNotation}). 
+(we refer to the notation introduced in \cref{eq:orderingNotation}). 
 Let us now multiply the $Q^{\vec\alpha}$ in eq.~\eqref{eq:den} by this polynomial and 
 $Q^{\vec\beta}$. We get
 \begin{align}\begin{split}
