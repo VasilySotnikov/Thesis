@@ -1,0 +1,292 @@
+NLO QCD predictions require the computation of virtual one-loop corrections. They appear as interference terms of
+$n$-parton loop amplitudes $\Amp_n$ with $n$-parton tree level contributions $\Ampt_n$
+\begin{align}\label{eq:interference}
+ \sum_{c,h}2 \Re{{\Ampt_n}^*\Amp_n},
+\end{align}
+summed over color ($c$) and helicity ($h$) of the involved partons. We handle the dynamical
+degrees of freedom of color and kinematics separately, which has several
+advantages. A fixed cyclic ordering of external particles results in less
+kinematical invariants for each color-ordered amplitude and thereby
+makes the analytic structure more transparent, which was in particular
+relevant for the development of
+unitarity methods. In numerical
+approaches, the smaller building blocks allow for a fine-grained
+numerical precision monitoring and control. Furthermore, using a color decomposition allows for an
+expansion of the virtual cross-section in powers of $1/N_C$, which gives a significant speedup for
+the numerical phase space integration. The typically smaller subleading-color
+contributions have to be evaluated on fewer phase space points in
+order to reach the same overall integration error. 
+
+In order to disentangle kinematical and color degrees of freedom of
+QCD \ola s,
+we apply a trace-based color decomposition \cite{Mangano1991}. As a
+result, we can express \ola s as the
+product of color factors and purely kinematic functions, so called
+partial amplitudes. At one-loop, partial amplitudes are further
+decomposed into the basic building blocks of gauge-invariant primitive amplitudes \cite{Bern1995b,Bern:1997sc} with a fixed
+cyclic ordering of external particles. The handling of
+color is independent of whether the involved quarks are massless or
+massive, which is of particular relevance for our application. It allows us to use an existing algorithm to obtain the color
+decomposition of one-loop amplitudes involving multiple quark lines as
+described in Ref.~\cite{Ita:2011ar}. This algorithm has been successfully applied to massless
+high-multiplicity processes involving an \ew~gauge boson \cite{BH:W4j,BH:W5j,BH:Z4j}.
+
+\section{Partial Amplitudes}
+\label{sec:partamp}
+The vertices of QCD Feynman
+rules are equipped with either fundamental generators
+$(T^a)_i^{\bar{j}}$ or structure constants $f^{abc}$, where the indices of quarks are given by $\{i,j,\dots\}$ and those
+of anti-quarks by $\{\bar{i},\bar{j},\dots\}$. In order to treat both fundamental and adjoint color indices on the
+same footing, we rewrite the structure constants $f^{abc}$ appearing in gluon
+interactions in terms of the fundamental representation $(T^a)_i^{\bar
+  j}$ using 
+\begin{align}\label{eq:repcs}
+f^{abc} = - \frac{i}{\sqrt{2}}\text{Tr}\left([T^a,T^b]T^c\right).
+\end{align}
+with $\text{Tr}(T^aT^b) = \delta^{ab}$ such
+that $T^a=\frac{\lambda^a}{\sqrt{2}}$. Whenever contracted adjoint
+indices appear, we can apply the $SU(N_c)$ Fierz identity
+\begin{align}\label{eq:fierz}
+\sum_a (T^a)_i^{\bar j} (T^a)_k^{\bar l} = \delta_i^{\bar l} \delta_k^{\bar j} - \frac{1}{N_c}  \delta_i^{\bar j} \delta_k^{\bar l},
+\end{align}
+and thereby reduce the possible forms of appearing color factors. They
+are constructed out of powers of $N_C$, traces
+of generators $\Tr(T^aT^b\dots T^n)$, strings of generators with open
+fundamental indices $(T^aT^b\dots T^n)_i^{\bar{j}}$ and Kronecker delta functions
+$\delta_i^{\bar{j}}$. Here the gauge group parameter $N_C$ is left
+unspecified and can be set to $N_C=3$ for physical QCD predictions. A \textit{partial amplitude} is defined as the kinematic terms multiplying a
+specific color structure, by which we mean a combination of color generators. The generic expression for amplitudes involving up to six-quarks can
+be found in \cite{Ita:2011ar}. As an example, for a two-quark amplitude at
+tree level, we have
+\begin{align}
+  \Ampt_n  (1_q,2_{\bar q},3,\dots,n)=\sum_{\sigma \in
+   S_{n-2}}(T^{a_{\sigma(3)}} \dots
+ T^{a_{\sigma(n)}})_{i_1}^{\bar{j_2}}\Amt_n(1_q,\sigma(3),\dots,
+ \sigma(n),2_{\bar{q}}),
+\end{align}
+where the coupling can be thought of as included in $\Amt_n$ and we sum over all permutations
+$S_{n-2}$ of the $n-2$ gluons labels appearing in the partial tree
+amplitudes $\Amt_n$. The permutations in $\sigma$ are also used for
+the mapping of the adjoint gluonic
+color indices. Note that for clarity, we suppress both helicity and color indices of
+the involved particles in the expressions for the amplitudes
+$\Ampt_n$. The color-decomposition of the corresponding
+\ola~additionally contains traces of fundamental generators and is given by
+\begin{align}\label{eq:c2q}
+  \begin{split}
+  \Amp_n  (&1_q,2_{\bar q},3,\dots,n)=\\
+&  \sum_{j=1}^{n-1}\sum_{\substack{\sigma \in \mathcal{P}\\}}
+  \text{Gr}_{2;n-2;j}(\sigma)A_{n;j}\left(\sigma(3),\dots,\sigma(j+1);1_q,\sigma(j+2),\dots,\sigma(n),2_{\bar
+  q}\right),
+\end{split}
+\end{align}
+with the following color-structure groupings
+\begin{align}\label{eq:groupings}
+   \text{Gr}_{2;n-2;j}(\sigma) = \Tr(T^{a_{\sigma(3)}} \dots
+ T^{a_{\sigma(j+1)}})(T^{a_{\sigma(j+2)}} \dots
+ T^{a_{\sigma(n)}})_{i_1}^{\bar{j_2}}.
+\end{align}
+The combined sum in Eq.~\eqref{eq:c2q} runs over all distinct color
+structures: the outer sum over all different group
+theoretical factors and the inner sum over independent gluon orderings
+$\mathcal{P}=S_{n-2}/S_{n-2;j}$ that leave the trace in
+Eq.~\eqref{eq:groupings} invariant. As an explicit example, the one-loop color
+decomposition of $\Amp_4(1_q,2_{\bar q},3_g,4_g)$ in terms of partial amplitudes yields
+\begin{align}\label{eq:partialdecomp}
+\begin{split}
+  \Amp_4(1_q,2_{\bar q},3_g,4_g) =&
+  (T^3T^4)_{i_1}^{\bar{i}_2}\Am_{4;1}(1_q,3_g,4_g,2_{\bar q})+
+  (T^4T^3)_{i_1}^{\bar{i}_2}\Am_{4;1}(1_q,4_g,3_g,2_{\bar
+    q})\\
+&+\Tr(T^3T^4)\delta_{i_1}^{\bar{i}_2}\Am_{4;3}(3_g,4_g;1_q,2_{\bar q}),
+\end{split}
+\end{align}
+where we have used the conventions $(T^aT^b\dots T^n)_i^{\bar
+  j} \rightarrow \delta_i^{\bar j}$ for $n=0$ and $\Tr(T^aT^b\dots
+ T^n) \rightarrow 1$ for $n=0$ as well as the property $\Tr (T^a) =
+ 0$. The first list of particles in front of the semicolon is omitted if the color trace contribution is absent.
+
+
+\section{Primitive Amplitudes}
+\label{sec:primitives}
+Partial amplitudes can be further decomposed into gauge invariant,
+color-ordered basic building blocks, so called \textit{primitive amplitudes}
+\cite{Bern1995b}, with a fixed cyclic ordering of external
+legs. All partial amplitudes can be expressed by the set of primitive amplitudes
+of a given process. Since primitive amplitudes can contribute to
+several partial amplitudes, a caching mechanism for the primitives is
+appropriate. Explicit examples of how to generate the set of primitives
+and their relations to the partial amplitudes can be found in \cite{Bern1995b,Bern:1997sc}, with a general algorithm of how to
+obtain them given in \cite{Ita:2011ar}. The Feynman rules used for the
+computation of amplitudes have to be changed due to
+our replacements (cf Eqs.~\eqref{eq:repcs} and \eqref{eq:fierz}). The
+color-ordered Feynman rules can for example be found in
+\cite{Mangano1991} and in Appendix \ref{sec:cofr}.
+
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m)]
+\def\1up{1.0}
+\def\up{2.0}
+\def\opa{0.5}
+\node at (0,-\up) {$L$};
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0,0);
+    \vertex (v1) at (-\1up,\1up);
+    \vertex (v2) at (\1up,\1up);
+    \vertex (v3) at (\1up,-\1up);
+    \vertex (v4) at (-\1up,-\1up);
+    \vertex (o1) at (-\up,\up){\(1\)};
+    \vertex (o2) at (\up,\up){\(3\)};
+    \vertex (o3) at (\up,-\up){\(4\)};
+    \vertex (o4) at (-\up,-\up){\(2\)};
+    \vertex (c1) at (\1up,0);
+    \vertex (c2) at (\up,-\1up);
+    \diagram* {
+      (v1)  -- [gluon,thick,opacity=\opa] (v2) -- [gluon,thick,opacity=\opa] (v3)--  [gluon,thick,opacity=\opa] (v4) --  [fermion,thick] (v1), 
+      (o1) -- [anti fermion,thick] (v1),
+      (o2) -- [gluon,thick,opacity=\opa] (v2),
+      (o3) -- [gluon,thick,opacity=\opa] (v3),
+      (o4) -- [fermion,thick] (v4),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\begin{tikzpicture}[baseline=(m)]
+\def\1up{1.0}
+\def\up{2.0}
+\def\opa{0.5}
+\node at (0,-\up) {$R$};
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0,0);
+    \vertex (v1) at (-\1up,\1up);
+    \vertex (v2) at (\1up,\1up);
+    \vertex (v3) at (\1up,-\1up);
+    \vertex (v4) at (-\1up,-\1up);
+    \vertex (o1) at (-\up,\up){\(1\)};
+    \vertex (o2) at (\up,\up){\(3\)};
+    \vertex (o3) at (\up,-\up){\(4\)};
+    \vertex (o4) at (-\up,-\up){\(2\)};
+    \vertex (c1) at (\1up,0);
+    \vertex (c2) at (\up,-\1up);
+    \diagram* {
+      (v1)  -- [anti fermion,thick] (v2) -- [anti fermion,thick] (v3)--  [anti fermion,thick] (v4) --  [gluon,thick,opacity=\opa] (v1), 
+      (o1) -- [anti fermion,thick] (v1),
+      (o2) -- [gluon,thick,opacity=\opa] (v2),
+      (o3) -- [gluon,thick,opacity=\opa] (v3),
+      (o4) -- [fermion,thick] (v4),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\begin{tikzpicture}[baseline=(m)]
+\def\1up{1.0}
+\def\up{2.0}
+\def\opa{0.5}
+\node at (0,-\up) {$n_fL$};
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0,0);
+    \vertex (v1) at (-\1up,\1up);
+    %\vertex (v2) at (\1up,\1up);
+    %\vertex (v3) at (\1up,-\1up);
+    \vertex (v4) at (-\1up,-\1up);
+    \vertex (o1) at (-\up,\up){\(1\)};
+    \vertex (o4) at (-\up,-\up){\(2\)};
+    \vertex (c1) at (\1up,0);
+    \vertex (c2) at (\up,-\1up);
+    \vertex (n1) at (\1up,0);
+    \vertex (n0) at (-\1up0,0);
+    \vertex (n2) at (0.5,0.5);
+    \vertex[below=1cm of n2] (n3);
+    \vertex[above right=1cm of n2] (v2){\(3\)};
+    \vertex[below right=1cm of n3] (v3){\(4\)};
+    \diagram* {
+      (n0) --  [gluon,thick,opacity=\opa] (m), 
+      (m) --  [fermion,thick,quarter left] (n2) --  [fermion,thick,half
+      left] (n3) -- [fermion,thick,quarter left] (m),
+      (v4) --  [fermion,thick] (v1), 
+      (o1) -- [anti fermion,thick] (v1),
+      (n2) -- [gluon,thick,opacity=\opa] (v2),
+      (n3) -- [gluon,thick,opacity=\opa] (v3),
+      (o4) -- [fermion,thick] (v4),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{eqnarray*}
+\vspace{-0.5cm}
+\captionedequationset{Primitive amplitudes are represented by parent
+  diagrams specified by a routing label for the fermion
+  lines. Here we show the parent diagrams that contribute to the
+  partial amplitude $\Am_{4;1}(1_q,3_g,4_g,2_{\bar q})$, that is left-turner ($L$), right
+  turner ($R$) and closed fermion loop with the line passing to the left
+  of the loop ($n_fL$).\label{fig:parentdiag}} 
+
+We represent primitive amplitudes by \textit{parent diagrams},
+that is color-ordered Feynman diagrams with the maximal number of loop
+propagators. Additionally, the routing of
+each fermion line which can either appear as a left- ($L$) or
+right-turner ($R$) or as a closed
+fermion loop ($n_f$), has to be specified. Amplitudes with
+multiple fermion lines therefore have multiple routing labels. As an explicit example, we give the decomposition of
+the partial amplitudes $\Am_{4;1}(1_q,3_g,4_g,2_{\bar q})$ and $\Am_{4;3}(3_g,4_g;1_q,2_{\bar q})$ which
+appeared in the color decomposition in Eq.~\eqref{eq:partialdecomp}, in terms of primitive amplitudes
+\begin{align}
+\begin{split}
+ \Am_{4;1}(1_q,3_g,4_g,2_{\bar{q}})&=\nc
+ A^{[L]}(1_q,3_g,4_g,2_{\bar{q}})-\frac{1}{\nc}
+ A^{[R]}(1_q,3_g,4_g,2_{\bar q})\\
+&+ n_fA^{[n_fL]}(1_q,3_g,4_g,2_{\bar q}).
+\end{split}
+\end{align}
+The right hand side is written in terms of primitive amplitudes only, where the superscripts $[L]$, $[R]$ and $[n_f]$ specify the quark routing in the primitive amplitude. The $[n_f]$ primitive contains contributions from both light flavors and heavy flavors turning
+in the loop and the external quark line passes to the left ($n_fL$) of
+the closed loop. In Fig.~\ref{fig:parentdiag}, we show the
+graphical representation of the parent diagrams contributing to this partial
+amplitude. The other partial amplitude in Eq.~\eqref{eq:partialdecomp} can be decomposed as
+\begin{align}
+\begin{split}
+\Am_{4;3}(3_g,4_g;1_q,2_{\bar q})= \sum_{P(3,4)}& \left( A^{[L]}(1_q,3_g,4_g,2_{\bar{q}})+A^{[L]}(1_q,3_g,2_{\bar{q}},4_g) \right.\\
+&\left.+ A^{[L]}(1_q,2_{\bar{q}},3_g,4_g)\right),
+\end{split}
+\end{align}
+where we sum over the two permutations of gluon labels.
+
+For more general topologies, we apply the decomposition algorithm
+presented in \cite{Ita:2011ar}, which is applicable to massive quarks. By
+using symmetry properties amongst the primitive amplitudes, one can
+further reduce the number of fundamental building blocks that have to
+be computed. In computations with massive fermions, care has to be
+taken because not all symmetry properties of massless quarks hold for
+massive ones as well.\footnote{For example, the reversal of a fermion's arrow (cf.~Eq.~(2.23) in
+\cite{Ita:2011ar}) does not lead to a flip of the routing label for massive
+quark lines.}
+
+
+
+\section{Assembly of Virtual Matrix Elements}
+\label{sec:assembly-virt-matr}
+In order to obtain the full virtual cross-section $\dd \sigma_{\text{V}}$, we need to
+interfere tree- and loop-level amplitudes as noted in
+ Eq.~\eqref{eq:interference}. Therefore, open fundamental indices of
+ tree and loop color factors are contracted and the resulting color factors are made up of products of
+ traces of generators with repeated adjoint indices stemming from both tree and loop contributions. We then use the Fierz identity, Eq.~\eqref{eq:fierz}, on the
+ repeated adjoint indices
+ \begin{align}
+\begin{split}
+\Tr(T^aT^a) &= (T^a)_j^{\bar
+     i}(T^a)_i^{\bar
+     j}=\delta_{i}^{\bar{i}}\delta_{j}^{\bar{j}}-\frac{1}{N_C}\delta_{j}^{\bar{i}}\delta_{i}^{\bar{j}}=N_C^2-1\\
+   \Tr(T^aAT^aB)&=\Tr(A)\Tr(B)-\frac{1}{N_C}\Tr(AB),
+\end{split}
+ \end{align}
+where $A$ and $B$ are products of generators. Therefore, the
+color factors reduce to positive and negative powers of $N_C$ that
+multiply the products of tree and one-loop
+ partial amplitudes.
+
+ For the \textit{assembly} of virtual matrix
+ elements, that is multiplying tree and one-loop partial amplitudes
+ with the corresponding color factors, we use the approach of previous
+ work \cite{Ita:2011ar,BH:W4j,BH:W5j,BH:Z4j}. The color-decomposition therefore has to
+ be done only once. For the remainder of this thesis, we work with color-ordered primitive amplitudes with a fixed cyclic ordering of
+ external legs.
+
+
+

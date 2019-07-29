@@ -1,0 +1,242 @@
+%%% Definition der Dokumentklasse für A4-Papier und 12 Punkte Schriftgröße.
+%%% Ränder sind für Klebebindung sowohl im A4- als auch im herunterskalierten
+%%% A5-Ausdruck optimiert.
+
+\documentclass[a4paper,titlepage,bibliography=totoc,12pt,BCOR17mm,DIV12,headinclude,footinclude=false]{scrbook}
+
+\usepackage[utf8]{inputenc}
+%\usepackage{ifluatex}
+
+%\ifluatex
+  %%\usepackage{fontspec}
+  %\usepackage{fontenc}
+%\else
+  %%Packages for encoding of eg accented characters
+  %\usepackage[ansinew]{inputenc}
+%\usepackage[T1]{fontenc}
+%\fi
+
+\usepackage{easy-todo}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings,decorations.text,calc,arrows,positioning,shapes}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=4.5em, text badly centered, node distance=2cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=0.8\textwidth, text centered, rounded corners, minimum height=3em]
+\tikzstyle{block2} = [rectangle, draw, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, minimum height=2em]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=2em, text centered, draw=black, fill=orange!30]
+\usepackage{minibox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Math symbols etc
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{braket}
+\usepackage{bbold}
+\usepackage{slashed}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{tabularx,bigdelim}
+\usepackage{multirow}
+\usepackage[compat=1.1.0]{tikz-feynman}
+\usepackage{yfonts}
+\usepackage{xfrac}
+\usepackage{siunitx}
+\usepackage{mathtools}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Grafics
+\usepackage{graphicx}
+\usepackage{caption}
+%\usepackage{subcaption}
+%%% Sidecap: Bildbeschriftung seitlich neben dem Bild
+%\usepackage{sidecap}
+\usepackage[caption=false]{subfig}
+
+\usepackage{placeins}
+\usepackage{adjustbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Header
+%%% Fancyhdr: Nette Kopf- und Fusszeilen, werden weiter unten definiert.
+\usepackage{fancyhdr}
+%%% Definition der Kopf- und Fussleisten
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{% Kopfzeilen in Groß-/Kleinschreibung
+\markboth{%
+\chaptername\ \thechapter.%
+\ #1}{}}
+\renewcommand{\sectionmark}[1]{% Kopfzeilen in Groß-/Kleinschreibung
+\markright{%
+\thesection.%
+\ #1}}
+
+
+\usepackage{titlesec, blindtext, color} 
+
+%\definecolor{gray75}{gray}{0.75}
+%\newcommand{\hsp}{\hspace{20pt}}
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\titleformat{\chapter}[display]
+{\bfseries\Large}
+{\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+{2ex}
+{\titlerule
+  \vspace{1ex}%
+\filright}
+[\vspace{2ex}%
+\titlerule]
+
+\titlespacing{\chapter}{0cm}{-1cm}{0.5cm}[0cm]
+
+%\titleformat{\chapter}[display]
+%  {\bfseries\Large}
+%  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+%  {1ex}
+%  {\titlerule\vspace{1ex}\filleft}
+%  [\vspace{1ex}\titlerule]
+
+%%% Seitennumerierung vor dem eigentlichen Inhalt in römischen Zahlen
+\pagenumbering{roman}
+
+%%% Vermeidung von Hurenkindern und Schusterjungen
+\clubpenalty = 10000  % schliesst Schusterjungen aus
+\widowpenalty = 10000 % schliesst Hurenkinder aus
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Einige Pakete für eine schöne Titelseite
+\usepackage{everyshi,eso-pic,calc,ifthen,sty/wallpaper}
+\usepackage{sty/diplomarbeit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Eineinhalbfachen Zeilenabstand nutzen (Vorgabe Prüfungsamt)
+\usepackage{setspace}
+%\onehalfspacing
+\typearea[current]{last}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Hyperref: Klickbare Verweise in PDF-Dokumenten bei Verwendung von pdftex.
+%%%           Einstellbare Optionen für die PDF-Dokumenteigenschaften:
+%%%           - pdftitle:  Titel des Dokuments
+%%%           - pdfauthor: Autor der Arbeit
+%%%           ACHTUNG: Leerzeichen sind in den Optionen nicht zulässig. Am
+%%%           besten geschützte Leerzeichen (~) benutzen.
+\usepackage[pdftitle={NLO QCD Corrections to Vector Boson Production in Association with Multiple Heavy and Light Jets},pdfauthor={Felix Richard Anger}]{hyperref}
+
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks=true,
+    allcolors={blue!60!black}
+    %linkcolor={red!50!black},
+    %citecolor={blue!50!black},
+    %urlcolor={blue!80!black}
+}
+
+%%% Mehrere aufeinanderfolgend numerierte Zitate mit einem Bindestrich zusammen
+%%% fassen (z.B. [1-5] statt [1,2,3,4,5]).
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{doi}
+%\usepackage{mcite}
+
+%%% Hypernat beseitigt Fehler durch das
+%%% Paket Hyperref in Zusammenhang mit dieser Kompression.
+%\usepackage{hypernat}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% for ranges of equations
+\usepackage{cleveref}
+
+%-- Defines a CAPTION for a set of equations and numbers
+%   the set of equations is numbered
+% note: the caption adapts the text alignment to the length. 
+\newcounter{captionedequationset} %numbering
+\newdimen\captionlength
+\newcommand{\captionedequationset}[1]{
+    \refstepcounter{figure}% Step counter
+    \setlength{\captionlength}{\widthof{#1}} %
+    \addtolength{\captionlength}{\widthof{Figure~\thefigure: }}
+    %If the caption is shorter than the line width then
+    % the caption is centred, otherwise is flushed left.
+    \ifthenelse{\lengthtest{\captionlength < \linewidth }} %
+    {\begin{center}
+            Figure~\thefigure: #1
+        \end{center}} 
+    { \begin{flushleft} 
+        Figure~\thefigure: #1 %
+        \end{flushleft}}}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  NOT USE CURRENTLY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Fancyref: Vereinfachte Referenzen. Labels werden im Format "PRÄFIX:LABEL"
+%%%           erstellt. Dann wird mit \fref{PRÄFIX:LABEL} ein Verweis der Form
+%%%           z.B. "Kapitel 4" oder "Abschnitt 4.5" statt nur "4" oder "4.5"
+%%%           erstellt.
+%%%           ACHTUNG: Fehlt im Label im \fref-Kommando das Präfix und der
+%%%           Doppelpunkt, kommt es zu Fehlermeldungen, die ein fehlendes "}"
+%%%           beklagen!
+%%%           Liste der Präfixe und zugehöriger Objekte:
+%%%           Object      Prefix
+%%%           Chapter     chap
+%%%           Section     sec
+%%%           Equation    eq
+%%%           Figure      fig
+%%%           Table       tab
+%%%           Enumeration enum
+%%%           Footnote    fn
+%%%           Anhang*     apx
+%%%           *) Selbst definiertes Präfix
+
+%%%\usepackage[german,plain]{fancyref}
+%%% 
+%%%\newcommand*{\fancyrefapxlabelprefix}{apx}
+%%%\frefformat{plain}{\fancyrefapxlabelprefix}{%
+%%%    Anhang\fancyrefdefaultspacing#1%
+%%%}%
+%%%\Frefformat{plain}{\fancyrefapxlabelprefix}{%
+%%%    Anhang\fancyrefdefaultspacing#1%
+%%%}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% URL: Zur besseren Darstellung von URLs z.B. in Literaturquellen (einbindbar
+%%%      z.B. über "howpublished = \url{URL}")
+%\usepackage{url}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Hyphenat: Problemlöser für Trennungsprobleme: TeX trennt keine Wörter, die
+%%%           bereits einen Bindestrich beinhalten (z.B. Wasserstoff-Atom).
+%%%           Um die automatische Worttrennung auch bei solchen Wörtern zu 
+%%%           aktivieren, ersetzt man einfach den Bindestrich durch das 
+%%%           Kommando \hyp{}, also z.B. "Wasserstoff\hyp{}Atom".
+%\usepackage{hyphenat}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Mit diesen Kommandos kann man eigene Kapitel- und Sektionskopfzeilen
+%%% einbinden. Anwendung:
+%%%    \chapter{Langer Kapitelname}
+%%%    \shortchapter{Kurzer Kapitelname für Kopfzeile}
+%\newcommand{\shortchapter}[1]{% Erstellt eine eigene Kapitel-Kopfzeile
+%\markboth{%
+%\chaptername\ \thechapter.%
+%\ #1}{}}
+%\newcommand{\shortsection}[1]{% Erstellt eine eigene Sektions-Kopfzeile
+%\markright{%
+%\thesection.%
+%\ #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

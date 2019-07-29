@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inlcude preable
+\input{src/preamble}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Own defs etc
+\input{src/header.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Dokument beginnen:
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BibTeX-Style
+\bibliographystyle{ownrev.bst}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Scattering Amplitudes with Multi-Loop Generalized Numerical Unitarity Method }
+\author{Vasily Sotnikov}
+\date{\today}
+\maketitle
+
+\listoftodos
+
+\todo{What to do with numerical methods?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%\null
+%\cleardoublepage
+%    
+%    \thispagestyle{empty}
+%    ~
+%    \vskip 8cm
+%{\textit Life is far too important to be taken seriously\par}
+%\hspace{5.84cm} Oscar Wilde
+
+%\clearpage
+%%% Platz für Veröffentlichungen und Konferenz-Beiträge
+
+%\section*{List of Publications}
+%Partial results of the presented work have been published/submitted prior to
+%submission of this thesis. The results presented in Chapter \ref{chap:fdf} are based on the
+%following manuscript:
+%\begin{itemize}
+	%\item
+		%\textbf{F.R.\,Anger} and V.~Sotnikov, \textit{``On the Dimensional Regularization of QCD Helicity Amplitudes
+%With Quarks''},
+%\texttt{\href{https://arxiv.org/abs/1803.11127}{arXiv:1803.11127 [hep-ph]}}.
+%\end{itemize}
+%Chapters
+%\ref{chap:wbb_intro}-\ref{chap:wbb_results} on NLO QCD predictions for
+%\Wbbn~production are based on the
+%following publication:
+%\begin{itemize}
+	%\item \textbf{F.R.\,Anger}, F.~Febres Cordero, H.~Ita and
+                %V.~Sotnikov, \textit{``NLO QCD Predictions for $Wb\bar
+                  %b$ Production in Association with up to Three Light
+                  %Jets at the LHC''}, \href{https://dx.doi.org/10.1103/PhysRevD.97.036018}{Phys.~Rev.~\textbf{D97}, 036018 (2018)}, \texttt{\href{https://arxiv.org/abs/1712.05721}{arXiv:1712.05721
+                  %[hep-ph]}}.
+%\end{itemize}
+%The results on weak vector boson production with light jets presented in Chapters \ref{chap:vjet_basic} and
+%\ref{chap:vjet_result} are based on the following publication:
+%\begin{itemize}
+	%\item
+		%\textbf{F.R.\,Anger}, F.~Febres Cordero, S.~H{\"o}che and D.~Ma{\^i}tre, \textit{``Weak Vector Boson Production with Many Jets at the
+                  %LHC $\sqrt{s} = 13$ TeV''},
+                %\texttt{\href{https://arxiv.org/abs/1712.08621}{arXiv:1712.08621
+                    %[hep-ph]}}. To appear in Phys.~Rev.~D.
+                %% Submitted to Phys.~Rev.~D.
+%\end{itemize}
+
+%\subsection*{Other Publications}
+%\label{sec:other-publications}
+
+%\begin{itemize}
+	%\item
+		%C.~Gneiting, \textbf{F.R.\,Anger} and A.~Buchleitner,
+                %\textit{``Incoherent ensemble dynamics in disordered
+                  %systems''}, \href{https://dx.doi.org/10.1103/PhysRevA.93.032139}{Phys.~Rev.~\textbf{A93}, 032139 (2016)}, \texttt{\href{https://arxiv.org/abs/1508.07187}{arXiv:1508.07187 [quant-ph]}}.
+%\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\section*{Talks and Poster Presentations at Conferences}
+%%\begin{itemize}
+%%        \item
+%%        	\emph{Vector boson production with many jets at the
+%%                  LHC $\sqrt{s} = 13$ TeV} \\
+%%        	Felix Anger\\
+%%        	Talk, DPG Spring Meeting, M\"unster, 29.03.2017
+%%        \item
+%%        	\emph{Towards NLO QCD radiative corrections to the
+%%                  associated production of electroweak gauge bosons
+%%                  and heavy quarks} \\
+%%        	Felix Anger\\
+%%        	Poster, Amplitudes Conference, Stockholm, 05.07.2016
+%%        \item
+%%        	\emph{Towards NLO QCD radiative corrections to the
+%%                  associated production of electroweak gauge bosons
+%%                  and heavy quarks} \\
+%%        	Felix Anger\\
+%%        	Poster, TOP Workshop, Ischia, 25.09.2015
+%%\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+%
+%%% Inhaltsverzeichnis
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Kurzfassung aus der Datei "src/kurzfass"
+\cleardoublepage
+\phantomsection
+\section*{Abstract\markboth{Abstract}{}}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{src/short_version}
+\cleardoublepage
+%
+%%% Umsteigen auf Arabische Seitenzahlen
+\pagenumbering{arabic}
+%%
+
+
+
+%%-------------------------------------------------
+\chapter{Introduction}
+%\label{chap:intro}
+%\input{src/introduction}
+%%-------------------------------------------------
+
+\chapter{Theoretical Background}
+
+%%-------------------------------------------------
+%\chapter[From the Standard Model to Hadronic Collisions]{From the Standard Model to Hadronic Collisions: A
+  %Short Survey}
+\label{chap:sm}
+\input{src/sm}
+%%-------------------------------------------------
+
+\chapter{Computational Techniques for Loop Amplitudes}
+\label{chap:stdtech}
+\input{src/stdtech}
+
+\chapter{Multi-Loop $D$-Dimensional Numerical Unitarity}
+\label{chap:numunitarity}
+\input{src/numunitarity}
+
+
+%-------------------------------------------------
+
+\chapter{Dimensional Regularization and Helicity Amplitudes
+%in a Numerical Framework
+}
+\label{chap:dshel}
+\input{src/dshel}
+%%-------------------------------------------------
+
+
+%\chapter{Renormalization}
+%\label{chap:renorm}
+%\input{src/renorm}
+
+%%-------------------------------------------------
+
+%\newpage
+%\phantomsection
+%\thispagestyle{empty}
+%\input{src/part2}
+%\addcontentsline{toc}{chapter}{{\large Part 2: \texorpdfstring{$Wb\bar{b}+n$}{Wbb+n}~Jet Production (\texorpdfstring{$n=0,1,2,3$}{n=0,1,2,3})}}
+
+%%-------------------------------------------------
+
+\chapter{NLO QCD Predictions for Production of $Wb\bar b$ and Light Jets}
+\label{chap:wbb_pheno}
+\input{src/wbb_intro}
+
+
+\chapter{Two-loop Five-Parton QCD Helicity Amplitudes}
+\label{chap:5parton}
+\input{src/5parton}
+
+
+\chapter{Summary and Outlook}
+\label{chap:so}
+\todo{conclusions}
+%\input{src/summary}
+
+%%-------------------------------------------------
+
+%%%% Anhang
+\appendix
+%
+\addcontentsline{toc}{chapter}{{\large Appendices}}
+
+
+\input{src/appendix}
+%
+%%% Literaturverzeichnis aus Datei "literatur"
+\phantomsection
+%\nocite{apsrev41Control}
+%\bibliography{zitationen,revtex-custom}
+\bibliography{zitationen}
+
+%
+%%% Danksagungen aus Datei "src/danksag"
+%\chapter*{Acknowledgments\markboth{Acknowledgments}{}}
+%\addcontentsline{toc}{chapter}{Acknowledgments}
+%\input{src/danksag}
+%
+
+
+%
+%%% Ende des Dokuments
+\end{document}

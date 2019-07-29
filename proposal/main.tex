@@ -1,0 +1,130 @@
+\documentclass[a4paper,10pt]{article}
+\pdfoutput=1
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{enumitem}
+\setlist{nosep}
+
+
+\textheight = 24cm
+\textwidth = 16.5cm
+\oddsidemargin = -5pt
+\topmargin = -1.5cm
+\parskip = 10pt
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks=true,
+    allcolors={blue!60!black}
+    %linkcolor={red!50!black},
+    %citecolor={blue!50!black},
+    %urlcolor={blue!80!black}
+}
+
+\title{\vspace{-2cm}Proposal for Cumulative Thesis}
+\date{\vspace{-2ex}June 19, 2019}
+\author{\vspace{-1ex}Vasily Sotnikov}
+
+
+\newcommand{\paper}[1]{\vspace{3ex}\noindent\large\textbf{#1}\newline}
+
+\begin{document}
+
+\maketitle
+
+
+\subsection*{Relevant Publications}
+\vspace{-3ex}
+
+\paper{1. NLO QCD predictions for $Wb\bar b$ production in association with up to three light jets at the LHC}
+  F.~R.~Anger, F.~Febres Cordero, H.~Ita and V.~Sotnikov\\
+  Phys.\ Rev.\ D {\bf 97}, no. 3, 036018 (2018), doi:10.1103/PhysRevD.97.036018
+
+  In this article the next-to-leading QCD corrections to the associated production of $W$-bosons, a $b\bar{b}$ pair, and up to three light jets are presented.
+  The computation is done in the four-flavor-number scheme, thus including effects due to the non-vanishing bottom-quark mass.
+  The results obtained in this work provide a prediction for an important irreducible background to $H(\to b\bar{b})W$ studies.
+
+  The computation of one-loop matrix elements required for this project became possible
+  due to my work on the major upgrade of the \textsc{BlackHat} library to handle massive fermions in automated numerical unitarity.
+  The key developments are:
+  \begin{itemize}
+    \item unitarity cuts for a complete set of diagrams with internal massive particles in the loop
+    \item an algorithm for the extraction of the rational part through a modified spectrum of particles in the loop
+    \item in-house multi-precision implementation of master integrals with internal masses.
+  \end{itemize}
+  I also have carried out the study of numerical stability of the new version of the \textsc{BlackHat} library.
+  My main contribution to the writeup of this publication is in the description of formal aspects of virtual matrix element computation.
+
+
+\paper{2. Planar Two-Loop Five-Parton Amplitudes from Numerical Unitarity}
+  S.~Abreu, F.~Febres Cordero, H.~Ita, B.~Page and V.~Sotnikov\\
+JHEP {\bf 1811}, 116 (2018), doi:10.1007/JHEP11(2018)116
+
+  In this work we computed for the first time all two-loop five-parton helicity amplitudes relevant
+  for the computation of NNLO QCD corrections to the production of tree jets at hadron colliders in the leading color approximation.
+  The computation is carried out with the recently developed two-loop numerical unitarity methods, which we extend for use with finite field arithmetics.
+  We exploit decomposition of the integrand into master and surface terms that is independent of the parton type.
+  We present reference values for helicity amplitudes, which are obtained by combining the master-integral coefficients with the known master integrals.
+
+  For this project I have developed and implemented the formalism for
+  consistent definition of helicity amplitudes with quarks in dimensional regularization,
+  suitable for application in the framework of numerical computations with multi-loop $D$-dimensional unitarity.
+
+  Other technical contributions which has been crucial for this project include:
+  \begin{itemize}
+    \item extension of the $D$-dimensional tree-level amplitude generator to handle fermions
+    \item a general solution to the compatibility of fermions with evaluations over finite fields
+    \item extensive validation of the new results (divergent structure, comparison to literature, etc.)
+  \end{itemize}
+  As a result of my work I became a main developer of the \texttt{C++} framework \textsc{Caravel} for exploring multi-loop amplitudes
+  with numerical unitarity.
+
+  I have contributed substantially to the preparation of all parts of the manuscript,
+  with the focus on the definition of helicity amplitudes and presenting the main results of the paper.
+
+\paper{3. Analytic Form of the Planar Two-Loop Five-Parton Scattering Amplitudes in QCD}
+S.~Abreu, J.~Dormans, F.~Febres Cordero, H.~Ita, B.~Page and V.~Sotnikov\\
+JHEP {\bf 1905}, 084 (2019), doi:10.1007/JHEP05(2019)084
+
+In this work we present the analytic form of all two-loop five-parton helicity amplitudes
+required for the computation of NNLO QCD corrections to the production of three jets at hadron colliders
+in the leading-color approximation.
+We demonstrate how a combination of numerical evaluation of amplitudes through numerical unitarity with a
+dedicated algorithm of multivariate rational function reconstruction allows to obtain
+the analytic form of the amplitudes from exact numerical evaluations over finite fields.
+Their systematic simplification using multivariate partial-fraction decomposition
+leads to a particularly compact form. We show that with these methods, a sample with a size comparable to that
+required for numerical Monte-Carlo integration is sufficient to produce analytic expressions.
+
+  Here I have designed and implemented an algorithm which significantly optimizes the
+  treatment of $D$-dimensional particles in the loops and allows to carry out all numerical
+  evaluations with particle states taken to be in six dimensions. This replaces reconstruction
+  of the dependence on the dimensional regulator from sample values.
+  This development made the analytical reconstruction of amplitudes with quarks from numerical evaluations possible,
+  which was not feasible before.
+
+  I have also contributed to many other parts of the project, such as
+  building a framework for automated evaluation and reconstruction of large number of amplitudes.
+  My main contribution to the writeup of the publication is in the description of the new algorithms employed for the evaluation
+  of amplitudes, as well as presentation of the results.
+
+
+\subsection*{Ongoing Work}
+
+%I have presented the results of all the referenced papers through seminar talks in multiple universities and at a number of major international conferences.
+I am currently actively involved in the ongoing research projects which will results in further significant results and publications in the near future.
+
+Some of the details of my work on the dimensional regularization of helicity amplitudes in the framework of numerical unitarity can be found
+in the (yet) unpublished article\\
+\textit{``On the Dimensional Regularization of QCD Helicity Amplitudes With Quarks,''} F.~R.~Anger and V.~Sotnikov, arXiv:1803.11127 [hep-ph].
+
+
+
+
+
+
+
+
+\end{document}

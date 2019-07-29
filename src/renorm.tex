@@ -1,0 +1,654 @@
+In order to arrive at physical predictions, we need to
+\textit{renormalize} QCD \ola s. Renormalization refers to the process of
+connecting the initial Lagrangian parameters, so called bare
+parameters, to physical quantities that can be measured in experiment. In a renormalizable theory, UV divergencies stemming from
+virtual corrections drop out once the bare parameters are connected to
+physical ones. The SM, and thus QCD, is a renormalizable theory \cite{tHooft:1971qjg,tHooft:1972tcz}.
+
+
+We renormalize \ola s for processes involving massive quarks in a
+mixed scheme. The strong coupling is renormalized in the
+$\MSb$ scheme
+and we apply a shift to decouple massive quark loops from the running of
+$\alpha_s$. The wave-function and mass renormalization is done in the
+on-shell scheme. The mass renormalization is performed at the
+level of each color-ordered amplitude. Previously, we explicitly broke gauge invariance of the amplitudes by
+removing external leg self-energy Feynman diagrams from tree
+amplitudes that appeared in double cuts on \olb~topologies
+(cf.~Sec.~\ref{sec:massivebubble}). After recombination with the corresponding mass counterterms, gauge
+invariance of the \ola s is restored. The coupling renormalization and massive quark
+decoupling as well as wave-function renormalization lead to a shift proportional to the tree amplitude. We provide all renormalization constants in FDH to
+be consistent with the computation of the \ola s. 
+
+Furthermore, in Sec.~\ref{sec:scaledep} we work out the correct \root~\cite{ROOT} \ntuple{} weights \cite{BH:Ntuples} for massive
+one-loop amplitudes. Using \ntuple{} files allows for an efficient a-posteriori reevaluation of
+matrix elements with different renormalization and factorization
+scales as well as couplings and parton distribution functions.
+
+\section{Multiplicative Renormalization}
+\label{sec:stdrenorm}
+We will briefly review the standard multiplicative renormalization
+procedure (more details can be found in many textbooks \cite{PeskinS,Schwartz:2013pla,Bohm:2001yx}). In particular, we will see that mass counterterms have to
+be computed at the level of each color-ordered amplitude whereas the
+other renormalizations result in a shift proportional to the tree amplitude. We
+reparameterize the bare parameters in the Lagrangian by 
+\begin{align}
+  \psi_0 & = \sqrt{Z_2}\psi_R, & A_0^\mu & =  \sqrt{Z_3} A_R^\mu, \\
+m_0 & = Z_m m_R, & g_0 & = Z_g g_R, \notag
+\end{align}
+where $\psi_0$ is the bare fermion field, $A^\mu_0$ the bare QCD gauge field, $m_0$
+the bare mass and $g_0$ the bare strong coupling. In perturbation
+theory, we expand the renormalization constants $Z_i$ and get to first order
+\begin{align}\label{eq:renconst}
+  Z_2 & \equiv 1 + \delta_2, &  Z_3 &\equiv 1 + \delta_3,  \\
+  Z_m & \equiv 1 + \delta_m, &  Z_g &\equiv 1 + \delta_g, \notag 
+\end{align}
+which leads to a split up of the Lagrangian. We get the
+original Lagrangian in which bare parameters are replaced by
+renormalized ones, and in addition, the so called \textit{counterterm}
+Lagrangian that collects all terms in the renormalization constants $\delta_i$
+and generates counterterm Feynman rules. The renormalization constants
+multiplying the counterterm Feynman rules for QCD vertices are given by
+\begin{align}\label{eq:vertqcdct}
+\begin{split}
+  Z_{3g}-1 = Z_3^{3/2}Z_g-1 &\equiv \frac{3}{2} \delta_3 +
+  \delta_g, \\
+  Z_{4g}-1 = Z_3^{4/2}Z_g^2 -1&\equiv  2\delta_3 + 2 \delta_g, \\
+Z_{2q1g} -1= Z_2 Z_3^{1/2}Z_g -1 &\equiv  \delta_2 +
+  \frac{1}{2}\delta_3 + \delta_g,
+\end{split}
+\end{align}
+for the three- and four-valent gluon interaction $Z_{3g}$ and $Z_{4g}$
+as well as the quark-gluon interaction $Z_{2q1g}$. The Feynman
+rules for two-particle counterterms in Feynman gauge are given in Fig.~\ref{fig:qcdct}.
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m)]
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0,0);
+    \vertex (v1) at (1,0);
+    \vertex (v2) at (2,0);
+    \diagram* {
+      (m)  -- [fermion,insertion={[size=8pt]0.99}] (v1) -- [fermion] (v2), 
+    };
+  \end{feynman}
+\end{tikzpicture}
+ & \qquad i\left((\slashed{p}-m_R)\delta_2 -
+\delta_mm_R\right) &=P^q_{\text{ct}}(p)_{|\delta_2} +P^q_{\text{ct}}(p)_{|\delta_m}\\
+\vspace{1cm}
+\begin{tikzpicture}[baseline=(m)]
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0,0);
+    \vertex (v2) at (2,0);
+    \diagram* {
+      (m)  -- [gluon,insertion={[size=8pt]0.5}] (v2), 
+    };
+  \end{feynman}
+\end{tikzpicture}& \qquad -ip^2\delta_3 g^{\mu\nu}&=P^{g,\mu\nu}_{\text{ct}}(p)\\
+\end{eqnarray*}
+\vspace{-1.5cm}
+\captionedequationset{Feynman rules for QCD two-particle counterterms in Feynman gauge. The renormalization constants
+  $\delta_i$ are defined in Eq.~\eqref{eq:renconst}.\label{fig:qcdct}} 
+In principle, one has to compute all possible
+counterterms as specified by the counterterm Feynman rules. However,
+the simple counting exercise of Sec.~\ref{sec:renorm-shifts-prop} reveals that wave-function and coupling renormalization of QCD one-loop amplitudes lead to a
+renormalization shift proportional to the tree. The remaining mass
+renormalization counterterms have to be computed explicitly, as
+spelled out in Sec.~\ref{sec:mrenorm}.
+
+\section{Coupling and Wave-Function Renormalization}
+\label{sec:renorm-prop-tree}
+
+\subsection{Renormalization Shifts Proportional to Tree Amplitudes}
+\label{sec:renorm-shifts-prop}
+
+We first observe that the combination of two propagators of the QCD spectrum with a counterterm
+insertion leads, for the parts independent of $\delta_m$, to the original propagator
+multiplied by a renormalization constant. In particular, the counterterm
+insertion on fermion propagators is given by
+\begin{align}\label{eq:repropq}
+\begin{split}
+  P^q(p)P_{\text{ct}}^q(p)_{|\delta_2} P^q(p)& =  \frac{i(\slashed{p}+m_R)}{p^2-m_R^2}\left(i(\slashed{p}-m_R)\delta_2\right) \frac{i(\slashed{p}+m_R)}{p^2-m_R^2}\\
+  &=-\delta_2\frac{i(\slashed{p}+m_R)}{p^2-m_R^2} = -\delta_2 P^q(p),
+\end{split}
+\end{align}
+and that on gluon propagators by
+\begin{align}\label{eq:repropg}
+\begin{split}
+  P^g_{\mu\nu}(p) P^{g,\nu\rho}_{\text{ct}} P^g_{\rho\sigma}(p)& =  \frac{-ig_{\mu\nu}}{p^2} \left(-ip^2\delta_3 g^{\nu\rho}\right)  \frac{-ig_{\rho\sigma}}{p^2}\\
+  &=-\delta_3\frac{-ig_{\mu\sigma}}{p^2} = -\delta_3P^g_{\mu\sigma}(p).
+\end{split}
+\end{align}
+It remains to show that the multiplicative renormalization factor of each Feynman diagram is
+purely determined by the number and species of external particles. In
+order to do so, we count vertices and
+propagators of QCD tree amplitudes and multiply them with the corresponding
+renormalization factors,
+cf.~Eqs.~\eqref{eq:vertqcdct}-\eqref{eq:repropg}. We start with pure gluon amplitudes with $n$
+external particles. For each Feynman diagram contributing to the
+amplitude, we have
+\begin{align}\label{eq:gvert}
+  n = n_3 + 2 n_4 + 2,
+\end{align}
+where $n_3$ and $n_4$ are the number of three- and four-valent gluon
+interactions. The number of gluon propagators $n_{\text{p,g}}$ is
+related to the number of vertices by
+\begin{align}\label{eq:gprop}
+  n_{\text{p,g}} = n_3+ n_4 -1.
+\end{align}
+Therefore, the renormalization constants multiplying each Feynman
+diagram are given by
+\begin{align}
+\begin{split}
+  \text{R}(n,n_3,n_4,n_{\text{p,g}}) &= n_4 \left( 2\delta_3 + 2\delta_g \right) +n_3 \left(
+    \frac{3}{2} \delta_3 + \delta_g \right)-n_{\text{p,g}} \delta_3\\
+%&= n_4 \left( 2\delta_3 + 2\delta_g \right) +( n - 2 n_4 - 2) \left(
+%    \frac{3}{2} \delta_3 + \delta_g \right)-(n - n_4 -3)\delta_3 \\
+&= \frac{n}{2}\delta_3 +(n-2)\delta_g \equiv \text{R}(n),
+\end{split}
+\end{align}
+where we used Eqs.~\eqref{eq:gvert} and \eqref{eq:gprop} as well as
+the counterterm Feynman rules. Thus the renormalization constants
+multiplying each Feynman diagram are only dependent on the number of
+external legs. Wave-function
+and coupling renormalization of pure gluon amplitudes are therefore
+proportional to the corresponding tree
+amplitude. 
+
+We perform a similar counting exercise for processes involving both quarks and gluons. For a Feynman diagram of $n$ particles, with $N_g$ gluons, $N_q$ quarks, $n_3$ and $n_4$ gluon vertices and
+$n_{\text{qg}}$ quark-gluon vertices, we get the relation
+\begin{align}\label{eq:rqgen}
+  n=N_g+N_q = n_3 + 2n_4 + n_{\text{qg}} +2.
+\end{align}
+The number of both gluon ($n_{\text{p,g}}$) and quark ($n_{\text{p,q}}$) propagators is given by
+\begin{align}\label{eq:propqre}
+  n_{\text{p,g}} &= n_3+n_4 + \left(\frac{N_q}{2} - 1\right), &   n_{\text{p,q}} &=
+  n_{\text{qg}}-1- \left( \frac{N_q}{2} - 1\right).
+\end{align}
+The multiplicative renormalization factor $\text{R}(N_g,N_q,n_3,n_4,n_{\text{qg}},n_{\text{p,g}},n_{\text{p,q}})$ of each Feynman diagram with $N_g$ gluons and
+$N_q$ quarks therefore reads
+\begin{align}\label{eq:shiftfd}
+\begin{split}
+ \text{R}(\cdots) &= n_4 \left( 2\delta_3 + 2\delta_g \right) +n_3 \left(
+    \frac{3}{2} \delta_3 + \delta_g \right)+n_{\text{qg}}\left(\delta_2+\frac{1}{2}\delta_3+\delta_g\right)-n_{\text{p,g}} \delta_3-n_{\text{p,q}} \delta_2\\
+%&= n_4 \left( 2\delta_3 + 2\delta_g \right) +( n - 2 n_4 -n_{\text{qg}}+ (N_q-2)) \left(\frac{3}{2} \delta_3 +\delta_g \right)+n_{\text{qg}}(\delta_2+\frac{1}{2}\delta_3+\delta_g)\\
+%&\phantom{m}-\left(n -n_4-n_{\text{qg}} + \frac{1}{2}(m - 2)\right) \delta_3-\left(n_{\text{qg}}-\frac{m}{2} \right) \delta_2\\
+&=\frac{N_g}{2}\delta_3
++\frac{N_q}{2}\delta_2+\left(n-2\right)\delta_g \\
+&\equiv \text{R}(N_g,N_q),
+\end{split}
+\end{align}
+where we have used Eqs.~\eqref{eq:rqgen} and \eqref{eq:propqre} and
+the counterterm Feynman rules. As above, the wave-function and coupling renormalization shift for
+amplitudes containing quarks and gluons is proportional to a
+tree amplitude.
+
+\subsection{Renormalization Constants}
+\subsubsection{Gluon Wave-Function Renormalization}
+We renormalize the gluon wave function in the on-shell scheme. The
+renormalization constant is fixed by the requirement that the residue
+of the gluon propagator is one. As a side effect, we do not have
+to calculate self-energy corrections on external gluon legs. The
+renormalization constant in the on-shell scheme calculated in FDH is
+given by
+\begin{align}
+Z_3^{\text{os}}=1+\delta_{3}=1-g_s^2c_\Gamma\frac{2}{3}\left(\frac{1}{\epsilon} +
+  \log\left(\frac{\mu^2}{ m_{\text{os}}^2}\right)\right)+\mathcal{O}(g_s^4,\epsilon),
+\end{align}
+with a heavy quark with on-shell mass $m_{\text{os}}$ running in the
+closed loop and the prefactor $\displaystyle
+c_\Gamma=(4\pi)^{-(2-\epsilon)}\Gamma(1+\epsilon)\Gamma^2(1-\epsilon)/\Gamma(1-2\epsilon)$
+appearing in all integrals and renormalization constants. As we saw
+in Eq.~\eqref{eq:shiftfd}, each of the $N_g$ external gluons contributes a
+factor of $\frac{1}{2}\delta_3$ and we get contributions from each
+flavor in closed massive quark loops. Therefore the
+renormalization shift to a \ola~involving $n$ particles and $N_g$ gluons is given by
+\begin{align}
+\begin{split}
+  \text{R}_{\text{wf, gluon}} &= -g_s^{2}c_\Gamma
+N_g\sum_{i=1}^{N_{hf}}\left(\frac{1}{3\epsilon} + 
+  \frac{1}{3}\log\left(\frac{\mu^2}{ m_{i,\text{os}}^2}\right)\right)
+\Ampt(1,\dots,n)\\
+&=-g_s^{2}c_\Gamma
+N_g \Delta_3 \Ampt(1,\dots,n),
+\end{split}
+\end{align}
+where $N_{hf}$ denotes the number of heavy-quark flavors with mass $m_{i,\text{os}}$.
+%There is no contribution from massless quarks to the gluon
+%self-energy, since the corresponding integrals vanish in dimensional regularization.
+\subsubsection{Massive Quark Wave-Function Renormalization}
+ We use the on-shell scheme to renormalize the massive quark wave
+ function and the renormalization constant in FDH is given by
+\begin{align}
+ Z_2^{\text{os}}=1+\delta_2&=1-g_s^2c_\Gamma C_F\left(\frac{3}{\epsilon}+3\log{\left(\frac{\mu^2}{m_{\text{os}}^2}\right)}+5\right)+\mathcal{O}(g_s^4,\epsilon),
+\end{align}
+with $C_F=\frac{N_C^2-1}{2N_C}$. 
+%The constant $Z_2^{\text{os}}$ is fixed from requirements on the fermion propagator Eq.~\eqref{eq:osfermprop}.
+%\begin{align}
+% \lim_{p^2\rightarrow m^2_{\text{os}}}\left[\frac{i(\slashed{p}+m_{\text{os}})}{p^2-m^2_{\text{os}}}\left(1-{\hat\Sigma}_0(\slashed{p})-\frac{m_{\text{os}}(\slashed{p}+m_{\text{os}})\tilde{\Sigma}_1(\slashed{p})}{p^2-m_{\text{os}}^2}\right)u(p)\overset{!}{=}\frac{i(\slashed{p}+m_{\text{os}})}{p^2-m^2_{\text{os}}}u(p)\right],
+%\end{align}
+%which can be rephrased as
+%\begin{align}
+%  \hat\Sigma_0(m_{\text{os}}^2)+2m^2_{\text{os}}\tilde{\Sigma}^\prime_1(m_{\text{os}}^2)=0,
+%\end{align}
+%with the self-energies $\Sigma_i$ defined as in Sec.~\ref{sec:mrenorm} and
+%$\Sigma^\prime(\slashed{p})=\pdv{\Sigma(\slashed{p})}{\slashed{p}}$. 
+Each massive external fermion
+contributes a factor of $\frac{1}{2}\delta_2$, see Eq.~\eqref{eq:shiftfd}. Therefore, the
+renormalization shift to a \ola~involving $n$ particles including external massive quarks is given by
+\begin{align}
+\begin{split}
+  \text{R}_{\text{wf, quark}} &= -g_s^{2}c_\Gamma
+\sum_{i=1}^{N_{hf}}N_{Q_i}\frac{1}{2}C_F\left(\frac{3}{\epsilon}+3\log{\left(\frac{\mu^2}{m_{i,\text{os}}^2}\right)}+5\right)\Ampt(1,\dots,n)\\
+&= -g_s^{2}c_\Gamma
+\sum_{i=1}^{N_{hf}}N_{Q_i}\frac{\Delta_{2,i}}{2}\Ampt(1,\dots,n),
+\end{split}
+\end{align}
+where $N_{hf}$ denotes the number of heavy-quark flavors and $N_{Q_i}$ the number of external quarks of flavor $i$ with on-shell mass $m_{i,\text{os}}$.
+
+%See for example:\\
+%KST, \url{https://arxiv.org/pdf/hep-ph/9305239.pdf}\\
+%\url{https://arxiv.org/pdf/0807.4424.pdf}\\
+%\url{https://arxiv.org/pdf/hep-ph/9310301.pdf}\\
+%Weinzierl, \url{https://arxiv.org/pdf/hep-ph/0207055.pdf}
+
+\subsubsection{Coupling Renormalization}
+The coupling renormalization constant is fixed by a
+calculation of the
+vacuum polarization. We use the $\MSb$ scheme, where the
+renormalization constant for the coupling computed in FDH is given by
+\begin{align}
+ Z_g^{\MSb}=1+\delta_g=1-g_s^2c_\Gamma\frac{1}{2}\left(\frac{11N_c-2(N_f+N_{hf})}{3\epsilon}-\frac{N_c}{3}\right)
+ + \mathcal{O}(\epsilon,g_s^4),
+\end{align}
+with $N_f$ denoting the number of light and $N_{hf}$ the
+number of heavy-quark flavors. The finite shift $\frac{N_c}{3}$ stems
+from the translation of the gauge coupling from standard $\MSb$ to the
+FDH variant. As we saw in Eq.~\eqref{eq:shiftfd}, each power $N_{g_s}$ of the strong coupling $g_s$ contributes to the renormalization shift
+\begin{align}
+\begin{split}
+ \text{R}_{\text{coupling}} &= -g_s^{2}c_\Gamma \frac{N_{g_s}}{2}
+ \left(\frac{11N_c-2(N_f+N_{hf})}{3\epsilon}-\frac{N_c}{3}\right)\Ampt(1,\dots,n)\\
+ &= -g_s^{2}c_\Gamma N_{\alps} \Delta_{\alps}\Ampt(1,\dots,n).
+\end{split}
+\end{align}
+For pure QCD amplitudes, the power of $g_s$ is given by
+$N_{g_s}=n-2$ and that of $\alps$ by $N_{\alps}=N_{g_s}/2$. For amplitudes
+involving \ew~gauge bosons, the counting is reduced accordingly.
+\subsubsection{Heavy-Quark Decoupling}
+We work in the decoupling scheme \cite{Collins1978a}. That is, we require
+that heavy quarks decouple from the running of
+$\alpha_s$ at energies $E\ll m_{hf}$. Consequently, the appropriate $\MSb$ coefficients for the
+running of $\alpha_s$ should be the same as in absence of the heavy
+quarks. Therefore, diagrams with a heavy quark loop
+are subtracted at zero momentum transfer and the decoupling shift for an
+$n$-particle amplitude with $\frac{n-2}{2}$ powers of the strong
+coupling $\alps$ and $N_{hf}$ decoupled heavy-quark flavors is
+given by
+\begin{align}
+\begin{split}
+\text{R}_{\text{decoupling}}&= g_s^{2}c_\Gamma
+N_{\alps}\sum_{i=1}^{N_{hf}}
+\frac{2}{3}\log(\frac{\mu^2}{m_{i,\text{os}}}) \Ampt(1,\dots,n)\\
+&= -g_s^{2}c_\Gamma N_{\alps}\sum_{i=1}^{N_{hf}}
+\Delta_i\Ampt(1,\dots,n),
+\end{split}
+\end{align}
+where the sum runs over heavy quark flavors $N_{hf}$ and $N_{\alps}$ denotes the power of the coupling $\alps$. For processes involving \ew~gauge bosons, the counting is
+reduced accordingly.
+%\url{http://lanl.arxiv.org/pdf/hep-ph/0508242}
+%\url{https://ac.els-cdn.com/0550321382900384/1-s2.0-0550321382900384-main.pdf?_tid=3fc95d9e-a468-11e7-b8d4-00000aacb362&acdnat=1506615511_0873854316f0722bef4a45c5ee57e85d}
+
+\section{Mass Renormalization}
+\label{sec:mrenorm}
+For processes involving massive quarks, we need to renormalize the
+bare mass parameter. Its renormalization cannot be represented
+as a contribution proportional to the tree amplitude. For convenience we combine the computation of these
+contributions with the bubble diagrams. We explicitly
+compute mass-counterterm contributions using a dedicated recursive
+tree-like computation at the level of primitive loop amplitudes. The only source to the $\delta_m$ counterterm is the two-particle QCD counterterm interaction, cf.~Fig.~\ref{fig:qcdct} and Eq.~\eqref{eq:vertqcdct} 
+\begin{align}\label{eq:fermionpropins}
+  P^q_{\text{ct}}(p)_{|\delta_m} = -im_R \delta_m.
+\end{align}
+For double cut topologies with a gluon and a massive quark
+cut line, the mass counterterm is computed by replacing the two cut lines of the bubble with fermion propagators and the above insertion of
+Eq.~\eqref{eq:fermionpropins} as shown in Fig.~\ref{fig:massct}. The counterterm for a double cut topology
+with legs $1_g,\dots,j_{\bar{q}}$ joining in vertex one and
+$(j+1)_g,\dots,n_q$ in vertex two is thus computed by
+\begin{align}
+  \text{CT}_{1_g,\dots,j_{\bar{q}};(j+1)_g,\dots,n_q} =
+  Q(1_g,\dots,j_{\bar{q}}) P^q_{\text{ct}}(P_{1j})_{|\delta_m} \bar{Q}((j+1)_g,\dots,n_q),
+\end{align}
+where we denoted the momentum sum $P_{ij}=\sum_{k=i}^jp_k$ and $Q$ and
+$\bar{Q}$ denote quark and anti-quark Berends-Giele currents respectively. By adding these
+counterterms to each color-ordered \ola, gauge invariance is
+restored at the level of primitive amplitudes, after initially being broken by the removal of external leg self-energy insertions in \olb~cuts, cf.~Sec.~\ref{sec:massivebubble}.
+\begin{equation*}
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{2.5}
+  \def\cutshift{0.3}
+  \def\cutlength{1.0}
+
+  %The double cut lines
+  \pgfmathsetmacro\vertcut{(\blobpos-1)/2+1}
+  \draw[very thick] (\vertcut,\cutshift) -- (\vertcut,\cutshift+\cutlength);
+  \draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+
+  %\node at (-0.3,0) {\(1_{\bar{q}}\)};
+  \begin{feynman}[inline=(m1)]
+    \vertex[blob] (m) at (\blobpos, 0) {};
+    \vertex[blob] (m1) at (1, 0){};
+    \vertex (i) at (0, 0){\(\vdots\)};
+    \vertex (i1) at (0, \leglength){\(j_{\bar{q}}\)};
+    \vertex (i2) at (0, -\leglength){\(1_g\)};
+    \vertex (a) at (\blobpos+\leglength,0){\(\vdots\)};
+    \vertex (b) at (\blobpos+ \leglength,\leglength){\( (j+1)_{g} \)};
+    \vertex (c) at (\blobpos+ \leglength,- \leglength){\(n_{q}\)};
+    \diagram* {
+     (m1) -- [gluon, half left,out=90,in=90] (m)
+       -- [half left, thick,out=85,in=95] (m1),
+       (m) -- [gluon] (b),
+       (m1) -- [anti fermion] (i1),
+       (m1) -- [gluon] (i2),
+      (m) -- [fermion,  thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\hspace{0.5cm}\longrightarrow\hspace{0.5cm}
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{3.5}
+  \def\cutshift{0.3}
+  \def\cutlength{1.0}
+
+  %\node at (-0.3,0) {\(1_{\bar{q}}\)};
+  \begin{feynman}[inline=(m1)]
+    \vertex[blob] (m) at (\blobpos, 0) {};
+    \vertex[blob] (m1) at (1, 0){};
+    \vertex (mi) at (2.25, 0);
+    \vertex (i) at (0, 0){\(\vdots\)};
+    \vertex (i1) at (0, \leglength){\(j_{\bar{q}}\)};
+    \vertex (i2) at (0, -\leglength){\(1_g\)};
+    \vertex (a) at (\blobpos+\leglength,0){\(\vdots\)};
+    \vertex (b) at (\blobpos+ \leglength,\leglength){\( (j+1)_{g} \)};
+    \vertex (c) at (\blobpos+ \leglength,- \leglength){\(n_{q}\)};
+    \diagram* {
+      (m1) -- [fermion,insertion={[size=8pt]0.99}] (mi)   -- [fermion] (m),
+       (m) -- [gluon] (b),
+       (m1) -- [anti fermion] (i1),
+       (m1) -- [gluon] (i2),
+      (m) -- [fermion,  thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{equation*}
+\vspace{-1.2cm}
+\captionedequationset{Generation of mass counterterms. For double cut
+  topologies with a gluon and fermion cut line, we compute the
+  corresponding counterterm by joining the two currents
+  $Q(1_g,\dots,j_{\bar{q}})$ and $\bar{Q}((j+1)_g,\dots,n_q)$ with the
+  fermion two-particle counterterm interaction.\label{fig:massct}} 
+
+
+We renormalize the mass in the \textit{on-shell scheme}. The renormalization
+constant $Z_m$, computed in Feynman gauge and expressed in FDH is given by
+\begin{align}\label{eq:rcm}
+\begin{split}
+  Z_m^{\text{os}}=1+\delta_m&=1-C_Fg_s^2c_\Gamma
+  \left(\frac{\mu^2}{m_{\text{os}}^2}\right)^\epsilon
+  \left(\frac{3}{\epsilon}+5\right)+\mathcal{O}(g_s^4)\\
+&=1-C_Fg_s^2c_\Gamma \left(\frac{3}{\epsilon}+3\log{\left(\frac{\mu^2}{m_{\text{os}}^2}\right)}+5\right)+\mathcal{O}(g_s^4,\epsilon).
+\end{split}
+\end{align}
+The color factor $C_F$ evaluates to $C_F=1$ if we compute the counter
+terms for color-ordered particles. In the
+on-shell scheme, the renormalization constant
+$Z_m^{\text{os}}$ is fixed such that the pole of the
+propagator is described by the renormalized mass
+$m_{\text{os}}$, thereby fixing the finite terms. 
+
+%Summing up the one-particle irreducible contributions
+%to the fermion propagator up to first order, we get
+%\begin{align}\label{eq:osfermprop}
+%\begin{split}
+%  \hat{P}^q(p)&=\frac{i(\slashed{p}+m_R)}{p^2-m^2_R}\left(1-\frac{(\slashed{p}+m_R)\hat\Sigma(\slashed{p})}{p^2-m_R^2}\right)\\
+%&=\frac{i(\slashed{p}+m_R)}{p^2-m^2_R}\left(1-{\hat\Sigma}_0(\slashed{p})-\frac{m_R(\slashed{p}+m_R)\tilde{\Sigma}_1(\slashed{p})}{p^2-m_R^2}\right),
+%\end{split}
+%\end{align}
+%where we denote renormalized quantities with a hat. The renormalized
+%self-energy $\hat\Sigma(\slashed{p})$ can be split into vectorial and scalar part
+%according to $\hat\Sigma(\slashed{p})=\slashed{p}{\hat\Sigma}_0(\slashed{p})+m{\hat\Sigma}_1(\slashed{p})$ and the sum of the
+%parts is denoted by
+%$\tilde{\Sigma}_1(\slashed{p})={\hat\Sigma}_0(\slashed{p})+{\hat\Sigma}_1(\slashed{p})$. If we then require
+%to have a simple pole in Eq.~\eqref{eq:osfermprop} for $p^2\rightarrow m_R\equiv m_{\text{os}}$, we obtain the renormalization condition
+%\begin{align}\label{eq:rnc1}
+%  \lim_{p^2\rightarrow m^2_{\text{os}}}\tilde{\Sigma}_1(p^2) = \tilde{\Sigma}_1(m_{\text{os}}^2)  = 0.
+%\end{align}
+%The sum of renormalized self-energies
+%${\tilde\Sigma}_1(m_{\text{os}}^2)$ written in terms of unrenormalized
+%self-energies is given by
+%\begin{align}
+%\begin{split}
+%  \tilde{\Sigma}_1(m_{\text{os}}^2) &=
+%  {\hat{\Sigma}}_0(m_{\text{os}}^2)+{\hat \Sigma}_1(m_{\text{os}}^2) \\
+%&=  {\Sigma}_0(m_{\text{os}}^2)+{\Sigma}_1(m_{\text{os}}^2)-\delta_{m}^{\text{os}}=0,
+%\end{split}
+%\end{align}
+%which fixes the finite part of $Z_m^{os}\equiv
+%1+\delta_{m}^{\text{os}}$. It evaluates in FDH to Eq.~\eqref{eq:rcm}, given the expressions for the unrenormalized quark
+%self-energies in QCD.
+
+
+
+%\subsection{$\gamma_5$ renormalization}
+%In the HV scheme we do have a finite shift for $gamma_5$.
+%\begin{align}
+%  \gamma^\mu\gamma_5 \rightarrow   \frac{1}{2} Z_{axial}(\gamma^\mu\gamma_5 -  \gamma_5\gamma^\mu)\notag
+%\end{align}
+%with $Z_{axial}=1-2C_F 1_{HV}$\\
+%\url{https://arxiv.org/pdf/hep-ph/9903380.pdf}
+
+\section{Summary of Renormalization}
+\label{sec:summary}
+In summary, we renormalize \ola s in a mixed scheme. For external states we use the on-shell
+scheme and the gluon wave-function renormalization receives contributions from all
+active heavy quark flavors. We renormalize the mass in the on-shell scheme
+and compute mass renormalization counterterms
+explicitly at the level of each color-ordered amplitude. The QCD coupling is renormalized in $\MSb$, where we decouple massive quarks from the
+running of $\alpha_s$. The renormalized \ola~is obtained by combining all tree-like renormalization shifts with the mass renormalized \ola
+\begin{align}
+\begin{split}
+  \Amp_{(ren)}&=
+  \Amp_{(mass\
+    ren)}+\text{R}_{\text{wf,quark}}+\text{R}_{\text{wf,gluon}}+\text{R}_{\text{coupling}}+\text{R}_{\text{decoupling}}\\
+&= \Amp_{(mass\
+    ren)}-g_s^2 c_\Gamma \left( \sum_{i=1}^{N_{hf}} N_{Q_i} \frac{\Delta_{2,i}}{2} + N_{g}\Delta_3 +
+    N_{\alps}\left(\Delta_{\alps} + \sum_{i=1}^{N_{hf}}\Delta_i\right) \right)  \mathcal{A}^{\text{tree}},
+\end{split}
+\end{align}
+where $N_{hf}$ denotes the number of heavy flavors, $N_{Q_i}$ the number of external heavy quarks of flavor $i$, $N_g$ the number of external
+gluons and $N_{\alps}$ the power of $\alps$ (at Born level) . The
+renormalization constants in the FDH scheme are summarized in Table \ref{tab:renorm}.
+\begin{table}[h]
+  \caption{Renormalization constants used in this thesis. Here $\mu$ is the renormalization
+  scale, $m_{i}$ are the masses for heavy quarks, $N_f$ is the number of light flavors,
+  $N_{hf}$ the number of heavy flavors, and $N_c$ the number of colors.
+  A common factor of $-g_s^2 c_\Gamma$ has been factored out.}
+      \vskip 4mm
+  \centering
+    \begin{tabularx}{\textwidth}{lcll}
+      \hline\hline
+      \noalign{\vskip 4mm}
+      \textbf{Renormalization} & \textbf{Scheme} & \textbf{Constant}\\
+      \noalign{\vskip 3mm}
+      \hline
+      \noalign{\vskip 2mm}
+      %\rule{0pt}{1ex}\\
+    %\small
+      %\toprule
+      Heavy-quark wave function   & on-shell & $\displaystyle
+      \Delta_{2,i} ~=~ \frac{N_c^2-1}{2N_c} \left( \frac{3}{\epsilon}
+        + 3 \log{\frac{\mu^2}{m_i^2} + 5} \right)$\\
+      \noalign{\vskip 1mm}
+      Light-quark wave function   & on-shell & 0\qquad(UV+IR
+      cancellation) \\
+      \noalign{\vskip 3mm}
+      Quark mass            & on-shell & $\displaystyle \Delta_{m_i}
+      ~=~ \Delta_{2,i}\quad\text{}$\\
+      \noalign{\vskip 1mm}
+      Gluon wave function   & on-shell & $\displaystyle \Delta_3 ~=~ \sum_{i=1}^{N_{hf}}\left(\frac{1}{3 \epsilon} +
+      \frac{1}{3}\log{\frac{\mu^2}{m_i^2}}\right)$\\
+      \noalign{\vskip 1mm}
+      QCD coupling & $\MSb$ & $\displaystyle \Delta_{\alps} ~=~  \frac{1}{\epsilon} \left( \frac{11}{3}N_c - \frac{2}{3}(N_f+N_{hf}) \right) - \frac{N_c}{3}$\\
+      \noalign{\vskip 2mm}
+      \hline
+      \noalign{\vskip 2mm}
+      Decoupling shift & --- & $\displaystyle     \Delta_i ~=~-
+      \frac{2}{3}\log{\frac{\mu^2}{m_i^2}} $\\
+      \noalign{\vskip 1mm}
+      \hline\hline
+    \end{tabularx}
+  \label{tab:renorm}
+\end{table}
+
+\section{Scheme Shift From FDH to 't Hooft-Veltman}
+\label{sec:schemeshift}
+We use the FDH variant of dimensional regularization in intermediate steps to
+regularize UV and IR divergences. At the end we convert the renormalized
+amplitude to the HV scheme~\cite{tHooft:1972tcz} which is often more convenient for comparisons and interfacing with Monte-Carlo generators. The conversion of a renormalized \ola~$\Amp_{(ren)}$ is performed by a finite shift, see
+e.g.~\cite{Signer:2008va}
+\begin{align}
+  \mathcal{A}_{(ren)}^{\text{1-loop,HV}} =
+  \mathcal{A}_{(ren)}^{\text{1-loop,FDH}} - g_s^{2}c_\Gamma\left(N_g\frac{N_c}{6}+N_q\frac{N_c^2-1}{4N_c}\right)\Ampt,
+\end{align}
+where $N_g$ denotes the number of gluons and $N_q$ the number of light
+quarks in the respective amplitude.
+
+
+
+\section{Scale Variation Using \Ntuple{} Data}
+\label{sec:scaledep}
+
+We provide NLO results in the form of \root~\cite{ROOT} \ntuple{} files \cite{BH:Ntuples}. The \ntuple{} files allow to reevaluate
+generic IR-safe observables with different renormalization and
+factorization scales as well as different PDFs. They store the relevant information to
+reevaluate observables without recomputing the short-distance matrix
+elements, which is possible due to the particular simple form of the parts of the virtual matrix element that depend on $\mu_R$. This possibility for a-posteriori variations of scales and PDFs
+make the efficient estimation of uncertainties associated to NLO
+predictions possible. 
+
+In this section, we analyze the dependence of virtual cross sections on the unphysical renormalization scale. We neglect the implicit dependence
+via the strong coupling for this discussion, since it amounts to a global prefactor and can be
+treated as described in \cite{BH:Ntuples}. In particular, we identfiy additional
+renormalization terms with $\mu_R$ dependence which are present in calculations with massive external particles and have to be considered in order to supply the correct data for \ntuple{} files.
+
+The dependence of the virtual cross section on the unphysical scale
+$\mu_R$ is introduced in
+dimensional regularization to enforce a mass dimension of one for the
+gauge 
+couplings $g\rightarrow \mu_R^{\epsilon}g$. As a consequence, there is
+an explicit dependence on $\mu_R$ in virtual NLO matrix elements. We can write an unrenormalized, one-loop
+amplitude, with couplings stripped off, as
+\begin{align}\label{eq:mudep}
+  \Amp(\mu_R) =  \tilde{\mu}_R^{2\epsilon}\left[\frac{a_{2}}{\epsilon^2}+\frac{a_{1}}{\epsilon}
+  + a_0\right],
+\end{align}
+where we use the dimensionless scale $\tilde{\mu}_R =
+\frac{\mu_R}{\text{GeV}}$ to simplify the argument in the following. We generically have ratios of
+renormalization scale $\mu_R$ and involved physical scales, from which
+we build dimensionless quantities by
+\begin{align}
+ \left(\frac{\mu_R}{s}\right)^{2\epsilon} =\tilde{\mu}_R^{2\epsilon}\left(\frac{\text{GeV}}{s}\right)^{2\epsilon}.
+\end{align}
+Note, that Eq.~\eqref{eq:mudep} is valid for
+any number of involved physical scales.
+%\footnote{Assume we had two scales, the initial expression expression
+%would be $ \sigma_V =
+%(\frac{\mu_R}{sc_1})^{2\epsilon}\left[\frac{b_{2}}{\epsilon^2}+\frac{b_{1}}{\epsilon}
+%+ b_0\right]+
+%(\frac{\mu_R}{sc_2})^{2\epsilon}\left[\frac{c_{2}}{\epsilon^2}+\frac{c_{1}}{\epsilon}
+%+ c_0\right]$. After identifying two identical dimensionless scales,
+%we see that a redefinition of the parameters $b_i$ and $c_i$ leads to
+%the form in Eq.~\eqref{eq:mudep}.}. 
+We then expand $\left(\tilde{\mu}_R\right)^{2\epsilon}$ and obtain
+\begin{align}
+   \tilde{\mu}_R^{2\epsilon} = 1 +
+   \log(\murt)\epsilon+\frac{1}{2}\log(\murt)^2\epsilon^2
+   + \mathcal{O}(\epsilon^3),
+\end{align}
+such that the explicit $\tilde \mu_R$ dependence of
+Eq.~\eqref{eq:mudep} becomes transparent
+\begin{align}\label{eq:unrenam}
+    \Amp(\mu_R)  = \left[\frac{a_{2}}{\epsilon^2}+\frac{a_{1}+a_{2}\log(\murt)}{\epsilon}
+  + a_0+a_{1}\log(\murt)+\frac{1}{2}a_{2}\log(\murt)^2\right].
+\end{align}
+This formula contains double and single poles due to infrared
+divergencies as well as single poles due to ultraviolet
+divergencies. The difference of the finite part of the amplitude computed at two distinct scales $\mu_{R,1}$ and $\mu_{R,2}$ is then given by
+\begin{align}\label{eq:extrapolscale}
+\begin{split}
+\Amp_{|\epsilon^{0}}({\mu}_{R,2}) -\Amp_{|\epsilon^{0}}({\mu}_{R,1})
+  &=  a_1\log(\frac{\tilde{\mu}_{R,2}^2}{\tilde{\mu}_{R,1}^2})
++\frac{1}{2} a_2 \left[
+    \log(\tilde{\mu}_{R,2}^2)^2-
+    \log(\tilde{\mu}_{R,1}^2)^2\right]\\
+&=  \left[a_1+a_2\log(\tilde{\mu}_{R,1}^2)\right]\log(\frac{\tilde{\mu}_{R,2}^2}{\tilde{\mu}_{R,1}^2})
++\frac{1}{2} a_2
+\log(\frac{\tilde{\mu}_{R,2}^2}{\tilde{\mu}_{R,1}^2})^2,
+\end{split}
+\end{align}
+which we can parameterize in terms of the weights $w_1$ and $w_2$
+\begin{align}\label{eq:unrenweights}
+  w_1 &\equiv a_{1}+a_2
+  \log(\tilde{\mu}_{R,1}^2)=\Amp_{|\epsilon^{-1}},& w_2 &\equiv a_{2} = \Amp_{|\epsilon^{-2}}. 
+\end{align}
+The above parameterization has the advantage, that only ratios of
+renormalization scales have to be considered and no explicit
+dimensionless scales have to be constructed. The finite part of an unrenormalized \ola~at scale
+$\tilde{\mu}_{R,2}$ can thus be extrapolated from that at scale
+$\tilde{\mu}_{R,1}$ by adding the terms in Eq.~\eqref{eq:extrapolscale}
+\begin{align}\label{eq:extrapolscale2}
+\begin{split}
+  \Amp_{|\epsilon^{0}}({\mu}_{R,2})   &= \Amp_{|\epsilon^{0}}({\mu}_{R,1}) +
+  w_1\log(\frac{\tilde{\mu}_{R,2}^2}{\tilde{\mu}_{R,1}^2})+
+\frac{1}{2} w_2
+\log(\frac{\tilde{\mu}_{R,2}^2}{\tilde{\mu}_{R,1}^2})^2.
+\end{split}
+\end{align}
+The above considerations are independent
+of whether the involved particles are massive or not. In the
+renormalization procedure, see the previous sections, additional
+sources of $\mu_R$ dependence are introduced. Whereas mass and wave-function
+renormalization lead to terms in which the logarithmic dependence in
+the finite part has the same prefactor as the single pole, the shift
+due to charge renormalization has no dependence on $\mu_R$ but
+contributes to the single pole. Its
+schematic contributions in an $\epsilon$ expansion
+$(\epsilon^{-1},\epsilon^0)$ is given by
+\begin{align}
+   \text{R}_{\text{charge}} & = (a_{1,c},a_{0,c}),
+\end{align} 
+with coefficients $a_i$ that do not contain any logarithms. The decoupling
+shift for massive quarks however has finite logarithms but no contribution
+to the single pole
+\begin{align}
+   \text{R}_{\text{decoupling}} & = (0,a_{0,dec}\log(\murt)).
+\end{align}
+The weight $w_1$ should correctly parameterize simple logs of $\mu_R$ in
+the finite part. To account for the absence of $\mu_R$ dependence in the charge renormalization and the fact that the decoupling shift
+does not have a single-pole contribution, the weights for renormalized
+amplitudes are defined as 
+\begin{align}\label{eq:reweights}
+ w_1 &=\Ampr_{|\epsilon^{-1}} -a_{1,c}+ a_{0,dec}, &  w_2 &= \Ampr_{|\epsilon^{-2}}.
+\end{align}
+With these weights, one can use Eq.~\eqref{eq:extrapolscale} to
+extrapolate the virtual cross section to different values of $\mu_R$
+for processes involving massive particles.
+
+We provide the weights in Eq.~\eqref{eq:reweights} for each
+phase space point together with the finite part of the matrix element squared. They
+are stored in \ntuple{} files alongside information like the phase-space
+point, the involved partons, the factorization and renormalization
+scales, the Bjorken-x and the corresponding PDF
+weights. We make extensive use of a-posteriori scale variations in the phenomenological
+results presented in the following Chapters \ref{chap:wbb_intro}-\ref{chap:vjet_result}.

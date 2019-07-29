@@ -1,0 +1,46 @@
+\section{Colour decomposition}
+We decompose \ola s into purely kinematic functions, the so called partial amplitudes, that multiply group-theoretic factors, so called \cf s. We work in \SNc, where \Nc$=3$ is set for QCD. The group generators are normalized according in the fundamental representation, such that $\text{Tr}(T^aT^b) = \delta^{ab}$. We then rewrite the appearing structure constants $f^{abc}$ by 
+\begin{align}
+f^{abc} = - \frac{i}{\sqrt{2}}\text{Tr}\left([T^a,T^b]T^c\right)
+\end{align}
+and apply the Fierz identity for the \SNc~group
+\begin{align}
+\sum_a (T^a)_k^{\bar i} (T^a)_l^{\bar j} = \delta_k^{\bar j} \delta_l^{\bar i} - \frac{1}{N_c}  \delta_k^{\bar i} \delta_l^{\bar j} 
+\end{align}
+which leads to a \cd. We then collect terms according to their \cf~and obtain the following expressions for \ola s.
+
+\begin{align}
+\Amp_n (\{k_i,h_i,a_i\}) = \sum_{c=1}^{[n/2]+1}\sum_{\sigma \in S_n/S_{n;c}} \text{Gr}_{n;c}(\sigma)A_{n;c}(\sigma)
+\end{align}
+The leading \cf~GR$_{n;1}(1)=N_c \text{Tr}(T^{a_1}\dots T^{a_2})$ is given by the product of \Nc~and the tree \cf. Sub-leading \cs s are given by products of trace expressions.
+
+Partial amplitudes can then be further decomposed into gauge invariant
+building blocks, the primitive amplitudes. They do have a more
+transparent anlytic structure due to the fixed order of the appearing
+external legs, which results in a reduction of both factorization
+channels as well as invariants that can appear. In particular, this
+makes their usage amenable to methods based on factorization and
+branch cut singularity properties, such as numerical unitarity. We do
+use a \cd~based on the algorithm proposed in \cite{Ita:2011arx}
+
+
+\section{The Loop Integrand}
+
+Decomposition in terms of master integrals (massive basis), The generic form of a loop integrand at 1-loop, loop integrations,
+transverse / physical space, tensor basis
+A generic N-particle one-loop amplitude is given by
+\begin{align}
+ A_N^{\text{1-loop}}= \int \text{d}^4 l
+ \frac{N(p_1,p_2,\dots,p_N;l)}{D_1D_2\dots D_N}
+\end{align}
+
+\section{Tree amplitudes}
+We generate the required \co~tree amplitudes using an off-shell recursion due to Berends-Giele. This represents an efficient and flexible ways to obtain tree amplitudes. The recursion is based the idea of summing over all possible ways to connect the appearing building blocks, off-shell currents, to each other. The interactions of the theory as well as all possible way to distribute the \co~particles determine one recursive step. 
+
+
+
+
+
+
+
+

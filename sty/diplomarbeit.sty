@@ -1,0 +1,132 @@
+%%% Vorlage für eine nette Titelseite einer Diplom- oder Doktorarbeit
+
+%%% Notwendige Anpassungen:
+%%% - Titelbild in sty/titel.pdf einbauen und Einbindung anpassen (Zeile 31)
+%%% - Je nach Bedarf "Diplomarbeit" in "Dissertation" ändern (Zeile 38)
+%%% - Zweitgutachter einpflegen (Zeile 63)
+%%% - Beschreibung des Titelbildes einpflegen (Zeile 69)
+%
+\ProvidesPackage{sty/diplomarbeit}[]
+\ProcessOptions\relax
+%
+% === Titelseite ===
+% Nach tuhhtitle.sty by Markus Kohm
+% http://www.komascript.de/node/660
+\renewcommand*{\maketitle}{%
+  \begin{titlepage}
+	\begin{singlespace}
+          \ThisLRCornerWallPaper{0.7}{sty/fr_siegel_vektor}
+          \voffset 9mm
+          \begin{center}
+            % 
+            \vskip 7cm
+            
+            {\rule{\linewidth}{1.5pt}\\[6pt]\huge\bfseries\strut\ignorespaces\@title\\[-6pt]\rule{\linewidth}{1.5pt}\\} % Titel
+            % 
+            
+            % 
+            % \begin{figure}[h]
+            % \centering
+            % \includegraphics[clip=true,trim=0.0cm 0.0cm 0.0cm 0.0cm,width=\textwidth,height=8cm,keepaspectratio]{sty/titel}
+            % \end{figure}
+            % 
+            \vskip 6.2cm
+            % 
+            {\LARGE\bfseries\strut\ignorespaces Dissertation\par} % "Diplomarbeit"
+            % 
+            \vskip 0.3cm
+            % 
+            zur Erlangung des Doktorgrades\\
+            der Fakult{\"a}t f{\"u}r Mathematik und Physik der\par % "vorgelegt von"
+            % 
+            \vskip 0.2cm
+            {\LARGE\bfseries\strut\ignorespaces
+              Albert-Ludwigs-Universit{\"a}t\\}
+            {\LARGE \bfseries Freiburg\par} % "Diplomarbeit"
+            % 
+            \vskip 3.0cm
+            % 
+            vorgelegt von \\
+            {\Large\bfseries\strut\ignorespaces\baselineskip=1.2cm\@author\par} % Autor
+            % 
+            \vskip 2.0cm
+            % 
+            {\Large \bfseries\strut\ignorespaces Februar 2018\par}% Datum
+          \end{center}
+          \begin{tabular}{ll}
+            \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+            \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ 
+            Dekan: & \hspace{2.1mm}Prof.~Dr.~Gregor Herten\\
+            Referent:& Prof.~Dr.~Harald Ita\\
+            Koreferent:&\hspace{2.1mm}Prof.~Dr.~Stefan Dittmaier\\
+            \multicolumn{2}{l}{Tag der m{\"u}ndlichen Pr{\"u}fung: 23.04.2018}
+          \end{tabular}          
+
+  
+\end{singlespace}
+    \clearpage
+  \end{titlepage}
+
+  \begin{titlepage}
+	\begin{singlespace}
+          \ThisLRCornerWallPaper{0.7}{sty/fr_siegel_vektor}
+          \voffset 9mm
+          \begin{center}
+            % 
+            \vskip 7cm
+            
+            {\rule{\linewidth}{1.5pt}\\[6pt]\huge\bfseries\strut\ignorespaces\@title\\[-6pt]\rule{\linewidth}{1.5pt}\\} % Titel
+            % 
+            
+            % 
+            % \begin{figure}[h]
+            % \centering
+            % \includegraphics[clip=true,trim=0.0cm 0.0cm 0.0cm 0.0cm,width=\textwidth,height=8cm,keepaspectratio]{sty/titel}
+            % \end{figure}
+            % 
+            \vskip 6.2cm
+            % 
+            {\LARGE\bfseries\strut\ignorespaces Dissertation\par} % "Diplomarbeit"
+            % 
+            \vskip 0.3cm
+            % 
+            zur Erlangung des Doktorgrades\\
+            der Fakult{\"a}t f{\"u}r Mathematik und Physik der\par % "vorgelegt von"
+            % 
+            \vskip 0.2cm
+            {\LARGE\bfseries\strut\ignorespaces
+              Albert-Ludwigs-Universit{\"a}t\\}
+            {\LARGE \bfseries Freiburg\par} % "Diplomarbeit"
+            % 
+            \vskip 3.0cm
+            % 
+            vorgelegt von \\
+            {\Large\bfseries\strut\ignorespaces\baselineskip=1.2cm\@author\par} % Autor
+            % 
+            \vskip 2.0cm
+            % 
+            {\Large \bfseries\strut\ignorespaces Februar 2018\par}% Datum
+          \end{center}       
+
+  
+\end{singlespace}
+    \clearpage
+  \end{titlepage}
+
+
+
+}
+% ___ Ende: Titelseite ___
+
+% Was für die Schlusserklärung
+\newcommand*{\DecTitle}{\strut\ignorespaces\@title}
+\newcommand*{\DecDate}{\@date}
+\newcommand*{\DecAuthor}{\@author}
+
+% === Header und Footer ===
+\fancyhf{} % Alles löschen
+\fancyhf[EHL]{\leftmark} % gerade, Kopfleiste, links: Kapitel
+\fancyhf[OHR]{\rightmark} % ungerade, Kopfleiste, rechts: Section
+\fancyhf[EFL]{\thepage} % gerade, Fußleiste, links: Seitenzahl
+\fancyhf[OFR]{\thepage} % ungerade, Fußleiste, rechts: Seitenzahl
+% ___ Ende: Header und Footer ___

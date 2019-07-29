@@ -1,0 +1,85 @@
+\section{Unitarity Cuts, Optical Theorem and Factorization}
+
+\section{Ansatz for the Integrand}
+
+\section{Cut Equations}
+
+In the van Neerven-Vermaseren (NV) construction
+\cite{Neerven1984a}, the $D$-dimensional
+space-time is decomposed into a physical space and its complement, the
+transverse space. The NV construction is used for integrand
+parameterizations \cite{Ellis:2007br,Ita:2011hi}. Consider $r$ inflow momenta $p_1,\dots,p_r$. The
+physical space is then spanned by these $r$ momenta and has dimensions
+$D_p=\min(D,r-1)$, since the $r$ momenta are in general linearly dependent and one degree of freedom is absorbed by momentum
+conservation $\sum_{i=1}^rp_i = 0$. Whenever $r>D$, one can find
+additional relations to reduce the higher point scalar integrals to
+lower point ones \cite{Melrose1965}. For example, if $D=4$, one finds
+a basis with a maximal rank of $4$. The physical space therefore forms
+a lower dimensional subspace whenever $r\leq D$. The complent to the
+physical space is called
+transverse space and has dimension $D_t=\max(0,D-r+1)$, such that
+\begin{align}
+  D=D_p+D_t.
+\end{align}
+We assume that the momenta $p_1,\dots,p_r$ are ordered, such that the
+first $D_p$ vectors are linearly independent. The corresponding dual
+vectors are called $v_{1},\dots,v_{D_p}$. The transverse basis
+vectors are denoted $n_{1},\dots,n_{D_t}$ and we have the following properties
+\begin{align}
+    n_i\cdot n_j &= \delta_{ij}, & n_i\cdot p_j &= 0,\\
+   v_j \cdot n_i  &= 0, & v_j\cdot p_i &= \delta_{ij}.\notag
+\end{align}
+For the case that $r > D$, the space
+is parameterized solely in terms of linearly independent vectors
+$p_i$. 
+ The metric tensor is thus decomposed in the NV basis as 
+\begin{align}
+  g^{\mu\nu} = \sum_{i=1}^{D_p}p_i^\mu v_i^\nu+\sum_{i=1}^{D_t}n_i^\mu n_i^\nu,
+\end{align}
+with the projector into the transverse space consquently given by
+\begin{align}\label{eq:metricpron}
+  (g_\perp)^{\mu\nu} \equiv  \sum_{i=1}^{D_t}n_i^\mu n_i^\nu = g^{\mu\nu}- \sum_{i=1}^{D_p}p_i^\mu v_i^\nu.
+\end{align}
+One can thus decompose the loop momentum in the NV basis as 
+\begin{align}
+  \ell^\mu = \sum_{i=1}^{D_p}(\ell\cdot p_i)
+  v_i^\mu+\sum_{i=1}^{D_t}(\ell\cdot n_i) n_i^\mu,
+\end{align}
+with the projections of the loop momentum on the transverse space
+$t_i(\ell) = (\ell \cdot n_i)$.  In actual computations with $D>4$, only a specific combination of the
+projection on the transverse space is relevant. Since external
+particles remain in $4$-dimensions, the additional components of the
+loop momentum are only relevant in contractions of the loop momentum
+with itself
+\begin{align}
+  \mu^2 = -\ell_{[D-4]}^2 \equiv \sum_{i=5}^D(\ell \cdot n_i)^2,
+\end{align}
+for explicit integer $D$-dimensions. Only this combination is of
+relevance in $D\neq 4$-dimensional calculations. The $n_{i>4}$ are the transverse
+vectors of the $D-4$-dimensional space. One can split up the
+decomposition into a $4$-dimensional part and a $D-4$-dimensional part
+and gets for the projector into the transverse space
+\begin{align}\label{eq:metricprond}
+\begin{split}
+  (g_\perp)^{\mu\nu} &=  \sum_{i=1}^{D_t}n_i^\mu n_i^\nu=\sum_{i=1}^{4-r+1}n_i^\mu n_i^\nu +  \sum_{i=5}^{d}n_i^\mu n_i^\nu.
+\end{split}
+\end{align}
+
+
+\section{Doubled Propagators}
+Here discussion about \textit{subleading poles}
+
+\section{Basis of Numerator Insertions}
+Numerator tensors, span of function space. Master/Surface decomposition.
+
+\todo{classification of tensors here or in chapter \ref{chap:stdtech}?}
+
+
+\section{Dimensional Reconstruction}
+ In $D$ and $D_s$ (dimensional reduction later)
+
+\section{Evaluation of Cuts}
+$D$-dimensional off-shell recursion, weyl and Dirac fermions, tracking of representations?
+
+
+

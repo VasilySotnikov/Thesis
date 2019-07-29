@@ -1,0 +1,1824 @@
+In the following two chapters, we present a variant of the
+$D$-dimensional numerical unitarity method~\cite{Bern:1997sc,Britto:2004nc,Ellis:2007br,Giele:2008ve,Ellis:2008ir} applied to QCD \ola s with massive quark pairs. Unitarity methods are based on both
+analyticity and unitarity of one-loop scattering amplitudes. Analyticity allows to reconstruct amplitudes as a function of kinematical invariants and mass parameters while unitarity guarantees that residues at the
+singular points factorize into tree amplitudes. The term numerical here refers to the variant of the unitarity approach suitable for numerical evaluation as opposed to analytic computations. Numerical unitarity
+with massless particles has been successfully applied at one loop to high-multiplicity processes \cite{BH:W5j,BH:Z4j,FebresCordero2017} and recently using
+the techniques described in \cite{Ita2016} also to the four- and five gluon
+amplitude at two loops~\cite{Abreu:2017xsl,Abreu:2017idw}. Nevertheless, implementations of
+unitarity with massive external and internal particles remain few. Analytic formulae
+have been obtained for \Wbb~\cite{Badger:2010mg} and $t\bar{t}$ production
+\cite{Badger:2011yu} and a numerical approach was applied to on-shell $t\bar{t}(+1$
+jet) production \cite{Melnikov:2009dn,Melnikov:2010iu}. The work
+presented in this thesis applies the method of numerical unitarity to
+high-multiplicity processes with massive quark flavors. In Chapter
+\ref{chap:wbb_results}, we will for the
+first time present phenomenological results
+for $Wb\bar{b}+2$ and $3$ light jets using the here described
+methods. This is possible through a combination of the methods of numerical unitarity
+\cite{BlackHatI,Ellis:2007br,Ellis:2008ir}, together with an important extension of the algorithm, which concerns the careful treatment of internal and external polarization states in dimensional regularization. All details presented here
+have been implemented in C++ libraries which are the basis for a new
+version of the \BlackHat{} library~\cite{BlackHatI}. We overview the aspects of numerical
+unitarity most relevant for this thesis, and more details can be found
+in the reviews \cite{Ita:2011hi,Ellis:2011cr} and references therein. The next Chapter
+\ref{chap:fdf}, is devoted to the way we compute unitarity cuts in
+$D$-dimensions with massive particles.
+
+
+\section{Preliminaries}
+\label{sec:unitarity}
+\subsection{A Generic One-Loop Amplitude in $D$-Dimensions}
+\label{sec:genloop}
+We need to regularize \ola s to keep track of divergencies. Following
+the approach of dimensional regularization, we move away from $D=4$
+dimensional space-time and continue momenta and polarization vectors
+of loop particles to $D\neq 4$-dimensional space time. Without
+specifying \textit{how} to choose the space-time dimensionality for the moment, we can write any generic $n$-particle one-loop
+amplitude in $D$-dimensional space-time as
+\begin{align}\label{eq:genericola}
+\Am_n \sim \int \frac{\dd[D]{\ell}}{(2\pi)^{D}} \frac{\mathcal{N}(p_1,p_2,\dots,p_N;\ell)}{D_1D_2\dots D_N},
+\end{align}
+with the numerator function $\mathcal{N}$ depending on the
+momenta of the external particles as well as on the loop momenta $\ell$. The inverse propagators 
+\begin{align}\label{eq:invprop}
+  D_i=\left(\ell_i^2-m_i^2\right)=\left((\ell+q_i)^2-m_i^2\right)=\left((\ell+\sum_{j=1}^ip_j-q_0)^2-m_i^2\right),
+\end{align}
+build up the denominator, see Fig.~\ref{fig:genericloop}, with region
+momenta $q_i$ defined up to an arbitrary shift $q_0$. All external
+momenta are defined to be outgoing throughout this thesis.
+
+\begin{equation*}
+\begin{tikzpicture}[very thick]
+\coordinate (O) at (0,0);
+\def\ri{1.8cm}
+\def\ris{2.0cm}
+\def\ro{3.5cm}
+\def\ar{2.5cm}
+\def\lr{3.3cm}
+
+\def\bd{292}
+\def\ed{76}
+%\draw[decoration={text along path,reverse path,text
+%align={align=center},text={{$l_1$}}},decorate] (2.5,0) arc
+%(0:180:2.5);
+ \draw [dotted,very thick,domain=\bd:360] plot ({\ris*cos(\x)}, {\ris*sin(\x)});
+ \draw [dotted,very thick,domain=0:\ed] plot ({\ris*cos(\x)}, {\ris*sin(\x)});
+ \draw [very thick,domain=\ed:\bd] plot ({\ris*cos(\x)}, {\ris*sin(\x)});
+%\draw (O) circle (\ri);
+\node (i1) at (220:\ri){};
+\node (i2) at (292:\ri){};
+\node (i3) at (4:\ri){};
+\node (i4) at (76:\ri){};
+\node (i5) at (148:\ri){};
+\node (o1) at (220:\ro) {$p_1$};
+\node (o2) at (292:\ro){$p_N$};
+\node (o3) at (4:\ro){};
+\node (o4) at (76:\ro){$p_3$};
+\node (o5) at (148:\ro){$p_2$};
+\draw [->,very thick] (128:\ar) arc[x radius=\ar, y radius =\ar, start
+angle=128, end angle=96];
+\node (t2) at (112:\lr){$\ell+q_2$};
+\draw [->,very thick] (200:\ar) arc[x radius=\ar, y radius =\ar, start
+angle=200, end angle=168];
+\node (t1) at (180:\lr){$\ell+q_1$};
+\draw [->,very thick] (272:\ar) arc[x radius=\ar, y radius =\ar, start
+angle=272, end angle=240];
+\node (t3) at (252:\lr){$\ell+q_N$};
+\begin{scope}[very thick,decoration={
+    markings,
+    mark=at position 0.6 with {\arrow{>}}}
+    ] 
+\draw[postaction={decorate}] (i1) -- (o1);
+\draw[postaction={decorate}] (i2) -- (o2);
+\draw[postaction={decorate}] (i4) -- (o4);
+\draw[postaction={decorate}] (i5) -- (o5);
+\end{scope}
+\end{tikzpicture}
+\end{equation*}
+\vspace{-1.2cm}
+\captionedequationset{A generic one-loop amplitude, with region
+  momenta $q_i$ defined up to a shift $q_0$. The momenta of all
+  external particles are defined to be
+  outgoing.\label{fig:genericloop}} 
+
+
+\subsection{Dimensional Regularization}
+\label{sec:dimregfdh}
+In dimensional regularization, we set
+\begin{align}
+  D\equiv 4-2\epsilon,
+\end{align}
+which results in a representation of the UV and IR divergent integrals
+in terms of poles in $1/\epsilon^n$. The final results we
+provide are regularized in the standard 't
+Hooft-Veltman scheme (HV) \cite{tHooft:1972tcz}\footnote{Here $D_s=D$. For more on dimensional regularization schemes, see Sec.~\ref{sec:FDH-def}.}. For intermediate calculations however, we employ the four-dimensional
+helicity scheme (FDH)\footnote{Here, we set $D_s=4$ after performing
+  the algebra of Dirac matrices.}, in which results are related to the HV scheme by a finite shift
+that we apply at the end of our calculation
+(cf.~Sec.~\ref{sec:schemeshift}). For the purpose of this chapter, it
+suffices to define $D$-dimensional loop momenta $\ell$ and a
+decomposition into a
+$4$-dimensional part and an orthogonal $(D-4)$-dimensional part
+\cite{Bern:1995db}, which we refer to as higher-dimensional part,
+defined by
+\begin{align}\label{eq:lsplit}
+  \ell^\mu_{[D]}=\ell_{[4]}^\mu + \ell_{[D-4]}^\mu,
+\end{align}
+with $\ell_{[4]}\cdot \ell_{[D-4]} = 0$. The corresponding on-shell conditions read
+\begin{align}\label{eq:ddimos}
+\begin{split}
+  \ell^2_{[D]}&=\ell_{[4]}^2+\ell^2_{[D-4]}=m^2\\
+&=\ell_{[4]}^2-\mu^2=m^2,
+\end{split}
+\end{align}
+with the invariant mass of the higher-dimensional part
+$\ell_{[D-4]}^\mu$ conventionally
+named \linebreak {$\ell_{[D-4]}^2= -\mu^2$}. In FDH, external momenta are kept in $D=4$ and contractions of those with
+the higher-dimensional part of the loop momentum are zero
+$\ell_{[D-4]}\cdot p_{i\,[4]} = 0$, i.e.~there is no preferred direction in the
+$(D-4)$ subspace of the $D$-dimensional momenta. Thus the only dependence of the numerator
+function $\mathcal{N}$ in Eq.~\eqref{eq:genericola} on the higher
+dimensional part of the loop momentum comes through contractions of
+the form
+\begin{align}
+  \ell^2_{[D-4]}=-\mu^2.
+\end{align}
+In particular, this
+implies a rotational invariance in the higher-dimensional subspace of
+the loop momenta in the integration since only the absolute square of it enters the
+numerator function\footnote{If one chooses a formulation in integer
+  dimensions it thus suffices to use a $5$-dimensional loop
+  momentum}. For numerical purposes, we require finite dimensional representations of both metric tensor and Dirac
+algebra in order to compute \ola s in FDH. This is the topic of Chapter \ref{chap:fdf}.
+
+
+
+\subsection{Exploiting Unitarity as a Computational Method}
+\label{sec:unimeth}
+The unitarity approach builds on the observation that integrands of one-loop amplitudes $A_n^{\text{1-loop}}(\ell)$ factorize into products of tree amplitudes in the
+factorization or on-shell limit:
+\begin{align}\label{eq:faclimit}
+\begin{split}
+ \text{Res}_{i_1\dots i_k}[A_n^{\text{1-loop}}(\ell)]&\equiv\lim_{\ell\rightarrow
+    \ell_{i_1\dots i_k}}\left(D_{i_1}\dots
+    D_{i_k}A_n^{\text{1-loop}}(\ell)\right)\\
+&=\sum_{\text{states}}\left(\Amt_{n_1}(\ell_k,\dots,-\ell_1) \times \dots
+    \times \Amt_{n_k}(\ell_{k-1},\dots,-\ell_k) \right),
+\end{split}
+\end{align}
+where the set of propagator momenta $\ell_{i_1\dots
+  i_k}=\{\ell_{i_1},\dots,\ell_{i_k}\}$ in the loop simultaneously solves the
+on-shell conditions for the inverse propagators
+\begin{align}\label{eq:simloop}
+D_{i_1}(\ell_{i_1}) = \dots
+= D_{i_k} (\ell_{i_k}) = 0.
+\end{align}
+The propagator momenta are thereby restricted to the on-shell phase spaces
+and the sum runs over the states associated to the full spectrum of the
+theory for each on-shell momentum. The systematic application of
+these unitarity cuts allows a computation of the coefficients of the
+expansion of \ola s in terms of master integrals, as we will
+see in the following sections. The above is connected to the
+unitarity of the $S$-matrix, as worked out in \cite{Eden:1966dnq}.
+
+\subsection{Master Integrals}
+\label{sec:scmi}
+Any \ola~in $D$-dimensional space time can be written as a sum of scalar master integrals \cite{Melrose1965,Passarino:1978jh,Neerven1984a,Bern1993}
+\begin{align}\label{eq:mi}
+\Am_n = \sum_i \tilde{e}_i I_5^i+\sum_i \tilde{d}_i  I_4^i+ \sum_i \tilde{c}_i I_3^i+ \sum_i \tilde{b}_i I_2^i+ \sum_i \tilde{a}_i  I_1^i,
+\end{align}
+where the summation runs over all scalar integral functions of the
+corresponding topology, and $I_5,I_4,I_3,I_2,I_1$ - pentagon, box,
+triangle, bubble and tadpole integrals respectively - are known. The pentagon functions $I_5$ can be expressed in terms of lower point functions $I_{n<5}$ in one-loop computations, however, we require pentagon integrands and keep pentagons in intermediate steps of the computation. The master integrals on the right-hand side of Eq.~\eqref{eq:mi} are defined as 
+\begin{align}
+I_n^i = \frac{\mu^{2\epsilon}}{i c_\Gamma} \int \frac{\dd[D]{\ell}}{(2\pi)^{D}} \frac{1}{D_{i_1}D_{i_2}\dots D_{i_n}},
+\end{align}
+with $c_\Gamma=(4\pi)^{-(2-\epsilon)}\Gamma^2(1-\epsilon)\Gamma(1+\epsilon)/\Gamma(1-2\epsilon)$. In the following, we suppress the prefactor appearing in the integrals for simplicity. A set
+of the IR and / or collinearly divergent scalar integrals for general masses can for example be found in \cite{Ellis:2007qk}. Compared to a computation
+with massless external particles, the basis we employ contains more integrals. These are integrals with massive
+internal propagators as well as a new topology, the tadpole integral
+$I_1$. For massless particles, the latter is scaleless and vanishes in dimensional
+regularization. 
+
+The extraction of the coefficients for the tadpole
+integral and the bubble integral with
+a single massive leg in one corner $I_{2,m^2}$, see Fig.~\ref{fig:newmi}, require a special
+treatment in the unitarity method. This is the topic of
+Section~\ref{sec:massivebubble}. Explicit formulae for these two integrals can
+be found in App.~\ref{sec:massivebasisint}. 
+
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{0.75}
+  \def\blobpos{1.0}
+  \def\secondb{\blobpos+2}
+ 
+  \node at (\blobpos+1,0) {$I_{2,m^2}$};
+  \node at (\blobpos+1,1.2) {$0$};
+  \node at (\blobpos+1,-1.2) {$m^2$};
+  \node at (\blobpos-1.35,0) {$m^2$};
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (\blobpos, 0);
+    \vertex(m2) at (\secondb, 0);
+    \vertex (a) at (\secondb+\leglength*1.4,0){\vdots};
+    \vertex (b) at (\secondb+ \leglength,\leglength);
+    \vertex (c) at (\secondb+ \leglength,- \leglength);
+    \diagram* {
+      i -- [ultra thick] (m1)
+       -- [half left] (m2)
+       -- [ultra thick, half left] (m1),
+       (m2) --  (b),
+      (m2) -- [ultra thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+& &\hspace{1.5cm}
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{0.75}
+  \def\blobpos{1.0}
+  \def\secondb{\blobpos+2}
+
+  \node at (\blobpos+1,1.2) {$m^2$};
+  \node at (\blobpos+1,0) {$I_{1}$};
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (\blobpos, 0);
+    \vertex(m2) at (\secondb, 0);
+    \vertex (a) at (\secondb+\leglength*1.4,0);
+    \diagram* {
+      (m1) -- [ultra thick,half left] (m2)
+       -- [ultra thick, half left] (m1),
+       (m2) --  (a),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{eqnarray*}
+\vspace{-1.2cm}
+\captionedequationset{The extraction of the coefficients for the additional scalar integrals $I_{2,m^2}$ and
+  $I_1$ require a special treatment in the unitarity method. Thick lines refer to loop momenta with
+  $\ell^2=m^2$.\label{fig:newmi}}
+
+The number of inflow momenta for each integral in the basis of scalar master integrals is
+bounded from above by the space-time dimensionality $D$. Since we take
+external momenta and polarization vectors to be four dimensional, we maximally
+include a five-point function, the pentagon. Any higher-point function
+can be reduced to this set of integral functions. The knowledge of the
+coefficients $\tilde{e}_i,\tilde{d}_i,\tilde{c}_i,\tilde{b}_i,\tilde{a}_i$ completely defines the \ola.
+
+
+\section{The Loop Integrand}
+We consider loop amplitudes before integration,
+that is the integrand of \eqref{eq:genericola}. In the construction due
+to OPP~\cite{Ossola:2006us} and Ellis, Giele, Kunszt and Melnikov (EGKM) \cite{Ellis:2007br,Giele:2008ve}, the
+generic expression for the integrand of a $D$-dimensional \ola~is
+\begin{align}
+\begin{split}
+ A_n^{\text{1-loop}}(\ell)\equiv\frac{\mathcal{N}(\ell)}{D_1\dots D_n} =&\sum_{1\le i_1 < \dots < i_5 \le
+   n}\frac{\Delta^5_{i_1i_2i_3i_4i_5}(\ell)}{D_{i_1}D_{i_2}D_{i_3}D_{i_4}D_{i_5}}+\sum_{1\le
+   i_1 < \dots < i_4 \le
+   n}\frac{\Delta^4_{i_1i_2i_3i_4}(\ell)}{D_{i_1}D_{i_2}D_{i_3}D_{i_4}}\\
+&+\sum_{1\le i_1 < \dots < i_3 \le n}\frac{\Delta^3_{i_1i_2i_3}(\ell)}{D_{i_1}D_{i_2}D_{i_3}}+\sum_{1\le i_1 < \dots < i_2 \le n}\frac{\Delta^2_{i_1i_2}(\ell)}{D_{i_1}D_{i_2}}+\sum_{1\le i_1 \le n}\frac{\Delta^1_{i_1}(\ell)}{D_{i_1}},
+\end{split}
+\end{align}
+where inverse propagators are defined in Eq.~\eqref{eq:invprop}. We
+suppress the dependence of the numerator tensors $\Delta^i(\ell)$ on
+external particles and polarization states. As a next step, we want to
+find a suitable
+parameterization of the numerator tensors $\Delta^i(\ell)$. It should
+satisfy the following criteria: all possible tensor
+insertions up to a certain rank should be covered and it should be easy to relate
+the basis to the coefficients $\tilde{e}_i,\tilde{d}_i,\tilde{c}_i,\tilde{b}_i,\tilde{a}_i$ of the scalar master integral
+decomposition (cf.~Eq.~\ref{eq:mi}). Such a basis of possible
+tensors can be found using the van Neerven - Vermaseren construction (NV)
+\cite{Neerven1984a}, for more detail see also App.~\ref{sec:vnvm}. In
+the NV construction, the $D$-dimensional
+space-time is decomposed into a physical space, spanned by the linearly
+independent external momenta flowing into the parent diagram, and its complement, the
+transverse space. The vectors $n_i$ form an orthonormal
+basis that spans the space transverse to the
+physical momenta, $p_i\cdot n_j = 0$ and $n_i
+\cdot n_j = \delta_{ij}$. Together with the external momenta
+$p_i$ the $n_i$ form a basis of the four dimensional
+momentum space.
+
+
+A suitable numerator parameterization for $D$-dimensional \ola s involving massive particles is given by \cite{Ellis:2007br,Ellis:2008ir}
+\begin{align}\label{eq:intparam}
+\begin{split}
+  \Delta_{i_1i_2i_3i_4i_5}^5(\ell) &= e^0_{i_1i_2i_3i_4i_5}\mu^2\\
+  \Delta_{i_1i_2i_3i_4}^4(\ell) &=
+  d^0_{i_1i_2i_3i_4}+d^1_{i_1i_2i_3i_4}t_1\\
+&+(d^2_{i_1i_2i_3i_4}+d^3_{i_1i_2i_3i_4}t_1)\mu^2+d^4_{i_1i_2i_3i_4}\mu^4\\
+  \Delta_{i_1i_2i_3}^3(\ell) &=
+  c^0_{i_1i_2i_3}+c^1_{i_1i_2i_3}t_1+c^2_{i_1i_2i_3}t_2+c^3_{i_1i_2i_3}(t_1^2-t^2_2)\\
+&+t_1t_2(c^4_{i_1i_2i_3}
+  +c^5_{i_1i_2i_3}t_1+c^6_{i_1i_2i_3}t_2)\\
+&+(c^7_{i_1i_2i_3}t_1+c^8_{i_1i_2i_3}t_2+c^9_{i_1i_2i_3})\mu^2\\
+  \Delta_{i_1i_2}^2(\ell) &=
+  b^0_{i_1i_2}+b^1_{i_1i_2}t_1+b^2_{i_1i_2}t_2+b^3_{i_1i_2}t_3+b^4_{i_1i_2}(t_1^2-t_3^2)\\
+&
++b^5_{i_1i_2}(t_2^2-t_3^2)+b^6_{i_1i_2}t_2t_3+b^7_{i_1i_2}t_1t_2+b^8_{i_1i_2}t_1t_3\\
+&+b^9_{i_1i_2}\mu^2\\
+  \Delta_{i_1}^1(\ell) &=
+  a^0_{i_1}+a^1_{i_1}t_1+a^2_{i_1}t_2+a^3_{i_1}t_3+a^4_{i_1}t_4,
+\end{split}
+\end{align}
+where $t_i= (n_i\cdot \ell)$. The terms $\mu^2$ are the extra dimensional
+scalar product of the loop momentum and originate in a split-up of the
+loop momentum into four and $(D-4)$-dimensional part
+(cf.~Eqs.~\eqref{eq:lsplit} and \eqref{eq:ddimos}).
+
+
+The terms in Eq.~\eqref{eq:intparam} that contain
+projections of the loop momentum into the transverse space integrate
+to zero (spurious terms). Lorentz-invariance\footnote{And parity invariance to
+  exclude the epsilon tensor.} restricts the possible results of the
+integration to tensors formed by external momenta $p_i^\mu$ and metric tensors
+$g^{\mu\nu}$. The contraction of the resulting tensor with any
+symmetric tensor of transverse basis vectors therefore yields a vanishing result. As an explicit example, we can integrate the
+spurious part of the box numerator $\Delta^4_{1234}(\ell)$ over a $4$-dimensional loop momentum $\ell^\mu$ ($\mu^2=0$) and get
+\begin{align}
+\begin{split}
+  \int\frac{\dd[4]{\ell}}{(2\pi)^{4}}\frac{t_1}{D_1D_2D_3D_4}=\int\frac{\dd[4]{\ell}}{(2\pi)^{4}}\frac{\ell\cdot
+    n_1}{D_1D_2D_3D_4}\sim T(p_i)\cdot n_{1}=0,
+\end{split}
+\end{align}
+with the tensor $T^\mu(p_i)$ being formed by linear combinations of external
+momenta. Since the transverse vectors are orthogonal to the physical
+space, the scalar product of $T^\mu(p_i)$ with the transverse
+vector $n_1^\mu$ must vanish. A similar reasoning holds for general
+tensors, see e.g.~\cite{Ita:2011hi}. The remaining terms of the basis
+in Eq.~\eqref{eq:intparam} either plainly multiply scalar master
+integrals or scalar integrals with $\mu^n$ insertions, which we will treat later. The above basis is therefore naturally
+connected to the basis of scalar master integrals Eq.~\eqref{eq:mi}. 
+
+ 
+
+It remains to justify, why the above parameterization in
+Eq.~\eqref{eq:intparam} covers all possible tensor insertions. The
+tensors with components pointing along the physical space are
+dispensable. They lead to integrands of lower-point and scalar
+integrands as can be seen from the simplest case of 
+\begin{align}
+  \ell\cdot q_2 = \frac{1}{2}\left(\ell^2-(\ell-q_2)^2+q_2^2\right)=\frac{1}{2}\left(D_1-D_2+q_2^2\right).
+\end{align}
+Inserting this numerator into the integrand, the inverse propagators
+cancel and we get
+\begin{align}\label{eq:physdir}
+  \frac{\ell\cdot q_2}{D_1D_2D_3\cdots D_n} = \frac{1}{2}\left(\frac{1}{D_2D_3\cdots D_n}-\frac{1}{D_1D_3\cdots D_n}+\frac{q_2^2}{D_1D_2D_3\cdots D_n}\right),
+\end{align}
+with lower-point integrands and a scalar integrand. The
+Passarino-Veltman reduction algorithm \cite{Passarino:1978jh} exploits
+the above, namely that at one-loop, every scalar product of loop and
+external momenta can be expressed as a combination of propagators. 
+
+In consequence, the numerator tensors can only have components pointing along the
+transverse direction. Out of those, only a subset is linearly
+independent. As an example, the box numerator tensor could contain terms of
+the form 
+\begin{align}
+   \Delta_{i_1i_2i_3i_4}^4(\ell) = \cdots + \ell^\mu\ell^\nu n_{1\mu}n_{1\nu}+\ell^\mu\ell^\nu\ell^\rho
+n_{1\mu}n_{1\nu}n_{1\rho}+\cdots,
+\end{align}
+where the maximal rank of the tensor in Standard Model processes is equal to the
+number of inverse propagators in the diagram. Each of the above terms can be rewritten
+using the projection of the metric tensor into the transverse space
+(cf.~App.~\ref{sec:vnvm}~, Eq.~\eqref{eq:metricpron}). The terms then
+have the following form
+\begin{align}
+    \ell^\mu\ell^\nu n_{1\mu}n_{1\nu} = \ell^2 - \sum_{i=1}^3(\ell
+    \cdot p_i)(\ell \cdot v_i),
+\end{align}
+where $v_i$ are the so called dual vectors (see
+Appendix~\ref{sec:vnvm}) and the above terms contain inverse propagators and projections of the loop momentum onto the physical space $\ell
+\cdot p_i$. The latter again reduce, as in
+Eq.~\eqref{eq:physdir}, to lower-point and scalar
+integrands. With the projection of the metric into the transverse
+space, one obtains an additional constraint on the numerator tensors
+for each topology. The number of tensors in the numerator of
+each topology is then determined by power counting and the
+additional constraint from the projection of the trace into the
+transverse space.
+
+With the parameterization of Eq.~\eqref{eq:intparam}, the integration
+over the loop momentum, and thereby the connection to the basis of
+master integrals, can be trivially performed. As an example, we do get for the
+integration over the box numerator in $D$-dimensions
+\begin{align}
+\begin{split}
+  \int\frac{\dd[D]{\ell}}{(2\pi)^{D}}\frac{\Delta^4_{ijkl}(\ell)}{D_iD_jD_kD_l}&= \int\frac{\dd[D]{\ell}}{(2\pi)^{D}}\frac{d^0_{ijkl}+d^1_{ijkl}t_1+(d^2_{ijkl}+d^3_{ijkl}t_1)\mu^2+d^4_{ijkl}\mu^4
+}{D_iD_jD_kD_l}\\
+&= \int\frac{\dd[D]{\ell}}{(2\pi)^{D}}\frac{d^0_{ijkl}+d^2_{ijkl}\mu^2+d^4_{ijkl}\mu^4
+}{D_iD_jD_kD_l}\\
+&= d^0_{ijkl}I_{4,ijkl}+d^2_{ijkl}I_{4,ijkl}[\mu^2]+d^4_{ijkl}I_{4,ijkl}[\mu^4],
+\end{split}
+\end{align}
+where $I[\mu^2]$ denotes an insertions of $\mu^2$ from the higher-dimensional part of the loop
+momentum. 
+
+
+By splitting the integration into the $4$ and $D-4$-dimensional part,
+one can rewrite scalar master integrals with $\mu^2$ insertions in
+terms of higher dimensional scalar integrals \cite{Giele:2008ve,Badger:2008cm} (see also appendix of \cite{Bern:1995db}) 
+\begin{align}\label{eq:intdim}
+\begin{split}
+  I_{i\dots j}^{(D)}[\mu^2]=\int\frac{\dd[D]{\ell}}{(2\pi)^{D}}\frac{\mu^2}{D_i\dots
+    D_j} &= -\frac{(D-4)}{2} I_{i\dots j}^{(D+2)}[1]\\
+  I_{i\dots j}^{(D)}[\mu^4]=\int\frac{\dd[D]{\ell}}{(2\pi)^{D}}\frac{\mu^4}{D_i\dots
+    D_j}&= \frac{(D-4)(D-2)}{4} I_{i\dots j}^{(D+4)}[1].
+\end{split}
+\end{align}
+
+With the identities in Eq.~\eqref{eq:intdim}, different choices for
+the tensor basis are possible. We use the specific form of the pentagon numerator
+$\Delta^5(\ell)$ given in \cite{Badger:2008cm}. It is
+obtained by a dimensional shift identity on the $D$-dimensional scalar
+pentagon. As a result, one gets a $\mu^2$ insertion on the pentagon
+numerator and a contribution to the scalar box coefficient, which we
+already absorbed into the coefficient $d^0$. In total, we thus have five non-vanishing integrals with $\mu^2$ insertions. They are
+multiplied by the coefficients $e^0,d^2,d^4,c^9,b^9$. The six-dimensional
+scalar box and pentagon integrals are finite \cite{Bern1993}. The
+integrals therefore do not contribute to the amplitude in the limit
+$D=4-2\epsilon \rightarrow 4$
+\begin{align}\label{eq:vanint}
+\begin{split}
+\lim_{D\rightarrow 4}\frac{(D-4)}{2} I^{(6)}_{4,ijkl}[1] = 0\\
+\lim_{D\rightarrow 4}\frac{(D-4)}{2} I^{(6)}_{5,ijklm}[1] = 0.
+\end{split}
+\end{align}
+The 6-dimensional 2-point and 3-point as well as the 8-dimensional
+4-point scalar integrals are UV divergent. Each of those integrals is
+multiplied by a factor $(D-4)$, cf.~Eq.~\eqref{eq:intdim}, that
+cancels the pole $1/\epsilon$. Therefore, these integrals produce finite,
+$\epsilon$-independent contributions that are given by
+\begin{align}\label{eq:finiterint}
+\begin{split}
+  \lim_{D\rightarrow 4} I_{4,ijkl}^{(D)}[\mu^4]&= \lim_{D\rightarrow 4}\frac{(D-4)(D-2)}{4}I_{4,ijkl}^{(D+4)}[1] \rightarrow -\frac{1}{6}\\
+   \lim_{D\rightarrow 4} I_{3,ijk}^{(D)}[\mu^2]&= \lim_{D\rightarrow 4}-\frac{(D-4)}{2}I_{3,ijk}^{(D+2)}[1] \rightarrow -\frac{1}{2}\\
+    \lim_{D\rightarrow 4} I_{2,ij}^{(D)}[\mu^2]&= \lim_{D\rightarrow
+      4}-\frac{(D-4)}{2}I_{2,ij}^{(D+2)}[1] \rightarrow
+    \frac{(q_i-q_j)^2}{6} - \frac{m_i^2+m_j^2}{2},
+\end{split}
+\end{align}
+where we used Eq.~\eqref{eq:intdim}. Historically, one splits \ola s into a \textit{cut constructable}
+part and a \textit{rational} part when doing unitarity
+calculations \cite{Bern:1994zx,Bern:1994cg}. However, in this thesis we adopt the general $D$-dimensional picture as used in the relations in this section. Rational terms are generated by multiplying higher order terms (in
+$\epsilon$) of the coefficients with the integrals, producing finite
+contributions. In a calculation in $D=4$, all $\mathcal{O}(\epsilon)$
+terms in the expansion of the coefficients are set to zero and the
+rational part cannot be reconstructed. The
+non-vanishing finite contributions to the rational part of \ola s are given by the integrals in
+Eq.~\eqref{eq:finiterint} multiplied by the corresponding
+coefficients and can only be reconstructed by $D$-dimensional
+unitarity cuts. 
+
+The $D=4-2\epsilon$-dimensional representation of the \ola~is thus given by
+\begin{align}
+\begin{split}
+ A_n^{\text{1-loop}}=&\sum_{1\le
+   i_1 < \dots < i_4 \le
+   n}  \left( d^0_{i_1i_2i_3i_4} I_{4,i_1i_2i_3i_4}[1]-\frac{d^4_{i_1i_2i_3i_4}}{6}\right)\\
+&+\sum_{1\le i_1 < \dots < i_3 \le n}\left(c^0_{i_1i_2i_3}
+  I_{3,i_1i_2i_3}[1]-\frac{c^9_{i_1i_2i_3}}{2} \right)\\
+&+\sum_{1\le i_1
+  < \dots < i_2 \le n}\left(b^0_{i_1i_2}
+  I_{2,i_1i_2}[1]+\left(\frac{(q_{i_1}-q_{i_2})^2}{6}-\frac{m_{i_1}^2+m_{i_2}^2}{2}\right)b^9_{i_1i_2}
+\right)\\
+&+\sum_{1\le i_1 \le n} a^0_{i_1}I_{1,i_1} + \mathcal{O}(\epsilon),
+\end{split}
+\end{align}
+where we eliminated all vanishing integrals
+(cf.~Eq.~\eqref{eq:vanint}). Furthermore, we used the explicit expressions in
+Eq.~\eqref{eq:finiterint} for the non-vanishing integrals with $\mu^2$
+insertions. The rational coefficients $d_i^0,d_i^4,c_i^0,c_i^9,b_i^0,b^9_i,a_i^0$ are multiplying box, triangle, bubble and tadpole scalar integrals
+respectively and are functions of the external kinematics. Knowing these coefficients is tantamount to having
+computed the full color-ordered \ola. The coefficients multiplying
+spurious numerator terms are relevant only at intermediate steps. Also
+those with $\mu^2$ insertions with vanishing integrals in the limit
+$D=4-2\epsilon$ do not contribute to the final result, like the pentagon
+coefficient $e^0$ and the box coefficient $d^2$, but are nevertheless
+needed for a consistent computation. We will next see how the systematic application of multiple unitarity
+cuts allows to determine all tensor coefficients and thereby
+reconstruct the full \ola.
+
+
+\section{Generalized Unitarity Method}
+We employ the numerical unitarity method, which is based on a prescription of how to reconstruct the full \ola~by the consecutive
+application of pentuple, quadruple, triple, double and single cuts
+\cite{Bern:1997sc,Britto:2004nc}. We apply cuts at the level of
+the integrand of a \ola, with the numerator parameterization given in
+Eq.~\eqref{eq:intparam}. Central to this is the behavior of the
+one-loop integrand in the factorization limit of
+Eq.~\eqref{eq:faclimit}, i.e.~it factorizes into the product of tree
+amplitudes. The numerator tensors $\Delta^i(\ell)$ in
+Eq.~\eqref{eq:intparam}, are then given in terms of residues of
+multi-particle unitarity cuts, by
+\begin{align}\label{eq:unitarityrel}
+\begin{split}
+  \Delta_{i_1i_2i_3i_4i_5}^5(\ell_{i_1\dots i_5}) &=
+  \text{Res}_{i_1i_2i_3i_4i_5}\left[\Am_n(\ell_{i_1\dots i_5})\right]\
+  ,\\
+  \Delta_{i_1i_2i_3i_4}^4(\ell_{i_1\dots i_4}) &=
+  \text{Res}_{i_1i_2i_3i_4}\left[\Am_n(\ell_{i_1\dots i_4})\right]-\sum_{j\neq
+      i_1,i_2,i_3,i_4}\frac{\Delta_{i_1i_2i_3i_4j}^5(\ell_{i_1\dots
+        i_4})}{D_j}\ ,\\
+ \Delta_{i_1i_2i_3}^3(\ell_{i_1\dots i_3}) &=
+  \text{Res}_{i_1i_2i_3}\left[\Am_n(\ell_{i_1\dots i_3})\right]-\sum_{j\neq
+        i_1,i_2,i_3}\frac{\Delta^4_{i_1i_2i_3j}(\ell_{i_1\dots
+          i_3})}{D_j} \\
+     &\phantom{=} -\sum_{\substack{j,k\neq
+          i_1,i_2,i_3\\j<k}}\frac{\Delta^5_{i_1i_2i_3jk}(\ell_{i_1\dots
+          i_3})}{D_jD_k}\ ,\\
+ \Delta_{i_1i_2}^2(\ell_{i_1i_2}) &=
+  \text{Res}_{i_1i_2}\left[\Am_n(\ell_{i_1i_2})\right]-\sum_{j\neq
+        i_1,i_2}\frac{\Delta^3_{i_1i_2j}(\ell_{i_1i_2})}{D_j}\\
+&\phantom{=}-\sum_{\substack{j,k\neq
+        i_1,i_2\\j< k}}\frac{\Delta^4_{i_1i_2jk}(\ell_{i_1i_2})}{D_jD_k} -
+    \sum_{\substack{j,k,m\neq
+        i_1,i_2\\j<k<m}}\frac{\Delta^5_{i_1i_2jkm}(\ell_{i_1i_2})}{D_jD_kD_m}\
+    ,\\
+ \Delta_{i_1}^1(\ell_{i_1})& =
+  \text{Res}_{i_1}\left[\Am_n(\ell_{i_1})\right]-\sum_{j\neq
+        i_1}\frac{\Delta^2_{i_1j}(\ell_{i_1})}{D_j}-\sum_{\substack{j,k\neq
+        i_1\\j<k}}\frac{\Delta^3_{i_1jk}(\ell_{i_1})}{D_jD_k}\\
+&\phantom{=}-\sum_{\substack{j,k,m\neq
+        i_1\\j< k<m}}\frac{\Delta^4_{i_1jkm}(\ell_{i_1})}{D_jD_kD_m} -
+    \sum_{\substack{j,k,m,n\neq
+        i_1\\j<k<m<n}}\frac{\Delta^5_{i_1jkmn}(\ell_{i_1})}{D_jD_kD_mD_n}\
+    .
+\end{split}
+\end{align}
+The above equations are evaluated for a set of on-shell propagator momenta
+$\ell_{i_1\dots i_k}$ as defined
+in Eq.~\eqref{eq:simloop}. In order to isolate the contribution to a
+coefficient $\Delta^i$ from Eq.~\eqref{eq:unitarityrel}, care has to be taken to correctly subtract the
+contributions from topologies with more loop propagators to each
+residue. For example, the residue $\text{Res}_{i_1i_2i_3i_4}\left[\Am_n(\ell_{i_1\dots i_4})\right]$ contains contributions from five-point topologies, that have to be
+subtracted. These \textit{subtractions} rely on a hierarchical
+dependency between all topologies contributing to a specific primitive
+amplitude represented by a parent diagram. One can build the hierarchical
+dependence by considering all possibilities of
+\textit{pinching} propagators of a parent diagram. As an explicit
+example of Eq.~\eqref{eq:unitarityrel}, we give some of the numerators of a $4$-point amplitude in
+terms of the residues and subtractions from higher point
+topologies\footnote{There is no $\Delta^5$ for a $4$-point amplitude.}
+\begin{align}
+\begin{split}
+   \Delta_{1234}^4(\ell_{1234}) &=
+  \text{Res}_{1234}\left[\Am_n(\ell_{1234})\right]\ ,\\
+   \Delta_{234}^3(\ell_{234}) &=
+  \text{Res}_{234}\left[\Am_n(\ell_{234})\right]-\frac{\Delta_{1234}^4(\ell_{234})}{D_1}\
+  ,\\
+\Delta_{23}^2(\ell_{23}) &=
+  \text{Res}_{23}\left[\Am_n(\ell_{23})\right]-\frac{\Delta_{123}^3(\ell_{23})}{D_1}-\frac{\Delta_{234}^3(\ell_{23})}{D_4}-\frac{\Delta_{1234}^4(\ell_{23})}{D_1D_4}\
+  ,\\
+   \Delta_{3}^1(\ell_{3}) &=\text{Res}_{3}\left[\Am_n(\ell_{3})\right]-\frac{\Delta_{13}^2(\ell_{3})}{D_1}-\frac{\Delta_{23}^2(\ell_{3})}{D_2}-\frac{\Delta_{34}^2(\ell_{3})}{D_4}\\
+&\hspace{3.6cm}-\frac{\Delta_{123}^3(\ell_{3})}{D_1D_2}-\frac{\Delta_{134}^3(\ell_{3})}{D_1D_4}-\frac{\Delta_{234}^3(\ell_{3})}{D_2D_4}-\frac{\Delta_{1234}^4(\ell_{3})}{D_1D_2D_4}\
+.
+\end{split}
+\end{align}
+For the sake of brevity, we do not give
+explicit expressions for the loop momenta satisfying the cut
+conditions. Depending on
+the topology, the on-shell conditions in general do not fully
+constrain the loop-momentum but lead to a variety of loop momentum
+solutions, and moreover, require complex momenta to be satisfied. Parameterizations valid for massive particles and $D$-dimensional loop momenta can, for
+example, be found in \cite{Kilgore2007,Giele:2008ve,Ita:2011hi}.
+
+\subsubsection{Inverting the Unitarity Relations}
+\label{sec:invunirel}
+Starting with the pentagon numerator $\Delta^5$, the unitarity
+relations Eq.~\eqref{eq:unitarityrel} give a clear prescription of how to
+obtain the coefficients in the numerators $\Delta^i$. In a numerical application of the unitarity method, we sample the loop momentum and obtain $\Delta^i(\ell_{j_1,\ldots,j_i})$ computed
+for a specific choice of propagator momenta. In order to identify the scalar
+coefficients, by
+which the final \ola~is completely defined, we need to perform an inversion
+on the linear relations in Eq.~\eqref{eq:intparam}. In particular, for a
+numerical implementation this
+implies evaluating the cuts in Eq.~\eqref{eq:unitarityrel} multiple
+times depending on the tensor-rank. 
+
+
+The above is valid for general dimensionality $D$. In order to
+simplify the construction and reduce computing time, we do a
+\textit{two-step procedure} \cite{Giele:2008ve} to obtain all
+coefficients. As a first step, we compute with a $D=4$ dimensional
+on-shell phase-space, with all higher-dimensional contributions proportional to $\mu^2$ vanishing. The
+numerator tensors in Eq.~\eqref{eq:intparam} simplify and start with
+$\Delta^4$. Note that this corresponds to a particular way of choosing
+the loop momentum. Depending on the rank, we then evaluate the
+unitarity relations on multiple on-shell momenta. The resulting system of equations
+can be solved by matrix inversion or the application of a discrete
+Fourier transform as for example described in \cite{BlackHatI}. As a
+second step, we compute the remaining numerator tensors on $D$-dimensional on-shell
+phase spaces and reuse the coefficients obtained for $D=4$ in the
+inversion. The latter is possible since the coefficients $e^i,d^i,c^i,b^i,a^i$ are independent of the loop
+momentum.
+
+As an explicit example, we take the computation of the box
+coefficients $d^i$ for a fixed arrangement of momenta flowing into the
+vertices of the parent diagram. We drop the indices associated to the
+external momenta and get
+\begin{align}
+  \pmqty{\Delta^4(\ell_1)\\\Delta^4(\ell_2)\\\Delta^4(\ell_3)\\\Delta^4(\ell_4)\\\Delta^4(\ell_5)}=
+\pmqty{1 & t_{1;1}&0&0&0\\1 & t_{1;2}&0&0&0\\1 & t_{1;3}&\mu^2_3&t_{2;3}\mu^2_3&\mu^4_3\\1 & t_{1;4}&\mu^2_4&t_{2;4}\mu^2_4&\mu^4_4\\1 & t_{1;5}&\mu^2_5&t_{2;5}\mu^2_5&\mu^4_5\\} \pmqty{d^0\\d^1\\d^2\\d^3\\d^4\\},
+\end{align}
+where the $\ell_i$ are solutions to the on-shell conditions in
+$D$-dimensions and the associated variables $t_{j,i}$ and $\mu_i$
+calculated from loop momentum $\ell_i$. We take the loop momentum solutions $\ell_1$
+and $\ell_2$ being restricted to the $4$-dimensional subspace that is with
+$\mu^2=0$. As described above, our \textit{two-step procedure} gives us a
+lower block diagonal matrix by construction. As a first step, we
+compute the cuts $\Delta^4(\ell_1)$ and $\Delta^4(\ell_2)$. Those are
+cuts in $D=4$-dimensional space-time, which makes their computation
+numerically cheaper. We then invert the upper part of the matrix and
+obtain $d^0$ and $d^1$. In particular, we can reconstruct all tadpole
+coefficients by working in $D=4$, since they do not have $\mu^2$
+insertions. The second step then requires the evaluation of
+$\Delta^4(\ell_3)$, $\Delta^4(\ell_4)$ and $\Delta^4(\ell_5)$, where
+the loop momenta are $D$-dimensional momenta with $\mu^2\neq 0$. We
+then invert the lower block of the matrix. The next Chapter
+\ref{chap:fdf} is devoted to the computation of the cuts in $D$-dimensions.
+
+
+The advantage of this two-step process is twofold. It simplifies the
+inversion of the unitarity relations by turning them into a lower
+block diagonal matrix. And more importantly, it simplifies the calculation of the cuts
+$\Delta^i(\ell)$ for those loop momenta $\ell$ restricted to
+$4$-dimensions by not having to extend the spinor algebra and momenta to higher
+dimensional space-time.
+
+
+\section{Massive Bubble and Tadpole Cuts}
+\label{sec:massivebubble}
+Among the new scalar integrals contained in the basis of master
+integrals for massive particles (cf.~Sec.~\ref{sec:scmi}) are the
+tadpole integral $I_1$ and the
+bubble integral with a single massive leg in one corner $I_{2,m^2}$, which we
+refer to as massive one-leg bubble integral. The coefficients
+multiplying these integrals appear in the corresponding bubble and tadpole numerators in
+Eq.~\eqref{eq:intparam}. Double and
+single cuts on the corresponding topologies are required to
+reconstruct these coefficients. In this section, we will
+see that some care has to
+be taken in order to treat these two new topologies
+in the numerical unitarity framework described above.
+
+\subsection{Massive One-Leg Bubble Cuts}
+\label{sec:1legbub}
+In a direct application of numerical unitarity, external
+leg self-energy corrections would be included in double cuts on bubble
+topologies with one massive leg. We shall call these massive \olb s. The
+double cut on a massive \olb~leads to explicit
+divergent factors, as shown in Fig.~\ref{fig:doublecut}. In traditional approaches to renormalization, Feynman diagrams with
+self-energy insertions on massive external legs are discarded. They
+are accounted for in wave function and mass renormalization. For a massless external leg, the
+corresponding scalar integral is scaleless and therefore vanishing in
+dimensional regularization. Double cuts on \olb~topologies are
+therefore not considered for massless particles.
+
+
+The one-loop amplitude on the massive \olb~double cut factorizes into two tree amplitudes~$\Amt(-\ell_{2,q},1_{\bar
+  q},\ell_{1,g})$ and $\Amt(-\ell_{1,g},\dots,\ell_{2,{\bar{q}}})$, where the latter is
+not well defined, since it contains a divergent propagator. We split it into those parts multiplying the divergent
+propagator $R$ and
+those free from it $F$
+\begin{align}\label{eq:defolbc}
+  \Amt(-\ell_{1,g},\dots,\ell_{2,{\bar{q}}})=\frac{R(-\ell_{1,g},\dots,\ell_{2,{\bar{q}}})}{(\ell_{1,g}-\ell_{2,{\bar{q}}})^2-m^2_{\bar{q}}}+F(-\ell_{1,g},\dots,\ell_{2,\bar{q}}),
+\end{align}
+with the invariant mass of the momenta flowing through the intermediate
+propagator being fixed by momentum conservation
+$(\ell_{1,g}-\ell_{2,{\bar{q}}})^2=1_{\bar{q}}^2=m^2_{\bar{q}}$. Since it is equal to the quark mass,
+the first term in Eq.~\eqref{eq:defolbc} is singular.
+
+
+Three different possibilities on how to reconcile generalized
+unitarity and cuts of massive \olb s are known in the literature:
+First, the
+explicit removal of the unwanted contributions due to EGKM
+\cite{Ellis:2008ir} and their inclusion by wave function and mass renormalization. Second, the introduction of a regulator for the divergent tree which
+has to be accounted for throughout the calculation, due to Britto and
+Mirabella \cite{Britto:2011cr}. Third, a recent proposal by Badger et
+al.~\cite{Badger:2017gta} to match both infrared and ultraviolet poles in
+both $4-2\epsilon$ and $6-2\epsilon$ dimensions and thereby avoid the
+calculation of both one-leg massive bubbles and tadpoles. The
+latter comes at the cost of constructing an effective Lagrangian for the
+higher-dimensional calculation.
+
+\begin{equation*}
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{2.5}
+  \def\cutshift{0.3}
+  \def\cutlength{1.0}
+
+  %The double cut lines
+  \pgfmathsetmacro\vertcut{(\blobpos-1)/2+1}
+  \draw[very thick] (\vertcut,\cutshift) -- (\vertcut,\cutshift+\cutlength);
+  \draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+
+  \node at (-0.3,0) {\(1_{\bar{q}}\)};
+  \begin{feynman}[inline=(m1)]
+    \vertex[blob] (m) at (\blobpos, 0) {};
+    \vertex (m1) at (1, 0);
+    \vertex (i) at (0, 0);
+    \vertex (a) at (\blobpos+\leglength*1.4,0);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+ \leglength,- \leglength);
+    \diagram* {
+      i -- [fermion, thick] (m1)
+       -- [gluon, half left,momentum={[arrow shorten=0.3]\(\ell_1\)}] (m)
+       -- [half left, thick,out=85,in=100,momentum={[arrow shorten=0.3]\(\ell_2\)}] (m1),
+       (m) -- [gluon] (a),
+       (m) -- [gluon] (b),
+      (m) -- [fermion,  thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+=
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{0.75}
+  \def\blobpos{2.5}
+  \def\secondb{\blobpos+1}
+  \def\cutshift{0.2}
+  \def\cutlength{1.0}
+ 
+  %The double cut lines
+  \pgfmathsetmacro\vertcut{(\blobpos-1)/2+1}
+  %\def\vertcut{1.75}
+  \draw[very thick] (\vertcut,\cutshift) -- (\vertcut,\cutshift+\cutlength);
+  \draw[very thick] (\vertcut,-\cutshift) --
+  (\vertcut,-\cutshift-\cutlength);
+
+  %Cross over whole contribution
+  \def\hg{1.3}
+  \def\wg{0.5}
+  \def\bg{3.5}
+  \draw[ultra thick,red] (\wg,\hg) -- (\wg+\bg,-\hg);
+  \draw[ultra thick,red] (\wg,-\hg) -- (\wg+\bg,\hg);
+ 
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex (m) at (\blobpos, 0);
+    \vertex[blob] (m2) at (\secondb, 0){};
+    \vertex (a) at (\secondb+\leglength*1.4,0);
+    \vertex (b) at (\secondb+ \leglength,\leglength);
+    \vertex (c) at (\secondb+ \leglength,- \leglength);
+    \diagram* {
+      i -- [fermion, thick] (m1)
+       -- [gluon, half left] (m)
+       -- [half left, thick,out=85,in=95] (m1),
+       (m) -- [fermion, thick] (m2),
+       (m2) -- [gluon] (a),
+       (m2) -- [gluon] (b),
+      (m2) -- [fermion,  thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}+\sum
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{0.75}
+  \def\blobpos{2.5}
+  \def\secondb{\blobpos+1}
+  \def\cutshift{0.2}
+  \def\cutlength{1.0}
+  \def\sblob{0.6}
+ 
+  %The double cut lines
+  \pgfmathsetmacro\vertcut{(\blobpos-1)/2+1}
+  %\def\vertcut{1.75}
+  \draw[very thick] (\vertcut,\cutshift) -- (\vertcut,\cutshift+\cutlength);
+  \draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+ 
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex[blob] (m) at (\blobpos, \sblob){};
+    \vertex[blob] (m2) at (\blobpos, -\sblob){};
+    \vertex (a) at (\blobpos+ \leglength,-\sblob+ \leglength*0.9);
+    \vertex (b) at (\blobpos+ \leglength*1.2,\sblob);
+    \vertex (c) at (\blobpos+ \leglength,-\sblob- \leglength*0.9);
+    \diagram* {
+      i -- [fermion, thick] (m1)
+       -- [gluon, quarter left] (m),
+      (m2) -- [quarter left, thick] (m1),
+      (m)  -- [gluon] (m2),
+       (m) -- [gluon] (b),
+       (m2) -- [gluon] (a),
+      (m2) -- [fermion,  thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{equation*}
+\vspace{-1.2cm}
+\captionedequationset{Double cut on a massive one-leg bubble topology. The
+  blobs denote tree-like contributions and the sum in the right term runs over the possible ways to distribute the external
+  particles on the two tree amplitudes. We discard contributions from
+  external leg self-energy insertions.\label{fig:doublecut}} 
+
+We follow the proposition by EGKM \cite{Ellis:2008ir}
+to remove the wave-function graph contribution to the double cut
+appearing in \olb s. This is particularly well suited for
+calculations employing Berends-Giele recursions for the tree
+generation. Computing the double cut trees, we interrupt the recursion
+whenever a wave-function graph situation is identified. We thereby
+remove any divergent tree contribution. In particular, this implies
+that the two cut particles are not allowed to join in a vertex without
+previous interactions. Due to this
+removal, gauge invariance of the tree amplitude is broken and only restored
+after combination with the appropriate counterterms (cf.~Sec.~\ref{sec:mrenorm}). This requires in
+particular to consistently compute in the same gauge, which for simplicity we choose to be Feynman gauge, i.e.~the sum over polarization states is given by
+\begin{align}\label{eq:gluonpolsum}
+  \sum_{s=1}^{D_s}\epsilon_s^\mu\epsilon_s^\nu = - g^{\mu\nu}.
+\end{align}
+The above polarization sum includes unphysical degrees of
+freedom. In the discussed double-cut of Fig.~\ref{fig:doublecut} however, there is always a quark
+in the loop and therefore no additional ghost particles need to be introduced.
+
+\subsection{Massive Tadpole Cuts}
+\label{sec:massivetadpoles}
+The master integral basis for massive particles contains the scalar
+one-point integral $I_1$, a tadpole. Its coefficients can be reconstructed by the application of single
+cuts. Note that the scalar one-point integral is not to be confused with
+\textit{tadpole Feynman diagrams}. They have numerator insertions depending on
+the theory and vanish for both QED and QCD. In an application of
+unitarity single-cuts, vanishing tadpole Feynman diagrams would contribute. This section is concerned with the proper handling of
+single cuts. For massless particles, scalar one-point integrals are scaleless and vanish in dimensional
+regularization. Therefore, for massless processes, one does not have
+to deal with the described issues.
+
+\begin{equation*}
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1}
+  \def\blobpos{2.5}
+  \def\cutshift{0.5}
+  \def\cutlength{1.0}
+
+  %The double cut lines
+  \draw[very thick] (\cutshift,0) -- (\cutshift+\cutlength,0);
+  %\draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+
+  \begin{feynman}[inline=(m1)]
+    \vertex[blob] (m) at (\blobpos, 0) {};
+    \vertex (m1) at (1, 0);
+    \vertex (a) at (\blobpos+\leglength*1.4,\leglength*0.5);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+ \leglength*1.4,- \leglength*0.5);
+    \vertex (d) at (\blobpos+ \leglength,- \leglength);
+    \diagram* {
+       (m1) -- [fermion, half left,momentum={[arrow shorten=0.3]\(\ell_1\)},thick] (m)
+       -- [fermion,half left,thick] (m1),
+       (m) -- [gluon] (a),
+       (m) -- [fermion,thick] (b),
+      (m) -- [gluon] (c),
+      (m) -- [anti fermion,  thick] (d),
+    };
+  \end{feynman}
+\end{tikzpicture}
+=
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{3.5}
+  \def\cutshift{0.5}
+  \def\cutlength{0.9}
+
+  %The double cut lines
+  \draw[very thick] (\cutshift,0) -- (\cutshift+\cutlength,0);
+  %\draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+  %Cross over whole contribution
+  \def\hg{1.1}
+  \def\wg{0.5}
+  \def\bg{3.2}
+  \draw[ultra thick,red] (\wg,\hg) -- (\wg+\bg,-\hg);
+  \draw[ultra thick,red] (\wg,-\hg) -- (\wg+\bg,\hg);
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex (m2) at (2.5, 0);
+    \vertex[blob] (m) at (\blobpos, 0){};
+    \vertex (a) at (\blobpos+\leglength*1.4,\leglength*0.5);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+ \leglength*1.4,- \leglength*0.5);
+    \vertex (d) at (\blobpos+ \leglength,- \leglength);
+    \diagram* {
+       (m1) -- [fermion, half left,thick] (m2)
+       -- [fermion,half left,thick] (m1),
+       (m2) -- [gluon] (m),
+       (m) -- [gluon] (a),
+       (m) -- [fermion,thick] (b),
+      (m) -- [gluon] (c),
+      (m) -- [anti fermion,  thick] (d),
+    };
+  \end{feynman}
+\end{tikzpicture}+\sum
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{2.0}
+  \def\cutshift{0.5}
+  \def\cutlength{1.0}
+  \def\by{0.6}
+
+  %The double cut lines
+  \draw[very thick] (\cutshift,0) -- (\cutshift+\cutlength,0);
+  %\draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex[blob] (m) at (\blobpos,\by ) {};
+    \vertex[blob] (m2) at (\blobpos, -\by) {};
+    \vertex (a) at (\blobpos+\leglength*1.4,\leglength*0.5);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+ \leglength*1.4,- \leglength*0.5);
+    \vertex (d) at (\blobpos+ \leglength,- \leglength);
+    \diagram* {
+       (m1) -- [fermion, quarter left,thick] (m),
+       (m1) -- [anti fermion, quarter right,thick] (m2),
+       (m) -- [gluon] (m2),
+       (m) -- [gluon] (a),
+       (m) -- [fermion,thick] (b),
+      (m2) -- [gluon] (c),
+      (m2) -- [anti fermion,  thick] (d),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{equation*}
+\vspace{-0.5cm}
+\captionedequationset{Single cut on a massive tadpole topology, with
+  the first term on the left, $R$, denotes tadpole Feynman diagram
+  contributions and the second one non-tadpole
+  like terms $N$. The
+  blobs denote tree-like contributions and the sum runs over all possibilities
+  to distribute the external particles amongst the two blobs. We
+  discard contributions from tadpole Feynman diagrams.\label{fig:singlecut}} 
+
+We use a direct approach to obtain tadpole coefficients by following the unitarity prescription,
+with explicit loop momentum parameterization given for example in
+\cite{Ellis:2007br}. An explicit prescription of how to deal with
+divergent contributions that appear in single
+cuts is not explicitly described in the literature. In this section, we will
+illustrate the source of these divergent contributions and propose a
+consistent scheme to compute single cuts based on the same
+principle that we applied for the double cut
+(cf.~Sec.~\ref{sec:1legbub} and \cite{Ellis:2008ir}). For processes with the particles in the loop having an identical mass $m^2$, a second
+possibility exists to obtain the single coefficient of the scalar tadpole
+integral by matching the UV pole structure \cite{Bern:1995db,Badger2008,Badger:2017gta}. The
+only source of UV divergencies of \ola s are bubble and
+tadpole integrals, which are either independent of kinematical
+invariants or depend on the mass $m^2$ of loop particles. Knowing the coefficients of the bubble integrals
+and the UV pole structure of the full amplitude, one can deduce the coefficient of the
+scalar tadpole integral. For more details, see App.~\ref{sec:uvmatch}.
+
+There are two conceptual
+challenges in the direct unitarity approach when dealing with single cuts and both are
+related to tree-like contributions that diverge. The one-loop amplitude in
+Fig.~\ref{fig:singlecut} on the massive single cut corresponds to a single
+tree amplitude $\Amt(-\ell_{1,\bar{q}},\dots,\ell_{1,q})$. This tree amplitude is not well
+defined, since it contains singular terms in \textit{several}
+factorization channels. The first type corresponds to tadpole Feynman
+diagrams. These are not considered in traditional calculations based
+on Feynman diagrams since they vanish in dimensional regularization. By Lorentz invariance they must be proportional to the momentum $p^\mu$ of the
+gluon, which is zero $p^\mu=0$ by momentum conservation. We can
+split the tree into the part $R$ multiplying the apparently divergent
+propagator and the non-tadpole like term $N$ and obtain
+\begin{align}\label{eq:scparts}
+  \Amt(-\ell_{1,\bar{q}},\dots,\ell_{1,q})=\frac{R(-\ell_{1,\bar{q}},\dots,\ell_{1,q})}{p^2}+N(-\ell_{1,\bar{q}},\dots,\ell_{1,q}),
+\end{align}
+where momentum conservation fixes the momentum $p$ to be
+zero $p^\mu=0$. We discard the tadpole Feynman diagram contributions appearing in
+the single cut. Again, the tree generation with a Berends-Giele
+recursion is beneficial. Whenever a
+situation is identified where the two cut quarks directly join into a
+vertex without any previous interaction, we stop the recursion and the
+tadpole Feynman diagram is discarded. The appearance of a tadpole
+Feynman diagram in the single cut has not been explicitly discussed in
+the literature, but can be seen as being contained in the treatment of
+the double cut introduced by EGKM in \cite{Ellis:2008ir}.
+
+\begin{minipage}{1.0\linewidth}
+\begin{eqnarray*}
+\sum
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{2.0}
+  \def\cutshift{0.5}
+  \def\cutlength{1.0}
+  \def\by{0.6}
+
+  %The double cut lines
+  \draw[very thick] (\cutshift,0) -- (\cutshift+\cutlength,0);
+  %\draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex[blob] (m) at (\blobpos,\by ) {};
+    \vertex[blob] (m2) at (\blobpos, -\by) {};
+    \vertex (a) at (\blobpos+\leglength*1.4,\leglength*0.5);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+ \leglength*1.4,- \leglength*0.5);
+    \vertex (d) at (\blobpos+ \leglength,- \leglength);
+    \diagram* {
+       (m1) -- [fermion, quarter left,thick] (m),
+       (m1) -- [anti fermion, quarter right,thick] (m2),
+       (m) -- [gluon] (m2),
+       (m) -- [gluon] (a),
+       (m) -- [fermion,thick] (b),
+      (m2) -- [gluon] (c),
+      (m2) -- [anti fermion,  thick] (d),
+    };
+  \end{feynman}
+\end{tikzpicture}
+&=&
+\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{2.0}
+  \def\cutshift{0.5}
+  \def\cutlength{1.0}
+  \def\by{0.6}
+
+  %The double cut lines
+  \draw[very thick] (\cutshift,0) -- (\cutshift+\cutlength,0);
+  %\draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex (m) at (\blobpos,\by );
+    \vertex[blob] (m2) at (\blobpos, -\by) {};
+    \vertex (a) at (\blobpos+\leglength,-\by+0.4);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+ \leglength*1.2,- \by);
+    \vertex (d) at (\blobpos+ \leglength,- \leglength);
+    \diagram* {
+       (m1) -- [fermion, quarter left,thick] (m),
+       (m1) -- [anti fermion, quarter right,thick] (m2),
+       (m) -- [gluon] (m2),
+       (m) -- [fermion,thick] (b),
+       (m2) -- [gluon] (a),
+      (m2) -- [gluon] (c),
+      (m2) -- [anti fermion,  thick] (d),
+    };
+  \end{feynman}
+\end{tikzpicture}
++
+\dots\\
+&=&\begin{tikzpicture}[baseline=(m1)]
+  \def\leglength{1}
+  \def\blobpos{2.0}
+  \def\cutshift{0.5}
+  \def\cutlength{1.0}
+  \def\by{0.6}
+  \def\bshift{0.9}
+
+  %The double cut lines
+  \draw[very thick] (\cutshift,0) -- (\cutshift+\cutlength,0);
+  %\draw[very thick] (\vertcut,-\cutshift) -- (\vertcut,-\cutshift-\cutlength);
+  \def\hg{1.1}
+  \def\wg{0.5}
+  \def\bg{3.2}
+  \draw[ultra thick,red] (\wg,\hg) -- (\wg+\bg,-\hg);
+  \draw[ultra thick,red] (\wg,-\hg) -- (\wg+\bg,\hg);
+  \begin{feynman}[inline=(m1)]
+    \vertex (m1) at (1, 0);
+    \vertex (m) at (\blobpos,\by );
+    \vertex (m2) at (\blobpos, -\by) ;
+    \vertex (m3)[blob] at (\blobpos+\bshift, -\by) {};
+    \vertex (a) at (\blobpos+\bshift+\leglength,-\by+0.4);
+    \vertex (b) at (\blobpos+ \leglength,\leglength);
+    \vertex (c) at (\blobpos+\bshift+ \leglength*1.2,- \by);
+    \vertex (d) at (\blobpos+\bshift+ \leglength,- \leglength);
+    \diagram* {
+       (m1) -- [fermion, quarter left,thick] (m),
+       (m1) -- [anti fermion, quarter right,thick] (m2),
+       (m) -- [gluon] (m2),
+      (m2) -- [anti fermion,  thick] (m3),
+       (m) -- [fermion,thick] (b),
+       (m3) -- [gluon] (a),
+      (m3) -- [gluon] (c),
+      (m3) -- [anti fermion,  thick] (d),
+    };
+  \end{feynman}
+\end{tikzpicture}+\sum\dots+\dots
+\end{eqnarray*}
+\vspace{-0.5cm}
+\captionedequationset{The non-tadpole like part $N$ of the single cut contains contributions from external leg
+  self-energy corrections that have to be removed. They are accounted
+  for in the renormalization.\label{fig:singlecut2}} 
+\end{minipage}
+
+
+The second conceptual challenge is that the non-tadpole like term $N$
+in Eq.~\eqref{eq:scparts} also contains singular terms. They correspond
+to external leg self-energy Feynman diagrams. In
+Sec.~\ref{sec:1legbub}, we saw that they contain a divergent
+propagator. The part $N$ of Eq.~\eqref{eq:scparts} contains a sum over all possible ways of distributing the external
+legs to the two tree-like subgraphs, represented by blobs. Amongst the
+Feynman diagrams contained therein, we have external leg self-energy contributions, as is apparent in the second line of Fig.~\ref{fig:singlecut2}. We
+apply the same treatment as in the previous Sec.~\ref{sec:1legbub} for
+massive one-leg bubbles. The singular contributions are removed by
+stopping the Berends-Giele recursion whenever such a configuration
+appears during the computation of the tree amplitude. Again, we
+explicitly break gauge invariance which is only restored after
+combination with the appropriate counter terms. The removal of these
+singular contributions from the single cut makes the direct
+application of numerical unitarity feasible.
+
+\section{Tree Amplitude Generation with Berends-Giele Recursions}
+\label{sec:BGrec}
+Generalized unitarity relates color-ordered primitive \ola s to the
+product of color-ordered tree
+amplitudes. An efficient and flexible way of computing tree amplitudes are
+Berends-Giele recursion relations \cite{Berends:1987me} for off-shell
+currents. They were originally
+devised for pure gluon amplitudes but can easily be extended to an
+arbitrary spectrum. In algorithms based on off-shell recursion
+relations, so called currents with a single off-shell leg and $n$ on-shell legs
+are related to those with fewer on-shell legs. The possible
+interactions between the currents are determined by the
+theory at hand. Berends-Giele recursions work for complex
+momenta as well as in any integer-dimensional space-time. Therefore, they are well suited for the
+application in generalized unitarity and we implemented a new tree
+generator in the \BlackHat{} library for the computation of unitarity
+cuts for massive particles. Note, that
+the fine-grained control over the contributing Feynman diagrams to each
+current is beneficial for our treatment of double and single cuts with
+massive particles (cf.~Sec.~\ref{sec:massivetadpoles} and
+Sec.~\ref{sec:1legbub}). In particular, the removal of certain Feynman
+diagrams does not affect the
+efficiency of the computation during the evaluation phase. Compared to on-shell recursions like BCFW
+\cite{Britto2005c,Britto2005f}, that are based on factorization
+properties of the tree amplitudes, Berends-Giele recursion relations have the
+advantage of being flexible, e.g.~with respect to the space-time
+dimensionality, and robust since they rely on a small set of rules to be
+implemented.
+
+\subsubsection{A Toy Example for Off-Shell Tree Recursions}
+\label{sec:toybg}
+The basic principle of BG recursions can easily be demonstrated in a vectorial toy
+example with a three-point interaction only. For simplicity we consider the example of a
+four-point tree amplitude $\Amt(1,2,3,4)$ with a fixed order of
+external legs. We start by defining the \textit{current}
+$J^\mu(2,3,4)$, which is constructed from an ordered on-shell tree amplitude by
+stripping one leg off. In this example we remove the external leg labeled
+by $1$. To recover the tree amplitude, we multiply the current by both
+the wave function $\epsilon^\mu(1)$ of a massless spin-1 particle and
+the inverse propagator
+$D_1$\footnote{Numerically, the divergent propagator of the external
+  leg is dropped in the final step of the recursion.} of the
+removed external leg
+\begin{align}
+ \Amt(1,2,3,4)=D_1 J^\mu(1,2,3)\epsilon_\mu(4) .
+\end{align}
+The recursive steps to construct the current $J^\mu(2,3,4)$ are graphically represented in
+Fig.~\ref{fig:toy3pt}. The external on-shell legs join into the shaded
+blob, representing a tree-like contribution. The main idea of the recursion is that the current
+leg must interact via one of the interactions furnished by the theory. In our simplified example, we
+insert the allowed three-point interaction. Then, we sum over all
+possible ways to distribute the ordered external legs to the
+subcurrents. The same reasoning is applied to the smaller
+subcurrents, cf.~the second row. The endpoint of the recursion are the off-shell
+one-point currents $J^\mu(i)\equiv \epsilon^\mu(i)$. 
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\blobpos{1.0}
+  \def\rshift{0.6}
+  \def\lshift{-0.6}
+
+  \draw (\lshift,-\leglength) --
+  (\blobpos+\leglength+\rshift,-\leglength) --
+  (\blobpos+\leglength+\rshift,+\leglength) -- (\lshift,\leglength) -- (\lshift,-\leglength);
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex[blob] (m1) at (\blobpos,0 ) {};
+    \vertex (a) at (\blobpos+\leglength,\leglength*0.7) {\(1\)};
+    \vertex (b) at (\blobpos+ \leglength*1.2,0) {\(2\)};
+    \vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(3\)};
+    \diagram* {
+      (m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (b),
+      (m1) -- [gluon,thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+&=&
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{\curlength*0.7+\leglength*0.5}
+  \def\cu2{\curlength*0.7-\leglength*0.5}
+
+  \def\rshift{0.8}
+  \def\lshift{1.35}
+  \def\dshift{0.95}
+  \def\ushift{0.25}
+
+  \draw (\lshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,+\leglength+\ushift) -- (\lshift,\leglength+\ushift) -- (\lshift,-\leglength+\dshift);
+
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex (m1) at (\blobpos,0 );
+    \vertex[blob] (a) at (\blobpos+\curlength,\curlength*0.7){};
+    \vertex (a1) at (\curx,\cury1) {\(1\)};
+    \vertex (a2) at (\curx,\cu2) {\(2\)};
+    \vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(3\)};
+    \diagram* {
+      (m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a2),
+    };
+  \end{feynman}
+\end{tikzpicture}
++
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{-\curlength*0.7+\leglength*0.5}
+  \def\cu2{-\curlength*0.7-\leglength*0.5}
+
+
+  \def\rshift{0.8}
+  \def\lshift{1.35}
+  \def\dshift{-0.25}
+  \def\ushift{-0.95}
+
+  \draw (\lshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,+\leglength+\ushift) -- (\lshift,\leglength+\ushift) -- (\lshift,-\leglength+\dshift);
+
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex (m1) at (\blobpos,0 );
+    \vertex (a) at (\blobpos+\leglength,\curlength*0.7){\(1\)};
+    \vertex (a1) at (\curx,\cury1) {\(2\)};
+    \vertex (a2) at (\curx,\cu2) {\(3\)};
+    \vertex (c)[blob] at (\blobpos+ \curlength,-\curlength*0.7) {};
+    \diagram* {
+      (m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (c),
+      (c) -- [gluon,thick] (a1),
+      (c) -- [gluon,thick] (a2),
+    };
+  \end{feynman}
+\end{tikzpicture}\\[30pt]
+\begin{tikzpicture}[baseline=(a)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{\leglength*0.5}
+  \def\cu2{-\leglength*0.5}
+
+  \def\rshift{0.8}
+  \def\lshift{0.4}
+  \def\dshift{0.95-\curlength*0.75}
+  \def\ushift{0.25-\curlength*0.75}
+
+  \draw (\lshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,+\leglength+\ushift) -- (\lshift,\leglength+\ushift) -- (\lshift,-\leglength+\dshift);
+
+
+  \begin{feynman}[inline=(a)]
+    %\vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex (m1) at (\blobpos-0.3,0 ) {\(\mu\)};
+    \vertex[blob] (a) at (\blobpos+\curlength,0){};
+    \vertex (a1) at (\curx,\cury1) {\(1\)};
+    \vertex (a2) at (\curx,\cu2) {\(2\)};
+    %\vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(3\)};
+    \diagram* {
+      %(m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      %(m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a2),
+    };
+  \end{feynman}
+\end{tikzpicture}
+&=&
+\begin{tikzpicture}[baseline=(a)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{\leglength*0.5}
+  \def\cu2{-\leglength*0.5}
+
+
+  \begin{feynman}[inline=(a)]
+    %\vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex (m1) at (\blobpos-0.3,0 ) {\(\mu\)};
+    \vertex (a) at (\blobpos+\curlength,0);
+    \vertex (a1) at (\curx,\cury1) {\(1\)};
+    \vertex (a2) at (\curx,\cu2) {\(2\)};
+    %\vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(3\)};
+    \diagram* {
+      %(m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      %(m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a2),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\hspace{3.0cm}
+\begin{tikzpicture}[baseline=(a)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{\leglength*0.5}
+  \def\cu2{-\leglength*0.5}
+
+  \def\rshift{0.8}
+  \def\lshift{0.4}
+  \def\dshift{0.95-\curlength*0.75}
+  \def\ushift{0.25-\curlength*0.75}
+
+  \draw (\lshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,-\leglength+\dshift) --
+  (\blobpos+\leglength+\rshift,+\leglength+\ushift) -- (\lshift,\leglength+\ushift) -- (\lshift,-\leglength+\dshift);
+
+
+  \begin{feynman}[inline=(a)]
+    %\vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex (m1) at (\blobpos-0.3,0 ) {\(\mu\)};
+    \vertex[blob] (a) at (\blobpos+\curlength,0){};
+    \vertex (a1) at (\curx,\cury1) {\(2\)};
+    \vertex (a2) at (\curx,\cu2) {\(3\)};
+    %\vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(3\)};
+    \diagram* {
+      %(m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      %(m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a2),
+    };
+  \end{feynman}
+\end{tikzpicture}
+=
+\begin{tikzpicture}[baseline=(a)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{\leglength*0.5}
+  \def\cu2{-\leglength*0.5}
+
+
+  \begin{feynman}[inline=(a)]
+    %\vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex (m1) at (\blobpos-0.3,0 ) {\(\mu\)};
+    \vertex (a) at (\blobpos+\curlength,0);
+    \vertex (a1) at (\curx,\cury1) {\(2\)};
+    \vertex (a2) at (\curx,\cu2) {\(3\)};
+    %\vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(3\)};
+    \diagram* {
+      %(m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      %(m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a2),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{eqnarray*}
+\vspace{-0.5cm}
+\captionedequationset{Berends-Giele recursion for a current
+  $J^\mu(1,2,3)$ in a vectorial toy example with only three-point interactions.\label{fig:toy3pt}} 
+We can easily generalize the recursive relation of our vectorial toy example to any number of external particles. The
+recursive relations between the current $J(n,\dots,m)$, containing $m-n$ external on-shell legs, and those currents containing
+less external legs can be written as
+\begin{align}\label{eq:rectoy}
+  J^\mu(n,\dots,m) = \frac{g^{\mu\nu}}{D_{m,n}}\sum_{i=n}^{m-1}V_{\nu\rho\sigma}(-p_{m,n},p_{n,i},p_{i+1,m})J^\rho(n,\dots,i) J^\sigma(i+1,\dots,m),
+\end{align}
+with the momenta sums defined as $p_{i,j}=\sum_{k=i}^jp_k$. The
+indices of the inverse propagator $D_{i,j}$ label the involved
+momenta sum $D_{i,j}=ip_{i,j}^2$ and we assume a momentum-dependent three-point interaction
+$V^{\nu\rho\sigma}(p_1,p_2,p_3).$ The Berends-Giele-like tree recursions thereby provide a
+systematic prescription to collect all the Feynman diagram contributions to a given
+color-ordered tree amplitude. The recursion relations are valid for complex momenta in any
+integer space-dimension and the currents can be multi-component
+objects representing vectors, spinors or scalars in any integer
+space-time dimension.
+
+
+\subsubsection{Tree-Level Recursions}
+\label{sec:bgqcd}
+The recursion relations of the previous subsection can easily be extended to the full QCD
+spectrum and an additional \ew~gauge boson, requiring recursive relations for different types of currents. We will present those for
+pure gluon currents and those for currents composed of a single quark
+pair and additional gluons. Gluons interact via both three- and
+four-point interactions and thus the recursion relations read
+\begin{align}\label{eq:recglue}
+\begin{split}
+  J^\mu(n,\dots,m) &=
+  \frac{g^{\mu\nu}}{D_{m,n}}\left[\sum_{i=n}^{m-1}V_{\nu\rho\sigma}^{ggg}(-p_{m,n},p_{n,i},p_{i+1,m})J^\rho(n,\dots,i)
+  J^\sigma(i+1,\dots,m)\right.\\
+ &\left.+\sum_{i=n}^{m-2}\sum_{j=i+1}^{m-1}V_{\nu\rho\sigma\delta}^{gggg}J^\rho(n,\dots,i)
+   J^\sigma(i+1,\dots,j)J^\delta(j+1,\dots,m)\right].
+\end{split}
+\end{align}
+The color-ordered momentum dependent three-point interaction
+$V_{\nu\rho\sigma}^{ggg}(p_1,p_2,p_3)$ and the momentum independent
+four-point interaction $V_{\nu\rho\sigma\delta}^{gggg}$ are given in App.~\ref{sec:cofr}. Momentum sums
+and the gluon propagator are defined as in the previous section. The
+recursion terminates with the polarization state of the gluon
+$J^\mu(i)\equiv\epsilon^\mu(i)$.
+
+
+\begin{minipage}[c]{\linewidth}
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\blobpos{1.0}
+  \def\rshift{0.6}
+  \def\lshift{-0.6}
+
+  %\draw (\lshift,-\leglength) --
+  %(\blobpos+\leglength+\rshift,-\leglength) --
+  %(\blobpos+\leglength+\rshift,+\leglength) -- (\lshift,\leglength) -- (\lshift,-\leglength);
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (-0.3, 0) {\(\mu\)};
+    \vertex[blob] (m1) at (\blobpos,0 ) {};
+    \vertex (a) at (\blobpos+\leglength,\leglength*0.7) {\(n\)};
+    \vertex (b) at (\blobpos+ \leglength*1.2,0) {\(\vdots\)};
+    \vertex (c) at (\blobpos+ \leglength,-\leglength*0.7) {\(m\)};
+    \diagram* {
+      (m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (b),
+      (m1) -- [gluon,thick] (c),
+    };
+  \end{feynman}
+\end{tikzpicture}
+&=&\sum_{j=n}^{m-1}
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\curlength+\leglength*0.8}
+  \def\cury1{\leglength*0.7+\leglength*0.5}
+  \def\cu2{\leglength*0.7-\leglength*0.5}
+
+  \def\rshift{0.8}
+  \def\lshift{1.35}
+  \def\dshift{0.95}
+  \def\ushift{0.25}
+
+  %\draw (\lshift,-\leglength+\dshift) --
+  %(\blobpos+\leglength+\rshift,-\leglength+\dshift) --
+  %(\blobpos+\leglength+\rshift,+\leglength+\ushift) -- (\lshift,\leglength+\ushift) -- (\lshift,-\leglength+\dshift);
+
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0.2, 0);
+    \vertex (m1) at (\blobpos,0 );
+    \vertex[blob] (a) at (\blobpos+\curlength,\leglength*0.7){};
+    \vertex (a1) at (\curx,\cury1) {\(n\)};
+    \vertex (a3) at (\curx*1.2,\leglength*0.7) {\(\vdots\)};
+    \vertex (a2) at (\curx,\cu2) {\(j\)};
+
+    \vertex[blob] (c) at (\blobpos+ \curlength,-\leglength*0.7) {};
+    \vertex (b1) at (\curx+0.4,-\leglength*0.7+\leglength*0.5) {\(j+1\)};
+    \vertex (b3) at (\curx*1.2,-\leglength*0.7) {\(\vdots\)};
+    \vertex (b2) at (\curx+0.2,-\leglength*0.7-\leglength*0.5) {\(m\)};
+    \diagram* {
+      (m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a2),
+      (a) -- [gluon,thick] (a3),
+      (c) -- [gluon,thick] (b1),
+      (c) -- [gluon,thick] (b2),
+      (c) -- [gluon,thick] (b3),
+    };
+  \end{feynman}
+\end{tikzpicture}
++\sum_{i=n}^{m-2}\sum_{j=i+1}^{m-1}
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\curlength{0.8}
+  \def\blobpos{1.0}
+  \def\curx{\blobpos+\leglength+1.2}
+  \def\cury1{-\curlength*0.7+\leglength*0.5}
+  \def\cu2{-\curlength*0.7-\leglength*0.5}
+  \def\cu{0.4}
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0.2, 0);
+    \vertex (m1) at (\blobpos,0 );
+    \vertex (a)[blob] at (\blobpos+\leglength,\curlength*1.3){};
+    \vertex (b)[blob] at (\blobpos+\leglength+0.8,0){};
+    \vertex (c)[blob] at (\blobpos+\leglength,-\curlength*1.3){};
+    \vertex (a1) at (\curx,\curlength*1.3+\cu) {\(n\)};
+    \vertex (a2) at (\curx+0.2,\curlength*1.3){\(\vdots\)};
+    \vertex (a3) at (\curx,\curlength*1.3-\cu) {\(i\)};
+    \vertex (b1) at (\curx+1.0,+\cu) {\(i+1\)};
+    \vertex (b2) at (\curx+0.2+0.8,0){\(\vdots\)};
+    \vertex (b3) at (\curx+0.8,-\cu) {\(j\)};
+    \vertex (c1) at (\curx+0.2,-\curlength*1.3+\cu) {\(j+1\)};
+    \vertex (c2) at (\curx+0.2,-\curlength*1.3){\(\vdots\)};
+    \vertex (c3) at (\curx,-\curlength*1.3-\cu) {\(m\)};
+    \diagram* {
+      (m)  -- [gluon,thick] (m1),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (b),
+      (m1) -- [gluon,thick] (c),
+      (a) -- [gluon,thick] (a1),
+      (a) -- [gluon,thick] (a3),
+      (b) -- [gluon,thick] (b1),
+      (b) -- [gluon,thick] (b3),
+      (c) -- [gluon,thick] (c1),
+      (c) -- [gluon,thick] (c3),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{eqnarray*}
+\vspace{-0.5cm}
+\captionedequationset{Berends-Giele recursion for a gluonic current
+  $J^\mu(n,\dots,m)$. The sums run over all possible ways to
+  distribute the on-shell legs with fixed cyclic ordering amongst the subcurrents.\label{fig:bggluoncur}} 
+\end{minipage}
+
+
+Similar Berends-Giele recursions can be devised for tree amplitudes
+containing quark pairs. We have to distinguish currents with a
+quark off-shell leg and those with an anti-quark off-shell leg. Fig.~\ref{fig:bgqcur} shows the
+Berends-Giele recursions for a quark current with $n$-gluons and a
+single quark line. The quark has two possibilities to interact. It can
+radiate a gluon to the left or to the
+right of the fermion line. These are related by a minus sign
+$V_{\mu}^{qg\bar{q}}=-V_{\mu}^{q\bar{q}g}$, see color-ordered Feynman rules in App.~\ref{sec:cofr}. The recursion for the quark current
+$Q(g_1,g_2,\dots,g_{n_1};\bar{q};g_{n_1+1},\dots,g_{n_1+n_2})$
+therefore reads
+\begin{align}\label{eq:recq}
+\begin{split}
+  Q =&
+S^{q}(-p_{1,n_1+n_2})\left[\sum_{j=1}^{n_1}V_{\mu}^{qg\bar{q}}Q(g_{j+1},\dots,g_{n_1};\bar{q};g_{n_1+1},\dots,g_{n_1+n_2})J^\mu(g_1,\dots,g_j)\right.\\
+ &\left.+\sum_{j=n_1}^{n_1+n_2-1}V_{\mu}^{q\bar{q}g}Q(g_{1},\dots,g_{n_1};\bar{q};g_{n_1+1},\dots,g_{j})J^\mu(g_{j+1},\dots,g_{n_1+n_2})\right],
+\end{split}
+\end{align}
+with the quark propagator given by $S^{q}(p)=\frac{i(\slashed{p}+m)}{p^2-m^2}$ and momenta sums
+$p_{i,j}=\sum_{k=i}^jp_k$ defined as above. Fermion currents, propagators
+and interactions are objects in
+spinor space, which means that their relative positioning matters. We suppressed the related spinorial indices in Eq.~\eqref{eq:recq}.
+
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m)]
+  \def\leglength{1.2}
+  \def\blobpos{1.5}
+  \def\2blobpos{3.0}
+  \def\rshift{0.6}
+  \def\lshift{-0.6}
+  \def\shift{0.6}
+  \def\yshift{1}
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m) at (0, 0) {\(\mu\)};
+    \vertex[blob] (m1) at (\blobpos,0 ) {};
+    \vertex (m2) at (\2blobpos,0 ) ;
+    \vertex (a) at (\blobpos+\shift,\yshift) {\(n_1\)};
+    \vertex (a1) at (\blobpos,\yshift+0.2) {\(\dots\)};
+    \vertex (a2) at (\blobpos-\shift,\yshift) {\(1\)};
+    \vertex (c) at (\blobpos+\shift+0.2,-\yshift) {\(n_1+1\)};
+    \vertex (c1) at (\blobpos,-\yshift-0.3) {\(\dots\)};
+    \vertex (c2) at (\blobpos-\shift-0.2,-\yshift) {\(n_1+n_2\)};
+    \diagram* {
+      (m)  -- [anti fermion,thick] (m1),
+      (m1) -- [anti fermion,thick] (m2),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (a1),
+      (m1) -- [gluon,thick] (a2),
+      (m1) -- [gluon,thick] (c),
+      (m1) -- [gluon,thick] (c1),
+      (m1) -- [gluon,thick] (c2),
+    };
+  \end{feynman}
+\end{tikzpicture}
+&=&\sum_{j=1}^{n_1}
+\begin{tikzpicture}[baseline=(m)]
+   \def\leglength{1.2}
+  \def\blobpos{1.5}
+  \def\2blobpos{3.0}
+  \def\rshift{0.6}
+  \def\lshift{-0.6}
+  \def\shift{0.6}
+  \def\yshift{1}
+\def\mup{1}
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m0) at (-1, 0);
+    \vertex (m) at (0, 0);
+    \vertex[blob] (mup) at (0, \mup){};
+    \vertex (b) at (\shift,\mup+\yshift) {\(j\)};
+    \vertex (b1) at (0,\mup+\yshift+0.2) {\(\dots\)};
+    \vertex (b2) at (-\shift,\mup+\yshift) {\(1\)};
+    \vertex[blob] (m1) at (\blobpos,0 ) {};
+    \vertex (m2) at (\2blobpos,0 ) ;
+    \vertex (a) at (\blobpos+\shift,\yshift) {\(n_1\)};
+    \vertex (a1) at (\blobpos,\yshift+0.3) {\(\dots\)};
+    \vertex (a2) at (\blobpos-\shift,\yshift) {\(j+1\)};
+    \vertex (c) at (\blobpos+\shift+0.2,-\yshift) {\(n_1+1\)};
+    \vertex (c1) at (\blobpos,-\yshift-0.3) {\(\dots\)};
+    \vertex (c2) at (\blobpos-\shift-0.2,-\yshift) {\(n_1+n_2\)};
+    \diagram* {
+      (m0)  -- [anti fermion,thick] (m),
+      (m)  -- [anti fermion,thick] (m1),
+      (m1) -- [anti fermion,thick] (m2),
+      (m) -- [gluon,thick] (mup),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (a1),
+      (m1) -- [gluon,thick] (a2),
+      (m1) -- [gluon,thick] (c),
+      (m1) -- [gluon,thick] (c1),
+      (m1) -- [gluon,thick] (c2),
+      (mup) -- [gluon,thick] (b),
+      (mup) -- [gluon,thick] (b1),
+      (mup) -- [gluon,thick] (b2),
+    };
+  \end{feynman}
+\end{tikzpicture}
++\sum_{j=n_1}^{n_1+n_2-1}
+\begin{tikzpicture}[baseline=(m)]
+   \def\leglength{1.2}
+  \def\blobpos{1.5}
+  \def\2blobpos{3.0}
+  \def\rshift{0.6}
+  \def\lshift{-0.6}
+  \def\shift{0.6}
+  \def\yshift{1}
+\def\mup{1}
+
+  \begin{feynman}[inline=(m)]
+    \vertex (m0) at (-1, 0);
+    \vertex (m) at (0, 0);
+    \vertex[blob] (mup) at (0, -\mup){};
+    \vertex (b) at (\shift+0.3,-\mup-\yshift) {\(j+1\)};
+    \vertex (b1) at (0,-\mup-\yshift-0.2) {\(\dots\)};
+    \vertex (b2) at (-\shift-0.3,-\mup-\yshift) {\(n_1+n_2\)};
+    \vertex[blob] (m1) at (\blobpos,0 ) {};
+    \vertex (m2) at (\2blobpos,0 ) ;
+    \vertex (a) at (\blobpos+\shift,\yshift) {\(n_1\)};
+    \vertex (a1) at (\blobpos,\yshift+0.2) {\(\dots\)};
+    \vertex (a2) at (\blobpos-\shift,\yshift) {\(1\)};
+    \vertex (c) at (\blobpos+\shift+0.2,-\yshift) {\(n_1+1\)};
+    \vertex (c1) at (\blobpos,-\yshift-0.3) {\(\dots\)};
+    \vertex (c2) at (\blobpos-\shift-0.2,-\yshift) {\(j\)};
+    \diagram* {
+      (m0)  -- [anti fermion,thick] (m),
+      (m)  -- [anti fermion,thick] (m1),
+      (m1) -- [anti fermion,thick] (m2),
+      (m) -- [gluon,thick] (mup),
+      (m1) -- [gluon,thick] (a),
+      (m1) -- [gluon,thick] (a1),
+      (m1) -- [gluon,thick] (a2),
+      (m1) -- [gluon,thick] (c),
+      (m1) -- [gluon,thick] (c1),
+      (m1) -- [gluon,thick] (c2),
+      (mup) -- [gluon,thick] (b),
+      (mup) -- [gluon,thick] (b1),
+      (mup) -- [gluon,thick] (b2),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{eqnarray*}
+\vspace{-0.5cm}
+\captionedequationset{Berends-Giele recursion for the quark
+  current $Q$. The vertices for radiating the gluon to the right
+  $V_{\mu}^{qg\bar{q}}$ and to the left
+  $V_{\mu}^{q\bar{q}g}$ of the fermion line are related by a minus
+  sign. The sums run over all possibilities to
+  distribute the on-shell legs with fixed cyclic ordering amongst the
+  subcurrents.\label{fig:bgqcur}} 
+ The
+tree amplitude $
+\Amt(q;g_1,g_2,\dots,g_{n_1};\bar{q};g_{n_1+1},\dots,g_{n_1+n_2})$ can
+thus be recovered from the quark current $Q(g_1,g_2,\dots,g_{n_1};\bar{q};g_{n_1+1},\dots,g_{n_1+n_2})$ by 
+\begin{align}
+ \Amt=\bar{u}(p_q)\left(-i(\slashed{p}_q-m)\right)Q.
+\end{align}
+Extending the Berends-Giele recursion relations to an arbitrary number of quark pairs poses
+no problem in a numerical implementation but their graphical
+representation can become quite cumbersome. Also the addition of a
+color-neutral gauge boson poses no problem in a flexible numerical
+implementation. Color-neutral particles are not strictly ordered, they
+have to be inserted at all possible positions between the colored
+particles with fixed cyclic ordering. Care has to be taken to consistently
+treat color-neutral particles during both color decomposition and tree generation. Explicit expressions for propagators and vertices
+for a $W$-boson can be found in App.~\ref{sec:cofr}.
+
+
+\subsubsection{Multi-Cut Trees For Numerical Unitarity}
+\label{sec:singlecutunit}
+In the context of a numerical unitarity application, tree amplitudes
+always appear as products of tree amplitudes in unitarity cuts. Adjacent tree amplitudes in the cut are connected
+by an on-shell leg, whose momentum enters the amplitudes with opposite signs. The sum over helicity states on the cut corresponds to
+the polarization state sum and is given by
+\begin{align}\label{eq:projecpol}
+\begin{split}
+  P^{\mu\nu}_g \equiv -g^{\mu \nu} & =
+  \sum_{s=\pm}\epsilon_s^{*\mu}(p)\epsilon_s^\nu(-p)\\
+P_q(p) \equiv (\slashed{p} + m) &= \sum_{s=\pm} \bar{u}_s(p)v_s(-p),
+\end{split}
+\end{align}
+Instead of inserting explicit on-shell states for the cut leg, we replace the sum over helicity states on the cut by the corresponding
+polarization projectors $P^{\mu\nu}_g$ and $P_q(p)$ of Eq.~\eqref{eq:projecpol}. We refer to the product
+of cut trees summed over helicities, with all but one state sum replaced by
+the corresponding projectors, as a \textit{multi-cut tree}. In
+Fig.~\ref{fig:multicut}, the graphical representation of such a
+multi-cut tree appearing in the calculation of a quadruple cut is
+shown, where four loop propagators are set on-shell. 
+\begin{eqnarray*}
+\begin{tikzpicture}[baseline=(m)]
+
+\def\1up{1.0}
+\def\up{2.0}
+\def\hup{0.5}
+\def\cutl{0.5}
+
+\draw[ultra thick] (0,\1up-\cutl) -- (0,\1up+\cutl);
+\draw[ultra thick] (0,-\1up-\cutl) -- (0,-\1up+\cutl);
+\draw[ultra thick] (-\1up-\cutl,0) -- (-\1up+\cutl,0);
+\draw[ultra thick] (-\1up-\cutl,0) -- (-\1up+\cutl,0);
+\draw[ultra thick] (1.25,-0.25) -- (1.75,-0.75);
+\draw[ultra thick] (1.25,0.25) -- (1.75,0.75);
+
+\draw[->,thick] (\up+0.7,0.5) -- (\up+0.7,-0.5);
+\node at (\up+1,0) {$\ell_1$};
+
+\node at (0,\up) {$P_q$};
+\node at (0,-\up) {$P_g$};
+\node at (-\up,0) {$P_g$};
+\node at (\up,0) {$\sum_s$};
+  \begin{feynman}[inline=(m)]
+    \vertex (v1) at (-\1up,\1up);
+    \vertex (v2) at (\1up,\1up);
+    \vertex (v3) at (\1up,-\1up);
+    \vertex (v4) at (-\1up,-\1up);
+    \vertex (o1) at (-\up,\up){\(3\)};
+    \vertex (o2) at (\up,\up){\(4\)};
+    \vertex (o3) at (\up,-\up){\(1\)};
+    \vertex (o4) at (-\up,-\up){\(2\)};
+    \vertex (o5) at (\up*0.75,\1up*0.5);
+    \vertex (o6) at (\up*0.75,-\1up*0.5);
+    \vertex (c1) at (\1up,0);
+    \vertex (c2) at (\up,-\1up);
+    \diagram* {
+      (v1)  -- [fermion,thick] (v2) --  [fermion,thick] (o5),
+      (o6) -- [fermion,thick] (v3)--  [gluon,thick] (v4) --  [gluon,thick] (v1), 
+      (o1) -- [fermion,thick] (v1),
+      (o2) -- [gluon,thick] (v2),
+      (o3) -- [anti fermion,thick] (v3),
+      (o4) -- [gluon,thick] (v4),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{eqnarray*}
+\vspace{-0.5cm}
+\captionedequationset{A multi-cut tree appearing in a quadruple cut, where the sum over
+  polarization states is replaced by the corresponding projectors on
+  all but one cut line. \label{fig:multicut}} 
+
+The multi-cut tree for the quadruple cut in Fig.~\ref{fig:multicut} thus corresponds to 
+\begin{align}
+\begin{split}
+  &\sum_{s1,s_2,s_3,s_4=\pm}\Amt(-\ell_1,1_q,\ell_2)\Amt(-\ell_2,2_g,\ell_3)\Amt(-\ell_3,3_{\bar{q}},\ell_4)\Amt(-\ell_4,4_g,\ell_1)\\
+  &=\sum_{s1=\pm}J_\mu(-\ell_1,1_q,\ell_2)P_g^{\mu\nu}\MC_{\nu\rho}(-\ell_2,2_g,\ell_3)P_g^{\rho\sigma}\MC_{\sigma}(-\ell_3,3_{\bar{q}},\ell_4)P_q(\ell_4)\bar{Q}(-\ell_4,4_{g},\ell_1),
+\end{split}
+\end{align}
+where we introduced \textit{multi-currents} denoted by $\MC$, that is an amplitude
+with two off-shell legs and therefore two open indices (we suppress spinorial indices for simplicity). The summation
+in the first line is over all spin states of internal cut particles and
+that in the second line only over the spin-states of the internal
+particle, whose polarization sum is not replaced by the
+corresponding projector. Depending on
+the legs that are stripped off, the indices can be spinorial, vectorial, a
+mixture of those or the current can be a scalar. The quark
+projector $P_q$ and anti-fermion current $\bar{Q}$ live in spinor
+space, whereas the gluon projector $P_g$ and gluon current $J^\mu$ are
+vectors. Compared to computing tree amplitude by tree amplitude, the numerical
+implementation of multi-cut trees simplifies the
+book-keeping due to the smaller number of objects that are computed. Instead
+of computing several trees for each helicity configuration of internal
+cut legs, we only have to sum over the helicity configurations of the single
+cut leg with explicit on-shell states. Furthermore, handling the polarization sum by a
+projector reduces the number of operations for the computations in Feynman
+gauge. This is particularly relevant for a spectrum with an increased number of
+states. For example, we will see in the next chapter that our treatment of the
+rational terms leads to a massive spin-1 particle with three
+polarization states. The unphysical
+degrees of freedom circulating in the loop that are introduced by the gluonic polarization sum in
+Feynman gauge are canceled, since one cut-line is still computed with
+on-shell states. We implemented a caching
+mechanism for currents inside single tree amplitudes but also across
+all tree amplitudes required for the computation of a \ola. In
+particular, this allows for the efficient evaluation of the latter.
