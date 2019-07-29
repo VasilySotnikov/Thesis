@@ -249,19 +249,17 @@ $\mu_i$),
 and some are beyond four dimensions (denoted $\hat\mu_i$) is
 split into two blocks, a four-dimensional and a 
 $(D_s-4)$-dimensional one. For instance, we have
-%
-\begin{align}\begin{split}
+\begin{align}
+  \begin{split}
     \left(\gamma_{[D_s]}^{\mu_1}
     \gamma_{[D_s]}^{\hat \mu_2}
     \gamma_{[D_s]}^{\mu_3}
     \gamma_{[D_s]}^{\hat\mu_4}\right)_{a\kappa}^{\,b\lambda} &=
-%
     -\left(
     \gamma_{[D_s]}^{\mu_1}
     \gamma_{[D_s]}^{\mu_3}
     \gamma_{[D_s]}^{\hat \mu_2}
     \gamma_{[D_s]}^{\hat\mu_4} \right)_{a\kappa}^{\,b\lambda} \\
-%
     &=-\left( 
     \gamma_{[4]}^{\mu_1}
     \gamma_{[4]}^{\mu_3}
@@ -307,37 +305,39 @@ HV scheme this tensor decomposition results in simpler expressions
 than in CDR. Consider for instance the tree-level $q\bar q\to Q\bar
 Q$ amplitude
 \begin{equation}
-	\left(M^{(0)}\right)_{\kappa_1 \kappa_2}^{\lambda_1 \lambda_2}
-	\;\sim\;\; 
-        \bar u^{a_1}
-	\left(
-	\gamma_{[D_s]}^\mu
-	\right)_{a_1 \kappa_1}^{b_1 \lambda_1}
-	u_{b_1}
-        \,\,
-	\bar u^{a_2}
-	\left(
-	\gamma_{[D_s]\mu}
-	\right)_{a_2 \kappa_2}^{b_2 \lambda_2}
-	u_{b_2}
-	\,.
+  \left(M^{(0)}\right)_{\kappa_1 \kappa_2}^{\lambda_1 \lambda_2}
+  \;\sim\;\; 
+  \bar u^{a_1}
+  \left(
+  \gamma_{[D_s]}^\mu
+  \right)_{a_1 \kappa_1}^{b_1 \lambda_1}
+  u_{b_1}
+  \,\,
+  \bar u^{a_2}
+  \left(
+  \gamma_{[D_s]\mu}
+  \right)_{a_2 \kappa_2}^{b_2 \lambda_2}
+  u_{b_2}
+  \,.
 \end{equation}
 In the HV scheme, the gluon between the two quark lines is
 four dimensional, i.e., $\mu\leq3$, while
 in the CDR scheme, the gluon is $D_s$ dimensional.
 From eq.~\eqref{eqn:cliffordrecursion} we thus get
-\begin{equation}\label{eq:HVvsCDR}
-	\left(M^{(0)}\right)_{\kappa_1,\kappa_2}^{\lambda_1,\lambda_2}
-	=\begin{cases}
-	M^{(0)}_{0}\, \delta_{\kappa_1}^{\lambda_1}
-	\delta_{\kappa_2}^{\lambda_2}& \textrm{in HV,}\\
-	M^{(0)}_{0}\, \delta_{\kappa_1}^{\lambda_1}
-	\delta_{\kappa_2}^{\lambda_2}+
-	M^{(0)}_{1}\,\Bigl(\gamma_{[D_s-4]}^{\mu}\Bigl)_{\kappa_1}^
-	{\lambda_1}
-	\Bigl(\gamma_{[D_s-4]\mu}\Bigl)_{\kappa_2}^{\lambda_2}
-	&\textrm{in CDR,}
-	\end{cases}
+\begin{equation}
+  \label{eq:HVvsCDR}
+  \left(M^{(0)}\right)_{\kappa_1,\kappa_2}^{\lambda_1,\lambda_2}
+  =
+  \begin{cases}
+    M^{(0)}_{0}\, \delta_{\kappa_1}^{\lambda_1}
+    \delta_{\kappa_2}^{\lambda_2}& \textrm{in HV,}\\
+    M^{(0)}_{0}\, \delta_{\kappa_1}^{\lambda_1}
+    \delta_{\kappa_2}^{\lambda_2}+
+    M^{(0)}_{1}\,\Bigl(\gamma_{[D_s-4]}^{\mu}\Bigl)_{\kappa_1}^
+    {\lambda_1}
+    \Bigl(\gamma_{[D_s-4]\mu}\Bigl)_{\kappa_2}^{\lambda_2}
+    &\textrm{in CDR,}
+  \end{cases}
 \end{equation}
 where the $M_i^{(0)}$ are coefficients that are determined from
 products of four-dimensional $\gamma$-matrices contracted with
@@ -458,20 +458,20 @@ $\{v_n\}$ is then larger in this case. Using the basis for the
 $\gamma$-matrix chains introduced in 
 eq.~\eqref{eq:basisGammaChainDs}, we construct the associated
 basis $\{v_n\}$:
-%
-\begin{align}\begin{split} \label{eqn:4qtensors}
-  (v_0)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}   = &
-  \delta_{\kappa_1}^{\lambda_1} \delta_{\kappa_2}^{\lambda_2}\,, \\
-  (v_1)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
-  &(\gamma_{[D_s-4]}^{\mu_1} )_{\kappa_1}^{\lambda_1} 
-  (\gamma_{[D_s-4]\mu_1}^{\phantom{\mu}})_{\kappa_2}^{\lambda_2}\,, \\
-  & \vdots\\
-  (v_m)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
-  &(\gamma_{[D_s-4]}^{\mu_1 \ldots  \mu_m})_{\kappa_1}^{\lambda_1}
-  (\gamma_{[D_s-4]\mu_1 \ldots \mu_m}^{\phantom{\mu}})_{\kappa_2}^{\lambda_2}\,,\\
-  & \vdots\,
-\end{split}\end{align}
-%
+\begin{align}
+  \begin{split} \label{eqn:4qtensors}
+    (v_0)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}   = &
+    \delta_{\kappa_1}^{\lambda_1} \delta_{\kappa_2}^{\lambda_2}\,, \\
+    (v_1)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
+    &(\gamma_{[D_s-4]}^{\mu_1} )_{\kappa_1}^{\lambda_1} 
+    (\gamma_{[D_s-4]\mu_1}^{\phantom{\mu}})_{\kappa_2}^{\lambda_2}\,, \\
+    & \vdots\\
+    (v_m)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
+    &(\gamma_{[D_s-4]}^{\mu_1 \ldots  \mu_m})_{\kappa_1}^{\lambda_1}
+    (\gamma_{[D_s-4]\mu_1 \ldots \mu_m}^{\phantom{\mu}})_{\kappa_2}^{\lambda_2}\,,\\
+    & \vdots\,
+  \end{split}
+\end{align}
 where we have made explicit the indices in the $
 (D_s-4)$-dimensional space.
 The basis $\{v_n\}$ is infinite dimensional for
@@ -482,11 +482,7 @@ expansion only a finite number of basis elements contribute,
 as follows from inspecting the corresponding Feynman diagrams.
 We thus have
 \begin{equation} \label{eqn:4qampltensor}
-	M^{(k)}
-	(q,\bar q,Q,\bar Q,g,\ldots,g)
-	=\sum_{n=0}^{n_k}
-    v_n
-	M^{(k)}_n\,.
+	M^{(k)} (q,\bar q,Q,\bar Q,g,\ldots,g) =\sum_{n=0}^{n_k} v_n M^{(k)}_n\,.
 \end{equation}
 In the HV scheme, the decomposition is independent of the number
 of external gluons. In particular,
@@ -680,6 +676,7 @@ one computed from eq.~\eqref{eq:AmpDefAlt}.
 
 
 \subsection{Parametrization of Integrands of Amplitudes with External Fermions}
+\label{sec:ParamIntegrands}
 
 Since our representation of fermion amplitudes is manifestly
 Lorentz invariant in $(D_s-4)$ dimensions prior to loop
@@ -923,6 +920,8 @@ in eq.~\eqref{eq:ds-poly-alt}. At this point, all degrees of freedom beyond $(D_
 are traded for polynomials in $(D_s-6)$ with integer factors, and the coefficients
 $\tilde{\mathcal{K}}_i$ are expressed in terms of six-dimensional objects only.
 
+\todo{Put examples of tree and 1-loop.}
+
 \subsection{Dimensionally Reduced Feynman Rules}
 \label{sec:DsFeynRules}
 In the table~\ref{tab:Ds-FeynRules} we list the color-ordered Feynman rules for vertices involving the scalar particles introduced in section~\ref{sec:Ds}.
@@ -1017,6 +1016,8 @@ eq.~\eqref{eq:tensorDecomposition}.
 \subsection{Unitarity-Compatible Implementation}
 decomposition of trees through simplified off-shell recursion.
     Collecting $(D_s-6)$ powers and factors. Implementation in process libraries.
+
+    \todo{Use tree example here}
 
 
 

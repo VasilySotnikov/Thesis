@@ -233,35 +233,34 @@ each process as
 %
 \begin{align}
   \begin{split}
-  \label{eq:ColorDecG}
-  A(1_g, 2_g, 3_g, 4_g, 5_g) \big\vert_{\textrm{leading color}} = &
-  \sum_{\sigma\in S_5/Z_5} \Tr\left(
-  T^{a_{\sigma(1)}} T^{a_{\sigma(2)}} 
-  T^{a_{\sigma(3)}} T^{a_{\sigma(4)}} T^{a_{\sigma(5)}} \right)\\
-  &\times \CA({\sigma(1)}_g, {\sigma(2)}_g, {\sigma(3)}_g, {\sigma(4)}_g, {\sigma(5)}_g)\,, 
+    \label{eq:ColorDecG}
+    A(1_g, 2_g, 3_g, 4_g, 5_g) \big\vert_{\textrm{leading color}} = &
+    \sum_{\sigma\in S_5/Z_5} \Tr\left(
+    T^{a_{\sigma(1)}} T^{a_{\sigma(2)}} 
+    T^{a_{\sigma(3)}} T^{a_{\sigma(4)}} T^{a_{\sigma(5)}} \right)\\
+    &\times \CA({\sigma(1)}_g, {\sigma(2)}_g, {\sigma(3)}_g, {\sigma(4)}_g, {\sigma(5)}_g)\,, 
   \end{split} \\
   \begin{split}
-  \label{eq:ColorDec2Q}
-  A(1_q, 2_{\bar{q}}, 3_g, 4_g, 5_g) \big\vert_{\textrm{leading color}} 
+    \label{eq:ColorDec2Q}
+    A(1_q, 2_{\bar{q}}, 3_g, 4_g, 5_g) \big\vert_{\textrm{leading color}} 
     = & \sum_{\sigma\in S_3} 
-  \left( T^{a_{\sigma(3)}} T^{a_{\sigma(4)}} T^{a_{\sigma(5)}} \right)^{\;\bar{\imath}_2}_{i_1} \\
-  & \times\CA(1_q,2_{\bar{q}},\sigma(3)_g,\sigma(4)_g,\sigma(5)_g)\,,
+    \left( T^{a_{\sigma(3)}} T^{a_{\sigma(4)}} T^{a_{\sigma(5)}} \right)^{\;\bar{\imath}_2}_{i_1} \\
+    & \times\CA(1_q,2_{\bar{q}},\sigma(3)_g,\sigma(4)_g,\sigma(5)_g)\,,
   \end{split}\\
   \begin{split}
-  \label{eq:ColorDec4Q}
-  A(1_q, 2_{\bar{q}}, 3_Q, 4_{\bar{Q}}, 5_g)
-  \big\vert_{\textrm{leading color}} 
-  = & 
+    \label{eq:ColorDec4Q}
+    A(1_q, 2_{\bar{q}}, 3_Q, 4_{\bar{Q}}, 5_g)
+    \big\vert_{\textrm{leading color}} 
+    = & 
   %
-  \,(T^{a_5})^{\;\bar{\imath}_{2}}_{i_{3}} \delta^{\;\bar{\imath}_{4}}_{i_{1}}\;
+    \,(T^{a_5})^{\;\bar{\imath}_{2}}_{i_{3}} \delta^{\;\bar{\imath}_{4}}_{i_{1}}\;
   %
-  \CA(1_{q}, 2_{\bar{q}}, 5_g, 3_{Q}, 4_{\bar{Q}}) \,\,+  \\
+    \CA(1_{q}, 2_{\bar{q}}, 5_g, 3_{Q}, 4_{\bar{Q}}) \,\,+  \\
   %
-  & \,(T^{a_5})^{\;\bar{\imath}_{4}}_{i_{1}} \delta^{\;\bar{\imath}_{2}}_{i_{3}}\;
+    & \,(T^{a_5})^{\;\bar{\imath}_{4}}_{i_{1}} \delta^{\;\bar{\imath}_{2}}_{i_{3}}\;
   %
-\CA(1_{q},2_{\bar{q}},3_{Q},4_{\bar{Q}},5_g) \,,
-  %
-\end{split}
+    \CA(1_{q},2_{\bar{q}},3_{Q},4_{\bar{Q}},5_g) \,,
+  \end{split}
 \end{align}
 where $S_n$ denotes all permutations of $n$ indices and 
 $S_n/Z_n$ all non-cyclic permutations of $n$ indices. 
@@ -371,6 +370,7 @@ $N_f^0$, $N_f^1$ and $N_f^2$.}
 
 \subsection{Tensors}
 
+
 \section{Divergence Structure}
 \label{sec:IR}
 
@@ -428,23 +428,25 @@ For four-parton amplitudes $\lambda=2$, and for five-parton
 amplitudes $\lambda=3$.
 The renormalized amplitudes $\mathcal{A}_R^{(i)}$ are related 
 to the bare amplitudes $\mathcal{A}^{(i)}$ as follows:
-\begin{align}\begin{split}
-  \label{eq:twoLoopUnRenorm}
+\begin{align}
+  \begin{split}
+    \label{eq:twoLoopUnRenorm}
     &\mathcal{A}_R^{(0)}=\mathcal{A}^{(0)}, \\
-  & \mathcal{A}_R^{(1)}=S_{\epsilon}^{-1}\mathcal{A}^{(1)}
-  -\frac{\lambda}{2\epsilon}\frac{\beta_0}{\NC}
-  \mathcal{A}^{(0)}\,,\\
-  &\mathcal{A}_R^{(2)}=
-  S_{\epsilon}^{-2}\mathcal{A}^{(2)}
-  -\frac{\lambda+2}{2\epsilon}\frac{\beta_0}{\NC}S_{\epsilon}^
-  {-1}
-  \mathcal{A}^{(1)}
-  +\left(\frac{\lambda(\lambda+2)}{8\epsilon^2}\left(\frac{\beta_0}
-  {\NC}\right)^2
-  -\frac{\lambda}{2\epsilon}\frac{\beta_1}{\NC^2}\right)
-  \mathcal{A}^{
-  (0)}\,.
-\end{split}\end{align}
+    & \mathcal{A}_R^{(1)}=S_{\epsilon}^{-1}\mathcal{A}^{(1)}
+    -\frac{\lambda}{2\epsilon}\frac{\beta_0}{\NC}
+    \mathcal{A}^{(0)}\,,\\
+    &\mathcal{A}_R^{(2)}=
+    S_{\epsilon}^{-2}\mathcal{A}^{(2)}
+    -\frac{\lambda+2}{2\epsilon}\frac{\beta_0}{\NC}S_{\epsilon}^
+    {-1}
+    \mathcal{A}^{(1)}
+    +\left(\frac{\lambda(\lambda+2)}{8\epsilon^2}\left(\frac{\beta_0}
+    {\NC}\right)^2
+    -\frac{\lambda}{2\epsilon}\frac{\beta_1}{\NC^2}\right)
+    \mathcal{A}^{
+    (0)}\,.
+  \end{split}
+\end{align}
 
 
 
@@ -483,31 +485,33 @@ The index $a_i$ denotes a type of particle with momentum $p_i$, i.e., in the con
 $a_i\in\{g,q,\bar q, Q, \bar Q\}$. We introduced the auxiliary symbols $\gamma_{a,b}$, 
 symmetric under the exchange of indices, 
 $\gamma_{a,b}=\gamma_{b,a}$, and defined according to:
-\begin{align}\begin{split}
-  \gamma_{g,g}&=\frac{1}{\epsilon^2}+\frac{1}{2\eps}
-  \frac{\beta_0}{\NC}\,, \\
-  \gamma_{q,Q}&=\gamma_{q,\bar Q}=
-  \gamma_{\bar q, Q}=\gamma_{\bar q, \bar Q} 
-  =\frac{1}{\epsilon^2}+\frac{3}{2\eps}\,,\\
-  \gamma_{g,q}&=\gamma_{g,\bar q}=
-  \gamma_{g,Q}=\gamma_{g,\bar Q}=
-  \frac{\gamma_{g,g}+\gamma_{q,Q}}{2}\,,\\
-  \gamma_{q,\bar q}&=\gamma_{Q,\bar Q}=0\,.
-\end{split}\end{align}
-%
+\begin{align}
+  \begin{split}
+    \gamma_{g,g}&=\frac{1}{\epsilon^2}+\frac{1}{2\eps}
+    \frac{\beta_0}{\NC}\,, \\
+    \gamma_{q,Q}&=\gamma_{q,\bar Q}=
+    \gamma_{\bar q, Q}=\gamma_{\bar q, \bar Q} 
+    =\frac{1}{\epsilon^2}+\frac{3}{2\eps}\,,\\
+    \gamma_{g,q}&=\gamma_{g,\bar q}=
+    \gamma_{g,Q}=\gamma_{g,\bar Q}=
+    \frac{\gamma_{g,g}+\gamma_{q,Q}}{2}\,,\\
+    \gamma_{q,\bar q}&=\gamma_{Q,\bar Q}=0\,.
+  \end{split}
+\end{align}
 The operator~$\mathbf{I}^{(2)}_{[n]}$ is
-%
-\begin{align}\begin{split} \label{eqn:Iop}
-		\mathbf{I}^{(2)}_{[n]}(\eps)=&
-  -\frac{1}{2}\mathbf{I}^{(1)}_{[n]}(\eps)\mathbf{I}^{(1)}_{[n]}(\eps)
-  -\frac{\beta_0}{\NC\epsilon}\mathbf{I}^{(1)}_{[n]}(\eps) + 
-	\frac{e^{-\gamma_E\epsilon}\Gamma(1-2\epsilon)}
-  {\Gamma(1-\epsilon)}
-  \left(\frac{\beta_0}{\NC\epsilon}+K\right)
-  \mathbf{I}^{(1)}_{[n]}(2\epsilon) + 
-  \mathbf{H}_{[n]}(\epsilon)\,,
-\end{split}\end{align}
-%
+\begin{align}
+  \label{eqn:Iop}
+  \begin{split} 
+    \mathbf{I}^{(2)}_{[n]}(\eps)=&
+    -\frac{1}{2}\mathbf{I}^{(1)}_{[n]}(\eps)\mathbf{I}^{(1)}_{[n]}(\eps)
+    -\frac{\beta_0}{\NC\epsilon}\mathbf{I}^{(1)}_{[n]}(\eps) + 
+    \frac{e^{-\gamma_E\epsilon}\Gamma(1-2\epsilon)}
+    {\Gamma(1-\epsilon)}
+    \left(\frac{\beta_0}{\NC\epsilon}+K\right)
+    \mathbf{I}^{(1)}_{[n]}(2\epsilon) + 
+    \mathbf{H}_{[n]}(\epsilon)\,,
+  \end{split}
+\end{align}
 where 
 \begin{equation}
 K=\frac{67}{9}-\frac{\pi ^2}{3}-\frac{10}{9}\frac{\NF}{\NC}\,,
@@ -515,27 +519,31 @@ K=\frac{67}{9}-\frac{\pi ^2}{3}-\frac{10}{9}\frac{\NF}{\NC}\,,
 and $\mathbf{H}_{[n]}(\epsilon)$ is a diagonal operator at 
 leading color that depends on the number of external quarks 
 and gluons in the process,
-\begin{align}\begin{split}
-  \mathbf{H}_{[n]}(\epsilon)&=
-  \frac{e^{\gamma_E\epsilon}}{\epsilon\Gamma(1-\epsilon)}
-  \sum_{i=1}^n\left(
-  \delta_{a_i,g}H_g+
-  (\delta_{a_i,q}+\delta_{a_i,\bar q}
-  +\delta_{a_i,Q}+\delta_{a_i,\bar Q})
-  H_q
-  \right)\,,
-\end{split}\end{align}
+\begin{align}
+  \begin{split}
+    \mathbf{H}_{[n]}(\epsilon)&=
+    \frac{e^{\gamma_E\epsilon}}{\epsilon\Gamma(1-\epsilon)}
+    \sum_{i=1}^n\left(
+    \delta_{a_i,g}H_g+
+    (\delta_{a_i,q}+\delta_{a_i,\bar q}
+    +\delta_{a_i,Q}+\delta_{a_i,\bar Q})
+    H_q
+    \right)\,,
+  \end{split}
+\end{align}
 with (see e.g.~\cite{Bern:2003ck})
-\begin{align}\begin{split}
-  H_g&= \left(\frac{\zeta_3}{2}+\frac{5}{12}+
-  \frac{11\pi^2}{144}\right)
-  -\left(\frac{\pi^2}{72}+\frac{89}{108}\right)\frac{N_f}{\NC}
-  +\frac{5}{27}\left(\frac{N_f}{\NC}\right)^2\,,\\
-  H_q&=
-  \left(\frac{7\zeta_3}{4}+\frac{409}{864}
-  -\frac{11\pi^2}{96}\right)
-  +\left(\frac{\pi^2}{48}-\frac{25}{216}\right)\frac{N_f}{\NC}\,.
-\end{split}\end{align}
+\begin{align}
+  \begin{split}
+    H_g&= \left(\frac{\zeta_3}{2}+\frac{5}{12}+
+    \frac{11\pi^2}{144}\right)
+    -\left(\frac{\pi^2}{72}+\frac{89}{108}\right)\frac{N_f}{\NC}
+    +\frac{5}{27}\left(\frac{N_f}{\NC}\right)^2\,,\\
+    H_q&=
+    \left(\frac{7\zeta_3}{4}+\frac{409}{864}
+    -\frac{11\pi^2}{96}\right)
+    +\left(\frac{\pi^2}{48}-\frac{25}{216}\right)\frac{N_f}{\NC}\,.
+  \end{split}
+\end{align}
 
 The poles of the bare amplitudes, as presented for example in
 tables~\ref{tab:results4parton} and \ref{tab:results5parton}, can be recovered
@@ -607,7 +615,8 @@ the lower-loop amplitudes.
 In section \ref{sec:AnalyticForm} we will obtain analytic expression for the finite remainder directly.
 If necessary one can then recover the two-loop bare amplitude $\CA^{(2)}$ by inverting
 the relations \eqref{eq:twoLoopUnRenorm}:
-\begin{align}\begin{split}
+\begin{align}
+  \begin{split}
     \label{eq:ampFromRem}
     {\mathcal{A}}^{(2)}=&\,\mathcal{R}^{(2)}+
     S_\epsilon{\mathcal{A}}^{(1)}
@@ -621,9 +630,10 @@ the relations \eqref{eq:twoLoopUnRenorm}:
     \left(\frac{\beta_0}{N_c}\mathbf{I}_{[n]}^{(1)}-
     \frac{\beta_1}{N_c^2}\right)-\mathbf{I}_{[n]}^{(2)}
     \right)+\mathcal{O}(\epsilon)\,.
-  \end{split}\end{align}
+  \end{split}
+\end{align}
 
-\todo{possibly here section ``Implementaiton Details''}
+\todo{possibly here section ``Implementation Details''}
 
 \section{Validation}
 We have validated our results by carrying out a set of
@@ -840,6 +850,9 @@ One-loop amplitudes were known. Five-parton to order $\mathcal{O}(\eps^2)$ are p
 \end{table}
 
 \subsection{Four-Parton}
+
+\todo{Move four-parton results to appendix and refer from validation? Or move to validation}
+
 We evaluate the four-gluon, two-quark two-gluon and four-quark
 amplitudes at the phase-space point%
 \footnote{Units of energy are chosen arbitrarily.
