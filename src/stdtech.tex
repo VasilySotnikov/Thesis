@@ -163,8 +163,10 @@ For this reason these scalar products are commonly called \emph{reducible scalar
 We choose the remaining scalar products $\vb*{\alpha} \equiv \vb*{sp} \setminus \text{(RSP)}$ which are called
 \emph{irreducible scalar products} (ISP) to be the rest of our independent variables.
 
-An import observation which becomes evident from our choice of variables is that all topologies with $N_p> 4 L +\frac{1}{2}L(L+1)$, no matter the number of external particles, are reducible.
+An important observation which becomes evident from our choice of variables is that all topologies with $N_p> 4 L +\frac{1}{2}L(L+1)$, no matter the number of external particles, are reducible.
 Indeed in this case we have $(\dim\vb*{sp}) < N_p$ so there are no irreducible scalar products, and only $(\dim\vb*{sp})$ denominators can be independent.
+
+\todo{potential include a relation which reduces product of more than $\dim\vb*{sp}$ propagators to $N_p$ propagators}
 
 After a change of variables $\vb*{sp}\to \{\vb*{\rho},\vb*{\alpha}\}$ and cancellation of denominators
 we find that the numerators are now polynomials in ISPs only:
@@ -183,6 +185,7 @@ or after some simple considerations (see \cref{sec:traceless_completion} for det
 For $L>1$ however this is not the case and there are more identities which we can take advantage of to reduce the number of master integrals.
 We discuss this in the next section.
 
+\todo{mention 1-loop techniques: OPP and PV here somehow?}
 
 We conclude this section with a remark that the variables $\{\vb*{\rho},\vb*{\alpha}\}$ we chose for parametrization of the integrand can be promoted
 to the integration measure in \cref{eq:general_amplitude}. This representation of loop integrals known as the \emph{Baikov representation} \cite{Baikov:1996rk} 
@@ -217,45 +220,106 @@ exhibits many other useful properties, nonetheless we will not need to adopt it 
 
 Using \cref{eq:rsp_reduction} we can bring \cref{eq:general_amplitude} to the form 
 \begin{equation}
-  \sum_{\Gamma \in \Delta} \sum_{\gamma} \sum_{\va{i}} ~ c_{\Gamma\gamma, \va{i}} (\vb*{x},D) ~ \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
+  \sum_{\Gamma \in \Delta} \sum_{\gamma} \sum_{\va{i}} ~ c_{\Gamma\gamma, \va{i}} (\vb*{x},D) ~ 
+  \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
   \frac{m^{\va{i}}_{\Gamma\gamma}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
     }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{j}}}.
   \label{eq:rsp_reduced_amplitude}
 \end{equation}
-The integrals in \cref{eq:rsp_reduced_amplitude} are process-independent and have the form of \cref{eq:amplitude_integrated}.
-But we are still missing a large number of identities due to the vanishing of the total derivative in dimensional regularization.
+The integrals in \cref{eq:rsp_reduced_amplitude} are process-independent and have the desired form of \cref{eq:amplitude_integrated}.
+However we are still missing a large number of identities due to the vanishing of the total derivative in dimensional regularization.
 These identities are known as \emph{integration-by-parts} (IBP) identities \cite{Chetyrkin:1981qh,Tkachov:1981wb} and have a general
 form of
 \begin{equation}
   \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  \pdv{\ell_k^\mu}(
-  \frac{ v_k^\mu(\vb*{x},\vb*{\rho},\vb*{\alpha},D) \, m^{\va{i}}(\vb*{\alpha})
+  \frac{ v_k^\mu \ommit{(\vb*{x},\vb*{\rho},\vb*{\alpha},D)} ~ \, m^{\va{i}}(\vb*{\alpha})
     }{\prod_{j} \rho_j^{\gamma_{j}}}
     ) = 0,
   \label{eq:ibps}
 \end{equation}
-here the components of \emph{IBP vectors} $v_k^\mu(\vb*{x},\vb*{\rho},\vb*{\alpha},D)$ are arbitrary functions
-of all variables. The monomials $m^{\va{i}}(\vb*{\alpha})$ can be absorbed in the definition of the IBP vectors, but
-it's useful to keep them separate.
+where the components of \emph{IBP vectors} $v_k^\mu(\vb*{x},\vb*{\rho},\vb*{\alpha},D)$ are arbitrary rational functions
+of all variables. The monomials $m^{\va{i}}(\vb*{\alpha})$ can be absorbed in $v_k^\mu$, but
+it's convenient to keep them separate.
 
-\todo{abstract number of ISPs}
+It is useful to organize all topologies $\Delta$ in \cref{eq:rsp_reduced_amplitude}
+hierarchically by defining a partial ordering
+\begin{equation}
+    \Gamma_1 > \Gamma_2 \iff P_{\Gamma_1} \supset P_{\Gamma_2},
+\end{equation}
+meaning that topology $\Gamma_2$ is obtained from topology $\Gamma_1$ by removing one or more propagators.
+We then slice $\Delta$ into strictly ordered (overlapping) subsets $\Delta_i$ such that
+\begin{subequations}
+    \begin{gather}
+         \Delta = \bigcup_i \Delta_i,  \\
+         \Delta_i  = \{\Gamma \in \Delta : \forall (\Gamma_1, \Gamma_2) \in\Delta \qif\qty( \Gamma_1 \in \Delta_i \qand \Gamma_2 < \Gamma_1) \qthen \Gamma_2 \in \Delta_i \}.
+    \end{gather}
+\end{subequations}
+A subset $\Delta_i$ can thus be identified by it's ``greatest'' topology $\Gamma_{\Delta_i}$ ---
+the topology with the maximal number of propagators, which we will call a \emph{parent} topology (or diagram).
 
-The relations generated from \cref{eq:ibps} suggest to think of all integrals as a vector space of lists
-$I(\gamma_1,\ldots,\gamma_{N_p}; \alpha_1, \ldots, \alpha_{N_\text{ISP}})$
+If we allow exponents $\gamma_j$ in \cref{eq:rsp_reduced_amplitude} to be $\leq0$,
+all integrals in \cref{eq:rsp_reduced_amplitude} can be cast into \emph{families}
+\begin{equation} \label{eq:integral_families}
+    I_{\Delta_i}[\va{\gamma},\va{i}] \equiv 
+  \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
+  \frac{m^{\va{i}}_{\Gamma_{\Delta_i}}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
+    }{\prod_{j\in P_{\Gamma_{\Delta_i}}} \rho_j^{\gamma_{j}}}.
+\end{equation}
+IBP identities of \cref{eq:ibps} generate an under-determined system of homogeneous linear equations between integrals inside a family.
+The integrals which cannot be determined from the system are chosen to be master integrals.
+The remaining integrals are then expressed as linear combinations of master integrals.
+A systematic approach of generating and solving a complete system of IBP identities was formulated by Laporta \cite{Laporta:2001dd}.
+There are multiple publicly available implementations such as
+\textsc{Reduze} \cite{Studerus:2009ye,vonManteuffel:2012np},
+\textsc{Fire} \cite{Smirnov:2008iw,Smirnov:2014hma},
+\textsc{LiteRed} \cite{Lee:2012cn,Lee:2013mka},
+\textsc{Kira} \cite{Maierhoefer:2017hyi,Maierhofer:2018gpa}, etc.
 
+The problem of IBP reduction is in general very difficult, which
+is due the very large amount of relations produced from \cref{eq:ibps}, and
+hence the requirement to solve large linear systems.
+This is due to the number of choices of IBP vectors, as well as the fact that IBP identities
+in general include the relations for integrals with denominators raised to powers larger than one, even
+though this integrals are mostly not found from Feynman rules.
 
-Families of integrals closed under IBP identities.
+Although as for master integrals if solved, the reduction tables can be recycled, but fully analytic approaches cannot solve linear systems. 
+And even if the reduction table tables can be produced, they are not usable in practice \cite{Chawdhry:2018awn}.
 
-Systematic approach formulated by Laporta \cite{Laporta:2001dd}
+In \cref{chap:numunitarity} we discuss how this difficulty can be addressed by unitarity-based methods,
+which do not require the solution of the full IBP system.
 
-Public implementations available:
-\textsc{Reduze} \cite{Studerus:2009ye,vonManteuffel:2012np}
-\textsc{Fire} \cite{Smirnov:2008iw,Smirnov:2014hma}
-\textsc{LiteRed} \cite{Lee:2012cn,Lee:2013mka}
-\textsc{Kira} \cite{Maierhoefer:2017hyi,Maierhofer:2018gpa}
-
-Bottlenecks
+\todo{Example?}
 
 
 \section{Master Integrals}
 
-here very brief review of common methods to compute master integrals
+Once the set of master integrals is found, the IBP reduction relations can be applied 
+to all terms in \cref{eq:rsp_reduced_amplitude}.
+This determines the coefficients of master integrals
+\begin{equation} \label{eq:master_integrals}
+    \qquad I_{\Gamma,i} = 
+    \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{i,j}}}.
+\end{equation}
+in \cref{eq:amplitude_integrated}.
+
+\todo{choice of masters: uniform weight, finite, unitarity compatible} 
+
+A variety of methods have been developed for evaluation of the master integrals.
+Broadly speaking they can be classified into analytic and numerical methods.
+
+Direct integration using a convenient choice of integration variables is the most straightforward option.
+All one-loop integrals can be obtained this way \cite{vanHameren:2010cp,Ellis:2007qk,tHooft:1978jhc,Denner:2010tr}.
+But for multi-scale multi-loop integrals this becomes  cumbersome quickly  very.
+Another method is the integration in the Mellin-Barnes  representation  \cite{Smirnov:1999gc,Tausk:1999vh,Dubovyk:2017cqw}, which
+was has been successfully for some two-loop integrals.
+However the  most  commonly used and successful method currently is to obtain analytic results via
+differential equations \cite{Kotikov:1990kg,Remiddi:1997ny,Gehrmann:1999as,Henn:2013pwa,Argeri:2007up,Henn:2014qga}.
+
+On the numerical side, the commonly used general methods are sector decomposition \cite{Binoth:2000ps,Binoth:2003ak}
+and numerical Mellin-Barnes representation \cite{Czakon:2005rk,Anastasiou:2005cb}.
+See e.g. \cite{Freitas:2016sty} for a review.
+
+Usually the knowledge of analytical expressions is preferable since it allows for better control over
+precision and performance required for Monte-Carlo integration over external phase space. However
+some notable NNLO QCD computations have been carried out with at least part of the integrals evaluated with numerical
+methods \todo{references}.
