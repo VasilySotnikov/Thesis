@@ -1,35 +1,115 @@
-In this chapter we describe muli-loop generalization of uniarity techniques
+In this chapter we introduce the main computational methods we used to obtain results of
+\cref{chap:wbb_pheno,chap:5parton}. 
 
-used at one-loop...
+We will describe a complete generalization of unitarity techniques to multi-loop level.
 
-First we review factorization.
+With aim for automation and fully numerical.
 
-Then we discuss 
+Some partial attempts can be found in 
 
-\section{Unitarity Cuts, Optical Theorem and Factorization}
 
-\section{Ansatz for the Integrand}
+In this chapter we do not refer to a particular theory.
+
+
+Based on the papers
+
+I want to take the pragmatic perspective. And in practice it is not even essential:
+\begin{itemize}
+    \item       the most practical and flexible way to compute them in $D$ dimensions is with off-shell recursions (see references e.g. in tails of 1001 gluons)
+    \item Actually it is not even always the case as we see for massive particles.
+\end{itemize}
+
+LHS can be just an expression obtained from Feynman diagrams
+
+However in perturbation theory the fact that the corners are tree amplitudes can be seen explicitly.
+Because we collect together all graphs containing a particular singularity.
+
+
+\section{Ansatz}
 \label{sec:ansatz_integrand}
 
-\subsection{Traceless Completion}
-\label{sec:traceless_completion}
-
-\section{Cut Equations}
-
-\section{Doubled Propagators}
-Here discussion about \textit{subleading poles}
-
-\section{Basis of Numerator Insertions}
+\subsection{Basis of Numerator Insertions}
 Numerator tensors, span of function space. Master/Surface decomposition.
 
 \todo{classification of tensors here or in chapter \ref{chap:stdtech}?}
 
 
-\section{Dimensional Reconstruction}
+
+
+\subsection{Traceless Completion}
+\label{sec:traceless_completion}
+
+Starting from two loops will have $D$-dependence in the numerator from IBP identities, so
+we can choose to abandon all-together the idea of not having it there.
+
+Also can be obtained with through a specially constructed IBP identities \cite{Ita:2015tya}.
+%vectors of the form 
+%\begin{equation}
+  %v^\mu = (\sp(n_\epsilon^i,\ell))~\ell^\mu - (\sp(\tau,\ell))~n_\epsilon^{i\,\mu}
+%\end{equation}
+
+
+\subsection{Unitarity-Compatible IBP Identities}
+
+\section{Cut Equations}
+
+\subsection{On-Shell Loop-Momenta}
+
+\todo{In $D$ dimensions we don't have to worry about branches of solutions, and also loop momenta have to be real}
+
+\subsection{Evaluation of Cuts}
+
+\subsection{Off-Shell Recurcion}
+\label{sec:BG_recursion}
+
+$D$-dimensional off-shell recursion, 
+
+
+weyl and Dirac fermions, 
+tracking of representations?
+
+
+\subsection{Dimensional Reconstruction}
  In $D$ and $D_s$ (dimensional reduction later)
 
-\section{Evaluation of Cuts}
-$D$-dimensional off-shell recursion, weyl and Dirac fermions, tracking of representations?
+
+\section{Subleading Poles}
+Here discussion about \textit{subleading poles}
 
 
+
+\section{Examples}
+
+\subsection{One-Loop Hierarchy}
+
+Once the automated approach is set up, the one-loop case is so simple that we can
+do the full one-loop hierarchy.
+
+Compare to ``normal'' decomposition, we allow $D$-dependence in numerators. This might be not the best
+idea for NLO computations since terms of order $\mathcal{O}(\epsilon)$ can be dropped.
+It might be reasonable to do for higher-order computations where higher orders of $\epsilon$ are required.
+
+
+Take 5-point hierarchy.
+
+\subsubsection{Pentagon}
+
+Take $\mu^2$ insertion.
+
+\subsubsection{Box}
+
+\subsubsection{Triangle}
+
+Here also show that 1 and 2 mass triangles can be reduced
+
+\subsubsection{Bubble}
+
+See what happens with the light-like external momentum from the IBP perspective?
+Should work out.
+
+\subsubsection{Tadpole}
+
+\subsection{Some Two-Loop Topology}
+
+\todo{select a topology which is not too big to present} 
 

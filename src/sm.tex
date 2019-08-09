@@ -777,12 +777,16 @@ hadron collisions, which is the topic of the next subsection.
 \sma{} elements are transition amplitudes between asymptotic initial and final
 states. The states are approximate momentum
 eigenstates $|i\rangle$ at some early time before or after interaction
-\mbox{$t = \pm\infty$} when the particles were freely moving. One can decompose \sma{} elements and isolate
-the non-trivial part due to interactions $\mathcal{M}_{fi}$ by
-\begin{align}
-  \langle f | S | i \rangle =  \langle f | i \rangle + (2\pi)^4
-  \delta^{(4)}(p_i- p_f) \cdot i \mathcal{M}_{fi},
+\mbox{$t = \pm\infty$} when the particles were freely moving. 
+One can decompose \sma{} elements and isolate the non-trivial part due to interactions 
+${M}_{i\to f}$ by
+\begin{align} \label{eq:matrix_element}
+  \bra{i}{\mathcal{T}}\ket{f} =  (2\pi)^4 \delta^{(4)}(p_i- p_f) \mathcal{M}_{i\to f},
 \end{align}
+with
+\begin{equation} \label{eq:tmatrix}
+  \mathcal{S} = \mathbb{1}+i \mathcal{T},
+\end{equation}
 where four-momentum conservation between initial and
 final states is ensured by the corresponding delta function. The
 interpretation of the absolute square of \sma{} elements corresponds
@@ -999,13 +1003,13 @@ Now we insert these expansion into \eqref{eq:IRsafeXS} and obtain:
 where we dropped the arguments of $J$ for clarity. 
 
 Each individual term starting from NLO is infrared (IR) divergent.
-There are two sources for IR divergencies: soft and collinear divergencies.
+There are two sources for IR divergences: soft and collinear divergences.
 In virtual contributions, they occur in the loop integration when the loop-momenta are
 either soft or collinear with one of the external momenta.
 They can be studied systematically with the Landau equations \cite{Landau1959}.
 In real corrections they come from the integration over unresolved phase space.
 According to the Kinoshita-Lee-Nauenberg (KLN) theorem \cite{Kinoshita1962,Lee1964},
-these divergences have to cancel if the measurment function is chosen to satisfy the conditions \eqref{eq:IRsafeConditions}.
+these divergences have to cancel if the measurement function is chosen to satisfy the conditions \eqref{eq:IRsafeConditions}.
 
 Computation of terms in \eqref{eq:RR} is still a very challenging task \todo{many reference for IR subtraction methods here}.
 
@@ -1014,4 +1018,158 @@ After each contribution is rendered finite the phase space integrals are usually
 The discussion of integration of both resolved and unresolved phase space is beyond the scope of this thesis.
 Here we focus on the most challenging part:
 computation of loop amplitudes $A^{(1,2)}_{2\to n}$.
+
+\section{Unitarity Cuts and Universal Factorization}
+
+Unitarity of the \sma{},
+\begin{equation} \label{eq:unitarity_smatrix}
+  S^\dagger S = \mathbb{1},
+\end{equation}
+is a manifestation of a
+fundamental requirement that the probability is conserved by scattering.
+This simple fact imposes remarkable constrains on the structure of the underlying theory.
+
+The implication for the amplitudes can be obtained from the nontrivial part 
+of the scattering $\mathcal{T}$ defined in \cref{eq:tmatrix}.
+From \cref{eq:unitarity_smatrix} we get
+\begin{equation}
+  \mathbb{1} = (\mathbb{1}-i\mathcal{T}^\dagger)(\mathbb{1}+i\mathcal{T}) \quad\implies i(\mathcal{T}^\dagger- \mathcal{T}) = \mathcal{T}^\dagger\mathcal{T}.
+\end{equation}
+Then considering a matrix element between some final and initial states
+and inserting the completeness relation of the Hilbert space of QFT
+\begin{equation}
+  \mathbb{1} = \sum_n\int \dd{\Phi_n} \ket{\{n\}}\bra{\{n\}},    \qquad \dd{\Phi_n}=\prod_{i=1}^{n}\frac{\dd^4{p_i} }{(2\pi)^3} ~\delta(p_i^2-m_i^2) \Theta(p_i^{0}),
+\end{equation}
+where $\ket{\{n\}}$ is an $n$-particle state, we obtain
+\begin{equation}
+  \mathcal{M}_{i\to f} - \mathcal{M}_{f \to i}^\star = i (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \mathcal{M}_{i \to \{n\}}^{\phantom{\star}} \mathcal{M}^\star_{f \to \{n\}}.
+\end{equation}
+Here we used the definition in \cref{eq:matrix_element}. 
+In we choose $\ket{i} = \ket{f}$ we get 
+\begin{equation} \label{eq:optical_theorem}
+  2 \Im\mathcal{M}_{i\to i} = (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \Abs{\mathcal{M}_{i \to \{n\}}^{\phantom{\star}}}.
+\end{equation}
+This result is known as \emph{optical theorem}. 
+If we expand both sides of \cref{eq:optical_theorem} in coupling constants, we get an important
+implication: the imaginary part of an $L$-loop amplitude is given by a product of $(L-1)$-loop amplitudes.
+Thus unitarity supplies relations between different orders of perturbation theory.
+
+\todo{mention somewhere around here what is called on-shell} 
+
+Exploiting the fact the imaginary part of a propagator is given by
+\begin{equation}
+  \Im\frac{1}{p^2-m^2+i(\varepsilon \to 0)} = -\pi\delta(p^2-m^2),
+\end{equation}
+as a generalization of \cref{eq:optical_theorem} it can be shown \cite{Eden:1966dnq,Cutkosky1960}
+that imaginary parts of loop amplitudes are generated when some of intermediate particles go on-shell.
+And the \emph{discontinuity} of an amplitude considered as a function of complex momenta,
+\begin{equation}
+  \Disc i\mathcal{M}(s) \equiv i\mathcal{M}(s+i\varepsilon)-i\mathcal{M}(s-i\varepsilon) = -2\Im \mathcal{M}(s),
+\end{equation}
+with $s$ denoting some energy variable,
+can be obtained \cite{Cutkosky1960} by summing over all possible ways to \emph{cut} propagators in loops,
+\begin{equation} \label{eq:cut}
+  \frac{1}{p^2-m^2+i\varepsilon^2} ~\longrightarrow~ 2\pi i ~\delta(p^2-m^2) \Theta(p^{0})
+\end{equation}
+
+The optical theorem \cref{eq:optical_theorem} is closely related to
+a more universal factorization property of amplitudes \cite{Weinberg:1995mt}:
+\begin{mdframed}
+  \centering
+  \emph{All} amplitudes have poles when intermediate particles can go on-shell.
+\end{mdframed}
+If the model contains a one-particle state with mass $m_\xi$ (which can be zero),
+and for some combination of momenta $p_\xi \equiv  \sum_{n=1}^{k} p_k$, $p_\xi^2 \to m_\xi^2$,
+an amplitude of $n$ particles $A_n(1,\ldots{},n)$ factorizes as
+\begin{multline} \label{eq:factorization}
+  A_n(1,\ldots{},n) \longrightarrow \\
+    A^\alpha_{k+1}(1,\ldots{},k;\xi) ~\dfrac{\sum_{i \in \text{states}} \xi^\alpha_i \bar\xi^\beta_i }{p_\xi^2-m_\xi^2}~ A^\beta_{n-k+1}(k+1,\ldots{},n;\xi) \quad+~ \text{(less singular)},
+\end{multline}
+where the sum in the numerator is over all physical polarization states of particle $\xi$, and the ``less singular'' part of the amplitude contains no poles $\frac{1}{p_\xi^2-m_\xi^2}$.
+
+\begin{figure}[ht]
+  \newlength{\figureheight}
+  \setlength{\figureheight}{0.11\textheight}
+  \centering
+  \begin{equation*}
+    \vcenter{\hbox{\includegraphics[height=\figureheight]{TreeFull}}} 
+    \qquad \xrightarrow[p^2_\xi \to m_\xi^2]{} \quad
+    \frac{1}{p^2_\xi - m_\xi^2} \cdot
+    \sum_{i\in \text{states}}^{} ~
+    \vcenter{\hbox{\includegraphics[height=0.9\figureheight]{TreeLeft}}}\cdot
+    \vcenter{\hbox{\includegraphics[height=0.9\figureheight]{TreeRight}}}
+  \end{equation*}
+  \todo{refer from the text}
+  \caption{An example of factorization given by \cref{eq:factorization} due to the presence of a physical singularity. }
+  \label{fig:factorization}
+\end{figure}
+
+
+\todo{Note that in \cref{eq:optical_theorem} there is a phase-space integral present on the right-hand side}
+
+The exact singularity as expected cannot be reached in any physical process.
+However if we analytically continue an amplitude to complex external momenta,
+it is possible to choose them to hit the pole explicitly
+while still satisfying on-shell conditions for external states.
+
+
+\subsection{On-Shell Recursion}
+\label{sec:BCFW}
+
+The universal factorization  property expressed by \cref{eq:factorization} is independent of perturbation theory. 
+For tree-level amplitudes however the factorization can be discovered rather straightforwardly by inspection,
+although it might be obscured in the expressions found within the standard Feynman-diagrammatic approach.
+
+The factorization of tree amplitudes can be converted into an algorithm to evaluate them.
+This is done through the systematic exploration of the amplitude's factorization limits such that
+it can be broken down recursively to sums of lower-multiplicity tree amplitudes. 
+The building blocks of this recursion are thus on-shell amplitudes.
+This idea is known as \emph{Britto-Cachazo-Feng-Witten} (BCFW) recursion \cite{Britto2005c,Britto2005f}.
+The on-shell recursion is a very powerful tool for analytical computations, especially 
+in theories with supersymmetry \cite{Dixon:2010ik,Drummond:2008cr,Bourjaily:2010wh}.
+However for numerical applications and general models the on-shell recursion algorithm
+does not offer benefits over off-shell alternatives, both in speed and numerical stability \cite{Duhr:2006iq,Drummond:2008cr,Badger:2012uz},
+especially if one is interested in tree amplitudes in arbitrary number of space-time dimensions (see \cref{chap:numunitarity}). 
+
+
+
+\subsection{Generalized Cuts}
+
+Unitarity can be turned into a computational method for loop amplitudes: \cite{Bern:1994cg,Bern:1994zx}
+where they obtained certain (cut-constructable) class of amplitudes directly
+from it's cuts by matching discontinuities of integrals.
+
+Write the formula summing integrals with coefficients.
+
+\begin{figure}[ht]
+  \centering
+  \begin{equation*}
+    \vcenter{\hbox{\includegraphics[width=0.2\linewidth]{box}}} \qquad \xrightarrow[i\in\{1\ldots4\}]{\ell_{i}^2-m_i^2\to~0} \qquad
+    \vcenter{\hbox{\includegraphics[width=0.2\linewidth]{boxCut}}}
+   % \quad = \quad \sum_{i}  c_{i} ~ m_{i}(\ell) + \sum_{i}  \tilde{c}_{i} \,\tilde{m}_{i}(\ell)
+  \end{equation*}
+  \caption{Illustration of a quadruple generalized cut. On the left all diagrams with the specified propagators are included.
+  On the right each corner is a tree amplitude.}
+  \label{fig:quad_cut}
+\end{figure}
+
+
+It is possible to generalize application of cuts given by \cref{eq:cut} to
+obtain multi-channel discontinuities \cite{Britto:2004nc}.
+For example see \cref{fig:quad_cut}.
+Note that this kind of cuts are not direct consequences of unitarity of the $\mathcal{S}$-matrix (\cref{eq:unitarity_smatrix}), hence the name \emph{generalized} cuts.
+
+As a next step one can use the factorization of amplitudes on the cuts at the \emph{integrand} level and match
+it to the ansatz of all possible numerator insertions instead of integral coefficients \cite{Giele:2008ve,Ellis:2007br,Ellis:2008ir,Berger:2008sj}.
+
+Somewhat confusingly sometimes generalized unitarity methods refer to purely algebraical method of reduction widely known as OPP \cite{Ossola:2006us},
+which can be applied to any numerator function.
+Its flexibility allows for straightforward automation (see e.g. \cite{Berger:2008ag,Berger:2008sj,Cullen:2011ac,Mastrolia:2010nb,Ossola:2007ax}).
+
+The extension of the ideas to multi-loop level have been actively studied in recent years.
+
+
+key concept which is behind
+the main computational method of this thesis presented in \cref{chap:numunitarity}.
+
 

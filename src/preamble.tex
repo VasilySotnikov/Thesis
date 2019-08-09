@@ -15,21 +15,24 @@
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, minimum height=2em]
 \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=2em, text centered, draw=black, fill=orange!30]
+
 \usepackage{minibox}
+\usepackage{mdframed}
+\mdfsetup{
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Math symbols etc
 \usepackage{amsmath,amsfonts,amssymb}
-\usepackage{braket}
 \usepackage{bbold}
 \usepackage{slashed}
 \usepackage{physics}
 \usepackage{booktabs}
 \usepackage{tabularx,bigdelim}
 \usepackage{multirow}
-\usepackage[compat=1.1.0]{tikz-feynman}
-\usepackage{yfonts}
 \usepackage{xfrac}
 \usepackage{siunitx}
 \usepackage{mathtools}
@@ -110,16 +113,11 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Hyperref: Klickbare Verweise in PDF-Dokumenten bei Verwendung von pdftex.
-%%%           Einstellbare Optionen für die PDF-Dokumenteigenschaften:
-%%%           - pdftitle:  Titel des Dokuments
-%%%           - pdfauthor: Autor der Arbeit
-%%%           ACHTUNG: Leerzeichen sind in den Optionen nicht zulässig. Am
-%%%           besten geschützte Leerzeichen (~) benutzen.
-\usepackage[pdftitle={NLO QCD Corrections to Vector Boson Production in Association with Multiple Heavy and Light Jets},pdfauthor={Felix Richard Anger}]{hyperref}
+\usepackage[%
+  pdftitle={Scattering Amplitudes with Multi-Loop Generalized Numerical Unitarity Method},%
+  pdfauthor={Vasily Sotnikov}%
+]{hyperref}
 
-\usepackage{xcolor}
 \hypersetup{
     colorlinks=true,
     allcolors={blue!60!black}
@@ -232,4 +230,6 @@
 
 % for ranges of equations
 \usepackage{cleveref}
+
+\graphicspath{{figures/}}
 
