@@ -107,6 +107,7 @@ We will review the standard approach in the next section, and
 then explain how unitarity-based methods allow to address some of it's difficulties in \cref{chap:numunitarity}
 
 \section{Classification of Numerators}
+\label{sec:classification_numerators}
 
 To solve the problem of reduction,
 we need to classify all possible structures that can appear in the numerator functions $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ in \cref{eq:general_amplitude}.
@@ -237,12 +238,12 @@ it's convenient to keep them separate.
 
 It is useful to organize all topologies $\Delta$ in \cref{eq:rsp_reduced_amplitude}
 hierarchically by defining a partial ordering
-\begin{equation}
+\begin{equation} \label{eq:topology_order}
     \Gamma_1 > \Gamma_2 \iff P_{\Gamma_1} \supset P_{\Gamma_2},
 \end{equation}
 meaning that topology $\Gamma_2$ is obtained from topology $\Gamma_1$ by removing one or more propagators.
 We then slice $\Delta$ into strictly ordered (overlapping) subsets $\Delta_i$ such that
-\begin{subequations}
+\begin{subequations} \label{eq:topology_sequence}
     \begin{gather}
          \Delta = \bigcup_i \Delta_i,  \\
          \Delta_i  = \{\Gamma \in \Delta : \forall (\Gamma_1, \Gamma_2) \in\Delta \qif\qty( \Gamma_1 \in \Delta_i \qand \Gamma_2 < \Gamma_1) \qthen \Gamma_2 \in \Delta_i \}.

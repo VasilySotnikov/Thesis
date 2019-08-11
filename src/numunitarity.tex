@@ -1,17 +1,26 @@
-In this chapter we introduce the main computational methods we used to obtain results of
-\cref{chap:wbb_pheno,chap:5parton}. 
+In \cref{chap:stdtech} we discussed how a generic loop amplitude \eqref{eq:general_amplitude} can be reduced
+to a sum of master integrals \eqref{eq:amplitude_integrated} in two stages.
+First all reducible numerators are maximally canceled against corresponding denominators.
+And after that the remaining numerators are reduced with IBP identities.
+We indicated that the former can be rather challenging in some cases,
+and the latter is one of the main bottlenecks in computations of
+multi-scale two-loop amplitudes.
+In this chapter we introduce a generalization of one-loop integrand-level unitarity-based methods \cite{Ossola:2006us,Giele:2008ve,Ellis:2008ir}
+to two loops, which offers an alternative path to reduction of amplitudes and addresses the mentioned bottlenecks in an elegant way.
+The foundations of this approach have been laid out in works \cite{Ita:2015tya,Abreu:2017xsl,Abreu:2017hqn}.
+Notably it is designed to be amenable for automation and efficient numerical implementation, which is indispensable
+for addressing the problem of large expressions in multi-scale problems.
 
-We will describe a complete generalization of unitarity techniques to multi-loop level.
+Like in \cref{chap:stdtech}, here we will not refer to any particular theory.
+%We also postpone the discussion of helicity amplitudes until \cref{chap:dshel}
+%and assume that 
+From now on we will also specialize to two loops whenever necessary,
+although most results of this chapter
+can be applied to any number of loops.
 
-With aim for automation and fully numerical.
+The computational methods described in this chapter are essential for obtaining the results we present in \cref{chap:wbb_pheno,chap:5parton}.
 
-Some partial attempts can be found in 
-
-
-In this chapter we do not refer to a particular theory.
-
-
-Based on the papers
+\hrule
 
 I want to take the pragmatic perspective. And in practice it is not even essential:
 \begin{itemize}
@@ -24,9 +33,25 @@ LHS can be just an expression obtained from Feynman diagrams
 However in perturbation theory the fact that the corners are tree amplitudes can be seen explicitly.
 Because we collect together all graphs containing a particular singularity.
 
-
 \section{Ansatz}
 \label{sec:ansatz_integrand}
+
+We start by again considering a generic $L$-loop amplitude in \cref{eq:general_amplitude},
+and  the classification of numerators from \cref{sec:classification_numerators}.
+We organize all topologies hierarchically as described around \cref{eq:topology_order,eq:topology_sequence},
+but we \emph{do not} cast integrals into families by allowing exponents $\gamma_j$ of propagators $\vb*{\rho}$ to be non-positive.
+Instead we aim to construct a special basis of numerator functions of the form 
+  
+In this section we discuss the reduction at the integrand level and thus we drop the explicit integral symbol from all expressions.
+
+
+for each topology independently.
+
+Note that 
+
+
+
+
 
 \subsection{Basis of Numerator Insertions}
 Numerator tensors, span of function space. Master/Surface decomposition.
