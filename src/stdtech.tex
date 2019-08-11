@@ -92,27 +92,19 @@ where $M_{\Gamma}$ is a set of particular choices of numerator insertions $m_{\G
 Despite the fact that the numerator functions $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ in \cref{eq:general_amplitude} depend on the types of external particles and a particular model,
 the master integrals $I_{\Gamma,i}$ are universal and determined only by kinematics.
 
-Evaluation of amplitudes can thus be separated into two different problems.
-First one extracts the list of all relevant topologies and numerator insertions from \cref{eq:general_amplitude},
-identifies master integrals and computes them. 
-Then one has to reduce all terms in \cref{eq:general_amplitude} to the form of \cref{eq:amplitude_integrated}.
-All process- and model-dependent information is now contained in the master-integral coefficients $c_{\Gamma,i}$, so
-the first part of the computation can be recycled for all kinematically-equivalent amplitudes.
+Evaluation of amplitudes can thus be separated into two different problems:
+\begin{enumerate}
+  \item Extract the list of all relevant topologies and numerator insertions from \cref{eq:general_amplitude},
+    identify master integrals and compute them.
+  \item Reduce all terms in \cref{eq:general_amplitude} to the form of \cref{eq:amplitude_integrated}, thus
+    determining the coefficients $c_{\Gamma,i}$.
+\end{enumerate}
+All process- and model-dependent information is contained in the master-integral coefficients $c_{\Gamma,i}$,
+so the master integrals can be recycled for all kinematically-equivalent amplitudes.
 
 In this thesis we focus on the reduction to master-integral coefficients.
 We will review the standard approach in the next section, and
-then explain how unitarity methods allow to address some of it's difficulties in \cref{chap:numunitarity}
-
-%The numerator functions $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ are multivariate polynomials of loop momenta,
-%which generate a large number of different monomials
-
-
-
-%multivariate polynomials in
-% + (N-1)L$ variables.
-
-
-%Very brief overview of integral evaluation methods, we do not discuss this here.
+then explain how unitarity-based methods allow to address some of it's difficulties in \cref{chap:numunitarity}
 
 \section{Classification of Numerators}
 
@@ -130,7 +122,7 @@ Here the vectors $\tau^i$ are the basis of the orthogonal complement of $\spn{p_
 so we have $p_i \cdot \tau_j = 0$.
 The directions $\tau^i$ can be introduced to $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ through external polarization states, hence
 the scalar products $\sp(\ell_i, \tau_j)$ will drop out if polarization sums are performed.
-In the HV scheme $D_{\text{ext}}=4$ and we the number of corresponding scalar products is
+In the HV scheme $D_{\text{ext}}=4$ and the number of corresponding scalar products is
 \begin{equation}
   \label{eq:sp_counts}
   \renewcommand{\arraystretch}{1.5}
@@ -143,12 +135,14 @@ In the HV scheme $D_{\text{ext}}=4$ and we the number of corresponding scalar pr
 \end{equation}
 
 The numerators $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ can be thus represented as elements of a polynomial ring
-$\mathcal{K}[\vb*{sp}]$ with coefficients $c_{\va{i}}(\vb*{x},D)$ being rational functions of external kinematics $\vb*{x}$ and $D$:
+%$\mathcal{K}[\vb*{sp}]$ 
+with coefficients $c_{\va{i}}(\vb*{x},D)$ being rational functions of external kinematics $\vb*{x}$ and $D$:
 \begin{multline}
   \mathcal{N}_{\Gamma,\gamma_\Gamma}(\vb*{x}, \vb*{sp}, D) = \sum_{\va{i} : \abs{\va{i}} < H_{\Gamma}} c_{\va{i}} (\vb*{x},D)~ m^{\va{i}}(\vb*{sp}), \\
   m^{\va{i}}(\vb*{sp}) = (\sp(\ell_1,\ell_1))^{i_1} ~\cdots~ (\sp(\ell_1,p_1))^{i_{\min\qty(4,N-1)L}} ~\cdots~,
   %%(\sp(\ell_L, \tau_{4-\min\qty(4,N-1)}))^{\i_{\dim{\vb*{sp}}}}
 \end{multline}
+\todo{fix the monomial definition} 
 where the sum runs over all monomials $m^{\va{i}}(\vb*{sp})$ with \emph{total degree} $\abs{\va{i}} \equiv \sum_j i_j$ less than
 $ H_{\Gamma} $, which is determined by the UV structure of the model in consideration.
 
@@ -311,8 +305,8 @@ Direct integration using a convenient choice of integration variables is the mos
 All one-loop integrals can be obtained this way \cite{vanHameren:2010cp,Ellis:2007qk,tHooft:1978jhc,Denner:2010tr}.
 But for multi-scale multi-loop integrals this becomes  cumbersome quickly  very.
 Another method is the integration in the Mellin-Barnes  representation  \cite{Smirnov:1999gc,Tausk:1999vh,Dubovyk:2017cqw}, which
-was has been successfully for some two-loop integrals.
-However the  most  commonly used and successful method currently is to obtain analytic results via
+has been used to solve some two-loop integrals.
+However the most commonly used and successful method is to obtain analytic results via
 differential equations \cite{Kotikov:1990kg,Remiddi:1997ny,Gehrmann:1999as,Henn:2013pwa,Argeri:2007up,Henn:2014qga}.
 
 On the numerical side, the commonly used general methods are sector decomposition \cite{Binoth:2000ps,Binoth:2003ak}
@@ -321,5 +315,8 @@ See e.g. \cite{Freitas:2016sty} for a review.
 
 Usually the knowledge of analytical expressions is preferable since it allows for better control over
 precision and performance required for Monte-Carlo integration over external phase space. However
-some notable NNLO QCD computations have been carried out with at least part of the integrals evaluated with numerical
+some notable NNLO QCD computations have been carried out with at least one of the integrals evaluated through numerical
 methods \todo{references}.
+
+In this thesis we will not consider evaluation of master integrals.
+For the class of process we are interested in the analytic results are available in the literature.

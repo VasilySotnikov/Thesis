@@ -1023,20 +1023,20 @@ computation of loop amplitudes $A^{(1,2)}_{2\to n}$.
 
 Unitarity of the \sma{},
 \begin{equation} \label{eq:unitarity_smatrix}
-  S^\dagger S = \mathbb{1},
+  \mathcal{S}^\dagger \mathcal{S} = \mathbb{1},
 \end{equation}
 is a manifestation of a
 fundamental requirement that the probability is conserved by scattering.
 This simple fact imposes remarkable constrains on the structure of the underlying theory.
 
 The implication for the amplitudes can be obtained from the nontrivial part 
-of the scattering $\mathcal{T}$ defined in \cref{eq:tmatrix}.
+of the $\mathcal{S}$-matrix, $\mathcal{T} = -i(\mathcal{S}-\mathbb{1})$.
 From \cref{eq:unitarity_smatrix} we get
 \begin{equation}
   \mathbb{1} = (\mathbb{1}-i\mathcal{T}^\dagger)(\mathbb{1}+i\mathcal{T}) \quad\implies i(\mathcal{T}^\dagger- \mathcal{T}) = \mathcal{T}^\dagger\mathcal{T}.
 \end{equation}
 Then considering a matrix element between some final and initial states
-and inserting the completeness relation of the Hilbert space of QFT
+and inserting the completeness relation of the Hilbert space of QFT,
 \begin{equation}
   \mathbb{1} = \sum_n\int \dd{\Phi_n} \ket{\{n\}}\bra{\{n\}},    \qquad \dd{\Phi_n}=\prod_{i=1}^{n}\frac{\dd^4{p_i} }{(2\pi)^3} ~\delta(p_i^2-m_i^2) \Theta(p_i^{0}),
 \end{equation}
@@ -1044,7 +1044,7 @@ where $\ket{\{n\}}$ is an $n$-particle state, we obtain
 \begin{equation}
   \mathcal{M}_{i\to f} - \mathcal{M}_{f \to i}^\star = i (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \mathcal{M}_{i \to \{n\}}^{\phantom{\star}} \mathcal{M}^\star_{f \to \{n\}}.
 \end{equation}
-Here we used the definition in \cref{eq:matrix_element}. 
+where the matrix element $\mathcal{M}_{i \to f}$ is defined by \cref{eq:matrix_element}. 
 In we choose $\ket{i} = \ket{f}$ we get 
 \begin{equation} \label{eq:optical_theorem}
   2 \Im\mathcal{M}_{i\to i} = (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \Abs{\mathcal{M}_{i \to \{n\}}^{\phantom{\star}}}.
@@ -1054,7 +1054,7 @@ If we expand both sides of \cref{eq:optical_theorem} in coupling constants, we g
 implication: the imaginary part of an $L$-loop amplitude is given by a product of $(L-1)$-loop amplitudes.
 Thus unitarity supplies relations between different orders of perturbation theory.
 
-\todo{mention somewhere around here what is called on-shell} 
+\todo{mention somewhere around here (or above) what is called on-shell} 
 
 Exploiting the fact the imaginary part of a propagator is given by
 \begin{equation}
@@ -1062,30 +1062,33 @@ Exploiting the fact the imaginary part of a propagator is given by
 \end{equation}
 as a generalization of \cref{eq:optical_theorem} it can be shown \cite{Eden:1966dnq,Cutkosky1960}
 that imaginary parts of loop amplitudes are generated when some of intermediate particles go on-shell.
-And the \emph{discontinuity} of an amplitude considered as a function of complex momenta,
+The \emph{discontinuity} of an amplitude considered as a function of complex momenta,
 \begin{equation}
   \Disc i\mathcal{M}(s) \equiv i\mathcal{M}(s+i\varepsilon)-i\mathcal{M}(s-i\varepsilon) = -2\Im \mathcal{M}(s),
 \end{equation}
 with $s$ denoting some energy variable,
-can be obtained \cite{Cutkosky1960} by summing over all possible ways to \emph{cut} propagators in loops,
+then can be obtained \cite{Cutkosky1960} by summing over all possible ways to \emph{cut} propagators in loops,
 \begin{equation} \label{eq:cut}
   \frac{1}{p^2-m^2+i\varepsilon^2} ~\longrightarrow~ 2\pi i ~\delta(p^2-m^2) \Theta(p^{0})
 \end{equation}
 
-The optical theorem \cref{eq:optical_theorem} is closely related to
+The optical theorem is closely related to
 a more universal factorization property of amplitudes \cite{Weinberg:1995mt}:
 \begin{mdframed}
   \centering
   \emph{All} amplitudes have poles when intermediate particles can go on-shell.
 \end{mdframed}
-If the model contains a one-particle state with mass $m_\xi$ (which can be zero),
-and for some combination of momenta $p_\xi \equiv  \sum_{n=1}^{k} p_k$, $p_\xi^2 \to m_\xi^2$,
+If the model contains a one-particle state with the mass $m_\xi$ (which can be zero),
+and for some combination of momenta $p_\xi \equiv  \sum_{k=1}^{n} p_k$, $p_\xi^2 \to m_\xi^2$,
 an amplitude of $n$ particles $A_n(1,\ldots{},n)$ factorizes as
 \begin{multline} \label{eq:factorization}
   A_n(1,\ldots{},n) \longrightarrow \\
-    A^\alpha_{k+1}(1,\ldots{},k;\xi) ~\dfrac{\sum_{i \in \text{states}} \xi^\alpha_i \bar\xi^\beta_i }{p_\xi^2-m_\xi^2}~ A^\beta_{n-k+1}(k+1,\ldots{},n;\xi) \quad+~ \text{(less singular)},
+    A^\alpha_{k+1}(1,\ldots{},k;\xi) ~
+    \dfrac{\sum_{i \in \text{states}} \xi^\alpha_i \bar\xi^\beta_i }{p_\xi^2-m_\xi^2}~ A^\beta_{n-k+1}(k+1,\ldots{},n;\xi) \quad+~ \text{(less singular)},
 \end{multline}
-where the sum in the numerator is over all physical polarization states of particle $\xi$, and the ``less singular'' part of the amplitude contains no poles $\frac{1}{p_\xi^2-m_\xi^2}$.
+where the sum in the numerator is over all physical polarization states of particle $\xi$, 
+and the ``less singular'' part of the amplitude contains no poles $\frac{1}{p_\xi^2-m_\xi^2}$.
+An example of such factorization is illustrated in \cref{fig:factorization}.
 
 \begin{figure}[ht]
   \newlength{\figureheight}
@@ -1099,8 +1102,10 @@ where the sum in the numerator is over all physical polarization states of parti
     \vcenter{\hbox{\includegraphics[height=0.9\figureheight]{TreeLeft}}}\cdot
     \vcenter{\hbox{\includegraphics[height=0.9\figureheight]{TreeRight}}}
   \end{equation*}
-  \todo{refer from the text}
-  \caption{An example of factorization given by \cref{eq:factorization} due to the presence of a physical singularity. }
+  \caption{
+    An example of factorization due to a physical pole singularity. 
+    Here $p_\xi =  p_1 + p_2 + p_3$.
+  }
   \label{fig:factorization}
 \end{figure}
 
@@ -1132,44 +1137,64 @@ does not offer benefits over off-shell alternatives, both in speed and numerical
 especially if one is interested in tree amplitudes in arbitrary number of space-time dimensions (see \cref{chap:numunitarity}). 
 
 
-
 \subsection{Generalized Cuts}
 
-Unitarity can be turned into a computational method for loop amplitudes: \cite{Bern:1994cg,Bern:1994zx}
-where they obtained certain (cut-constructable) class of amplitudes directly
-from it's cuts by matching discontinuities of integrals.
+Unitarity can be turned into a computational method of loop amplitudes as well.
+A certain class of one-loop amplitudes, which
+can be written as a sum of box, triangle, and bubble scalar integrals,
+\begin{equation} \label{eq:cut_constructable_ampl}
+  A^{(1)} = \sum_i d_{i}\,\vcenter{\hbox{\includegraphics[width=8ex]{boxintegral}}}_i~+~
+  \sum_{i}^{} c_{i}\,\vcenter{\hbox{\includegraphics[width=7ex]{triangleint}}}_i~+~
+  \sum_i b_{i}\,\vcenter{\hbox{\includegraphics[width=8ex]{bubint}}}_i
+\end{equation}
+can be obtained entirely from unitarity cuts computed through Cutkosky rules \cite{Bern:1994cg,Bern:1994zx}.
+Each integral in \cref{eq:cut_constructable_ampl} has unique discontinuities.
+So the discontinuities of the loop amplitude on the left, 
+evaluated as phase-space integrals over products of on-shell tree amplitudes as follows from unitarity,
+can be matched to those of integrals to obtain equations for the integral coefficients.
 
-Write the formula summing integrals with coefficients.
-
-\begin{figure}[ht]
-  \centering
-  \begin{equation*}
-    \vcenter{\hbox{\includegraphics[width=0.2\linewidth]{box}}} \qquad \xrightarrow[i\in\{1\ldots4\}]{\ell_{i}^2-m_i^2\to~0} \qquad
-    \vcenter{\hbox{\includegraphics[width=0.2\linewidth]{boxCut}}}
-   % \quad = \quad \sum_{i}  c_{i} ~ m_{i}(\ell) + \sum_{i}  \tilde{c}_{i} \,\tilde{m}_{i}(\ell)
-  \end{equation*}
-  \caption{Illustration of a quadruple generalized cut. On the left all diagrams with the specified propagators are included.
-  On the right each corner is a tree amplitude.}
-  \label{fig:quad_cut}
-\end{figure}
-
+However in general \emph{only} unitarity is not enough.
 
 It is possible to generalize application of cuts given by \cref{eq:cut} to
 obtain multi-channel discontinuities \cite{Britto:2004nc}.
 For example see \cref{fig:quad_cut}.
 Note that this kind of cuts are not direct consequences of unitarity of the $\mathcal{S}$-matrix (\cref{eq:unitarity_smatrix}), hence the name \emph{generalized} cuts.
 
-As a next step one can use the factorization of amplitudes on the cuts at the \emph{integrand} level and match
-it to the ansatz of all possible numerator insertions instead of integral coefficients \cite{Giele:2008ve,Ellis:2007br,Ellis:2008ir,Berger:2008sj}.
+\begin{figure}[ht]
+  \centering
+  \begin{equation*}
+    \vcenter{\hbox{\includegraphics[width=0.2\linewidth]{box}}} \qquad \xrightarrow[i\in\{1\ldots4\}]{\ell_{i}^2-m_i^2\to~0} \qquad
+    \vcenter{\hbox{\includegraphics[width=0.2\linewidth]{boxCut}}}
+    \quad = \quad \sum_{i}  c_{i} ~ m_{i}(\ell) %+ \sum_{i}  \tilde{c}_{i} \,\tilde{m}_{i}(\ell)
+  \end{equation*}
+  \caption{
+    An example of a generalized cut.
+    The loop momentum is chosen such that four propagator are simultaneously put to zero.
+    On the left \emph{all} diagrams with the chosen propagators contribute.
+    In the factorization limit each corner is a tree amplitude.
+    The cut is matched to a basis of loop-momentum polynomials $\{m_i(\ell)\}$ on the right.
+  }
+  \label{fig:quad_cut}
+\end{figure}
 
-Somewhat confusingly sometimes generalized unitarity methods refer to purely algebraical method of reduction widely known as OPP \cite{Ossola:2006us},
-which can be applied to any numerator function.
+
+As a next step one can use the factorization of amplitudes on the cuts at the \emph{integrand} level  and match
+it to a basis of loop-momentum polynomials in numerators (see \cref{fig:quad_cut}),
+instead of integral coefficients \cite{Giele:2008ve,Ellis:2007br,Ellis:2008ir,Berger:2008sj}.
+This matching procedure is intimately connected to a purely algebraical method of integral reduction known as OPP \cite{Ossola:2006us}.
+This method uses the cut conditions \cref{eq:cut} to set some propagators to zero and triangularize linear systems for determining the basis coefficients.
+It can be applied individually to each Feynman diagram or a sum thereof, thus having very little to do with factorization and unitarity.
+When applied to the full amplitude however, it re
+
+Somewhat confusingly sometimes generalized unitarity methods also refer 
+
 Its flexibility allows for straightforward automation (see e.g. \cite{Berger:2008ag,Berger:2008sj,Cullen:2011ac,Mastrolia:2010nb,Ossola:2007ax}).
 
-The extension of the ideas to multi-loop level have been actively studied in recent years.
+Most of the ideas mentioned in this section are formulated in the context of one-loop computations.
+These give the first real taste of quantum nature of QFT.
+Unfortunately, going beyond one-loop, many of the ideas do not generalize straightforwardly,
+and require much more sophisticated computational techniques.
+The extension of the ideas to multi-loop level have been actively studied in recent years \cite{Ita:2015tya,Abreu:2017idw,Abreu:2017hqn} 
 
-
-key concept which is behind
-the main computational method of this thesis presented in \cref{chap:numunitarity}.
-
+In this thesis we apply the state-of-the-art developments for 
 
