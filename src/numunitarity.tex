@@ -7,13 +7,16 @@ and the latter is one of the main bottlenecks in computations of
 multi-scale two-loop amplitudes.
 In this chapter we introduce a generalization of one-loop integrand-level unitarity-based methods \cite{Ossola:2006us,Giele:2008ve,Ellis:2008ir}
 to two loops, which offers an alternative path to reduction of amplitudes and addresses the mentioned bottlenecks in an elegant way.
-The foundations of this approach have been laid out in works \cite{Ita:2015tya,Abreu:2017xsl,Abreu:2017hqn}.
+The foundations of this approach have been laid out in works \cite{Ita:2015tya,Abreu:2017xsl,Abreu:2017hqn,Abreu:2017idw}.
 Notably it is designed to be amenable for automation and efficient numerical implementation, which is indispensable
 for addressing the problem of large expressions in multi-scale problems.
+\todo{Having fast numerical algorithm at hand allows in many cases to use numerical evaluations to exactly reconstruct analytic expressions.}
+
+\todo{References for other partial developments in multi-loop generalized unitarity}
 
 Like in \cref{chap:stdtech}, here we will not refer to any particular theory.
 %We also postpone the discussion of helicity amplitudes until \cref{chap:dshel}
-%and assume that 
+%and assume that
 From now on we will also specialize to two loops whenever necessary,
 although most results of this chapter
 can be applied to any number of loops.
@@ -33,50 +36,200 @@ LHS can be just an expression obtained from Feynman diagrams
 However in perturbation theory the fact that the corners are tree amplitudes can be seen explicitly.
 Because we collect together all graphs containing a particular singularity.
 
-\section{Ansatz}
+\section{Master/Surface Integrand Parametrization}
 \label{sec:ansatz_integrand}
 
 We start by again considering a generic $L$-loop amplitude in \cref{eq:general_amplitude},
 and  the classification of numerators from \cref{sec:classification_numerators}.
-We organize all topologies hierarchically as described around \cref{eq:topology_order,eq:topology_sequence},
+We organize all topologies hierarchically as described around \cref{eq:topology_order,eq:topology_sequence}.
 but we \emph{do not} cast integrals into families by allowing exponents $\gamma_j$ of propagators $\vb*{\rho}$ to be non-positive.
-Instead we aim to construct a special basis of numerator functions of the form 
-  
-In this section we discuss the reduction at the integrand level and thus we drop the explicit integral symbol from all expressions.
+
+Instead we will construct a special basis of numerator functions for each topology independently,
+\begin{equation} \label{eq:master_surface_basis}
+  \mathcal{N}_\Gamma = \sum_{i \in M_\Gamma \cup S_\Gamma}^{} c_{\Gamma, i}(\vb*{x},D) \; m_{\Gamma, i} (\vb*{x},\vb*{\rho},\vb*{\alpha},D),
+\end{equation}
+where $S_\Gamma$ is a set of numerators which vanish upon integration, which we call \emph{surface terms}, $M_\Gamma$ is a set of numerators associated to master integrals, and
+$m_{\Gamma, i} (\vb*{x},\vb*{\rho},\vb*{\alpha},D)$ are \emph{polynomials} in $\vb*{\rho}$ and $\vb*{\alpha}$ and rational functions in $\vb*{x}$ and $D$.
+We will refer to this basis as \emph{master/surface} basis or decomposition.
+The advantage of having a master/surface basis is that
+reducing an amplitude to it achieves
+a complete reduction by construction,
+and the coefficients $c_{\Gamma,i}$ for $i\in M_\Gamma$ are the coefficients
+of master integrals in \cref{eq:amplitude_integrated}.
+Also we do not need to consider topologies with $N_p > 4L + \frac{1}{2}L(L+1)$ since as we discussed in \cref{sec:classification_numerators}
+they are reducible to topologies lower in the hierarchy.
+
+Of course, this basis can be obtained from the standard approach of \cref{chap:stdtech}, which would not be a very illuminating exercise.
+However the construction of master/surface decomposition can be cast into a much simpler computational problem than solving all IBP relations.
+In what follows we review how this is accomplished.
 
 
-for each topology independently.
-
-Note that 
-
-
-
-
-
-\subsection{Basis of Numerator Insertions}
-Numerator tensors, span of function space. Master/Surface decomposition.
-
-\todo{classification of tensors here or in chapter \ref{chap:stdtech}?}
-
-
-
-
-\subsection{Traceless Completion}
+\subsection{Transverse ISPs}
 \label{sec:traceless_completion}
 
-Starting from two loops will have $D$-dependence in the numerator from IBP identities, so
-we can choose to abandon all-together the idea of not having it there.
+Consider a numerator $\mathcal{N}_\Gamma$ of any topology $\Gamma$ from $\Delta$ with $N_p \leq  4L + \frac{1}{2}L(L+1)$.
 
-Also can be obtained with through a specially constructed IBP identities \cite{Ita:2015tya}.
-%vectors of the form 
+What makes a set of numerator insertions $m_{\Gamma,i}$ a basis is that
+$\spn{m_{\Gamma,i}}$ is equivalent (as a set) to a ring of polynomials $\mathcal{K}[\vb*{\alpha}]$.
+So it is convenient to start constructing the master/surface basis from a natural basis of monomials in $\mathcal{K}[\vb*{\alpha}]$:
+\begin{equation}
+  \mathcal{N}_\Gamma = \sum_{\va{i}}^{} c_{\Gamma, i}(\vb*{x},D) \; m_\Gamma^{\va{i}}(\vb*{\alpha}), \qquad
+  m_\Gamma^{\va{i}}(\vb*{\alpha}) =
+  %\rho_1^{i_1}\,\ldots\,\rho_{N_p}^{i_{N_p}} ~
+  %\alpha_1^{i_{N_p+1}}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_p+1 +N_\text{ISP} }}.
+  \alpha_1^{i_1}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_\text{ISP} }}.
+\end{equation}
+
+\todo{
+  Somehow bring in that all $\rho$ are reduced (can be put to zero).
+  Perhaps need to explain beforehand that we do not need to consider any RSPs.
+  This requires to have cut equations before this section? Maybe it is better.
+}
+
+\todo{
+  Polynomial ring with coefficients $\rho$
+}
+
+\todo{potentially mention here on how the transverse vectors are obtained}
+
+Recall that some the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
+We will denote these as $\vb*{\alpha}^\tau$.
+From Lorentz symmetry an $L$-loop integral of an arbitrary rational function $f(\vb*{\vb*{x},\vb*{\rho}},D)$ can be written as
+\begin{equation} \label{eq:rank_1_tensor_integral}
+  \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \ell_k^{\mu} = \sum_{i}^{}c_i(\vb*{x},D)\;p^\mu_i.
+\end{equation}
+Contracting both sides with $\tau^\mu_j$ and using the orthogonality condition we obtain
+\begin{equation}
+  \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \alpha^{\tau}_{k j}( \equiv \sp(\ell_k,\tau_j)) \quad = 0.
+\end{equation}
+Following the same argument it is easy to show that all monomials $m_\Gamma^{\va{i}}(\vb*{\alpha})$ with at least
+one of the transverse ISPs taken to an odd power are vanishing upon integration and thus can be taken as surface terms as is.
+
+Next we consider a rank 2 tensor integral
+\begin{equation}
+  \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \ell_k^{\mu}\ell_k^{\nu} = c_0\,g^{\mu\nu}_{[D]} + \sum_{i,j}^{}c_{i,j}\;p^\mu_i p^\nu_j,
+\end{equation}
+where the arguments of all coefficient are as in \cref{eq:rank_1_tensor_integral}, and we explicitly specified the dimensions of the metric tensor.
+Upon contraction with $g^{\mu\nu}_{[D-4]}$ or $\tau_j^\mu\tau_j^\nu$, and taking into an account
+\[
+  g^{\mu\nu}_{[D]}g^{\phantom{\mu\nu}}_{[D-4]\nu\mu} = D-4,
+\]
+only $c_0$ survives.
+We can then easily find a combination of two which make the right-hand side vanish. Applying it to the left-hand side, we have
+\begin{equation}
+  \qty(\tau_j^\mu\tau_j^\nu - \frac{g^{\mu\nu}_{[D-4]}}{D-4}) ~ \ell_k^{\mu}\ell_k^{\nu} = (\alpha_j^\tau)^2 - \frac{\mu_{kk}(\vb*{\rho},\vb*{\alpha})}{D-4} \longrightarrow 0,
+\end{equation}
+where $\mu_{kj} \equiv g^{\phantom{\mu\nu}}_{[D-4]\mu\nu} \ell_k^\mu \ell_j^\nu$, so the expression on the right is a surface term and
+we append it to our basis.
+
+\todo{
+  Here it is important that $\rho$ in $\mu_{ij}$ should be kept, although they are zero on the topology.
+  This will be the same for surface terms.
+}
+
+Similar relations can be found for any product of even powers of $\alpha_j \in \vb*{\alpha}^\tau$.
+They can all be generated with the projector
+\begin{equation}
+  \mathrm{P}^{\mu_1\ldots{}\mu_n}_j =  \tau^{\mu_i}_j\ldots{}\tau^{\mu_n}_j - \frac{1}{n}\frac{1}{D-4} \sum_{\sigma \in \mathcal{G}_{2;n}}^{} g^{\mu_{\sigma(1)}\mu_{\sigma(2)}}_{[D-4]}~\tau^{\mu_{\sigma(3)}}_j\ldots{}\tau^{\mu_{\sigma(n)}}_j,
+\end{equation}
+where the sum is over all inequivalent ways to distribute indices $\{\mu_1,\ldots{},\mu_n\}$ in the summand.
+We will refer to such relations as \emph{traceless completions}.
+
+As an example, we list all traceless completions sufficient for the computation of two-loop amplitudes in renormalizable theories:
+\begin{align} \label{eq:traceless_completion_replacements}
+  (\alpha_{kj}^{\tau})^2 &\to (\alpha_{kj}^{\tau})^2 - \frac{\mu_{kk}}{D-4}, \\
+  \nonumber
+  (\alpha_{kj}^{\tau})^2(\alpha_{k^\prime j}^{\tau})^2 &\to
+  (\alpha_{kj}^{\tau})^2(\alpha_{k^\prime j}^{\tau})^2 - \frac{1}{D-4} \qty(
+    \frac{1}{2}(\alpha_{kj}^{\tau})^2 \mu_{k^\prime k^\prime} ~+~ \alpha_{kj}^{\tau}\alpha_{k^\prime j}^{\tau} \mu_{k k^\prime} + \frac{1}{2}(\alpha_{k^\prime j}^{\tau})^2 \mu_{k k}
+  ).
+\end{align}
+
+To summarize, all transverse ISPs are either trivially surface terms or can be turned into surface terms with the replacements of \cref{eq:traceless_completion_replacements}.
+After this is done we are left to consider monomials from the ring $\mathcal{K}[\vb*{\alpha}\setminus\vb*{\alpha}^\tau]$ only.
+
+
+We conclude this section with two remarks.
+First, at one loop the master/surface decomposition is hereby complete since all ISPs are transverse.
+Second, the traceless completions of transverse ISPs alternatively
+can be obtained through a specially constructed IBP identities \cite{Ita:2015tya}.
+
+%vectors of the form
 %\begin{equation}
   %v^\mu = (\sp(n_\epsilon^i,\ell))~\ell^\mu - (\sp(\tau,\ell))~n_\epsilon^{i\,\mu}
 %\end{equation}
 
 
 \subsection{Unitarity-Compatible IBP Identities}
+So far our set of numerator insertions $m_{\Gamma,i}$ consists of monomials with odd powers of transverse ISPs and traceless-completions of
+monomials with even powers of transverse ISPs, which are all surface terms.
+This leaves us to handle the span of polynomial ring $\mathcal{K}[\hat{\alpha}\equiv \alpha\setminus\alpha^\tau]$,
+which is the most non-trivial part of the master/surface decomposition.
+
+The reason why not all terms from $\mathcal{K}[\hat{\alpha}]$ are master terms is that they are
+related through IBP identities \eqref{eq:ibps}. So what we need to do is
+\begin{enumerate}
+  \item from all IBP identities select a complete set of those which relate
+    \emph{only} monomials from $\mathcal{K}[\hat{\alpha}]$, i.e. those that do not change powers of denominators; \label{item1}
+  \item viewing these relations as a linear map in the space of monomials $m_{\Gamma,i}(\hat{\alpha})$, take
+    a basis of it's kernel as surface terms $\hat{S}_\Gamma$;
+  \item what is left in the complement $\mathcal{K}[\hat{\alpha}]\setminus \hat{S}_\Gamma$ are master terms $M_\Gamma$
+\end{enumerate}
+
+In principle the described procedure can be carried out with standard IBP reduction techniques discussed in \cref{sec:ibp}.
+However this would be rather wasteful
+since the vast majority of IBP identities involve relations between different topologies and doubling of denominators.
+And indeed currently publicly available reduction programs
+\cite{Studerus:2009ye,vonManteuffel:2012np, Smirnov:2008iw,Smirnov:2014hma, Lee:2012cn,Lee:2013mka, Maierhoefer:2017hyi,Maierhofer:2018gpa}
+have problems with reducing high degrees of ISPs in many variables.
+
+Instead we can generate from the start only the IBP identities described in \cref{item1},
+known as \emph{unitarity-compatible} IBP identities \cite{Ita:2015tya,Abreu:2017xsl,Gluza:2010ws,Schabinger:2011dz,Larsen:2015ped}, by
+restricting the IBP vectors $v_i^\mu$ in \cref{eq:ibps} to satisfy
+\begin{equation} \label{eq:non_doubling_ibp_vectors}
+  \sum_i v_i^\mu(\vb*{x},D;\vb*{\rho},\vb*{\alpha}) ~ \pdv{\ell^\mu_i} \rho_k = f(\vb*{x},D;\vb*{\rho},\vb*{\alpha}) ~ \rho_k, \qquad \forall k\in P_\Gamma,
+\end{equation}
+where it is crucial that both the arbitrary function $f$ and the vector components $v_i^\mu$ are polynomial in $\vb*{\rho}$ and $\vb*{\alpha}$, not rational.
+
+The most straightforward way to find all vectors satisfying \cref{eq:non_doubling_ibp_vectors} 
+is by inserting a simple ansatz
+\begin{equation}
+  v_i^\mu = \sum_{j}^{}c^{(\text{loop})}_{ij}\ell^\mu_j ~+~ c^{(\text{ext})}_{ij} \sum_{j}^{}p^\mu_j
+    c_{ij}^{(\ldots{})} = 
+\end{equation}
+into \cref{eq:non_doubling_ibp_vectors}.
+The system of linear equations for coefficients \ldots{} can be readily read off.
+
+A much more powerful and beautiful way of finding the solutions of unitarity-compatibility equations based on algebraic geometry methods.
+
+Excellent lectures
+Here references for Yang lectures and modules and syzygys and so on\ldots{}.
+
+In particular powerful when combined with unitarity cuts.
+
+
+\todo{note: $M_\Gamma$ can be and frequently is empty}
+
+\todo{define clearly on-shell of topology so I can use it everywhere} 
+
+
+\begin{itemize}
+  \item linear independence can be checked on-shell
+  \item surface terms themselves need to be off-shell, can be checked with standard IBP reduction
+\end{itemize}
+
 
 \section{Cut Equations}
+
+We have constructed the master/surface basis in \cref{eq:master_surface_basis}. Now we discuss how
+to reduce amplitudes to it.
+
+Can be used to fit any integrand parametrization. For example one
+can want to not have $D$-dependent coefficient, and fit to simple monomials.
+Or one can eliminate transverse ISPs only, and do the IBP reduction later.
+Or one can choose master/surface basis and do the full reduction in place.
+
+Since the hardest problem is of IBP reduction it is beneficial to choose master/surface basis.
 
 \subsection{On-Shell Loop-Momenta}
 
@@ -87,10 +240,10 @@ Also can be obtained with through a specially constructed IBP identities \cite{I
 \subsection{Off-Shell Recurcion}
 \label{sec:BG_recursion}
 
-$D$-dimensional off-shell recursion, 
+$D$-dimensional off-shell recursion,
 
 
-weyl and Dirac fermions, 
+weyl and Dirac fermions,
 tracking of representations?
 
 
@@ -114,6 +267,9 @@ Compare to ``normal'' decomposition, we allow $D$-dependence in numerators. This
 idea for NLO computations since terms of order $\mathcal{O}(\epsilon)$ can be dropped.
 It might be reasonable to do for higher-order computations where higher orders of $\epsilon$ are required.
 
+Starting from two loops will have $D$-dependence in the numerator from IBP identities, so
+we can choose to abandon all-together the idea of not having it there.
+
 
 Take 5-point hierarchy.
 
@@ -136,5 +292,5 @@ Should work out.
 
 \subsection{Some Two-Loop Topology}
 
-\todo{select a topology which is not too big to present} 
+\todo{select a topology which is not too big to present}
 

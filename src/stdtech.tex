@@ -136,7 +136,7 @@ In the HV scheme $D_{\text{ext}}=4$ and the number of corresponding scalar produ
 \end{equation}
 
 The numerators $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ can be thus represented as elements of a polynomial ring
-%$\mathcal{K}[\vb*{sp}]$ 
+$\mathcal{K}[\vb*{sp}]$ 
 with coefficients $c_{\va{i}}(\vb*{x},D)$ being rational functions of external kinematics $\vb*{x}$ and $D$:
 \begin{multline}
   \mathcal{N}_{\Gamma,\gamma_\Gamma}(\vb*{x}, \vb*{sp}, D) = \sum_{\va{i} : \abs{\va{i}} < H_{\Gamma}} c_{\va{i}} (\vb*{x},D)~ m^{\va{i}}(\vb*{sp}), \\
@@ -155,7 +155,11 @@ This implies
 that whenever these scalar products are encountered in $\mathcal{N}_{\Gamma,\gamma_\Gamma}\qty(\vb*{sp})$ they can be canceled with
 one of the denominators and attributed to a topology with less propagators.
 For this reason these scalar products are commonly called \emph{reducible scalar products} (RSP).
-We choose the remaining scalar products $\vb*{\alpha} \equiv \vb*{sp} \setminus \text{(RSP)}$ which are called
+We choose the remaining scalar products
+\begin{equation}
+  \vb*{\alpha} \equiv \vb*{sp} \setminus \text{(RSP)}, \qquad \dim{\vb*{\alpha}} \equiv N_\text{ISP} =  \dim{\vb*{sp}}-N_p,
+\end{equation}
+which are called
 \emph{irreducible scalar products} (ISP) to be the rest of our independent variables.
 
 An important observation which becomes evident from our choice of variables is that all topologies with $N_p> 4 L +\frac{1}{2}L(L+1)$, no matter the number of external particles, are reducible.
@@ -171,7 +175,8 @@ we find that the numerators are now polynomials in ISPs only:
     \mathcal{N}^{\prime}_{\Gamma,\gamma_\Gamma}(\vb*{x}, \vb*{\alpha}, D) =
     \sum_{\va{i} : \abs{\va{i}} < H_{\Gamma}} c^{\prime}_{\va{i}} (\vb*{x},D)~ m^{\va{i}}(\vb*{\alpha}),
 \end{equation}
-In practice this reduction can be non-trivial and systematically performed with Gröbner basis techniques \cite{Zhang:2012ce,Mastrolia:2012wf,Mastrolia:2012an,Mastrolia:2016dhn}.
+and all topologies with $N_p > 4L +\frac{1}{2}L(L+1)$ are eliminated.
+In practice this can be non-trivial and systematically performed with Gröbner basis techniques \cite{Zhang:2012ce,Mastrolia:2012wf,Mastrolia:2012an,Mastrolia:2016dhn}.
 In unitarity-based approaches this step is taken into an account by construction,
 and need not be carried out explicitly. We discuss this in more detail in \cref{sec:ansatz_integrand}
 
@@ -211,6 +216,7 @@ exhibits many other useful properties, nonetheless we will not need to adopt it 
 
 
 \section{Integration-by-Parts Identities}
+\label{sec:ibp}
 
 
 Using \cref{eq:rsp_reduction} we can bring \cref{eq:general_amplitude} to the form 
