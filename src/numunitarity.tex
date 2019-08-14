@@ -65,30 +65,21 @@ In what follows we review how this is accomplished.
 
 Consider a numerator $\mathcal{N}_\Gamma$ of any topology $\Gamma$ from $\Delta$ with $N_p <  4L + \frac{1}{2}L(L+1)$.
 
-What is meant by a set of numerator insertions $m_{\Gamma,i}$ being a basis of numerator insertions is that
-$\spn{m_{\Gamma,i}(\vb*{x},D,\vb*{\alpha};\vb*{\rho})}$ is equivalent as a linear vector space
-modulo RSPs (i.e.\ with imposed the on-shell constraints $\rho_j = 0\;\forall j\in P_\Gamma$)
-to a ring of polynomials $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$.
+What is meant by a set of numerator insertions $m_{\Gamma,i}(\vb*{x},D;\vb*{\rho},\vb*{\alpha})$ being a basis is that
+$\spn{m_{\Gamma,i}}$ is equivalent
+modulo RSPs (i.e.\ with the on-shell constraints $\rho_j = 0,\;\forall j\in P_\Gamma$ imposed)
+as a linear vector space to a ring of polynomials $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$.
+Evidently how $m_{\Gamma,i}$ depend on $\vb*{\rho}$ is of no relevance for what concerns constructing
+a basis in $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$, but, as we will see shortly, sometimes the presence
+of $\vb*{\rho}$ might be important for ensuring other features of $m_{\Gamma,i}$ such as vanishing
+upon integration.
 
-Recall that anything proportional to $\rho_j \in P_\Gamma$ is reducible to topologies lower in the hierarchy,
-so the coefficients of the polynomials in $\vb*{\alpha}$ need not to depend on $\vb*{\rho}$ in order
-
-\footnote{
+%\footnote{
   %more precisely: $\mathcal{K}_{\vb*{x},D;\vb*{\rho}}[\vb*{\alpha}]$ has coefficients from a ring $\mathcal{K}_{\vb*{x},D}[\vb*{\rho}]$,
   %which itself has coefficients from a field of rational functions $Q(\vb*{x},D)$
-}, 
+%}, 
 
-The linear vector space of monomials $\mathcal{K}_{\vb*{x},D;\vb*{\rho}}[\vb*{\alpha}]$ is of course infinite,
-so we need to impose power counting constraints.
-
-
-\todo{
-  Somehow bring in that all $\rho$ are reduced (can be put to zero).
-  Perhaps need to explain beforehand that we do not need to consider any RSPs.
-  This requires to have cut equations before this section? Maybe it is better.
-}
-
-So it is convenient to start constructing the master/surface basis from a natural basis of monomials in $\mathcal{K}_{\vb*{x},D;\vb*{\rho}}[\vb*{\alpha}]$:
+It is convenient to start constructing the master/surface basis from a natural basis of monomials from $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$:
 \begin{equation}
   \mathcal{N}_\Gamma = \sum_{\va{i}}^{} c_{\Gamma, \va{i}}(\vb*{x},D;\vb*{\rho}) \; m_\Gamma^{\va{i}}(\vb*{\alpha}), \qquad
   m_\Gamma^{\va{i}}(\vb*{\alpha}) = \vb*{\alpha}^{\va{i}} \equiv 
@@ -96,10 +87,11 @@ So it is convenient to start constructing the master/surface basis from a natura
   %\alpha_1^{i_{N_p+1}}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_p+1 +N_\text{ISP} }}.
   \alpha_1^{i_1}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_\text{ISP} }}.
 \end{equation}
-
-\todo{Important note here: coefficients $c_{\Gamma,i}(\vb*{x},D;\rho)$ are required to have support on the cut, i.e.\ $\eval{c_{\Gamma,\va{i}}}_{\rho_j \to 0} \neq 0$ } 
-
-
+where we allow coefficients $c_{\Gamma,i}$ to depend on $\vb*{\rho}$.
+%except for $\eval{c_{\Gamma,\va{i}}}_{\rho_j \to 0} = 0$,
+%such that all monomials  stay irreducible.
+The basis of the linear vector space of all monomials from $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$ is of course infinite,
+but the maximal degree we need to consider in practice is always limited from above by UV behavior of the particular model under consideration.
 
 \todo{potentially mention here on how the transverse vectors are obtained}
 
@@ -133,11 +125,6 @@ We can then easily find a combination of two contractions which make the right-h
 where $\mu_{kj} \equiv g^{\phantom{\mu\nu}}_{[D-4]\mu\nu} \ell_k^\mu \ell_j^\nu$, so the expression on the right is a surface term and
 we append it to our basis.
 
-\todo{
-  Here it is important that $\rho$ in $\mu_{ij}$ should be kept, although they are zero on the topology.
-  This will be the same for surface terms.
-}
-
 Similar relations can be found for any product of even powers of $\alpha_j \in \vb*{\alpha}^\tau$.
 They can all be generated with the projector
 \begin{equation}
@@ -145,6 +132,10 @@ They can all be generated with the projector
 \end{equation}
 where the sum is over all inequivalent ways to distribute indices $\{\mu_1,\ldots{},\mu_n\}$ in the summand.
 We will refer to such relations as \emph{traceless completions}.
+Note that although $\mu_{kj}(\vb*{\rho},\vb*{\alpha})$ are partially reducible to lower topologies,
+we cannot use their reduction $\mu_{kj}(0,\vb*{\alpha})$ in traceless completion. If we do use it, the
+corresponding insertion will no longer be vanishing upon integration.
+The same applies in general for all surface terms.
 
 As an example, we list all traceless completions sufficient for the computation of two-loop amplitudes in renormalizable theories:
 \begin{align} \label{eq:traceless_completion_replacements}
@@ -172,17 +163,18 @@ can be obtained through a specially constructed IBP identities \cite{Ita:2015tya
 
 
 \subsection{Unitarity-Compatible IBP Identities}
+\label{sec:unitarity_compatible_ibps}
 So far our set of numerator insertions $m_{\Gamma,i}$ consists of monomials with odd powers of transverse ISPs and traceless-completions of
 monomials with even powers of transverse ISPs, which are all surface terms.
-This leaves us to handle the span of polynomial ring $\mathcal{K}_{\vb*{x},D;\rho}[\hat{\vb*{\alpha}}\equiv \vb*{\alpha}\setminus\vb*{\alpha}^\tau]$ truncated by the imposed
-power counting condition,
+This leaves us to consider the span of polynomial ring $\mathcal{K}_{\vb*{x},D}[\hat{\vb*{\alpha}}\equiv \vb*{\alpha}\setminus\vb*{\alpha}^\tau]$,
+%truncated by the imposed power counting condition,
 which is the most non-trivial part of the master/surface decomposition.
 
-The reason why not all terms from $\mathcal{K}_{\vb*{x},D;\rho}[\hat{\vb*{\alpha}}]$ are master terms is that they are
+The reason why not all terms from $\mathcal{K}_{\vb*{x},D}[\hat{\vb*{\alpha}}]$ are master terms is that they are
 related through IBP identities \eqref{eq:ibps}. So what we need to do is
 \begin{enumerate}
   \item Generate IBP identities which relate
-    \emph{only} monomials from $\mathcal{K}_{\vb*{x},D;\rho}[\hat{\vb*{\alpha}}]$, i.e.\ those which do not increase powers of denominators (and do not add new denominators).
+    \emph{only} monomials from $\mathcal{K}_{\vb*{x},D}[\hat{\vb*{\alpha}}]$, i.e.\ those which do not increase powers of denominators (and do not add new denominators).
     These identities can all be taken as surface terms, but they are not independent. 
     \label{item1}
   \item  Viewing each surface term as a vector in the linear space of monomials $\hat{\vb*{\alpha}}^{\va{i}}$, take
@@ -220,18 +212,21 @@ where it is crucial that both the arbitrary function $f$ and the vector componen
 }%
 In practice much more powerful methods of solving \cref{eq:non_doubling_ibp_vectors}  based on computational
 algebraic geometry can be employed \cite{Larsen:2015ped,Boehm:2018fpv,Zhang:2016kfo,Abreu:2017xsl,Bendle2019}.
-Having unitarity-compatible IBP vectors at hand trivializes the generation of an overcomplete set of surface terms.
-The spanning set of surface terms is then obtained as outlined in \cref{item2,item3}.
 
-\todo{power counting remarks: 1. in general had to be increased before bringing it down to final}
+Having unitarity-compatible IBP vectors lets us trivially generate an overcomplete set of surface terms%
+\footnote{
+  It is worth noting that one has to be careful with power counting constraints at this stage.
+  In general it is necessary to keep higher degree terms before eliminating linear dependences to get a complete set.
+}
+by inserting the vectors in \cref{eq:ibps}.
+The spanning set (i.e.\ complete and non-redundant) is then obtained as outlined in \cref{item2,item3}.
+The basis of numerators is constructed modulo RSPs, so
+linear dependences between surface terms can be found with on-shell conditions $\rho_j=0$ imposed.
+This can be very helpful when the size of the basis gets large.
+Sometimes the set $M_\Gamma$ is found to be empty, which means that there are
+no master integrals on this topology.
 
-\todo{note: $M_\Gamma$ can be and frequently is empty}
-
-\todo{define clearly on-shell of topology so I can use it everywhere}
-
-\todo{surface terms themselves need to be off-shell, can be checked with standard IBP reduction} 
-
-\todo{linear independence can be checked on-shell}
+\todo{can be checked with standard IBP reduction} 
 
 \section{Cut Equations}
 \label{sec:cut_equations}

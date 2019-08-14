@@ -276,18 +276,29 @@ There are multiple publicly available implementations such as
 \textsc{LiteRed} \cite{Lee:2012cn,Lee:2013mka},
 \textsc{Kira} \cite{Maierhoefer:2017hyi,Maierhofer:2018gpa}, etc.
 
-The problem of IBP reduction is in general very difficult, which
-is due the very large amount of relations produced from \cref{eq:ibps}, and
-hence the requirement to solve large linear systems.
-This is due to the number of choices of IBP vectors, as well as the fact that IBP identities
-in general include the relations for integrals with denominators raised to powers larger than one, even
+The problem of IBP reduction is in general very difficult.
+This is due to the large amount of relations produced from \cref{eq:ibps},
+which is in turn due to the number of choices of IBP vectors, as well as the fact that IBP identities
+in general include the relations for integrals with raised denominators powers, even
 though this integrals are mostly not found from Feynman rules.
+In the end the bottleneck is coming from the requirement to solve massive systems of linear equations.
+Many great advances in the IBP-reduction technology has happened
+\cite{Gluza:2010ws,Schabinger:2011dz,Larsen:2015ped,Bern:2017gdk,Chawdhry:2018awn,Badger:2008cm,Kosower:2018obg,Mastrolia:2018uzb,Frellesvig:2019kgj,Frellesvig:2019uqt,Bendle2019}
+since the Laporta algorithm became the standard of the field.
+It was also proposed to reconstruct the reduction tables from
+numerical evaluations over finite fields \cite{vonManteuffel:2014ixa,Peraro:2016wsq,Peraro:2019svx,Klappert:2019emp,Smirnov:2019qkx}.
+There is still a problem however,
+that even when the analytic reduction tables can be obtained,
+they might be not very useful for reduction of amplitudes due
+to the prohibitive size of expressions (see e.g.\ \cite{Chawdhry:2018awn,Bendle2019}).
+To this end it seems beneficial to carry out IBP reduction numerically and reconstruct
+amplitudes instead \cite{Badger:2018enw,Chicherin:2018yne,Badger:2019djh}.
 
-Although as for master integrals if solved, the reduction tables can be recycled, but fully analytic approaches cannot solve linear systems. 
-And even if the reduction table tables can be produced, they are not usable in practice \cite{Chawdhry:2018awn}.
+In this thesis we will take advantage of generalized unitarity-based methods (see \cref{chap:numunitarity}),
+which do not require the full solution of IBP systems, and thus
+partially avoid the problems discussed above.
 
-In \cref{chap:numunitarity} we discuss how this difficulty can be addressed by unitarity-based methods,
-which do not require the solution of the full IBP system.
+\todo{potentially mention that the tables are once and for all} 
 
 \todo{Example?}
 
