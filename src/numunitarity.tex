@@ -20,6 +20,9 @@ which we discuss in \cref{sec:ansatz_integrand}.
 The second is exploiting integrand-level factorization limits of amplitudes originating from generalized unitarity (see \cref{sec:unitarity}),
 which we discuss in \cref{sec:cut_equations}.
 
+\todo{We are embracing dimensional regularization, not trying to do things like four-dimensional stuff.} 
+
+
 %Like in \cref{chap:stdtech}, here we will not refer to any particular theory.
 %We also postpone the discussion of helicity amplitudes until \cref{chap:dshel}
 %and assume that
@@ -231,20 +234,36 @@ no master integrals on this topology.
 \section{Cut Equations}
 \label{sec:cut_equations}
 
-I want to take the pragmatic perspective. And in practice it is not even essential:
-\begin{itemize}
-    \item       the most practical and flexible way to compute them in $D$ dimensions is with off-shell recursions (see references e.g.\ in tails of 1001 gluons)
-    \item Actually it is not even always the case as we see for massive particles.
-\end{itemize}
+We have constructed the master/surface basis in \cref{eq:master_surface_basis},
+so to mathch the amplitude to our ansatz
+\begin{equation}
+  \sum_{\Gamma \in \Delta} \sum_{\gamma} \sum_{\va{i}} ~ c_{\Gamma\gamma, \va{i}} (\vb*{x},D) ~ 
+  \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
+  \frac{m^{\va{i}}_{\Gamma\gamma}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
+    }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{j}}}.
+\end{equation}
+we only need to extract master coefficients.
+We didn't care what's on the left: in principle it's just an expression obtained from Feynman diagrams.
+At this point we can obtain linear equations for the master and surface coefficients by sampling
+with sufficient number of loop momenta. However this will be a huge linear system, impractical to solve.
 
-LHS can be just an expression obtained from Feynman diagrams
+So this is where generalized unitarity comes in.
+For each topology if we put loop momenta on-shell, 
+the leading terms in the limit
+we get factorization on the left
+on the right sum of all topologies which have them as subset
 
+The algorithm:
+at the top level match directly
+then going down, subtract the topologies above
+(see example of hierarchy in ..)
+
+
+Factorization is not a fact:
+Actually it is not even always the case as we see for massive particles.
 However in perturbation theory the fact that the corners are tree amplitudes can be seen explicitly.
 Because we collect together all graphs containing a particular singularity.
 
-
-We have constructed the master/surface basis in \cref{eq:master_surface_basis}. Now we discuss how
-to reduce amplitudes to it.
 
 
 \subsection{On-Shell Loop-Momenta}
@@ -252,23 +271,36 @@ to reduce amplitudes to it.
 \todo{In $D$ dimensions we don't have to worry about branches of solutions, and also loop momenta have to be real}
 
 \subsection{Evaluation of Cuts}
-
-\subsection{Off-Shell Recurcion}
-\label{sec:BG_recursion}
+\label{sec:evluation_of_cuts}
 
 $D$-dimensional off-shell recursion,
-
+the most practical and flexible way to compute them in $D$ dimensions is with off-shell recursions (see references e.g.\ in tails of 1001 gluons)
 
 weyl and Dirac fermions,
 tracking of representations?
+
+states in appendix?
 
 
 \subsection{Dimensional Reconstruction}
  In $D$ and $D_s$ (dimensional reduction later)
 
+see how \cref{chap:dshel} for discussion of what to do with $D_s$.
+
+coefficients are $D$-dependent because of IBPs
+
+
 
 \section{Subleading Poles}
-Here discussion about \textit{subleading poles}
+
+reference \cite{Abreu:2017idw} 
+
+related \cite{Baumeister:2019rmh} 
+Here discussion about subleading poles
+
+very simple: just shuffle
+
+example, take pictures from their paper
 
 
 \section{Discussion}
