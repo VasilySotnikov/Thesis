@@ -16,7 +16,7 @@ in Ref.~\cite{wbbpaper}.
 
 Previous computations with numerical unitarity have shown a good numerical stability even for high-multiplicity one-loop matrix elements (see for
 example~\cite{BH:W3jDistributions,BH:W5j}). However, there exist
-regions of phase space where on-shell loop-momentum parameterizations (which can e.g.~be found in \cite{Kilgore2007}) can break down. In particular, this occurs if Gram determinants\footnote{The Gram matrix is the matrix of all possible inner products of external momenta and its determinant is called the Gram determinant.}, which are found in on-shell solutions to the loop momentum, are
+regions of phase space where on-shell loop-momentum parameterizations (which can e.g.\ be found in \cite{Kilgore2007}) can break down. In particular, this occurs if Gram determinants\footnote{The Gram matrix is the matrix of all possible inner products of external momenta and its determinant is called the Gram determinant.}, which are found in on-shell solutions to the loop momentum, are
 close to zero. This type of configuration can lead to incomplete cancellations of large contributions and
 thereby induce a loss of numerical precision. 
 
@@ -29,7 +29,7 @@ phase-space points by performing checks at several
 stages of the calculation. With some minor adaptations we use the same
 implementation as described in \cite{Berger:2008sj,BH:W3jDistributions}. Whenever
 any of those checks fails, we switch to a higher precision computation locally
-(i.e. only for the part which failed the check), using
+(i.e.\ only for the part which failed the check), using
 higher-precision arithmetic as provided by the QD library \cite{QD}. The fraction of time
 spent on these recomputations is normally small. Specifically, we test the vanishing of higher-rank tensor
 coefficients. Tensors with rank greater than $n$, for $n$-point topologies ($n=1,2,3,4,5$) must vanish given the interactions
