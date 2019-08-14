@@ -1,4 +1,4 @@
-In \cref{chap:stdtech} we discussed how a generic loop amplitude \eqref{eq:general_amplitude} can be reduced
+In \cref{chap:stdtech} we sketched how a generic loop amplitude \eqref{eq:general_amplitude} can be reduced
 to a sum of master integrals \eqref{eq:amplitude_integrated} in two stages.
 First all reducible numerators are maximally canceled against corresponding denominators.
 And after that the remaining numerators are reduced with IBP identities.
@@ -14,27 +14,20 @@ for addressing the problem of large expressions in multi-scale problems.
 
 \todo{References for other partial developments in multi-loop generalized unitarity}
 
-Like in \cref{chap:stdtech}, here we will not refer to any particular theory.
+The approach we discuss in this chapter broadly speaking consists of two major ingredients.
+This first is a special choice of integrand parametrization\footnote{sometimes also called \emph{ansatz}},
+which we discuss in \cref{sec:ansatz_integrand}.
+The second is exploiting integrand-level factorization limits of amplitudes originating from generalized unitarity (see \cref{sec:unitarity}),
+which we discuss in \cref{sec:cut_equations}.
+
+%Like in \cref{chap:stdtech}, here we will not refer to any particular theory.
 %We also postpone the discussion of helicity amplitudes until \cref{chap:dshel}
 %and assume that
-From now on we will also specialize to two loops whenever necessary,
-although most results of this chapter
-can be applied to any number of loops.
+%From now on we will also specialize to two loops whenever necessary,
+%although most results of this chapter
+%can be applied to any number of loops.
 
-The computational methods described in this chapter are essential for obtaining the results we present in \cref{chap:wbb_pheno,chap:5parton}.
-
-\hrule
-
-I want to take the pragmatic perspective. And in practice it is not even essential:
-\begin{itemize}
-    \item       the most practical and flexible way to compute them in $D$ dimensions is with off-shell recursions (see references e.g. in tails of 1001 gluons)
-    \item Actually it is not even always the case as we see for massive particles.
-\end{itemize}
-
-LHS can be just an expression obtained from Feynman diagrams
-
-However in perturbation theory the fact that the corners are tree amplitudes can be seen explicitly.
-Because we collect together all graphs containing a particular singularity.
+\todo{The computational methods described in this chapter are essential for obtaining the results we present in \cref{chap:wbb_pheno,chap:5parton}.}
 
 \section{Master/Surface Integrand Parametrization}
 \label{sec:ansatz_integrand}
@@ -46,10 +39,13 @@ but we \emph{do not} cast integrals into families by allowing exponents $\gamma_
 
 Instead we will construct a special basis of numerator functions for each topology independently,
 \begin{equation} \label{eq:master_surface_basis}
-  \mathcal{N}_\Gamma = \sum_{i \in M_\Gamma \cup S_\Gamma}^{} c_{\Gamma, i}(\vb*{x},D) \; m_{\Gamma, i} (\vb*{x},\vb*{\rho},\vb*{\alpha},D),
+  \mathcal{N}_\Gamma = \sum_{i \in M_\Gamma \cup S_\Gamma}^{} c_{\Gamma, i}(\vb*{x},D) \; m_{\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha}),
 \end{equation}
-where $S_\Gamma$ is a set of numerators which vanish upon integration, which we call \emph{surface terms}, $M_\Gamma$ is a set of numerators associated to master integrals, and
-$m_{\Gamma, i} (\vb*{x},\vb*{\rho},\vb*{\alpha},D)$ are \emph{polynomials} in $\vb*{\rho}$ and $\vb*{\alpha}$ and rational functions in $\vb*{x}$ and $D$.
+where $S_\Gamma$ is a set of numerators which vanish upon integration, which we call \emph{surface terms}, $M_\Gamma$ is a set of numerators associated to master integrals.
+Here we introduced a notation for distinguishing the arguments of $m_{\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha})$,
+which we will use throughout this chapter. 
+It means that $m_{\Gamma, i}$ is a rational function of arguments on the left of ``;'', and \emph{polynomial} in the arguments on the right. 
+
 We will refer to this basis as \emph{master/surface} basis or decomposition.
 The advantage of having a master/surface basis is that
 reducing an amplitude to it achieves
@@ -67,18 +63,24 @@ In what follows we review how this is accomplished.
 \subsection{Transverse ISPs}
 \label{sec:traceless_completion}
 
-Consider a numerator $\mathcal{N}_\Gamma$ of any topology $\Gamma$ from $\Delta$ with $N_p \leq  4L + \frac{1}{2}L(L+1)$.
+Consider a numerator $\mathcal{N}_\Gamma$ of any topology $\Gamma$ from $\Delta$ with $N_p <  4L + \frac{1}{2}L(L+1)$.
 
-What makes a set of numerator insertions $m_{\Gamma,i}$ a basis is that
-$\spn{m_{\Gamma,i}}$ is equivalent (as a set) to a ring of polynomials $\mathcal{K}[\vb*{\alpha}]$.
-So it is convenient to start constructing the master/surface basis from a natural basis of monomials in $\mathcal{K}[\vb*{\alpha}]$:
-\begin{equation}
-  \mathcal{N}_\Gamma = \sum_{\va{i}}^{} c_{\Gamma, i}(\vb*{x},D) \; m_\Gamma^{\va{i}}(\vb*{\alpha}), \qquad
-  m_\Gamma^{\va{i}}(\vb*{\alpha}) =
-  %\rho_1^{i_1}\,\ldots\,\rho_{N_p}^{i_{N_p}} ~
-  %\alpha_1^{i_{N_p+1}}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_p+1 +N_\text{ISP} }}.
-  \alpha_1^{i_1}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_\text{ISP} }}.
-\end{equation}
+What is meant by a set of numerator insertions $m_{\Gamma,i}$ being a basis of numerator insertions is that
+$\spn{m_{\Gamma,i}(\vb*{x},D,\vb*{\alpha};\vb*{\rho})}$ is equivalent as a linear vector space
+modulo RSPs (i.e.\ with imposed the on-shell constraints $\rho_j = 0\;\forall j\in P_\Gamma$)
+to a ring of polynomials $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$.
+
+Recall that anything proportional to $\rho_j \in P_\Gamma$ is reducible to topologies lower in the hierarchy,
+so the coefficients of the polynomials in $\vb*{\alpha}$ need not to depend on $\vb*{\rho}$ in order
+
+\footnote{
+  %more precisely: $\mathcal{K}_{\vb*{x},D;\vb*{\rho}}[\vb*{\alpha}]$ has coefficients from a ring $\mathcal{K}_{\vb*{x},D}[\vb*{\rho}]$,
+  %which itself has coefficients from a field of rational functions $Q(\vb*{x},D)$
+}, 
+
+The linear vector space of monomials $\mathcal{K}_{\vb*{x},D;\vb*{\rho}}[\vb*{\alpha}]$ is of course infinite,
+so we need to impose power counting constraints.
+
 
 \todo{
   Somehow bring in that all $\rho$ are reduced (can be put to zero).
@@ -86,15 +88,24 @@ So it is convenient to start constructing the master/surface basis from a natura
   This requires to have cut equations before this section? Maybe it is better.
 }
 
-\todo{
-  Polynomial ring with coefficients $\rho$
-}
+So it is convenient to start constructing the master/surface basis from a natural basis of monomials in $\mathcal{K}_{\vb*{x},D;\vb*{\rho}}[\vb*{\alpha}]$:
+\begin{equation}
+  \mathcal{N}_\Gamma = \sum_{\va{i}}^{} c_{\Gamma, \va{i}}(\vb*{x},D;\vb*{\rho}) \; m_\Gamma^{\va{i}}(\vb*{\alpha}), \qquad
+  m_\Gamma^{\va{i}}(\vb*{\alpha}) = \vb*{\alpha}^{\va{i}} \equiv 
+  %\rho_1^{i_1}\,\ldots\,\rho_{N_p}^{i_{N_p}} ~
+  %\alpha_1^{i_{N_p+1}}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_p+1 +N_\text{ISP} }}.
+  \alpha_1^{i_1}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_\text{ISP} }}.
+\end{equation}
+
+\todo{Important note here: coefficients $c_{\Gamma,i}(\vb*{x},D;\rho)$ are required to have support on the cut, i.e.\ $\eval{c_{\Gamma,\va{i}}}_{\rho_j \to 0} \neq 0$ } 
+
+
 
 \todo{potentially mention here on how the transverse vectors are obtained}
 
-Recall that some the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
+Recall that some of the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
 We will denote these as $\vb*{\alpha}^\tau$.
-From Lorentz symmetry an $L$-loop integral of an arbitrary rational function $f(\vb*{\vb*{x},\vb*{\rho}},D)$ can be written as
+From Lorentz symmetry an $L$-loop integral of an arbitrary rational function $f(\vb*{\vb*{x},\vb*{\rho}},D)$ is
 \begin{equation} \label{eq:rank_1_tensor_integral}
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \ell_k^{\mu} = \sum_{i}^{}c_i(\vb*{x},D)\;p^\mu_i.
 \end{equation}
@@ -102,7 +113,7 @@ Contracting both sides with $\tau^\mu_j$ and using the orthogonality condition w
 \begin{equation}
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \alpha^{\tau}_{k j}( \equiv \sp(\ell_k,\tau_j)) \quad = 0.
 \end{equation}
-Following the same argument it is easy to show that all monomials $m_\Gamma^{\va{i}}(\vb*{\alpha})$ with at least
+Following the same argument it is easy to show that all monomials $\vb*{\alpha}^{\va{i}}$ with at least
 one of the transverse ISPs taken to an odd power are vanishing upon integration and thus can be taken as surface terms as is.
 
 Next we consider a rank 2 tensor integral
@@ -115,7 +126,7 @@ Upon contraction with $g^{\mu\nu}_{[D-4]}$ or $\tau_j^\mu\tau_j^\nu$, and taking
   g^{\mu\nu}_{[D]}g^{\phantom{\mu\nu}}_{[D-4]\nu\mu} = D-4,
 \]
 only $c_0$ survives.
-We can then easily find a combination of two which make the right-hand side vanish. Applying it to the left-hand side, we have
+We can then easily find a combination of two contractions which make the right-hand side vanish. Applying it to the left-hand side, we have
 \begin{equation}
   \qty(\tau_j^\mu\tau_j^\nu - \frac{g^{\mu\nu}_{[D-4]}}{D-4}) ~ \ell_k^{\mu}\ell_k^{\nu} = (\alpha_j^\tau)^2 - \frac{\mu_{kk}(\vb*{\rho},\vb*{\alpha})}{D-4} \longrightarrow 0,
 \end{equation}
@@ -163,17 +174,22 @@ can be obtained through a specially constructed IBP identities \cite{Ita:2015tya
 \subsection{Unitarity-Compatible IBP Identities}
 So far our set of numerator insertions $m_{\Gamma,i}$ consists of monomials with odd powers of transverse ISPs and traceless-completions of
 monomials with even powers of transverse ISPs, which are all surface terms.
-This leaves us to handle the span of polynomial ring $\mathcal{K}[\hat{\alpha}\equiv \alpha\setminus\alpha^\tau]$,
+This leaves us to handle the span of polynomial ring $\mathcal{K}_{\vb*{x},D;\rho}[\hat{\vb*{\alpha}}\equiv \vb*{\alpha}\setminus\vb*{\alpha}^\tau]$ truncated by the imposed
+power counting condition,
 which is the most non-trivial part of the master/surface decomposition.
 
-The reason why not all terms from $\mathcal{K}[\hat{\alpha}]$ are master terms is that they are
+The reason why not all terms from $\mathcal{K}_{\vb*{x},D;\rho}[\hat{\vb*{\alpha}}]$ are master terms is that they are
 related through IBP identities \eqref{eq:ibps}. So what we need to do is
 \begin{enumerate}
-  \item from all IBP identities select a complete set of those which relate
-    \emph{only} monomials from $\mathcal{K}[\hat{\alpha}]$, i.e. those that do not change powers of denominators; \label{item1}
-  \item viewing these relations as a linear map in the space of monomials $m_{\Gamma,i}(\hat{\alpha})$, take
-    a basis of it's kernel as surface terms $\hat{S}_\Gamma$;
-  \item what is left in the complement $\mathcal{K}[\hat{\alpha}]\setminus \hat{S}_\Gamma$ are master terms $M_\Gamma$
+  \item Generate IBP identities which relate
+    \emph{only} monomials from $\mathcal{K}_{\vb*{x},D;\rho}[\hat{\vb*{\alpha}}]$, i.e.\ those which do not increase powers of denominators (and do not add new denominators).
+    These identities can all be taken as surface terms, but they are not independent. 
+    \label{item1}
+  \item  Viewing each surface term as a vector in the linear space of monomials $\hat{\vb*{\alpha}}^{\va{i}}$, take
+    a basis of this space as the set $\hat{S}_\Gamma$
+    \label{item2}
+  \item The vectors from the complement $\mathcal{K}[\hat{\vb*{\alpha}}]\setminus \hat{S}_\Gamma$ are then master terms $M_\Gamma$
+    \label{item3}
 \end{enumerate}
 
 In principle the described procedure can be carried out with standard IBP reduction techniques discussed in \cref{sec:ibp}.
@@ -184,52 +200,57 @@ And indeed currently publicly available reduction programs
 have problems with reducing high degrees of ISPs in many variables.
 
 Instead we can generate from the start only the IBP identities described in \cref{item1},
-known as \emph{unitarity-compatible} IBP identities \cite{Ita:2015tya,Abreu:2017xsl,Gluza:2010ws,Schabinger:2011dz,Larsen:2015ped}, by
+known as \emph{unitarity-compatible} IBP identities \cite{Gluza:2010ws,Schabinger:2011dz,Ita:2015tya}, by
 restricting the IBP vectors $v_i^\mu$ in \cref{eq:ibps} to satisfy
 \begin{equation} \label{eq:non_doubling_ibp_vectors}
   \sum_i v_i^\mu(\vb*{x},D;\vb*{\rho},\vb*{\alpha}) ~ \pdv{\ell^\mu_i} \rho_k = f(\vb*{x},D;\vb*{\rho},\vb*{\alpha}) ~ \rho_k, \qquad \forall k\in P_\Gamma,
 \end{equation}
 where it is crucial that both the arbitrary function $f$ and the vector components $v_i^\mu$ are polynomial in $\vb*{\rho}$ and $\vb*{\alpha}$, not rational.
 
-The most straightforward way to find all vectors satisfying \cref{eq:non_doubling_ibp_vectors} 
-is by inserting a simple ansatz
-\begin{equation}
-  v_i^\mu = \sum_{j}^{}c^{(\text{loop})}_{ij}\ell^\mu_j ~+~ c^{(\text{ext})}_{ij} \sum_{j}^{}p^\mu_j
-    c_{ij}^{(\ldots{})} = 
-\end{equation}
-into \cref{eq:non_doubling_ibp_vectors}.
-The system of linear equations for coefficients \ldots{} can be readily read off.
+{
+  \def\coeff{c^{(\text{loop, ext})}_{ij,\va{k}_\rho \va{k}_{\hat{\alpha}}}}
+  A naive way to find all vectors satisfying \cref{eq:non_doubling_ibp_vectors}
+  is by inserting a simple ansatz
+  \begin{equation}
+    v_i^\mu = \sum_{j}^{}c^{(\text{loop})}_{ij}\ell^\mu_j ~+~  \sum_{j}^{}c^{(\text{ext})}_{ij} p^\mu_j, \qquad
+    c_{ij}^{(\text{loop,ext})} = \sum_{\va{k}_\rho, \va{k}_{\hat{\alpha}}} \coeff (\vb*{x},D)\, \vb*{\rho}^{\va{k}_\rho}\vb*{\hat{\alpha}}^{\va{k}_\alpha}
+  \end{equation}
+  into \cref{eq:non_doubling_ibp_vectors}.
+  The linear constraints for coefficients $\coeff$ can be then solved with standard linear algebra.
+}%
+In practice much more powerful methods of solving \cref{eq:non_doubling_ibp_vectors}  based on computational
+algebraic geometry can be employed \cite{Larsen:2015ped,Boehm:2018fpv,Zhang:2016kfo,Abreu:2017xsl,Bendle2019}.
+Having unitarity-compatible IBP vectors at hand trivializes the generation of an overcomplete set of surface terms.
+The spanning set of surface terms is then obtained as outlined in \cref{item2,item3}.
 
-A much more powerful and beautiful way of finding the solutions of unitarity-compatibility equations based on algebraic geometry methods.
-
-Excellent lectures
-Here references for Yang lectures and modules and syzygys and so on\ldots{}.
-
-In particular powerful when combined with unitarity cuts.
-
+\todo{power counting remarks: 1. in general had to be increased before bringing it down to final}
 
 \todo{note: $M_\Gamma$ can be and frequently is empty}
 
-\todo{define clearly on-shell of topology so I can use it everywhere} 
+\todo{define clearly on-shell of topology so I can use it everywhere}
 
+\todo{surface terms themselves need to be off-shell, can be checked with standard IBP reduction} 
 
-\begin{itemize}
-  \item linear independence can be checked on-shell
-  \item surface terms themselves need to be off-shell, can be checked with standard IBP reduction
-\end{itemize}
-
+\todo{linear independence can be checked on-shell}
 
 \section{Cut Equations}
+\label{sec:cut_equations}
+
+I want to take the pragmatic perspective. And in practice it is not even essential:
+\begin{itemize}
+    \item       the most practical and flexible way to compute them in $D$ dimensions is with off-shell recursions (see references e.g. in tails of 1001 gluons)
+    \item Actually it is not even always the case as we see for massive particles.
+\end{itemize}
+
+LHS can be just an expression obtained from Feynman diagrams
+
+However in perturbation theory the fact that the corners are tree amplitudes can be seen explicitly.
+Because we collect together all graphs containing a particular singularity.
+
 
 We have constructed the master/surface basis in \cref{eq:master_surface_basis}. Now we discuss how
 to reduce amplitudes to it.
 
-Can be used to fit any integrand parametrization. For example one
-can want to not have $D$-dependent coefficient, and fit to simple monomials.
-Or one can eliminate transverse ISPs only, and do the IBP reduction later.
-Or one can choose master/surface basis and do the full reduction in place.
-
-Since the hardest problem is of IBP reduction it is beneficial to choose master/surface basis.
 
 \subsection{On-Shell Loop-Momenta}
 
@@ -255,6 +276,15 @@ tracking of representations?
 Here discussion about \textit{subleading poles}
 
 
+\section{Discussion}
+The two parts of our method are largely independent of each other and can be used separately if deemed beneficial.
+
+Can be used to fit any integrand parametrization. For example one
+can want to not have $D$-dependent coefficient, and fit to simple monomials.
+Or one can eliminate transverse ISPs only, and do the IBP reduction later.
+Or one can choose master/surface basis and do the full reduction in place.
+
+Since the hardest problem is of IBP reduction it is beneficial to choose master/surface basis.
 
 \section{Examples}
 
