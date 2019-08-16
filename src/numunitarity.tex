@@ -94,7 +94,12 @@ where we allow coefficients $c_{\Gamma,i}$ to depend on $\vb*{\rho}$.
 %except for $\eval{c_{\Gamma,\va{i}}}_{\rho_j \to 0} = 0$,
 %such that all monomials  stay irreducible.
 The basis of the linear vector space of all monomials from $\mathcal{K}_{\vb*{x},D}[\vb*{\alpha}]$ is of course infinite,
-but the maximal degree we need to consider in practice is always limited from above by UV behavior of the particular model under consideration.
+but the maximal degree  we need to consider $\mathsf{P}$ in practice is always limited from above by UV behavior of the particular model under consideration.
+The number of basis elements is thus 
+\begin{equation} \label{eq:number_of_monomials}
+  \dim{\spn{\vb*{\alpha}^{\va{i}} : \abs{\va{i}} < \mathsf{P}}} =  \frac{(N_\text{ISP} + \mathsf{P})!}{N_\text{ISP}! \mathsf{P}!}.
+\end{equation}
+\todo{Per loop power counting}
 
 \todo{potentially mention here on how the transverse vectors are obtained}
 
@@ -224,7 +229,7 @@ Having unitarity-compatible IBP vectors lets us trivially generate an overcomple
 by inserting the vectors in \cref{eq:ibps}.
 The spanning set (i.e.\ complete and non-redundant) is then obtained as outlined in \cref{item2,item3}.
 The basis of numerators is constructed modulo RSPs, so
-linear dependences between surface terms can be found with on-shell conditions $\rho_j=0$ imposed.
+linear dependences between surface terms are found with on-shell conditions $\rho_j=0$ imposed.
 This can be very helpful when the size of the basis gets large.
 Sometimes the set $M_\Gamma$ is found to be empty, which means that there are
 no master integrals on this topology.
@@ -234,13 +239,13 @@ no master integrals on this topology.
 \section{Cut Equations}
 \label{sec:cut_equations}
 
-We have constructed the master/surface basis in \cref{eq:master_surface_basis},
-so to mathch the amplitude to our ansatz
+In the previous \crefname{sec:ansatz_integrand} we discussed how to construct a master/surface basis
+of all possible numerators for each topology, so the integrand of an amplitude must 
+have the form
 \begin{equation}
-  \sum_{\Gamma \in \Delta} \sum_{\gamma} \sum_{\va{i}} ~ c_{\Gamma\gamma, \va{i}} (\vb*{x},D) ~ 
-  \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
-  \frac{m^{\va{i}}_{\Gamma\gamma}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
-    }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{j}}}.
+  \sum_{\Gamma \in \Delta} \sum_{\gamma} \sum_{i \in M_\Gamma \cup S_\Gamma}^{} c_{\Gamma, i}(\vb*{x},D) \;
+  \frac{m_{\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha}) }%
+    {\prod_{j\in P_\Gamma} \rho_j^{\gamma_{j}}}.
 \end{equation}
 we only need to extract master coefficients.
 We didn't care what's on the left: in principle it's just an expression obtained from Feynman diagrams.
@@ -280,6 +285,15 @@ weyl and Dirac fermions,
 tracking of representations?
 
 states in appendix?
+
+In the context of off-shell recursion it is more efficient to reverse
+the decomposition of cut propagators into state sums, and treat them
+as ``closed'' currents.
+
+ 
+S-tree cuts (also reference Peraro's paper where this is explain as well)
+
+Top-down and bottom-up.
 
 
 \subsection{Dimensional Reconstruction}
@@ -327,8 +341,8 @@ It might be reasonable to do for higher-order computations where higher orders o
 Starting from two loops will have $D$-dependence in the numerator from IBP identities, so
 we can choose to abandon all-together the idea of not having it there.
 
+Tables with number of monomials, etc.
 
-Take 5-point hierarchy.
 
 \subsubsection{Pentagon}
 
