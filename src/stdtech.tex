@@ -62,16 +62,16 @@ a corresponding tree amplitude $A^{0}_N$
 
 
 The most general form of any $L$-loop amplitude with $N$ external particles with momenta $p_1,\ldots,p_N$ and polarization states $\varepsilon_1,\ldots,\varepsilon_N$ is
-\todo{clean up $\gamma$ sums in this section}
 \begin{equation}
-  \sum_{\Gamma \in \Delta} \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~ \sum_{\gamma} 
-  \frac{\mathcal{N}_{\Gamma,\gamma}%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
-    }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{j}}},
+  \sum_{\Gamma \in \Delta} \sum_{\gamma_\Gamma} \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~ 
+  \frac{\mathcal{N}_{\Gamma,\gamma_\Gamma}%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
+    }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma j}}},
     \qquad \tilde{\dd{\ell_i}} \equiv \frac{\dd[D]{\ell_i}}{(2\pi)^{D}}.
   \label{eq:general_amplitude}
 \end{equation}
-Here $\rho_j = q_j^2 - m_j^2$ is a denominator of a propagator with momentum $q_j$ and mass $m_j$. The sum $\sum_{\gamma}$ runs over all possible assignments
-of exponents $\gamma_{j} > 0$ of each propagator $\rho_j$. We define a \emph{topology} $\Gamma$ to be identified with a particular set of propagators $P_\Gamma$,
+Here $\rho_j = q_j^2 - m_j^2$ is a denominator of a propagator with momentum $q_j$ and mass $m_j$. The sum $\sum_{\gamma_\Gamma}$ runs over all assignments
+of exponents $\gamma_{\Gamma j} > 0$ of each propagator $\rho_j$. 
+We define a \emph{topology} $\Gamma$ to be identified with a particular set of (unique) propagators $P_\Gamma$,
 treating two sets of propagators equal if one can be transformed into the other with linear reparametrizations of loop momenta.
 Note that topologies defined in this sense can have multiple graph representations.
 The external sum runs over a set of all distinct topologies $\Delta$ contributing to the amplitude.
@@ -80,15 +80,15 @@ are functions of all possible scalar products of loop momenta, external momenta 
 
 Carrying out loop integrations in \cref{eq:general_amplitude} is extremely challenging task in general.
 Fortunately there are many relations between integrals in \cref{eq:general_amplitude}.
-And it is thus sufficient to consider a significantly smaller set of integrals $\Delta_\Gamma \subset \Delta$ commonly referred to
+And it is thus sufficient to consider a significantly smaller set of integrals $\Delta_M \subset \Delta$ commonly referred to
 as \emph{master integrals}. Then the amplitude can be written in the form
 \begin{equation}
-  \sum_{\Gamma \in \Delta_\Gamma} \sum_{i\in M_\Gamma} ~ c_{\Gamma,i} ~ I_{\Gamma,i}, 
+  \sum_{\Gamma \in \Delta_M} \sum_{i\in M_\Gamma} ~ c_{\Gamma,i} ~ I_{\Gamma,i}, 
     \qquad I_{\Gamma,i} \equiv 
-      \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{i,j}}},
+      \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}},
   \label{eq:amplitude_integrated}
 \end{equation}
-where $M_{\Gamma}$ is a set of particular choices of numerator insertions $m_{\Gamma,i}$ and exponents $\gamma_i$.
+where $M_{\Gamma}$ is a set of particular choices of numerator insertions $m_{\Gamma,i}$ and exponents $\gamma_{\Gamma i}$.
 Despite the fact that the numerator functions $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ in \cref{eq:general_amplitude} depend on the types of external particles and a particular model,
 the master integrals $I_{\Gamma,i}$ are universal and determined only by kinematics.
 
@@ -104,7 +104,7 @@ so the master integrals can be recycled for all kinematically-equivalent amplitu
 
 In this thesis we focus on the reduction to master-integral coefficients.
 We will review the standard approach in the next section, and
-then explain how unitarity-based methods allow to address some of it's difficulties in \cref{chap:numunitarity}
+then explain how unitarity-based methods allow to address some of it's difficulties in \cref{chap:numunitarity}.
 
 \section{Classification of Numerators}
 \label{sec:classification_numerators}
@@ -121,7 +121,7 @@ Due to the Lorentz-invariance the numerators $\mathcal{N}_{\Gamma,\gamma_\Gamma}
 where $D_{\text{ext}}$ is the dimensionality of external states and momenta.
 Here the vectors $\tau^i$ are the basis of the orthogonal complement of $\spn{p_1,\cdots,p_{N-1}}$ to the full four-dimensional Minkowski space,
 so we have $p_i \cdot \tau_j = 0$.
-The directions $\tau^i$ can be introduced to $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ through external polarization states, hence
+The directions $\tau^i$ can be introduced into $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ through external polarization states, hence
 the scalar products $\sp(\ell_i, \tau_j)$ will drop out if polarization sums are performed.
 In the HV scheme $D_{\text{ext}}=4$ and the number of corresponding scalar products is
 \begin{equation}
@@ -136,19 +136,19 @@ In the HV scheme $D_{\text{ext}}=4$ and the number of corresponding scalar produ
 \end{equation}
 
 The numerators $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ can be thus represented as elements of a polynomial ring
-$\mathcal{K}_{\vb*{x},D}[\vb*{sp}]$ 
-with coefficients $c_{\va{i}}(\vb*{x},D)$ being rational functions of external kinematics $\vb*{x}$ and $D$:
-\begin{multline}
-  \mathcal{N}_{\Gamma,\gamma_\Gamma}(\vb*{x}, \vb*{sp}, D) = \sum_{\va{i} : \abs{\va{i}} < H_{\Gamma}} c_{\va{i}} (\vb*{x},D)~ m^{\va{i}}(\vb*{sp}), \\
-  m^{\va{i}}(\vb*{sp}) = (\sp(\ell_1,\ell_1))^{i_1} ~\cdots~ (\sp(\ell_1,p_1))^{i_{\min\qty(4,N-1)L}} ~\cdots~,
+$\mathbb{Q}_{\vb*{x},D}[\vb*{sp}]$ 
+with coefficients $c_{\va{i}}(\vb*{x},D)$ from a field of rational functions $\mathbb{Q}_{\vb*{x},D}$ of external kinematics $\vb*{x}$ and $D$:
+\begin{equation}
+  \mathcal{N}_{\Gamma,\gamma_\Gamma}(\vb*{x}, \vb*{sp}, D) = \sum_{\va{i} : \abs{\va{i}} < H_{\Gamma}} c_{\va{i}} (\vb*{x},D)~ m^{\va{i}}(\vb*{sp}),
+  %m^{\va{i}}(\vb*{sp}) = (\sp(\ell_1,\ell_1))^{i_1} ~\cdots~ (\sp(\ell_1,p_1))^{i_{\min\qty(4,N-1)L}} ~\cdots~,
+  \qquad m^{\va{i}}(\vb*{sp}) = \mathrm{sp}_1^{i_1} ~\ldots{}~ \mathrm{sp}_{\dim{\vb*{sp}}}^{i_{\dim{\vb*{sp}}}},
   %%(\sp(\ell_L, \tau_{4-\min\qty(4,N-1)}))^{\i_{\dim{\vb*{sp}}}}
-\end{multline}
-\todo{fix the monomial definition} 
+\end{equation}
 where the sum runs over all monomials $m^{\va{i}}(\vb*{sp})$ with \emph{total degree} $\abs{\va{i}} \equiv \sum_j i_j$ less than
-$ H_{\Gamma} $, which is determined by the UV structure of the model in consideration.
+$ H_{\Gamma} $. $ H_{\Gamma} $ is determined by the UV structure of the model in consideration.
 
 
-For a given topology $\Gamma$ in \cref{eq:general_amplitude} we chose $N_p$ denominators $\vb*{\rho}\equiv\{\rho_1,\ldots,\rho_{N_p}\}$ as
+For a given topology $\Gamma$ in \cref{eq:general_amplitude} we chose $N_p$ denominators $\vb*{\rho}\equiv\{\rho_1,\ldots,\rho_{N_p}\} \in P_\Gamma$ as
 independent variables. Then $N_p$ scalar products from the set $\vb*{sp}$
 can be expressed as functions of the denominators $\vb*{\rho}$.
 This implies
@@ -157,7 +157,7 @@ one of the denominators and attributed to a topology with less propagators.
 For this reason these scalar products are commonly called \emph{reducible scalar products} (RSP).
 We choose the remaining scalar products
 \begin{equation}
-  \vb*{\alpha} \equiv \vb*{sp} \setminus \text{(RSP)}, \qquad \dim{\vb*{\alpha}} \equiv N_\text{ISP} =  \dim{\vb*{sp}}-N_p,
+  \vb*{\alpha} \equiv \vb*{sp} \setminus \{\text{RSPs}\} , \qquad \dim{\vb*{\alpha}} \equiv N_\text{ISP} =  \dim{\vb*{sp}}-N_p,
 \end{equation}
 which are called
 \emph{irreducible scalar products} (ISP) to be the rest of our independent variables.
@@ -221,10 +221,10 @@ exhibits many other useful properties, nonetheless we will not need to adopt it 
 
 Using \cref{eq:rsp_reduction} we can bring \cref{eq:general_amplitude} to the form 
 \begin{equation} \label{eq:rsp_reduced_amplitude}
-  \sum_{\Gamma \in \Delta} \sum_{\gamma} \sum_{\va{i}} ~ c_{\Gamma\gamma, \va{i}} (\vb*{x},D) ~ 
+  \sum_{\Gamma \in \Delta} \sum_{\gamma_\Gamma} \sum_{\va{i}} ~ c_{\Gamma\gamma_\Gamma, \va{i}} (\vb*{x},D) ~ 
   \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
-  \frac{m^{\va{i}}_{\Gamma\gamma}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
-    }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{j}}}.
+  \frac{m^{\va{i}}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
+    }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma j}}}.
 \end{equation}
 The integrals in \cref{eq:rsp_reduced_amplitude} are process-independent and have the desired form of \cref{eq:amplitude_integrated}.
 However we are still missing a large number of identities due to the vanishing of the total derivative in dimensional regularization.
@@ -281,9 +281,9 @@ which is in turn due to the number of choices of IBP vectors, as well as the fac
 in general include the relations for integrals with raised denominators powers, even
 though this integrals are mostly not found from Feynman rules.
 In the end the bottleneck is coming from the requirement to solve massive systems of linear equations.
-Many great advances in the IBP-reduction technology has happened
+Many great improvements to the IBP-reduction technology has been suggested
 \cite{Gluza:2010ws,Schabinger:2011dz,Larsen:2015ped,Bern:2017gdk,Chawdhry:2018awn,Badger:2008cm,Kosower:2018obg,Mastrolia:2018uzb,Frellesvig:2019kgj,Frellesvig:2019uqt,Bendle2019}
-since the Laporta algorithm became the standard of the field.
+since the Laporta algorithm became widespread.
 It was also proposed to reconstruct the reduction tables from
 numerical evaluations over finite fields \cite{vonManteuffel:2014ixa,Peraro:2016wsq,Peraro:2019svx,Klappert:2019emp,Smirnov:2019qkx}.
 There is still a problem however,
@@ -291,16 +291,13 @@ that even when the analytic reduction tables can be obtained,
 they might be not very useful for reduction of amplitudes due
 to the prohibitive size of expressions (see e.g.\ \cite{Chawdhry:2018awn,Bendle2019}).
 To this end it seems beneficial to carry out IBP reduction numerically and reconstruct
-amplitudes instead \cite{Badger:2018enw,Chicherin:2018yne,Badger:2019djh}.
+analytic expressions for amplitudes instead \cite{Badger:2018enw,Chicherin:2018yne,Badger:2019djh}.
 
 In this thesis we will take advantage of generalized unitarity-based methods (see \cref{chap:numunitarity}),
 which do not require the full solution of IBP systems, and thus
 partially avoid the problems discussed above.
 
 \todo{potentially mention that the tables are once and for all} 
-
-\todo{Example?}
-
 
 \section{Master Integrals}
 
@@ -309,7 +306,7 @@ to all terms in \cref{eq:rsp_reduced_amplitude}.
 This determines the coefficients of master integrals
 \begin{equation} \label{eq:master_integrals}
     \qquad I_{\Gamma,i} = 
-    \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{i,j}}}.
+    \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}}.
 \end{equation}
 in \cref{eq:amplitude_integrated}.
 
@@ -325,11 +322,15 @@ Another method is the integration in the Mellin-Barnes  representation  \cite{Sm
 has been used to solve some two-loop integrals.
 However the most commonly used and successful method is to obtain analytic results via
 differential equations \cite{Kotikov:1990kg,Remiddi:1997ny,Gehrmann:1999as,Henn:2013pwa,Argeri:2007up,Henn:2014qga}.
+These equations are obtained by noticing that
+derivatives of maser integrals with respect to
+external invariants can be IBP-reduced to the linear vector space of master integrals from the same family.
+Thus the whole family of integrals can be obtained from solving the system of linear differential equations,
+given that the boundary conditions are known.
 
-On the numerical side, the commonly used general methods are sector decomposition \cite{Binoth:2000ps,Binoth:2003ak}
-and numerical Mellin-Barnes representation \cite{Czakon:2005rk,Anastasiou:2005cb}.
-See e.g.\ \cite{Freitas:2016sty} for a review.
-
+On the numerical side (see e.g.\ \cite{Freitas:2016sty} for a comprehensive review)
+the commonly used general methods are sector decomposition \cite{Binoth:2000ps,Binoth:2003ak}
+and numerical integration in Mellin-Barnes representation \cite{Czakon:2005rk,Anastasiou:2005cb}.
 Usually the knowledge of analytical expressions is preferable since it allows for better control over
 precision and performance required for Monte-Carlo integration over external phase space. However
 some notable NNLO QCD computations have been carried out with at least one of the integrals evaluated through numerical
