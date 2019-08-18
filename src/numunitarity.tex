@@ -98,7 +98,7 @@ The basis of the linear vector space of all monomials from $\mathbb{Q}_{\vb*{x},
 but the maximal degree  we need to consider $\mathsf{P}$ in practice is always limited from above by UV behavior of the particular model under consideration.
 The number of basis elements is thus 
 \begin{equation} \label{eq:number_of_monomials}
-  \dim{\spn{\vb*{\alpha}^{\va{i}} : \abs{\va{i}} < \mathsf{P}}} =  \frac{(N_\text{ISP} + \mathsf{P})!}{N_\text{ISP}! \mathsf{P}!}.
+  \dim{\spn{\vb*{\alpha}^{\va{i}} : \abs{\va{i}} \leq  \mathsf{P}}} =  \frac{(N_\text{ISP} + \mathsf{P})!}{N_\text{ISP}! \mathsf{P}!}.
 \end{equation}
 \todo{Per loop power counting}
 
@@ -114,7 +114,7 @@ Contracting both sides with $\tau^\mu_j$ and using the orthogonality condition w
 \begin{equation}
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \alpha^{\tau}_{k j}( \equiv \sp(\ell_k,\tau_j)) \quad = 0.
 \end{equation}
-Following the same argument it is easy to show that all monomials $\vb*{\alpha}^{\va{i}}$ with at least
+Following the same argument it is easy to see that all monomials $\vb*{\alpha}^{\va{i}}$ with at least
 one of the transverse ISPs taken to an odd power are vanishing upon integration and thus can be taken as surface terms as is.
 
 Next we consider a rank 2 tensor integral
@@ -135,7 +135,7 @@ where $\mu_{kj} \equiv g^{\phantom{\mu\nu}}_{[D-4]\mu\nu} \ell_k^\mu \ell_j^\nu$
 we append it to our basis.
 
 Similar relations can be found for any product of even powers of $\alpha_j \in \vb*{\alpha}^\tau$.
-They can all be generated with the projector
+They can all be generated with the projector \todo{is it a projector?} 
 \begin{equation}
   \mathrm{P}^{\mu_1\ldots{}\mu_n}_j =  \tau^{\mu_i}_j\ldots{}\tau^{\mu_n}_j - \frac{1}{n}\frac{1}{D-4} \sum_{\sigma \in \mathcal{G}_{2;n}}^{} g^{\mu_{\sigma(1)}\mu_{\sigma(2)}}_{[D-4]}~\tau^{\mu_{\sigma(3)}}_j\ldots{}\tau^{\mu_{\sigma(n)}}_j,
 \end{equation}
@@ -161,7 +161,9 @@ After this is done we are left to consider monomials from the ring $\mathbb{Q}[\
 
 
 We conclude this section with two remarks.
-First, at one loop the master/surface decomposition is hereby complete since all ISPs are transverse.
+First, at one loop the master/surface decomposition is hereby complete since all ISPs are transverse.\footnote{%
+  there is a peculiar exception, see examples in \cref{sec:ms_examples}
+}
 Second, the traceless completions of transverse ISPs alternatively
 can be obtained through a specially constructed IBP identities \cite{Ita:2015tya}.
 
@@ -214,7 +216,7 @@ where it is crucial that both the arbitrary function $f$ and the vector componen
   \def\coeff{c^{(\text{loop, ext})}_{ij,\va{k}_\rho \va{k}_{\hat{\alpha}}}}
   A naive way to find all vectors satisfying \cref{eq:non_doubling_ibp_vectors}
   is by inserting a simple ansatz
-  \begin{equation}
+  \begin{equation} \label{eq:unitarity_compaible_ibp_ansatz}
     v_i^\mu = \sum_{j}^{}c^{(\text{loop})}_{ij}\ell^\mu_j ~+~  \sum_{j}^{}c^{(\text{ext})}_{ij} p^\mu_j, \qquad
     c_{ij}^{(\text{loop,ext})} = \sum_{\va{k}_\rho, \va{k}_{\hat{\alpha}}} \coeff (\vb*{x},D)\, \vb*{\rho}^{\va{k}_\rho}\vb*{\hat{\alpha}}^{\va{k}_\alpha}
   \end{equation}
@@ -243,44 +245,242 @@ no master integrals on this topology.
 
 \todo{can be checked with standard IBP reduction} 
 
+
 \subsection{Examples}
+\label{sec:ms_examples}
 
-\subsubsection{One-Loop Hierarchy}
+We now consider some examples of constructing the master/surface basis.
+First we take a look at all one-loop topologies, 
+and then a two-loop topology.
 
-Once the automated approach is set up, the one-loop case is so simple that we can
-do the full one-loop hierarchy.
+\subsection{One-Loop Topologies}
 
-Compare to ``normal'' decomposition, we allow $D$-dependence in numerators. This might be not the best
-idea for NLO computations since terms of order $\mathcal{O}(\epsilon)$ can be dropped.
-It might be reasonable to do for higher-order computations where higher orders of $\epsilon$ are required.
+Once a multi-loop generalization of the technology for finding master/surface decomposition 
+is set up, the case $L=1$ seems to be nothing but a simple warm-up. 
+Most of general features of the approach do in fact appear in one-loop topologies,
+so it is instructive to consider.
+Although, of course, the reader familiar with the one-loop literature may find
+their application somewhat superfluous.
 
-Starting from two loops will have $D$-dependence in the numerator from IBP identities, so
-we can choose to abandon all-together the idea of not having it there.
+Compared to the ``usual'' basis of one-loop numerator insertions of \cite{Ossola:2006us,Giele:2008ve},
+our basis will contain explicit $D$-dependence, and so will the coefficients.
+This is the price paid for requiring to have the least amount of master integrals possible.
+From efficiency perspective this is probably not a good idea for NLO computations,
+since the terms of $\mathcal{O}(\epsilon)$ can be dropped
+and extra master integrals can be arranged to be trivial, generating a so-called rational part.
+For NNLO computations and beyond, where higher orders in the $\epsilon$-expansion are required, 
+this might be not unreasonable to think of.
 
-Tables with number of monomials, etc.
+For $L=1$ the total number of scalar products is $\dim{\vb*{sp}} = 4\cdot 1+ 1 = 5$.
+Hence topologies with the number of propagators $N_p>5$ are reducible.
+
+%\begin{table}[ht!]
+  %\centering
+  %\begin{tabular}{cccccc}
+    %\toprule
+    %$N_p$ & $N_\text{ISP}$ & $\mathsf{P}$ & $\dim \spn{\vb*{\alpha}^{\va{i}}}$ & Monomials \\
+    %5 & 0 & 5 & 1   &   $\{1\}$\\
+    %4 & 1 & 4 & 5   & $\{1,\alpha_1,\alpha_1^2,\alpha_1^3,\alpha_1^4\}$\\
+    %3 & 2 & 3 & 10  & \\
+    %2 & 3 & 2 & 10  & $\{1,\alpha_1,\alpha_2,\alpha_3,\alpha_1^2,\alpha_1\alpha_2,\alpha_1\alpha_3,\alpha_2^2,\alpha_2\alpha_3, \alpha_3^2\} $ \\
+    %1 & 4 & 1 & 5   \\
+    %\midrule
+    %\bottomrule
+  %\end{tabular}
+  %\caption{One-loop topologies}
+  %\label{tab:counting_1l_topos}
+%\end{table}
+
+\textbf{Pentagon}
+
+For pentagon topologies the 5 propagators $\{\rho_1,\ldots{}\rho_5\}$ are chosen as 5 independent variables,
+so there are no irreducible insertions except for the scalar, and there are no IBP identities involving it. 
+The one master insertion is usually chosen to be $\mu^2$, such that
+the corresponding integral contributes only from  $\order{\epsilon}$.
+
+\todo{Recall that $\mu^2(\vb*{\rho})$ is not an independent variable.} 
+
+\textbf{Box}
+
+For boxes we have  4 propagators $\{\rho_1,\ldots{}\rho_4\}$ and an ISP $ \alpha_1 = \sp(\ell,\tau_1), $
+corresponding to one transverse direction.
+The possible monomials up to degree 4 are 
+\[
+  \{1,~\alpha_1,~\alpha_1^2,~\alpha_1^3,~\alpha_1^4\},~
+\]
+from which $\alpha_1,\alpha_1^3$ are surface terms trivially.
+For monomials $\alpha_1^2$ and $\alpha_1^4$ we use the traceless completions in
+\cref{eq:traceless_completion_replacements}. There are no IBP relations for box topologies so
+our master/surface decomposition is
+\[
+  M_{\Gamma_\text{box} } = \{1\}, \qquad S_{\Gamma_\text{box} } = \{\alpha_1,~ \alpha_1^2 - \frac{\mu^2}{D-4},~ \alpha_1^3,~ \alpha_1^4 - 3 \frac{\alpha_1^2~\mu^2}{D-4}\}.
+\]
+Compared to the ``standard'' choice (e.g.\ from \cite{Giele:2008ve}),
+\[
+  M_{\Gamma_\text{box} } = \{1, \mu^2, \mu^4\}, \qquad S_{\Gamma_\text{box} } = \{\alpha_1,~ \alpha_1 \mu^2 \}.
+\]
+we have two less master integrals.
 
 
-\subsubsection{Pentagon}
 
-Take $\mu^2$ insertion.
+\textbf{Triangle}
 
-\subsubsection{Box}
+For triangles there are two ISPs: $ \alpha_1 = \sp(\ell,\tau_1)$, and $\alpha_2 = \sp(\ell,\tau_2)$,
+corresponding to two transverse direction.
+The 10 possible monomials up to total degree 3 are:
+\[
+\{1,~\alpha_1,~\alpha_2,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_2^2,~ \alpha_1^3,~ \alpha_1^2\alpha_2,~ \alpha_1\alpha_2^2,~ \alpha_2^3\}.
+\]
+from which all except $\{1,~\alpha_1^2,~\alpha_2^2\}$ are trivial surface terms,
+and the last two are traceless completed.
+For boxes and pentagons our considerations did not depend on a particular kinematics configuration.
+For triangles this is not the case. For generic kinematics with massive propagators
+and all $p_i^2\neq 0$, the decomposition is 
+\begin{align*}
+  M_{\Gamma_\text{tri} } &= \{1\}, \\
+   S_{\Gamma_\text{tri} } &= 
+  \{\alpha_1,~\alpha_2,~\alpha_1^2 - \frac{\mu^2}{D-4},~\alpha_1\alpha_2,~\alpha_2^2- \frac{\mu^2}{D-4},~ \alpha_1^3,~ \alpha_1^2\alpha_2,~ \alpha_1\alpha_2^2,~ \alpha_2^3\}.
+\end{align*}
+However for a special case when
+\begin{equation}
+  \begin{tabular}{ll}
+    $\rho_1 = \ell^2$,               &  $p_1^2=0 \qor p_1^2\neq 0$, \\
+    $\rho_2 = (\ell-p_1)^2$,         &  $p_2^2=0$,  \\
+    $\rho_3 = (\ell-p_1-p_2)^2$, \hspace{2cm}    & $p_3^2\neq 0$, \\
+  \end{tabular}
+\end{equation}
+we find non-trivial unitarity-compatible IBP vectors from \cref{eq:non_doubling_ibp_vectors}, for example
+\[
+  (\sp(p_1,p_2) + \rho_2 - \rho_3)~\ell^\mu  - \frac{1}{2} (2 \sp(p_1,p_2) + \rho_2 - \rho_3)~p_1^\mu  + \frac{1}{2}   (p_1^2 - \rho_1 - \rho_2)~p_2^\mu.
+\]
+Inserting it in \cref{eq:ibps} we obtain a surface term
+\[  
+  (D-4) \sp(p_1,p_2) + (D-3) (\rho_2-\rho_3).
+\]
+So for this kinematics configuration the whole space is spanned by surface terms,
+\begin{align*}
+  M_{\Gamma_\text{tri} } &= \{\}, \\
+   S_{\Gamma_\text{tri} } &= 
+  \Big\{(D-4) \sp(p_1,p_2) + (D-3) (\rho_2-\rho_3),\\ 
+    &\qquad \alpha_1,~\alpha_2,~\alpha_1^2 - \frac{\mu^2}{D-4},~\alpha_1\alpha_2,~\alpha_2^2- \frac{\mu^2}{D-4},~ \alpha_1^3,~ \alpha_1^2\alpha_2,~ \alpha_1\alpha_2^2,~ \alpha_2^3 \Big\}.
+\end{align*}
+This happens very frequently starting from two loops.
 
-\subsubsection{Triangle}
-
-Here also show that 1 and 2 mass triangles can be reduced
 
 \subsubsection{Bubble}
 
-See what happens with the light-like external momentum from the IBP perspective?
-Should work out.
+For generic kinematics we have 3 ISPs, $\{\alpha_1,~\alpha_2,~\alpha_3\}$, and
+10 monomials up to the total degree 2,
+\[
+  \{1,~\alpha_1,~\alpha_2,~\alpha_3,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_1\alpha_3,~\alpha_2^2,~\alpha_2\alpha_3,~ \alpha_3^2\}.
+\]
+As before we convert all transverse ISPs to surface terms and we are left with one master integral.
+
+There is an exceptional kinematical configuration,
+\begin{equation*}
+  \begin{tabular}{ll}
+    $\rho_1 = \ell^2-m^2$,               &  \qquad $p_1^2=0$,\\
+    $\rho_2 = (\ell-p_1)^2-m^2$,         &  \\
+  \end{tabular}
+\end{equation*}
+for which something peculiar happens:
+because $p_1$ is light-like, the transverse ``complement'' to it has to contain $p_1$ itself, thus the full four-dimensional space
+cannot be decomposed into a direct sum of $\spn{p_1}$ and it's transverse, like we have done before.
+Instead we have to introduce a random light-like vector $\tau_\chi^\mu$,
+\[
+  \tau_\chi^2=0, \qquad \sp(\tau_\chi,\tau_{\{1,2\}}) = 0, \qquad  \sp(p_1,\tau_\chi) \neq 0,
+\]
+such that $\spn{p_1,\tau_1,\tau_2,\tau_\chi}$ spans the full four-dimensional space.
+We realize that $\chi \equiv \sp(\ell,\tau_\chi)$ is neither RSP nor it is a transverse ISP, so 
+we need to employ IBP identities.
+We add to the ansatz \eqref{eq:unitarity_compaible_ibp_ansatz} terms proportional to $\tau_\chi^\mu$ and solve them.
+We find two surface terms,
+\begin{align*}
+  s_1 &= (\sp(p_1,\tau_\chi)) \qty(2 m^2 + \rho_1) - (D-1)\rho_1\chi, \\
+  s_2 &= (\sp(p_1,\tau_\chi))^2 - 3 \chi^2,
+\end{align*}
+and can choose $\chi$ as the one master. The master/surface decomposition is thus
+\begin{align*}
+  M_{\Gamma_\text{b0} } &= \{\chi\}, \\
+   S_{\Gamma_\text{b0} } &= 
+  \{s_1,~s_2,~\alpha_1,~\alpha_2,~\alpha_1^2 - \frac{\mu^2}{D-4},~\alpha_1\alpha_2,~ \alpha_1\chi,~\alpha_2^2-\frac{\mu^2}{D-4},~\alpha_2\chi \}.
+\end{align*}
+Of course in this case the master integrals from insertions $\chi$ and $\chi^2$ can be computed trivially by direct integration.
+For $m^2=0$ the corresponding integrals are scaleless, and vanish in dimensional regularization,
+so this topology can be discarded.
 
 \subsubsection{Tadpole}
+Massless tadpoles vanish in dimensional regularization and can be discarded.
+For massive tadpoles there are 4 transverse ISPs, and one master integral,
+so the decomposition is done in the same way as above.
 
-\subsubsection{Some Two-Loop Topology}
+\subsection{Two-Loop Sunrise}
 
-\todo{select a topology which is not too big to present}
+\begin{wrapfigure}{l}{0.25\linewidth}
+  \includegraphics[width=1\linewidth]{sunrise_kinmatics_example}
+\end{wrapfigure}
+As a two-loop example we choose a two-loop massless ``sunrise'' topology, which is simple enough to fit the answer on a page.
+For $L=2$ we have 11 scalar products. There are 3 propagators in the sunrise, so we have 8 ISPs in total.
+From them 6 are transverse. 
+We choose the independent variables to be 
+\begin{align*}
+  \rho_1 &= \ell_1^2,            \qquad & \alpha_1 = 2 (\sp(\ell_1,p_1)), \\
+  \rho_2 &= \ell_2^2,                    & \alpha_2 = 2 (\sp(\ell_2,p_1)), \\
+  \rho_3 &= (\ell_1-\ell_2-p_1)^2. &
+\end{align*}
+Using the formula \cref{eq:number_of_monomials} we get that there are 45 monomials up to the total degree 2.
+39 of them contain at least one of the transverse ISPs, so we traceless complete them as in the one-loop case.
+We are then left to deal with 6 monomials
+\[
+  \{1,~ \alpha_1,~ \alpha_2,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_2^2\}.
+\]
+Employing the ansatz \eqref{eq:unitarity_compaible_ibp_ansatz} we find lots of unitarity-compatible IBP vectors.
+A couple of examples are:
+\begin{equation*}
+  \begin{tabular}{CC}
+    v_1^\mu & v_2^\mu \\
+    \midrule
+    ( s -\alpha_2)\qty(( s  - \alpha_1) \ell_1^\mu + \rho_1 p_1^\mu)  &   (\alpha_2- s ) \qty( ( s +\alpha_2^2)\ell_2^\mu - \rho_2 p_1^\mu) \\
+    (\alpha_1- s )\ell_1^\mu - \rho_1 p_1^\mu         &     ( s +\alpha_2) \ell_2^\mu - \rho_2 p_1^\mu \\
+    \left( 2 s  - 2\alpha_1+\alpha_2 \right) \ell_1^\mu + \left( - s +\alpha_1-\alpha_2 + \rho_1 -\rho_2+\rho_3 \right) +\alpha_1\ell_2^\mu &  0\\
+    \ldots{} & \ldots{}\\
+    %\multicolumn{2}{C}{\ldots{}\ldots{}} \\
+  \end{tabular},
+\end{equation*}
+where $s\equiv p_1^2$.
+We use all these vectors to obtain the corresponding surface terms. 
+In the next step we find the spanning set.
+To do this we treat each surface term as a vector from the vector space 
+$\spn{1,~ \alpha_1,~ \alpha_2,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_2^2}$,
+and find a basis of the subspace spanned by all surface terms. 
+It is important that we do this modulo RSPs, i.e.\ (temporarily) set $\rho_j\to 0$.
+In this case we find that 5 of them are independent:
+\begin{equation*}
+  \begin{array}{l|l}
+    s_1 & \alpha _1^2 (1-D)+\alpha _2^2 (D-1)+\rho _1 s-2 \rho _2 s+\rho _3 s \\
+    s_2 & \alpha _1^2 \left(2 D^2-5 D+3\right)+2 \alpha _1 \alpha _2 (D-1)^2+(3-2 D) \rho _1 s+(3-2 D) \rho _3 s-2 \rho _2 s \\
+    s_3 & \alpha _1^2 \left(-3 D^2+7 D-4\right)+(3 D-4) \rho _1 s-2 (D-2) \rho _2 s+(3 D-4) \rho _3 s+2 \alpha _1 (D-1)^2 s \\
+    s_4 & \alpha _1^2 \left(3 D^2-7 D+4\right)+(4-3 D) \rho _1 s+2 (D-2) \rho _2 s+(4-3 D) \rho _3 s+2 \alpha _2 (D-1)^2 s \\
+    s_5 & -3 \alpha _1^2 \left(3 D^2-7 D+4\right)+3 (3 D-4) \rho _1 s-6 (D-2) \rho _2 s+3 (3 D-4) \rho _3 s+4 (D-1)^2 s^2 \\
+  \end{array}
+\end{equation*}
+This leaves us with just one master integral, which
+we can choose to be any insertion linear independent from $\spn{s_1,\ldots{},s_5}$.
+For example it can be the scalar integral.
 
+
+
+\todo{Maybe also add an example for factorizable} 
+%\subsection{Factorizable Topologies}
+
+%We construct parametrization as 1-loop squared.
+%Thus exactly as in 1-loop we find that all topologies with triangles
+%with 1 or 2 external masses do not have masters and the surface term can be taken exactly the same as from 1-loop triangle.
+%All other have exactly one master and otherwise the space is spanned by traceless completions.
+
+
+\todo{Put somewhere: Starting from two loops will have $D$-dependence in the numerator from IBP identities, so
+we can choose to abandon all-together the idea of not having it there.}
 
 \section{Cut Equations}
 \label{sec:cut_equations}
@@ -290,22 +490,23 @@ In the previous section we discussed how to construct a master/surface basis
 of all possible numerators for each topology, so the integrand of an amplitude must 
 be reducible to the form
 \begin{equation} \label{eq:unitarity_ansatz}
-  A^{(L)}(\{p_i,\varepsilon_i\}, \{\ell_k\}, D) = 
+  A^{(L)}(\{p_i,\varepsilon_i\}, \{\ell_k\}, D) \longrightarrow  
   \sum_{\Gamma \in \Delta} \sum_{\gamma_\Gamma} \sum_{i \in M_{\Gamma\gamma_\Gamma} \cup S_{\Gamma\gamma_\Gamma}} c_{\Gamma\gamma_\Gamma, i}(\vb*{x},D) \;
   \frac{m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha}) }%
     {\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i, j}}},
 \end{equation}
 whatever the initial representation of the amplitude on the left-hand side is.
 For example it can be obtained as a sum of all Feynman diagrams.
-The only thing left to compute the amplitude then
-is to extract the coefficients $c_{\Gamma\gamma_\Gamma, i}$.
+The only thing left to compute the amplitude is then
+to extract the coefficients $c_{\Gamma\gamma_\Gamma, i}$.
 In principle we could sample the expression on the left-hand side with sufficient number of loop momenta,
 and get a linear system of equations for $c_{\Gamma\gamma_\Gamma, i}$ by matching it to our ansatz on the right hand side.
-But the system obtained this way would be humongous, not to mention that evaluating the left hand side might be costly.
+But the system obtained this way would be so humongous that even a numerical solution would be problematic,
+not to mention that evaluating the left hand side is usually not cheap either.
 
 \def\gleading{{\gamma^{\textit{(l)}}_{\Gamma}}}
 Fortunately the insights from generalized unitarity (see \cref{sec:unitarity}) suggest
-a physics-motivated way of block-triangularizing the said linear system.
+a physics-motivated way of block-triangularizing the linear system for the coefficients $c_{\Gamma\gamma_\Gamma, i}$.
 If we pick a topology $\Gamma$ and arrange loop momenta to satisfy it's on-shell limit $\rho_j \to 0,\;\forall j\in P_\Gamma$ (i.e.\ perform a cut),
 the coefficients $c_{\Gamma\gleading,i}$ of the leading term in this limit
 can be obtained through \emph{cut equations},
@@ -323,7 +524,7 @@ where the sum $\sum_{\Gamma^\prime > \Gamma}$ is over topologies with more propa
 The cut equations are valid only for loop momenta $\ell_l^{\Gamma}$ that satisfy the cut conditions,
 which we should take into an account when choosing sample values to generate the linear systems. 
 In this way, going from the top of the hierarchy to the bottom
-we solve cut equations one topology at a time, effectively making the initial system block-triangular.
+we solve cut equations one topology at a time, recycling the coefficients obtained earlier, effectively making the initial system block-triangular.
 
 What is even better is that the left-hand side of \cref{eq:cut_equations} in the on-shell limit
 can be evaluated as products of on-shell tree amplitudes,
@@ -331,21 +532,25 @@ can be evaluated as products of on-shell tree amplitudes,
     \lim_{\ell^{\phantom{\Gamma}}_l \to \ell_l^{\Gamma}}\qty\Big( A^{(L)} \; {\prod_{j\in P_\Gamma} \rho_j^{\qty(\gleading)_j}} ) \longrightarrow 
       \sum_{\text{states}} ~ \prod_{i \in T_\Gamma} A^{(0)}_i(\ell_l^{\Gamma},D),
 \end{equation}
-where the sum is over all \emph{physical} states in $D$ dimensions, and $T_\Gamma$ corresponds to
+where the sum is over all states in $D$ dimensions, and $T_\Gamma$ corresponds to
 all vertices of the topology $\Gamma$. The fact that this factorization takes place
 at the level of \emph{integrand} is closely related but does not directly follow from generalized unitarity.
 In practice the factorization can be rather straightforwardly realized by noticing the following \cite{Eden:1966dnq}: 
 if one collects together all Feynman diagrams contributing to a particular topology,
-each vertex of this topology is the sum of all tree graphs with fixed external legs,
+each vertex of this topology is a sum of all tree graphs with fixed external legs,
 hence it can be nothing else than a tree amplitude.
 For an explicit example of how this happens see \cref{fig:example_factorization}. 
 A notable exception to this observation can be found in the models which
 contain non-trivial wave-function and mass renormalization for some of its' particles,
 i.e.\ when there are non-vanishing one-particle-reducible diagrams \cite{Ellis:2008ir,Ellis:2011cr}.
 These Feynman diagrams are absorbed into renormalization and have to be discarded from amplitudes by hand (\todo{see figure .}), hence
-the vertices of the topologies to which they would contribute are \emph{not} tree amplitudes.
+the vertices of the cut topologies to which they would contribute are \emph{not} tree amplitudes.
 There is an interesting proposal to work around this issue \cite{Badger:2017gta}.
-In practice however it does not prevent us from using cut equations, but rather
+In practice however\footnote{%
+  in this thesis we do not aim to follow the philosophy of ``never going off-shell'',
+  but rather opt for whichever solution deemed more practical
+}
+it does not prevent us from using cut equations, but rather
 demands some additional booking-keeping.
 
 \begin{figure}[ht]
@@ -357,7 +562,7 @@ demands some additional booking-keeping.
     \mathfigure{height=\figureheight}{example_tree_corner/f4} \longrightarrow 
     \mathfigure{height=1.5\figureheight}{example_tree_corner/corner}
   \]
-  \caption{An illustration of ``diagrammatic'' factorization. 
+  \caption{An illustration of diagrammatic ``proof'' of factorization. 
     On the left we show all Feynman diagrams contributing to a four-point one-loop amplitude of any theory with 3- and 4-point vertices
     in the channel $\{\ell^2,(\ell-p_1)^2,(\ell-p_1-p_2)^2\}\to 0$ given by the topology on the right.
     The tree amplitudes in the corners of the topology are assembled explicitly.
@@ -366,46 +571,69 @@ demands some additional booking-keeping.
 \end{figure}
 
 Let us now mention how do we handle
-the cases when the set of propagators' exponents $\gamma_\Gamma$ for some topology $\Gamma$
+the cases when the set of choices of propagators' exponents for some topology $\Gamma$
 contains more than one element, that is there are propagators raised to powers greater than 1 \cite{Abreu:2017idw}.
 As we mentioned above, the \cref{eq:cut_equations} directly isolates coefficients of 
 the propagator structure with maximal total degree $\gleading$. For this propagator structure
 also the factorization of \cref{eq:cut_amplitude} applies.
-The coefficients of all the remaining propagator structures can be obtained from a topology directly below
-$\Gamma$ in the hierarchy.  Consider the example in \cref{fig:example_subleading_pole} 
+The coefficients of all the remaining propagator structures can be obtained together with the (leading) coefficients  of a topology one level below
+$\Gamma$ in the hierarchy by ``undoing'' the block-triangularization.
+Consider an example in \cref{fig:example_subleading_pole}.
+The two-loop bubble-hexagon topology $\Gamma_1$ is given by a list of propagators $\{\rho_1,\ldots{},\rho_6\}$ and there are two
+possible sets of exponents,
+\[
+  \Gamma_1 \leftrightarrow  \{\rho_1,\ldots{},\rho_6\}, \qquad \gamma_{\Gamma_1} =  
+  \begin{pmatrix} 
+    \{1,1,1,2,1,1\} &\leftarrow \gamma_{{\Gamma_1},1}  & \equiv \gamma_{\Gamma_1}^{(\textit{l})} \\ 
+    \{1,1,1,1,1,1\} &\leftarrow \gamma_{{\Gamma_1},2} &
+  \end{pmatrix}
+\]
+First we solve the cut equations for coefficients of $\gamma_{{\Gamma_1},1}$, and proceed down the hierarchy normally until we reach
+the bubble-box topology $\Gamma_2$, not considering equations for the coefficients $\gamma_{{\Gamma_1},2}$.
+We obtain the latter through the cut equations for $\Gamma_2$, treating them as unknowns together with 
+the coefficients of the topology $\Gamma_2$ itself. Clearly this ``trick'' can always be performed
+notwithstanding how many doubled (or tripled, etc.\@) propagators we encounter.
+The only cost is that of solving the equations for larger number of coefficients.
 
-Another possibility is to realize that the only cases when this can happen 
+Another possibility is to realize that the only cases when propagators can be raised to higher powers 
 are from self-energy insertions on internal lines, which are associated to renormalization.
 It turns out \cite{Baumeister:2019rmh} that
 it is possible to cook up \emph{integrand-level} UV counter-terms such that
-the integrand of the amplitude can be renormalized and all subleading poles cancel as a consequence.
+the integrand of the amplitude gets renormalized,
+and all subleading poles vanish as a consequence.
 
-We opt for the former solution a more generic solution
+We opt for the former approach as a simpler generic solution in favor of the
+more intricate case-by-case study of the latter.
+We observe that at least for two-loop
+amplitudes a slight increase of ranks for some of the cut equations does not
+pose any significant problem.
+
+\todo{reference how to solve the equations} 
 
 \begin{figure}[ht] 
   \centering
-  \begin{tikzpicture}[scale=3]
+  \begin{tikzpicture}[scale=3,line width=1pt]
     \setlength{\figureheight}{0.08\textheight}
         % Maximal
     \node at (0,2){\includegraphics[width=\figureheight]{diagrams_from_4gluon/HexaBubbleThin}};
-    \node at (0,1.5){(a) $\Gamma$, $\gleading$}; 
+    \node at (0,1.5){ $\Gamma_1^{\{1,1,1,2,1,1\}}$}; 
     \node at (1,2){\includegraphics[width=\figureheight]{diagrams_from_4gluon/PentaTriangleThin}};
     \node at (2,2){\includegraphics[width=\figureheight]{diagrams_from_4gluon/DoubleBoxThin}};
     \node at (3,2){\reflectbox{\includegraphics[width=\figureheight]{diagrams_from_4gluon/PentaTriangleThin}}};
         % Next-to-maximal
-    \node at (0.5,1){\includegraphics[width=\figureheight]{diagrams_from_4gluon/BubblePentagonSemiGenericThin}};
-    \node at (0.5,0.5){(b) $\Gamma$, $\gamma_\Gamma^{(\hat{4})}$}; 
+    \node at (0.5,1) (a) {\includegraphics[width=\figureheight]{diagrams_from_4gluon/BubblePentagonSemiGenericThin}};
+    \node at (0.5,0.5)  { $\Gamma_1^{\{1,1,1,1,1,1\}}$}; 
     \node at (1.5,1){\includegraphics[width=\figureheight]{diagrams_from_4gluon/BoxTriangleThin}}; 
     \node at (2.5,1){\reflectbox{\includegraphics[width=\figureheight]{diagrams_from_4gluon/BoxTriangleThin}}};
         % Next-to-next-to-maximal
-    \node at (1.5,0){\includegraphics[width=\figureheight]{diagrams_from_4gluon/BubbleBoxGenericThin}};
-    \node at (1.5,-0.5){(c) $\Gamma_{\hat{4}}$}; 
+    \node at (1.5,0) (b) {\includegraphics[width=\figureheight]{diagrams_from_4gluon/BubbleBoxGenericThin}};
+    \node at (1.5,-0.5){$\Gamma_2^{\{1,1,1,1,1\}}$}; 
+    \path [line,<->] (a.south east) -- (b.north west);
   \end{tikzpicture}
 %
-  \caption{The planar bubble-box hierarchy. The maximal diagrams are (a)-(d),
-    next-to maximal are the (e)-(g) and at the bottom we find the bubble-box
-    diagram (h).
-    Based on the figure from \cite{Abreu:2017idw}. 
+  \caption{A slice of the hierarchy of a two-loop four-point amplitude with the bubble-box topology $\Gamma_2$ at the bottom.
+    The indices $i$ on the lines correspond to the propagators $\rho_i$, and the list of their exponents is given by the superscripts.
+    One of the diagrams with topology $\Gamma_1$ has a doubled propagator $\rho_4$.
   }
   \label{fig:example_subleading_pole}
 \end{figure}
@@ -413,13 +641,30 @@ We opt for the former solution a more generic solution
 
 }
 
-\subsection{Evaluation of Cuts}
-\label{sec:evluation_of_cuts}
+\section{Evaluation of Cuts}
+\label{sec:evaluation_of_cuts}
 
-\subsubsection{On-Shell Loop-Momenta}
-\todo{In $D$ dimensions we don't have to worry about branches of solutions, and also loop momenta have to be real}
+In this section we discuss evaluation of the left-hand side of the cut equations \eqref{eq:cut_equations}
+in the factorized form of \cref{eq:cut_amplitude}.
+But first we will need an explicit form of loop momenta which solve on-shell conditions
+for each topology.
 
 
+\subsection{On-Shell Loop Momenta}
+
+
+parametrized by the variables we
+used in \cref{chap:stdtech,sec:ansatz_integrand}.
+
+reference appendix for $\mu_{ij}$
+
+In $D$ dimensions we don't have to worry about branches of solutions, 
+and also loop momenta have to be real
+
+
+
+
+\subsection{Evaluation of Tree Amplitudes}
 $D$-dimensional off-shell recursion,
 the most practical and flexible way to compute them in $D$ dimensions is with off-shell recursions (see references e.g.\ in tails of 1001 gluons)
 
@@ -433,7 +678,7 @@ the decomposition of cut propagators into state sums, and treat them
 as ``closed'' currents.
 
  
-S-tree cuts (also reference Peraro's paper where this is explain as well)
+S-tree cuts (also reference Peraro's paper where this is explained as well, also I think it was in NLOjets, and Felix's theis maybe?)
 
 Top-down and bottom-up.
 
@@ -445,18 +690,21 @@ see how \cref{chap:dshel} for discussion of what to do with $D_s$.
 
 coefficients are $D$-dependent because of IBPs
 
+separate dependence on $D$ and $D_s$
+
 
 
 
 \section{Discussion}
 The two parts of our method are largely independent of each other and can be used separately if deemed beneficial.
 
-Can be used to fit any integrand parametrization. For example one
-can want to not have $D$-dependent coefficient, and fit to simple monomials.
+Can be used to fit any integrand parametrization. 
+For example one can consider not having $D$-dependent coefficients important, and fit to simple monomials.
 Or one can eliminate transverse ISPs only, and do the IBP reduction later.
 Or one can choose master/surface basis and do the full reduction in place.
 
 Since the hardest problem is of IBP reduction it is beneficial to choose master/surface basis.
 
 The factorization was not mandatory, lhs could be just evaluated and it could be anything.
+
 
