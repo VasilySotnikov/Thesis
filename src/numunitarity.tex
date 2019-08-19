@@ -42,7 +42,7 @@ but we \emph{do not} cast integrals into families by allowing exponents $\gamma_
 
 Instead we will construct a special basis of numerator functions for each topology independently,
 \begin{equation} \label{eq:master_surface_basis}
-  \mathcal{N}_{\Gamma \gamma_\Gamma} = \sum_{i \in M_{\Gamma\gamma_\Gamma}} \cup S_{\Gamma\gamma_\Gamma} c_{\Gamma\gamma_\Gamma, i}(\vb*{x},D) \; m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha}),
+  \mathcal{N}_{\Gamma \gamma_\Gamma} = \sum_{i \in M_{\Gamma\gamma_\Gamma} \cup S_{\Gamma\gamma_\Gamma}} c_{\Gamma\gamma_\Gamma, i}(\vb*{x},D) \; m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha}),
 \end{equation}
 where $S_{\Gamma\gamma_\Gamma}$ is a set of numerators which vanish upon integration, which we call \emph{surface terms}, $M_{\Gamma\gamma_\Gamma}$ is a set of numerators associated to master integrals.
 Here we introduced a notation for distinguishing the arguments of $m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha})$,
@@ -367,7 +367,7 @@ So for this kinematics configuration the whole space is spanned by surface terms
 This happens very frequently starting from two loops.
 
 
-\subsubsection{Bubble}
+\textbf{Bubble}
 
 For generic kinematics we have 3 ISPs, $\{\alpha_1,~\alpha_2,~\alpha_3\}$, and
 10 monomials up to the total degree 2,
@@ -409,7 +409,7 @@ Of course in this case the master integrals from insertions $\chi$ and $\chi^2$ 
 For $m^2=0$ the corresponding integrals are scaleless, and vanish in dimensional regularization,
 so this topology can be discarded.
 
-\subsubsection{Tadpole}
+\textbf{Tadpole}
 Massless tadpoles vanish in dimensional regularization and can be discarded.
 For massive tadpoles there are 4 transverse ISPs, and one master integral,
 so the decomposition is done in the same way as above.
@@ -456,12 +456,13 @@ and find a basis of the subspace spanned by all surface terms.
 It is important that we do this modulo RSPs, i.e.\ (temporarily) set $\rho_j\to 0$.
 In this case we find that 5 of them are independent:
 \begin{equation*}
+  \small
   \begin{array}{l|l}
-    s_1 & \alpha _1^2 (1-D)+\alpha _2^2 (D-1)+\rho _1 s-2 \rho _2 s+\rho _3 s \\
-    s_2 & \alpha _1^2 \left(2 D^2-5 D+3\right)+2 \alpha _1 \alpha _2 (D-1)^2+(3-2 D) \rho _1 s+(3-2 D) \rho _3 s-2 \rho _2 s \\
-    s_3 & \alpha _1^2 \left(-3 D^2+7 D-4\right)+(3 D-4) \rho _1 s-2 (D-2) \rho _2 s+(3 D-4) \rho _3 s+2 \alpha _1 (D-1)^2 s \\
-    s_4 & \alpha _1^2 \left(3 D^2-7 D+4\right)+(4-3 D) \rho _1 s+2 (D-2) \rho _2 s+(4-3 D) \rho _3 s+2 \alpha _2 (D-1)^2 s \\
-    s_5 & -3 \alpha _1^2 \left(3 D^2-7 D+4\right)+3 (3 D-4) \rho _1 s-6 (D-2) \rho _2 s+3 (3 D-4) \rho _3 s+4 (D-1)^2 s^2 \\
+    s_1 & \alpha _1^2 (1-D)+\alpha _2^2 (-1+D)+s \left(\rho _1-2 \rho _2+\rho _3\right) \\
+    s_2 & \alpha _1^2 (-3 (-1+D) (-4+3 D))+s \left(4 (-1+D)^2 s+3 (-4+3 D) \rho _1-6 (-2+D) \rho _2+3 (-4+3 D) \rho _3\right) \\
+    s_3 & \alpha _1^2 ((-1+D) (-3+2 D))+\alpha _2 \alpha _1 \left(2 (-1+D)^2\right)+s \left((3-2 D) \rho _1-2 \rho _2+(3-2 D) \rho _3\right) \\
+    s_4 & \alpha _1^2 (-4+(7-3 D) D)+\alpha _1 \left(2 (-1+D)^2 s\right)+s \left((-4+3 D) \rho _1-2 (-2+D) \rho _2+(-4+3 D) \rho _3\right) \\
+    s_5 & \alpha _1^2 ((-1+D) (-4+3 D))+\alpha _2 \left(2 (-1+D)^2 s\right)+s \left((4-3 D) \rho _1+2 (-2+D) \rho _2+(4-3 D) \rho _3\right) \\
   \end{array}
 \end{equation*}
 This leaves us with just one master integral, which
@@ -519,7 +520,8 @@ can be obtained through \emph{cut equations},
   c_{\Gamma^\prime\gamma_{\Gamma^\prime}, i} \;
   \frac{m_{\Gamma^\prime\gamma_{\Gamma^\prime}, i}}{\displaystyle \prod_{j\in P_{\Gamma^\prime} \setminus P_\Gamma} \rho_j^{\gamma_{\Gamma^\prime i, j}}},
 \end{multline}
-where the sum $\sum_{\Gamma^\prime > \Gamma}$ is over topologies with more propagators 
+which are \cref{eq:unitarity_ansatz} with terms of $\order{\rho_j^{\qty(\gleading)_j}}$ dropped, so
+the sum $\sum_{\Gamma^\prime > \Gamma}$ is over topologies with more propagators 
 (recall the organization into hierarchies by \cref{eq:topology_order,eq:topology_sequence}).
 The cut equations are valid only for loop momenta $\ell_l^{\Gamma}$ that satisfy the cut conditions,
 which we should take into an account when choosing sample values to generate the linear systems. 
@@ -647,20 +649,82 @@ pose any significant problem.
 In this section we discuss evaluation of the left-hand side of the cut equations \eqref{eq:cut_equations}
 in the factorized form of \cref{eq:cut_amplitude}.
 But first we will need an explicit form of loop momenta which solve on-shell conditions
-for each topology.
+for each topology \todo{because the tree amplitudes are evaluate such.} 
 
 
 \subsection{On-Shell Loop Momenta}
 
+Given any topology $\Gamma$ with $N$ external momenta $\{p_1,\ldots{},p_N\}$, $L$ loops and $N_p$ propagators, our aim
+is to find the components of $L$ loop momenta such that  
+the cut conditions,
+\[
+  \rho_j = 0, \quad \forall j\in P_\Gamma,
+\]
+are satisfied. 
+In principle the equations can be solved case by case given any initial choice of degrees of freedom.
+However we would like the solution to be universal so that we can easily
+implement it in a computer program once and for all. 
+Furthermore, to be able to use it for both floating point and exact (finite field) numerical evaluations, 
+we would like it to involve only rational operations.
+The latter is in general non-trivial since the cut conditions are quadratic, and
+define an algebraic variety in a $(6\cdot L)$-dimensional space.
 
-parametrized by the variables we
-used in \cref{chap:stdtech,sec:ansatz_integrand}.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.3\textwidth]{topo_kinematics}
+  \caption{A generic two-loop topology. All external momenta $p_i$ are outgoing. There are 3 strands connecting nodes $N_1$ and $N_2$.}
+  \label{fig:topo_kinematics}
+\end{figure}
+
+We will parametrize the loop momenta 
+with the same independent variables we used in \cref{chap:stdtech,sec:ansatz_integrand},
+which corresponds to the ``adapted'' coordinated in the terminology of \cite{Ita:2015tya, Abreu:2017xsl}.
+We begin by considering all strands (see \cref{fig:topo_kinematics}) of the topology $\Gamma$ independently.
+First we separate four-dimensional part and $(D-4)$-dimensional parts as
+\begin{equation}
+  \ell^l = \ell_{[4]}^l + \sum_i \tilde{n}_i~\mu^l_{i}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0,
+\end{equation}
+where $\tilde{n}_i$ is some basis in $M_{[D-4]}$.
+\todo{Unify the notion of spaces} 
+For each strand $l$ we construct a van Neerven-Vermaseren basis (see \cref{sec:vNV_basis})
+in $D=4$ with respect to the set $B^l = B^l_p \cup B^l_t$ of $\max(4,N-1)$ external momenta chosen in the following order:
+\begin{enumerate}
+  \item momenta flowing out of strand $l$ (added to set $B^l_p$),
+  \item any other external momenta until $\max(4,N-1)$ of them is collected (added to set $B^l_t$)
+\end{enumerate}
+Then for $\ell^l_{[4]}$ we get
+\begin{subequations}
+  \begin{align}
+    \ell^l_{[4]} &= \sum_{j\in B^l_p}\, r^l_j(\vb*{\rho}) v^l_j ~+~ \sum_{j\in B^l_t} \alpha^l_j\,v^l_j ~+~\sum_{j\in B_\tau} \alpha^\tau_j \frac{\tau_j}{(\tau_j)^2}, \\
+    r_j^l(\vb*{\rho}) &=  \sp(\ell^l, p_j), \quad j\in B^l_p\\
+    \alpha_j^l &=  \sp(\ell^l, p_j),\quad j\in B^l_t \\
+    \alpha_j^\tau &=  \sp(\ell^l, \tau_j),
+  \end{align}
+\end{subequations}
+where $v^l_j$ are dual vectors to $p_j$, and $\tau_j$ are transverse to all external momenta of the topology.
+
+
+
+
+
+with the input 
+
 
 reference appendix for $\mu_{ij}$
+
+
+Related to ISPs we introduced before.
 
 In $D$ dimensions we don't have to worry about branches of solutions, 
 and also loop momenta have to be real
 
+
+%We conclude this section with a remark.
+It is worth noting that although in principle the parametrization described in this
+section is amenable for both floating point and exact evaluations,
+the former require the issues of numerical stability to be considered.
+For this reason better suited parametrizations can be derived (see e.g.\ \cite{Kilgore:2007qr,Berger:2008sj} for one-loop examples),
+which is rather tedious already at one loop.
 
 
 
