@@ -667,7 +667,7 @@ implement it in a computer program once and for all.
 Furthermore, to be able to use it for both floating point and exact (finite field) numerical evaluations, 
 we would like it to involve only rational operations.
 The latter is in general non-trivial since the cut conditions are quadratic, and
-define an algebraic variety in a $(6\cdot L)$-dimensional space.
+define an algebraic variety in a $(D\cdot L)$-dimensional space.
 
 \begin{figure}[ht]
   \centering
@@ -679,41 +679,48 @@ define an algebraic variety in a $(6\cdot L)$-dimensional space.
 We will parametrize the loop momenta 
 with the same independent variables we used in \cref{chap:stdtech,sec:ansatz_integrand},
 which corresponds to the ``adapted'' coordinated in the terminology of \cite{Ita:2015tya, Abreu:2017xsl}.
-We begin by considering all strands (see \cref{fig:topo_kinematics}) of the topology $\Gamma$ independently.
+
+We begin by considering each strand (see \cref{fig:topo_kinematics}) of the topology $\Gamma$ independently.
 First we separate four-dimensional part and $(D-4)$-dimensional parts as
 \begin{equation}
-  \ell^l = \ell_{[4]}^l + \sum_i \tilde{n}_i~\mu^l_{i}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0,
+  \ell^l = \ell_{[4]}^l + \sum_{i\in \tilde{B}} \tilde{n}_j~\mu^l_{j}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0, 
 \end{equation}
 where $\tilde{n}_i$ is some basis in $M_{[D-4]}$.
 \todo{Unify the notion of spaces} 
 For each strand $l$ we construct a van Neerven-Vermaseren basis (see \cref{sec:vNV_basis})
 in $D=4$ with respect to the set $B^l = B^l_p \cup B^l_t$ of $\max(4,N-1)$ external momenta chosen in the following order:
 \begin{enumerate}
-  \item momenta flowing out of strand $l$ (added to set $B^l_p$),
-  \item any other external momenta until $\max(4,N-1)$ of them is collected (added to set $B^l_t$)
+  \item momenta flowing out of strand $l$ (added to $B^l_p$),
+  \item any other external momenta until $\max(4,N-1)$ of them is collected (added to $B^l_t$)
 \end{enumerate}
 Then for $\ell^l_{[4]}$ we get
 \begin{subequations}
+  \label{eq:lparametrization}
   \begin{align}
-    \ell^l_{[4]} &= \sum_{j\in B^l_p}\, r^l_j(\vb*{\rho}) v^l_j ~+~ \sum_{j\in B^l_t} \alpha^l_j\,v^l_j ~+~\sum_{j\in B_\tau} \alpha^\tau_j \frac{\tau_j}{(\tau_j)^2}, \\
-    r_j^l(\vb*{\rho}) &=  \sp(\ell^l, p_j), \quad j\in B^l_p\\
-    \alpha_j^l &=  \sp(\ell^l, p_j),\quad j\in B^l_t \\
+    \ell^l_{[4]} &= \sum_{j\in B^l_p} r^l_j(\vb*{\rho}^l)\,v^l_j ~+~ \sum_{j\in B^l_t} \alpha^l_j\,v^l_j ~+~\sum_{j\in B_\tau} \alpha^\tau_j \frac{\tau_j}{(\tau_j)^2}, \\
+    \label{eq:lparametrization_b}
+    r_j^l(\vb*{\rho}^l) &=  \sp(\ell^l, p_j), \quad j\in B^l_p,    \\ 
+    \label{eq:lparametrization_c}
+    \alpha_j^l &=  \sp(\ell^l, p_j),\quad j\in B^l_t, \\
+    \label{eq:lparametrization_d}
     \alpha_j^\tau &=  \sp(\ell^l, \tau_j),
   \end{align}
 \end{subequations}
-where $v^l_j$ are dual vectors to $p_j$, and $\tau_j$ are transverse to all external momenta of the topology.
+where $\vb*{\rho}^l \in P_\Gamma^l \subset P_\Gamma$ are propagators on the strand $l$,
+$v^l_j$ are dual vectors to $p_j$, and $\tau_j$ are transverse to all external momenta of the topology.
+By construction \[\dim{B^l} + \dim{B_\tau} +\dim{\tilde{B}}=D,\] 
+so we can choose 
+$(\dim{B^l_p}+1)$ propagators $\rho^l_j$,  $(\dim{B^l_t})$ coordinates $\alpha^l_j$, $(\dim{B_\tau})$ coordinates $\alpha^\tau_j$,
+and (D-4) coordinates $\mu^l_j$, subject to the constraint
+\[
+  \sum_{j\in \tilde{B}} (\mu^l_j)^2 \equiv \mu_{ll}  = \rho^l_1 - \ell^l_{[4]}(\vb*{\rho}^l,\vb*{\alpha}^l,\vb*{\alpha}^\tau), \qquad \rho^l_1 = (\ell^l)^2,
+\]
+as the parametrization of $D$ degrees of freedom for each strand.
+Taking into an account the momentum conservation constraints from nodes we get $D L$ degrees of freedom,
+from which $4 L +\frac{1}{2}L(L+1)$ (recall \cref{eq:sps_all}) we can relate to our variables from \cref{chap:stdtech,sec:ansatz_integrand}.
+This is in fact how do we
 
 
-
-
-
-with the input 
-
-
-reference appendix for $\mu_{ij}$
-
-
-Related to ISPs we introduced before.
 
 In $D$ dimensions we don't have to worry about branches of solutions, 
 and also loop momenta have to be real
