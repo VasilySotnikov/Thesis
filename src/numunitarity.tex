@@ -822,19 +822,47 @@ Note that beyond two loops it is not always possible to span the whole cut with 
 
 
 \subsection{Dimensional Reconstruction}
- In $D$ and $D_s$ (dimensional reduction later)
 
-We can then \cite{Giele:2008ve} and has  previously been applied
-in \cite{Ellis:2008ir,Boughezal:2011br,Abreu:2017xsl,Abreu:2017hqn}
+We now have discussed both sides of \cref{eq:unitarity_ansatz},
+and hereby everything required to obtain the coefficients of master integrals $c_{\Gamma\gamma_\Gamma,i}(\vb*{x},D,D_s)$. \todo{equation solving?} 
+The coefficients are functions of external kinematics $\vb*{x}$, and the dimensional regularization parameters $D$ and $D_s$.
+In the spirit of our goal to have a fully numerically-viable framework, 
+we can obtain the master coefficients
+for any numerical value of $D$\footnote{
+  here $D$ refers exactly to the parameter in the master/surface decomposition,
+  and  not to be confused with the dimensionality of the space in which we embed loop momenta
+}%
+\textsuperscript{,}%
+\footnote{as long as we avoid explicit poles on integer values},
+and any (large enough to embed the loop momenta components in) \emph{integer} value of $D_s$.
+The internal self-consistency of dimensional regularization guarantees
+that these evaluations reproduce correctly the corresponding limits from the formally infinite-dimensional spaces.
 
-see how \cref{chap:dshel} for discussion of what to do with $D_s$.
+We do however need to know the full analytic dependence on both $D$ and $D_s$ to be able
+to set them to $4-2\epsilon$ eventually.
+To this end we employ the function interpolation techniques (see \cref{sec:func_reconstruction})
+and reconstruct the rational dependence on $D$ and polynomial dependence on $D_s$ from numerical samples for each coefficient.
+This idea is known by the name 
+\emph{dimensional reconstruction} \cite{Giele:2008ve,Ellis:2008ir,Boughezal:2011br,Abreu:2017xsl,Abreu:2017hqn}.
 
-coefficients are $D$-dependent because of IBPs
+We conclude with some technical remarks which
+have important implications for numerical efficiency of the approach.
 
-separate dependence on $D$ and $D_s$
+The former comes solely from the right hand side of \cref{eq:unitarity_ansatz}, the ansatz,
+ and the latter --- exclusively from the left hand side.
 
+Although we do need to determine the surface coefficients for subtractions,
+we do not need to reconstruct this dependence. This dependence is expected to be more complicated, because unphysical.
+This is the first example of how numerical evaluations avoid the complexity of large intermediate expressions,
+but the analytic result is obtained in still.
 
+Another: 
+even when we aim to evaluate external kinematics with floating point,
+we can reconstruct the dependence on $D$ from finite field evaluations.
 
+Another:
+evaluating multiple $D_s$ values might be rather costly,
+we see how to better do it \cref{chap:dshel} 
 
 \section{Discussion}
 The two parts of our method are largely independent of each other and can be used separately if deemed beneficial.
