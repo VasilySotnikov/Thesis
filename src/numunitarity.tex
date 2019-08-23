@@ -8,11 +8,10 @@ multi-scale two-loop amplitudes.
 In this chapter we introduce a generalization of one-loop integrand-level unitarity-based methods \cite{Ossola:2006us,Giele:2008ve,Ellis:2008ir}
 to two loops, which offers an alternative path to reduction of amplitudes and addresses the mentioned bottlenecks in an elegant way.
 The foundations of this approach have been laid out in works \cite{Ita:2015tya,Abreu:2017xsl,Abreu:2017hqn,Abreu:2017idw}.
+Some related work can also be found in 
+\cite{Mastrolia:2011pr,Badger:2012dp,Badger:2013gxa,Zhang:2012ce,Mastrolia:2013kca,Mastrolia:2016dhn,Mastrolia:2012an,Kleiss:2012yv,Feng:2012bm,Kosower:2011ty}.
 Notably it is designed to be amenable for automation and efficient numerical implementation, which is indispensable
 for addressing the problem of large expressions in multi-scale problems.
-\todo{Having fast numerical algorithm at hand allows in many cases to use numerical evaluations to exactly reconstruct analytic expressions.}
-
-\todo{References for other partial developments in multi-loop generalized unitarity}
 
 The approach we discuss in this chapter broadly speaking consists of two major ingredients.
 This first is a special choice of integrand parametrization\footnote{sometimes also called \emph{ansatz}},
@@ -20,15 +19,13 @@ which we discuss in \cref{sec:ansatz_integrand}.
 The second is exploiting integrand-level factorization limits of amplitudes originating from generalized unitarity (see \cref{sec:unitarity}),
 which we discuss in \cref{sec:cut_equations}.
 
-\todo{We are embracing dimensional regularization, not trying to do things like four-dimensional stuff.} 
 
+%Unlike many numerical implementations of  
+%One of the important features is that we  
 
-%Like in \cref{chap:stdtech}, here we will not refer to any particular theory.
+%Like in \cref{chap:stdtech}, here we will not refer to any particular model.
 %We also postpone the discussion of helicity amplitudes until \cref{chap:dshel}
 %and assume that
-%From now on we will also specialize to two loops whenever necessary,
-%although most results of this chapter
-%can be applied to any number of loops.
 
 \todo{The computational methods described in this chapter are essential for obtaining the results we present in \cref{chap:wbb_pheno,chap:5parton}.}
 
@@ -100,9 +97,6 @@ The number of basis elements is thus
 \begin{equation} \label{eq:number_of_monomials}
   \dim{\spn{\vb*{\alpha}^{\va{i}} : \abs{\va{i}} \leq  \mathsf{P}}} =  \frac{(N_\text{ISP} + \mathsf{P})!}{N_\text{ISP}! \mathsf{P}!}.
 \end{equation}
-\todo{Per loop power counting}
-
-\todo{potentially mention here on how the transverse vectors are obtained}
 
 Recall that some of the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
 We will denote these as $\vb*{\alpha}^\tau$.
@@ -743,7 +737,7 @@ which can be rather tedious already at one loop.
 
 \subsection{Evaluation of Tree Amplitudes}
 
-Having the on-shell loop-momenta components available,
+With the on-shell loop-momenta components available
 we can evaluate the cuts in \cref{eq:cut_amplitude} as products
 of tree amplitudes.
 
@@ -752,24 +746,24 @@ the only explicit trace of the dimensional regularization was the presence of ra
 The evaluation of cuts in $D$ dimensions is much more involved since we need to treat the particles' states accordingly.
 And a numerical evaluation is only possible if a finite (and preferably) small representation for these states exists.
 In \cref{sec:osm} we found that thanks to Lorentz symmetry we can embed loop
-momenta into a space with finite integer $D$.
-Taking advantage of this fact, we can embed the states of particles in a space of finite integer dimension $D_s\geq D$ as well.
+momenta into a space with finite integer dimension $D^{(L)}$.
+Taking advantage of this fact, we can embed the states of particles in a space of finite integer dimension $D_s\geq D^{(L)}$ as well.
 From now on we will keep $D_s$ and $D$ separate,
-and only after all master coefficients are determined will we set $D_s\to D\to 4-2\varepsilon$.
-In \cref{chap:dshel} we investigate closely how to deal with the $D_s$-dependence.
+and only after all master coefficients are determined will we set $D_s\to D\to 4-2\epsilon$.
+In \cref{chap:dshel} we examine closely how to deal with the $D_s$-dependence efficiently.
 In any case we need to be able to evaluate the tree amplitudes in arbitrary $D_s$ dimensions.
 
 To this end we choose to utilize the off-shell Berends-Giele recursion \cite{Berends:1987me}
-as a very flexible and efficient way to organize tree-level calculations,
+as a very flexible and efficient way to organize tree-level calculations
 which admits a seamless generalization to $D_s$ dimensions.
 The Berends-Giele recursion is formulated in terms of
-\emph{off-shell} currents $J^{\bar{\alpha}}(\{p_i,\alpha^i\})$,
+\emph{off-shell currents} $J^{\bar{\alpha}}(\{p_i,\alpha^i\})$,
 \begin{equation}
   \mathfigure{width=0.2\linewidth}{off-shell_current},
 \end{equation}
 defined as the sum of all possible ways (using the Feynman rules of the model)
 to combine the legs with indices $\{\alpha^1,\ldots{},\alpha^n\}$ and
-momenta $\{p_1,\ldots{},p_n\}$ into an index of type $\bar{\alpha}$.
+momenta $\{p_1,\ldots{},p_n\}$ into an open index of type $\bar{\alpha}$.
 Here the indices $\alpha$ are understood to refer to tensor or spinor indices, as well as all other relevant quantum numbers such as
 charge, flavor, color, etc.
 Then starting from the first-level currents, which are simply the external states of particles, one
@@ -790,7 +784,7 @@ e.g.\ for spin 1 and spin $\frac{1}{2}$ particles
 \begin{subequations}
   \begin{align}
     -g^{\mu\nu} + \frac{\ell^\mu \eta^\nu + \ell^\nu \eta^\mu}{\sp(\ell,\eta)}  &~\xleftrightarrow{\ell^2\to 0\;}~  \sum_{j=1}^{D_s-2} \varepsilon^\mu_j(\ell){\varepsilon^\nu_j}^{\star{}}(\ell) , \\
-    \qty(\slashed{\ell}  \pm m)^{\alpha\beta} &~\xleftrightarrow{\ell^2\to m^2}~ \sum_{j=1}^{2^{\frac{D_s}{2}-1}} u^\alpha_j(\ell){\overline{u}_j^\beta}(\ell),
+    \qty(\slashed{\ell}  \pm m\,\mathbb{1})^{\alpha\beta} &~\xleftrightarrow{\ell^2\to m^2}~ \sum_{j=1}^{2^{\frac{D_s}{2}-1}} u^\alpha_j(\ell){\overline{u}_j^\beta}(\ell),
   \end{align}
 \end{subequations}
 so on the cut we are allowed to switch back and forth.
@@ -801,21 +795,22 @@ Moving along the path,
 for each tree amplitude we build it's final current,
 but instead of contracting it with the external state, we feed it through
 the corresponding cut propagator as an input to the next tree amplitude.
-Only at the of the path do we contract the final current with a state from a polarization sum.
+Only at the end of the path do we contract the final current with a state from a polarization sum.
 Note that beyond two loops it is not always possible to span the whole cut with just one continuous path.
 
 \begin{figure}[ht]
   \centering
-  \subfloat[\label{sf:topo_cut:path}]{
+  \subfloat[\label{fig:topo_cut:path}]{
     \includegraphics[width=0.3\textwidth]{topo_cut}
   }
   \hfill
-  \subfloat[\label{sf:topo_cut:unrolled}]{
+  \subfloat[\label{fig:topo_cut:unrolled}]{
     \includegraphics[width=0.6\textwidth]{topo_unrolled}
   }
   \caption{A generic cut of a two-loop amplitude as a sequence of ``closed'' off-shell currents, shown as blobs.
-    The red line in \cref{sf:topo_cut:path} demonstrates a path, which is ``unrolled'' in \cref{sf:topo_cut:unrolled}.
-    Only the two cut-propagator numerators at the beginning and the end of the path are explicitly expanded in terms of polarization states.
+    The red line in \cref{fig:topo_cut:path} demonstrates a path, which is ``unrolled'' in \cref{fig:topo_cut:unrolled}.
+    The dashed lines in \cref{fig:topo_cut:unrolled} indicate the only two cut propagators
+    decomposed into pairs of polarization states and used as an explicit input to the off-shell recursion.
   }
   \label{fig:topo_cut}
 \end{figure}
@@ -823,10 +818,11 @@ Note that beyond two loops it is not always possible to span the whole cut with 
 
 \subsection{Dimensional Reconstruction}
 
-We now have discussed both sides of \cref{eq:unitarity_ansatz},
-and hereby everything required to obtain the coefficients of master integrals $c_{\Gamma\gamma_\Gamma,i}(\vb*{x},D,D_s)$. \todo{equation solving?} 
+We now have everything required to obtain the coefficients of master integrals 
+$c_{\Gamma\gamma_\Gamma,i}$ from  \cref{eq:cut_equations}.  
+\todo{equation solving?} 
 The coefficients are functions of external kinematics $\vb*{x}$, and the dimensional regularization parameters $D$ and $D_s$.
-In the spirit of our goal to have a fully numerically-viable framework, 
+In the spirit of our goal of constructing a fully numerically-capable framework, 
 we can obtain the master coefficients
 for any numerical value of $D$\footnote{
   here $D$ refers exactly to the parameter in the master/surface decomposition,
@@ -834,46 +830,74 @@ for any numerical value of $D$\footnote{
 }%
 \textsuperscript{,}%
 \footnote{as long as we avoid explicit poles on integer values},
-and any (large enough to embed the loop momenta components in) \emph{integer} value of $D_s$.
+and any  \emph{integer} value of $D_s$ large enough to embed the loop momenta components.
 The internal self-consistency of dimensional regularization guarantees
-that these evaluations reproduce correctly the corresponding limits from the formally infinite-dimensional spaces.
+that these evaluations reproduce correctly the corresponding limits from the formally infinite-dimensional spaces.\footnote{
+  Beware of models with chiral couplings! A naive ``continuation'' of chirality to $D_s$ dimensions
+  can make all coefficients to behave non-smoothly as functions of $D_s$ at all integer values.
+}
 
 We do however need to know the full analytic dependence on both $D$ and $D_s$ to be able
 to set them to $4-2\epsilon$ eventually.
 To this end we employ the function interpolation techniques (see \cref{sec:func_reconstruction})
-and reconstruct the rational dependence on $D$ and polynomial dependence on $D_s$ from numerical samples for each coefficient.
-This idea is known by the name 
+and reconstruct the rational dependence on $D$ and polynomial dependence on $D_s$ for each coefficient from numerical samples.
+This idea is known by the name of
 \emph{dimensional reconstruction} \cite{Giele:2008ve,Ellis:2008ir,Boughezal:2011br,Abreu:2017xsl,Abreu:2017hqn}.
+In some cases evaluating the left hand side of \cref{eq:cut_equations} for multiple $D_s$ values might become a computational bottleneck,
+for example when fermionic particles appear in loops. In \cref{chap:dshel} we discuss how to address this issue.
 
-We conclude with some technical remarks which
-have important implications for numerical efficiency of the approach.
-
-The former comes solely from the right hand side of \cref{eq:unitarity_ansatz}, the ansatz,
- and the latter --- exclusively from the left hand side.
-
-Although we do need to determine the surface coefficients for subtractions,
-we do not need to reconstruct this dependence. This dependence is expected to be more complicated, because unphysical.
-This is the first example of how numerical evaluations avoid the complexity of large intermediate expressions,
-but the analytic result is obtained in still.
-
-Another: 
-even when we aim to evaluate external kinematics with floating point,
-we can reconstruct the dependence on $D$ from finite field evaluations.
-
-Another:
-evaluating multiple $D_s$ values might be rather costly,
-we see how to better do it \cref{chap:dshel} 
+We conclude this section with some technical remarks which
+have important implications for numerical efficiency of the dimensional reconstruction.
+\begin{itemize}
+  \item Since the master integral coefficients depend both on $D$ and  $D_s$ at a first glance we would
+    need to evaluate everything $n_D \cdot n_{D_s}$ times, where $n_D$ and $n_{D_s}$ are the sizes of the respective samples.
+    However since the $D$-dependence comes solely from the right hand side of \cref{eq:unitarity_ansatz}
+   and the $D_s$-dependence from the left hand side, we can sample each side independently only $n_D$ and $n_{D_s}$ times
+   accordingly.
+ \item Although we do need to determine the surface-term coefficients from \cref{eq:cut_equations} to use them for subtractions,
+   we \textit{do not} need to reconstruct their dependence on $D$ analytically. 
+   This is very helpful because the surface-term coefficients can be expected to be more complicated in general
+   since they do not contain physical information and ambiguous to a great extent.
+   %This is the first example of how numerical evaluations avoid the complexity of large intermediate expressions,
+   %but the analytic result is obtained in still.
+ \item The reconstruction algorithms normally work with exact numerical evaluations only.
+   However even if we aim for example for Monte-Carlo integration over external phase space using floating point numbers,
+   the rational functions of $D$ can be reconstructed for each process from just one exact ``warm-up'' evaluation over finite fields.
+\end{itemize}
 
 \section{Discussion}
-The two parts of our method are largely independent of each other and can be used separately if deemed beneficial.
 
-Can be used to fit any integrand parametrization. 
-For example one can consider not having $D$-dependent coefficients important, and fit to simple monomials.
-Or one can eliminate transverse ISPs only, and do the IBP reduction later.
-Or one can choose master/surface basis and do the full reduction in place.
+In this chapter we laid out the central concepts of the multi-loop $D$-dimensional numerical unitarity approach.
+We formulated it in a way directly amenable for automation.
+And indeed we implemented the presented algorithms to obtain the results of \cref{chap:5parton}.
 
-Since the hardest problem is of IBP reduction it is beneficial to choose master/surface basis.
+The major ingredients of our method, 
+the master/surface integrand parametrization and
+the usage of generalized cuts to obtain cut equations
+are largely independent of each other and in fact 
+can be used separately if deemed beneficial.
 
-The factorization was not mandatory, lhs could be just evaluated and it could be anything.
+The cut equations can be employed to obtain the coefficients of any basis of integrand functions. 
+For example, one can consider a basis of simple monomials in \cref{eq:rsp_reduction}.
+In this way only the reduction of RSPs will be achieved, and the full IBP reduction has to be preformed afterwards.
+One advantage is that the coefficients in this basis do not depend on $D$ (they still depend on $D_s$ of course).
+Or one can consider the basis of simple monomials but with transverse ISPs traceless-completed (see \cref{sec:traceless_completion}).
+In this way only the IBP reduction of non-transverse ISPs remains to be carried out \todo{reference this adaptive integrand reduction stuff?}.
+The latter \textit{is} frequently the hardest part of the reduction of multi-loop amplitudes. 
+So the fact that the master/surface basis mitigates significantly it's difficulty is the main argument for our choice.
+
+It is also worth mentioning that the evaluation of cuts through the 
+factorization property of \cref{eq:cut_amplitude} is not essential in our approach. 
+The left hand side of \cref{eq:cut_equations} can in principle be any 
+expression which has a form of \cref{eq:general_amplitude} which can be evaluated in the on-shell limit,
+like a single Feynman diagram or a numerator insertion on a particular topology. 
+
+%We usead cutting a lot.
+%In our approach we made use of cutting in many places.
+%``Unitarity'' approaches sometimes simply means anything employing cuts.
+
+%Given the consideration above,
+
+%On the opposite side the master/surface basis and do the full reduction in place.
 
 
