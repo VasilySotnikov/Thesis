@@ -1,36 +1,55 @@
-The full physical information about a process is contained in a complete set of \textit{helicity amplitudes}.
+In \cref{chap:stdtech,chap:numunitarity} we were operating on the objects under the assumption that they are Lorentz scalars.
+However in QFT scattering amplitudes of particles with spin are not Lorentz scalars,
+and the set of all Lorentz structures generated from Feynman diagrams is immensely redundant.
+In this chapter we will discuss how amplitudes of any scattering process, 
+polarized or not, can be decomposed into a minimal basis of Lorentz-invariant objects.
 
-They are calculated by selecting all external states of particles to be the states with definite helicity \todo{define what helicity is}.
+It is well known that the full physical information about any scattering process is contained in a complete set of \textit{helicity amplitudes} ---
+the amplitudes with all external particles' states chosen to have a definite helicity.
+Being non-redundant and complete representation of physical information, the helicity amplitudes 
+enjoy a number of nice properties such as trivialization of gauge-invariance and manifestation of Poincaré symmetry.
+On a technical side the consequence is that the helicity amplitudes are expected to have the most compact representation.
+And indeed this has been shown to be the case in numerous practical applications (see e.g.\ %
+\cite{DeLaurentis:2019phz,Badger:2019djh,Badger:2011yu,Badger:2013gxa,DeFreitas:2004kmi,Gehrmann:2011aa,Gehrmann:2009vu,Glover:2004si,Glover:2003cm,Garland:2002ak,Dunbar:2016aux,Dunbar:2016gjb,Dunbar:2016cxp,Badger:2015lda,Gehrmann:2015bfy,Bern:2003ck,Bern:2002tk,Badger:2018enw,Dunbar2017,Kunszt:1994nq}).
 
-It is well known that helicity amplitudes exhibit nice physical properties such as trivialization of gauge-invariance and
-manifestation of Poincare symmetry \todo{some references}.
+The computation of tree-level helicity amplitudes is a very straight-forward task,
+which amounts to simply inserting the corresponding states with definite helicities for each external particle.
+The spinor-helicity techniques can be employed to further enhance the computations.
+Moving forward to amplitudes with loops,
+we are forced to make the dimensionality of space-time formally infinite \cite{Collins:1984xc} 
+to regularize divergences\footnote{other regularization methods exist, but this is out of the scope of this thesis}.
+This fact makes both definition and evaluation of helicity amplitudes rather delicate.
+It is the purpose of this chapter to present a concise and efficient method of
+evaluating multi-loop helicity amplitudes in dimensional regularization. 
 
-From a technical perspective this means that helicity amplitudes are ``good'' objects to compute. \todo{this is very rough formulation}
+In \cref{sec:helampl_projectors} we briefly review a somewhat standard 
+method of obtaining helicity amplitudes through $D$-dimensional projectors,
+which can be found in the literature \cite{Garland:2002ak, Moch:2002hm, Glover:2003cm, Glover:2004si,Gehrmann:2009vu,Gehrmann:2011aa}. 
+In \cref{sec:helampl_embeding}, 
+taking advantage of some insights from \cref{chap:numunitarity},
+we show how the tree-level approach of ``simply inserting appropriate external states'' can
+be extended to loop amplitudes in the 't Hooft-Veltman (HV) flavor of dimensional regularization.
+This allows to dispose of construction of complicated projectors, which
+become vary hard to handle for large $(> 4)$ number of particles with spin \cite{Peraro:2019cjj}. 
+Another convenient feature of our approach is that it can be applied in a numerical context, such
+as evaluation of cuts through off-shell recursion as discussed in \cref{sec:evaluation_of_cuts}.
+In \cref{sec:ds_reduction} we discuss how
+the efficiency of extraction of the full $D_s$-dependence can be substantially improved
+by dimensionally reducing kinematically-independent degrees of freedom in higher dimensions.
 
-As we mentioned before, amplitudes with loops exhibit divergences, which forces us
-to use dimensional regularization.\footnote{other regularization methods exist \todo{reference}, but this is out of the scope of this thesis}
+\todo{reference spinning particles paper (was for 5 gluon) and another from the guy from MPP} 
 
+\section{Helicity}
+Define helicity
+Little group scaling
 
-Formally then the corresponding space is infinite-dimensional \todo{reference Collins}, and
-it can be made to ``coincide'' with the finite-dimensional one whenever $D$ takes integer values.
-
-In CDR we replace $SO(1,3)$ invariance by $SO(1,D-1)$.
-In HV by $SO(1,3)\otimes SO(D-4)$.
-
-After all divergences are cancelled, the limit $D\to4$ is taken and the physical results are recovered.
-
-All particle transform as irreducible representations of Poincare group in $D$ dimensions,
-so the number of states becomes infinite.
-This raises the question as to how to define a helicity amplitude in the framework of dimensional regularization.
-
-
-\section{Tensor Decomposition and Projectors}
+\section{Form-Factor Decomposition and Projectors}
+\label{sec:helampl_projectors}
 
 In this section we review a way to define helicity amplitudes in dimensional regularization through
 $D$-dimensional projectors.
-
 This approach has been used in a number of computations \cite{Garland:2002ak, Moch:2002hm, Glover:2003cm, Glover:2004si,Gehrmann:2009vu,Gehrmann:2011aa}.
-It's relation to HV scheme and helicity amplitudes has been recently further clarified \cite{Peraro:2019cjj}.
+It's relation to HV scheme and helicity amplitudes has been recently clarified in \cite{Peraro:2019cjj} (see also \cite{Chen:2019wyb}).
 
 One starts with decomposing an amplitude with unspecified external states into all possible $D$-dimensional tensor structures compatible
 with symmetries. One finds a basis of these structures and finds corresponding $D$-dimensional projectors.
@@ -49,6 +68,20 @@ Note that asking for helicity amplitudes makes sense only in HV scheme.
 
 
 \section{HV Helicity Amplitudes from Embedding of States}
+\label{sec:helampl_embeding}
+
+
+Formally then the corresponding space is infinite-dimensional \todo{reference Collins}, and
+it can be made to ``coincide'' with the finite-dimensional one whenever $D$ takes integer values.
+All particle transform as irreducible representations of Poincare group in $D$ dimensions,
+so the number of states becomes infinite.
+This raises the question as to how to define a helicity amplitude in the framework of dimensional regularization.
+
+In CDR we replace $SO(1,3)$ invariance by $SO(1,D-1)$.
+In HV by $SO(1,3)\otimes SO(D-4)$.
+
+
+
 
 We show how to obtain helicity amplitudes directly, without complicated projectors,
 for vector and spinor particles.
@@ -803,7 +836,9 @@ One clearer insight is that inconsistent algebras cannot be applied here due to 
 So the only consistent method should be when $\gamma_5$ commutes with higher dim. matrices.
 
 
+
 \section{$D_s$-Dependence From Dimensional Reduction}
+\label{sec:ds_reduction}
 Here we explain how to improve the extraction of $D_s$-dependence.
 This is crucial for amplitudes with external fermions due to the exponential scaling of the representation.
 
