@@ -617,9 +617,157 @@ which is a significant optimization of numerical evaluations.
 \chapter{Spinor-Helicity}
 \label{chap:4dspinhel}
 
-here describe four-dimensional spinor-helicity
+The spinor-helicity methods are well known are covered 
+in great detail in numerous sources \todo{references}.
+We provide only a brief summary.
+
+Helicity of a particle is the projection of it's spin $\va{S}$ on the direction of it's
+three-momentum $\va{p}$, and the states $\psi_{\pm s}$ with helicity $\pm s$ are defined as
+\begin{equation} \label{eq:helicity_def}
+  \sp(\va{S},\va{p}) \, \psi_{\pm s} = \pm s \abs{\va{p}}\, \psi_{\pm s}.
+\end{equation}
+The helicity of massless particles is a Lorentz invariant, and for spinor representations helicity and chirality eigenstates
+coincide. 
+%In fact the helicity eigenstates of massless particles are induced unitary representations
+For massive particles helicity eigenstates can be constructed relative to a chosen reference frame.
+
+
+\subsubsection{Massless Spin $1/2$}
+
+For massless spin $\frac{1}{2}$ particles $\va{S} = \frac{1}{2}\va{\sigma}$, and 
+the \cref{eq:helicity_def} is written in a covariant way as
+\begin{equation}
+  (\sp(p,\bar{\sigma}))^{\dot{A}B} \lambda_B(p) = 0, \qquad (\sp(p,\sigma))_{A\dot{B}} \lambda^{\dot{B}}(p) = 0,
+\end{equation}
+for positive and negative helicities correspondingly.
+Here 
+\begin{equation}
+  \sigma_{A \dot{B}}^{\mu} \equiv  \left( 1 , - \vec{\sigma} \right) \qand \bar{\sigma}^{\mu \dot{A} B} \equiv  \left( 1 ,  \vec{\sigma} \right),
+  \qquad \vec{\sigma}\equiv (\sigma_x,\sigma_y,\sigma_z),
+\end{equation} 
+with the standard Pauli matrices
+\begin{eqnarray}
+  \sigma_x = \left(\begin{array}{cc}
+    0 & 1\\
+    1 & 0 \\
+  \end{array} \right),
+  &
+  \sigma_y = \left(\begin{array}{cc}
+    0 & -i\\
+    i & 0 \\
+  \end{array} \right),
+  &
+  \sigma_z = \left(\begin{array}{cc}
+    1 & 0\\
+    0 & -1 \\
+  \end{array} \right),
+\end{eqnarray}
+and we introduced dotted and undotted spinor indices corresponding to the two non-equivalent representation of $SL(2,\mathbb{C})$.
+The indices can raised and lowered with the 2-dimensional Levi-Civita symbol as
+\begin{equation}
+    \label{raising_and_lowering_spinor_indices}
+  \begin{gathered}
+    p^A = \varepsilon^{AB} p_B, \qquad
+    p^{\dot{A}} = \varepsilon^{\dot{A}\dot{B}} p_{\dot{B}}, \\
+    p_{\dot{B}} = p^{\dot{A}} \varepsilon_{\dot{A}\dot{B}},  \qquad
+    p_B = p^A \varepsilon_{AB},
+  \end{gathered}
+\end{equation}
+which satisfies the properties
+\begin{equation}
+  \begin{gathered}
+    \varepsilon_{BA} = - \varepsilon_{AB},  \quad   \varepsilon^{AB} = \varepsilon^{\dot{A}\dot{B}} = \varepsilon_{AB} = \varepsilon_{\dot{A}\dot{B}}, \\
+    \eps^{A C} \eps_{B C} = \delta^{A}_{\;B}, \quad \eps^{\dot{A} \dot{C}} \eps_{\dot{B} \dot{C}} = \delta^{\dot{A}}_{\;\dot{B}}.
+  \end{gathered}
+\end{equation}
+We will use a convenient notation of angle and square brackets,
+\begin{equation}
+  \begin{aligned}
+    \ket{p} &\equiv \lambda_A(p), \quad \bra{p} &\equiv \lambda^A(p),  \\
+    \sket{p} &\equiv \lambda^{\dot{A}}(p), \quad \sbra{p} &\equiv \lambda_{\dot{A}}(p),
+  \end{aligned}
+\end{equation}
+to write compactly the spinor products,
+\begin{subequations}
+  \begin{equation}
+    \spaa(p,q) \equiv \lambda^A(p) \lambda_A(q), \qquad \spbb(p,q) \equiv \lambda_{\dot{A}}(p) \lambda^{\dot{A}}(q),
+  \end{equation}
+  and spinor chains such as
+  \begin{equation} \label{eq:vectors_from_spinors}
+    \sbraket(p,\gamma^\mu,q) = \brasket(q,\gamma^\mu,p)  \equiv \lambda_{\dot{A}}(p) \bar\sigma^{\mu\dot{A}B} \lambda_B(q).
+  \end{equation}
+\end{subequations}
+
+\todo{explicit form} 
 
 \todo{denormalized spinors for finite fields}
+
+
+\subsubsection{Massless Spin 1}
+
+It is easy to see that the spinor chains of the form of \cref{eq:vectors_from_spinors} are mass Lorentz vectors, and
+the helicity eigenstates of vector particles can be constructed as
+\begin{equation}
+  \varepsilon_+^\mu(p,\eta) = -\frac{\sbraket(p,\gamma^\mu,\eta)}{\sqrt{2} \spaa(p,\eta)}, \qquad \varepsilon_-^\mu(p,\eta) = \frac{\brasket(p,\gamma^\mu,\eta)}{\sqrt{2} \spbb(p,\eta)},
+\end{equation}
+where $\eta$ is some arbitrary reference vector. Indeed
+the relations 
+\begin{equation}
+  \qty(\varepsilon_{\pm})^2 =0, \qquad
+  \varepsilon^{\mu}_{\pm}(p,\eta) p_\mu = 0,
+  \;\;\;\;
+  \varepsilon^{\mu}_{\pm}(p,\eta) \eta_\mu = 0,
+\end{equation}
+are satisfied by construction, and the polarization sum is
+\begin{equation}
+  \varepsilon^{\mu}_{+}(p,\eta)\varepsilon^{\nu}_{-}(p,\eta) + \varepsilon^{\mu}_{-}(p,\eta)\varepsilon^{\nu}_{+}(p,\eta) = -g^{\mu\nu} + \frac{\ell^\mu \eta^\nu + \ell^\nu \eta^\mu}{\sp(\ell,\eta)}.
+\end{equation}
+And the little group scaling is
+\begin{equation}
+  \varepsilon_{\pm} \longrightarrow t^{(\mp 2)} \varepsilon_{\pm}
+\end{equation}
+
+
+\subsubsection{Massive Spin 1/2}
+
+
+\todo{q-helicity little group}
+
+
+\todo{Stefan's paper on spinors\cite{DittmaierWeyl}} 
+
+
+\chapter{Parametrization of Integrands of Amplitudes with External Fermions}
+\label{sec:ParamIntegrands}
+
+In this \namecref{sec:ParamIntegrands} we show
+explicitly how the Lorentz-invariance of the coefficients $M_n^{(k)}$ of the
+tensor tensor decomposition in \cref{eq:tensorDecomposition} guarantees that
+no explicit loop-momenta components will appear in the parametrization of their integrands.
+
+%Since our representation of fermion amplitudes is manifestly
+%Lorentz invariant in $(D_s-4)$ dimensions prior to loop
+%integration, the integrands of fermion amplitudes can be
+%decomposed in terms of the same set of master integrands and
+%surface terms as those used for amplitudes with gluons only \cite{Abreu:2017xsl,Abreu:2017hqn}.
+%We demostrate this below.
+
+The integrand of $M^{(2)}_{\{k\}}(\ell_l)$ of a two-loop amplitude with an arbitrary
+number of quark lines can be schematically written in terms of tensors $f^{\rho_1 \ldots \rho_n, \sigma_1\ldots \sigma_m}_{\{k\}}$ as
+\begin{equation} 
+  M_{\{k\}}(\ell_l) = \sum_{n,m} f^{\rho_1 \ldots \rho_n, \sigma_1 \ldots \sigma_m}_{\{k\}}
+  \left(\prod_{i=1}^n \vec{\mu}_{1 \, \rho_i}\right)
+  \left(\prod_{j=1}^m \vec{\mu}_{2 \, \sigma_i}\right),
+\end{equation}
+where the indices $\{k\}$ denote all spinor indices in  $\mathsf{S}_{[D_s-4]}$,
+and all contractions with the $(D_s-4)$-dimensional part of the loop momenta made explicit.
+Upon the projection onto any coefficient by $v_n^\dagger$ we get the sum of products of the metric tensors in $\mathsf{S}_{[D_s-4]}$
+from traces of products of $\gamma_{[D_s-4]}$, so 
+\begin{equation}
+  v_n^\dagger f^{\rho_1 \ldots \rho_n, \sigma_1 \ldots \sigma_m}_{\{k\}}  = \sum_{s\in S_2} c_s \qty(\prod_{\{\alpha_1,\alpha_2\}\in s} g^{\alpha_1,\alpha_2}_{[D_s-4]}),
+\end{equation}
+where the sum is over all possible ways to pair the indices $\{ \rho_1 \ldots \rho_n,\,\sigma_1 \ldots \sigma_m \}$.
+Inserting this into the previous equation we see that only on the invariants $\mu_{ij}$ appear in the integrand of $M_n^{(k)}$.
 
 
 
