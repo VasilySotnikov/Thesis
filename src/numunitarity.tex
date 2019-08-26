@@ -83,7 +83,7 @@ upon integration.
 It is convenient to start constructing the master/surface basis from a natural basis of monomials from $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$:
 \begin{equation}
   \mathcal{N} = \sum_{\va{i}}^{} c_{\va{i}}(\vb*{x},D;\vb*{\rho}) \; m^{\va{i}}(\vb*{\alpha}), \qquad
-  m_\Gamma^{\va{i}}(\vb*{\alpha}) = \vb*{\alpha}^{\va{i}} \equiv 
+  m_\Gamma^{\va{i}}(\vb*{\alpha}) = \vb*{\alpha}^{\va{i}} \coloneqq 
   %\rho_1^{i_1}\,\ldots\,\rho_{N_p}^{i_{N_p}} ~
   %\alpha_1^{i_{N_p+1}}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_p+1 +N_\text{ISP} }}.
   \alpha_1^{i_1}\,\ldots{}\,\alpha_{N_\text{ISP} }^{i_{N_\text{ISP} }}.
@@ -125,7 +125,7 @@ We can then easily find a combination of two contractions which make the right-h
 \begin{equation}
   \qty(\tau_j^\mu\tau_j^\nu - \frac{g^{\mu\nu}_{[D-4]}}{D-4}) ~ \ell_k^{\mu}\ell_k^{\nu} = (\alpha_j^\tau)^2 - \frac{\mu_{kk}(\vb*{\rho},\vb*{\alpha})}{D-4} \longrightarrow 0,
 \end{equation}
-where $\mu_{kj} \equiv g^{\phantom{\mu\nu}}_{[D-4]\mu\nu} \ell_k^\mu \ell_j^\nu$, so the expression on the right is a surface term and
+where $\mu_{kj} \coloneqq g^{\phantom{\mu\nu}}_{[D-4]\mu\nu} \ell_k^\mu \ell_j^\nu$, so the expression on the right is a surface term and
 we append it to our basis.
 
 Similar relations can be found for any product of even powers of $\alpha_j \in \vb*{\alpha}^\tau$.
@@ -173,7 +173,7 @@ can be obtained through a specially constructed IBP identities \cite{Ita:2015tya
 \label{sec:unitarity_compatible_ibps}
 So far our set of numerator insertions $m_{\Gamma,i}$ consists of monomials with odd powers of transverse ISPs and traceless-completions of
 monomials with even powers of transverse ISPs, which are all surface terms.
-This leaves us to consider the span of polynomial ring $\mathbb{Q}_{\vb*{x},D}[\hat{\vb*{\alpha}}\equiv \vb*{\alpha}\setminus\vb*{\alpha}^\tau]$,
+This leaves us to consider the span of polynomial ring $\mathbb{Q}_{\vb*{x},D}[\hat{\vb*{\alpha}}\coloneqq \vb*{\alpha}\setminus\vb*{\alpha}^\tau]$,
 %truncated by the imposed power counting condition,
 which is the hardest part of the master/surface decomposition.
 
@@ -385,7 +385,7 @@ Instead we have to introduce a random light-like vector $\tau_\chi^\mu$,
   \tau_\chi^2=0, \qquad \sp(\tau_\chi,\tau_{\{1,2\}}) = 0, \qquad  \sp(p_1,\tau_\chi) \neq 0,
 \]
 such that $\spn{p_1,\tau_1,\tau_2,\tau_\chi}$ spans the full four-dimensional space.
-We realize that $\chi \equiv \sp(\ell,\tau_\chi)$ is neither RSP nor it is a transverse ISP, so 
+We realize that $\chi \coloneqq \sp(\ell,\tau_\chi)$ is neither RSP nor it is a transverse ISP, so 
 we need to employ IBP identities.
 We add to the ansatz \eqref{eq:unitarity_compaible_ibp_ansatz} terms proportional to $\tau_\chi^\mu$ and solve them.
 We find two surface terms,
@@ -441,7 +441,7 @@ A couple of examples are:
     %\multicolumn{2}{C}{\ldots{}\ldots{}} \\
   \end{tabular},
 \end{equation*}
-where $s\equiv p_1^2$.
+where $s\coloneqq p_1^2$.
 We use all these vectors to obtain the corresponding surface terms. 
 In the next step we find the spanning set.
 To do this we treat each surface term as a vector from the vector space 

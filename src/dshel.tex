@@ -1,3 +1,5 @@
+\newcommand\helampl{\mathcal{A}_{\vb*{\lambda}}}
+
 In \cref{chap:stdtech,chap:numunitarity} we were operating on the objects under the assumption that they are Lorentz scalars.
 However in QFT scattering amplitudes of particles with spin are not Lorentz scalars,
 and the set of all Lorentz structures generated from Feynman diagrams is immensely redundant.
@@ -40,28 +42,22 @@ by dimensionally reducing kinematically-independent degrees of freedom in higher
 
 \todo{reference spinning particles paper (was for 5 gluon) and another from the guy from MPP} 
 
-\todo{Important transition between schemes} 
-The two schemes are consistent,
-in that their contributions to NNLO computations can be related by known
-transition rules~\cite{Broggio:2015dga}, but as we
-shall see below the HV scheme introduces some simplification in
-the calculation.
-
 
 \section{Helicity Amplitudes}
 
-Helicity amplitudes $\mathcal{A}(\{p_i,\varepsilon_{i,\lambda}\})$ 
-are defined as $\mathcal{S}$-matrix elements
-with external polarization states $\varepsilon_{i,\lambda}$ chosen to be
-the helicity eigenstates (for the definition of helicity see \cref{chap:4dspinhel}).
-Cross-sections obtained from $\Abs{\mathcal{A}(\{p_i,\varepsilon_{i,\lambda}\})}$ describe
+A helicity amplitude $\helampl$
+is defined as an $\mathcal{S}$-matrix element
+with external polarization states $\varepsilon_{i}$ chosen to be
+helicity eigenstates (for the definition of helicity see \cref{chap:4dspinhel}) with helicities $\vb*{\lambda}=\{\lambda_1,\ldots{},\lambda_N\}$.
+Cross-sections obtained from $\Abs{\helampl{}}$ describe
 the scattering of polarized particles.
 Unpolarized cross-sections can be obtained by summing over the helicities of all external particles
 with the help of the completeness relations
 \begin{subequations}
+  \label{eq:4d_completeness_relations}
   \begin{align}
-    \sum_{\lambda=\{+1,-1\}} \varepsilon^\mu_\lambda(\ell){\varepsilon^\nu_\lambda}^{\star{}}(\ell)  &= -g^{\mu\nu} + \frac{\ell^\mu \eta^\nu + \ell^\nu \eta^\mu}{\sp(\ell,\eta)}, \\
-    \sum_{\lambda=\{+\frac{1}{2},-\frac{1}{2}\}} u^\alpha_\lambda(\ell){\overline{u}_\lambda^\beta}(\ell)  &= \qty(\slashed{\ell}  \pm m\,\mathbb{1})^{\alpha\beta},
+    \sum_{\lambda=\{+1,-1\}} \varepsilon^\mu_\lambda(p){\varepsilon^\nu_\lambda}^{\star{}}(p)  &= -g^{\mu\nu} + \frac{p^\mu \eta^\nu + p^\nu \eta^\mu}{\sp(p,\eta)}, \\
+    \sum_{\lambda=\{+\frac{1}{2},-\frac{1}{2}\}} u^\alpha_\lambda(p){\overline{u}_\lambda^\beta}(p)  &= \qty(\slashed{p}  \pm m\,\mathbb{1})^{\alpha\beta},
   \end{align}
 \end{subequations}
 for gauge bosons and fermions correspondingly.
@@ -71,17 +67,26 @@ it can be further reduced by taking into an account charge and parity transforma
 The transformation of helicity amplitudes under the Lorentz boosts is completely specified by their 
 external states, and is given by the \emph{little group scaling},
 \begin{equation}
-  \ket{p_i} \to t_i \ket{p_i}, \quad  \sket{p_i} \to \frac{1}{t_i} \ket{p_i} \implies \mathcal{A}(\{p_i,\varepsilon_{i,\lambda}\}) \to  \qty(\prod_i t_i^{-2\lambda_i}) \mathcal{A}(\{p_i,\varepsilon_{i,\lambda}\}),
+  \ket{p_i} \to t_i \ket{p_i}, \quad  \sket{p_i} \to \frac{1}{t_i} \ket{p_i} \implies \helampl \to  \qty(\prod_i t_i^{-2\lambda_i}) \helampl,
 \end{equation}
 where $t_i$ are complex phases.
-As expected the squared matrix element $\Abs{\mathcal{A}(\{p_i,\varepsilon_{i,\lambda}\})}$ is Lorentz-invariant.
+As expected the squared matrix element $\Abs{\helampl{}}$ is Lorentz-invariant.
 With the help of spinor-helicity formalism we can also make any helicity amplitude itself into a scalar
 by removing it's \emph{spinor weight} --- a factor which has the same little group scaling
 as the helicity amplitude.
 Hence the scalar objects we were operating on in \cref{chap:stdtech,chap:dshel} can be the rescaled helicity amplitudes.
 
-\todo{possibly mention perturbative expansion and that the definition should apply to any loop order} 
-
+We can perturbatively expand helicity amplitudes in the coupling constants as
+\begin{equation}
+  \helampl =  \helampl^{(0)} + g^2 \helampl^{(1)} + g^4 \helampl^{(2)} + \ldots{},
+\end{equation}
+with all leading-order couplings absorbed into $\helampl^{(0)}$.
+It is then convenient to use the tree helicity amplitude\footnote{if it is not vanishing} $\helampl ^{(0)}$ to remove the spinor weight
+of loop amplitudes.
+It should be noted that the definition of helicity amplitudes may not depend on a regularization scheme
+used to regularize divergences of loop amplitudes. This implies, that 
+among the flavors of dimensional regularization only in the ones which consider external particles 
+to be in four dimensions the helicity amplitudes can be consistently defined.
 
 %This can be achieved for example by normalizing all amplitudes $A^{L}_N$ with $L\geq1$ by
 %a corresponding tree amplitude $A^{0}_N$ 
@@ -89,7 +94,7 @@ Hence the scalar objects we were operating on in \cref{chap:stdtech,chap:dshel} 
 \section{Form-Factor Decomposition and Projectors}
 \label{sec:helampl_projectors}
 
-In this section we review a way to define helicity amplitudes in dimensional regularization through $D$-dimensional projectors.
+In this section we review the conceptually simplest way to define helicity amplitudes in dimensional regularization, which is through $D$-dimensional projectors.
 This approach has been used in a number of computations \cite{Garland:2002ak, Moch:2002hm, Glover:2003cm, Glover:2004si,Gehrmann:2009vu,Gehrmann:2011aa}.
 It's relation to HV scheme and helicity amplitudes has been recently clarified in \cite{Peraro:2019cjj} (see also \cite{Chen:2019wyb}).
 
@@ -102,7 +107,7 @@ For example $\mathcal{T}_i$ can contain object like $\sp(\varepsilon(p_i),p_j)$,
 Here $A_i$ are the Lorentz-invariant form-factors.
 Then one finds projectors $\mathcal{P}_i$ on $A_i$ from linear combinations of $\mathcal{T}_i$ by solving the equations
 \begin{equation} \label{eq:cdr_projectors}
-  \mathcal{P}_i (\mathcal{A}) = \qty(\sum_j c_{i,j}(\vb*{x},D) \sum_\text{(states)} \mathcal{T}^{\dagger}_j) \sum_{k} \mathcal{T}_k A_k = A_i, 
+  \mathcal{P}_i [\mathcal{A}] = \qty(\sum_j c_{i,j}(\vb*{x},D) \sum_\text{(states)} \mathcal{T}^{\dagger}_j) \qty[\sum_{k} \mathcal{T}_k A_k] = A_i, 
 \end{equation}
 for the coefficients $c_{i,j}(\vb*{x},D)$, which are rational functions of external kinematics $\vb*{x}$ and $D$.
 Here the state sums are taken to be in $D$ dimensions, which corresponds to working in the CDR scheme.
@@ -114,181 +119,176 @@ The procedure uncovers the fact that only particular linear combinations of $A_i
 and the number of these combinations is exactly the number of independent helicity amplitudes, which is
 significantly lower than the number of initial tensor structures $\mathcal{T}_i$.
 
-The issues of this approach are two-fold:
+The difficulties of this approach are two-fold:
 \begin{enumerate}
   \item The number of initial tensor structures grows very fast with the number of external particles with spin.
-    This makes solving the equations \cref{eq:cdr_projectors} for projectors very challenging.
-  \item The projectors have to be done applied to analytic expressions since the tensor structures in $D$ dimensions have to be treated formally.
+    This makes solving the equations \cref{eq:cdr_projectors} for projectors and then applying them to each Feynman diagram very challenging for $N>4$.
+  \item The projectors have to be applied to analytic expressions since the external states in $D$ dimensions do not admit any finite numerical representations \cite{Collins:1984xc}.
 \end{enumerate}
 
-If we accept the idea that the helicity amplitudes contain the complete physical information, 
-the construction of form-factors in  \cref{eq:cdr_projectors} seems unnecessary.
-And indeed recently a way to avoid these steps and construct the projector onto helicity amplitudes directly was suggested \cite{Peraro:2019cjj}.
-This mitigates the problem, but there's still a problem that projectors have to be applied to analytic expressions.
-\todo{paragraph still rough} 
+Since the helicity amplitudes contain the complete physical information, 
+the construction of form-factors in  \cref{eq:cdr_projectors} seems to be an unnecessary complication.
+And indeed a way to avoid these steps and construct the projector onto helicity amplitudes directly has been suggested recently \cite{Peraro:2019cjj}.
+This somewhat mitigates the first issue, but the projectors have to be still applied to analytic expressions.
 
-%Formally then the corresponding space is infinite-dimensional \todo{reference Collins}, and
-%it can be made to ``coincide'' with the finite-dimensional one whenever $D$ takes integer values.
-%All particle transform as irreducible representations of Poincare group in $D$ dimensions,
-%so the number of states becomes infinite.
-
-
-%Then one switches to the HV scheme by decomposing projectors in $4$ and $(D-4)$ parts,
-%and chooses four-dimensional helicity states as a basis.
-
-
-\section{HV Helicity Amplitudes from Embedding of States}
+\section{Helicity Amplitudes in the HV Scheme from Embedding of States}
 \label{sec:helampl_embeding}
 
-We show how to obtain helicity amplitudes directly, without complicated projectors, for vector and spinor particles.
-We achieve this by working in HV scheme from the beginning.
+In this section we explain how multi-loop helicity amplitudes
+with vector and spinor external particles can be obtained in dimensional regularization
+from appropriate embedding of helicity states into spaces of higher dimensionality $\mathsf{S}_{[D_s]}$.
+As in \cref{sec:evaluation_of_cuts}, in this \namecref{chap:dshel} we will denote the dimensionality of particles'
+representations as $D_s$.
 
-We 
-choosing an appropriate embedding of the physical four-dimensional state in $D_s$ dimensions.
+\todo{
+  We build up independently from the projector approach, in the context of dimensional reconstruction. 
+  However the correspondence can be straightforwardly established
+}
 
-
+In HV the space-time symmetry group is extended to $\mathrm{SO}(1,D_s-1)$, and the external particles are kept in four dimensions. 
+More precisely this means that, like in CDR, the tensor and Clifford algebras are performed in $D_s$ dimensions,
+but the completeness relations for external states have to be as in \cref{eq:4d_completeness_relations}. 
+In other words the amplitudes in HV transform like their four-dimensional counterpart under $\mathrm{SO}(1,3)$, 
+and are invariant under the rotations in $\mathrm{SO}(D_s-4)$. 
+This implies that, upon normalizing by an appropriate spinor weight, the helicity amplitudes are scalars of the extended symmetry group $\mathrm{SO}(1,D_s-1)$.
+In \cref{chap:numunitarity} we argued that we can use this symmetry to embed the formally infinite-dimensional computation
+into a finite one with appropriately chosen integer values of $D^{(L)}$ and $D_s$.
+This fact motivates our strategy:
 \begin{enumerate}
-  \item We build up independently from the projector approach, in the context of dimensional reconstruction. 
-    However the correspondence can be straightforwardly established
-  \item We need to build Lorentz symmetry $\implies $ embedding of loop momenta $\implies $ embedding of $D_s$
-  \item number of states and splitting polarization sums
-  \item We need Lorentz scalars $\implies $ only look at tensors in $\mathsf{S}_{[D_s-4]}$,
-    and divide by little group in four dimensions
+  \item Consider amplitudes in arbitrary (integer) $D_s > D^{(L)}$ dimensions with fixed external states,
+    which have the right little-group behavior with respect to $\mathrm{SO}(1,3) \subset \mathrm{SO}(1,D_s-1)$.
+  \item Impose the rotational symmetry in $\mathrm{SO}(D_s-4)$ by combining the degrees of freedom from $\mathsf{S}_{[D_s-4]}$ in
+    a suitable way.
+  \item Set $D_s\to D$ in the amplitudes obtained from the previous step (which are polynomials in $D_s$).
 \end{enumerate}
+As we will see shortly, the second step is trivial for vector particles. For fermionic
+particles it requires a tensor decomposition similar to the one we discussed in \cref{sec:helampl_projectors},
+but enormously simplified by the fact that the indices in  $\mathsf{S}_{[D_s-4]}$ are completely decoupled from kinematics\footnote{
+  this applies after the loop integrations are performed, 
+  but we can always pull the corresponding projectors into the integrand given that $D_s$ was not set to $D$ yet.
+}
+and that we can ignore all vector particles.
+
 
 
 \subsection{Embedding of Vector States}
 \label{sec:embedding_vectors}
 
-This is trivially achieved for gluon helicity states: these
-Are vector particles and any four-dimensional polarization state
-can be embedded in a generic $D$-dimensional space by filling 
-the remaining components of the vector with zeros. 
-For fermion states, however, the embedding is less trivial as 
-the nature of the $D$-dimensional Clifford algebra means that
-there is no single associated state in $D$-dimensions.  
+Consider the amplitudes for the scattering of massless vector particles.
+There are $(D_s - 2)$ states for each particle in $D_s$ dimensions. 
+The corresponding polarization sum for a particle with momentum $p$ is 
+\begin{equation}
+  \sum_{j=1}^{D_s-2} \varepsilon^\mu_j(p){\varepsilon^\nu_j}^{\star{}}(p) = -g_{[4]}^{\mu\nu} + \frac{p^\mu \eta^\nu + p^\nu \eta^\mu}{\sp(p,\eta)} \;-\; g_{[D_s-4]}^{\mu\nu}, 
+\end{equation}
+where we used $p \in \mathsf{S}_{[4]}$
+to make the $(D_s-4)$-dimensional part explicit.
+Comparing this to \cref{eq:4d_completeness_relations} we see that we can embed the helicity states as
+\begin{align}
+  \varepsilon_{1,2}^\mu =
+    \begin{dcases}
+      \varepsilon^\mu_{+,-}, & \mu\in \mathsf{S}_{[4]},\\
+      0, & \mu\in \mathsf{S}_{[D_s-4]},\\
+    \end{dcases}
+    &&
+  \varepsilon_{j}^\mu = \delta^{(j+2)}_\mu, \qfor j\geq 3,
+\end{align}
+Thus the amplitudes in $D_s$ dimensions with $\varepsilon_{1,2}^\mu$ as external states satisfy the correct little-group scaling trivially.
+If we now also take into an account the orthogonality relations 
+\begin{align}
+  g_{[D_s]}^{\mu\nu} = g^{\mu\nu}_{[4]}+g^{\mu\nu}_{[D_s-4]}, && (g_{[4]})^{\mu\rho}(g_{[D_s-4]})_{\rho\nu} = 0,
+      %& (g_{[x]})^{\mu}_\mu =x, \qfor x \in  \{4,D_s,D_s-4\},
+\end{align}
+we see that these amplitudes are invariants under the rotations in $\mathsf{S}_{[D_s-4]}$.
+Hence they are the helicity amplitudes in the HV scheme.
+This is, of course, a well-known fact which has been exploited in one-loop computations with numerical generalized
+unitary methods \cite{Ellis:2007br,Giele:2008ve}, as well as as 
+in the so-called six-dimensional helicity formalism \cite{Bern2011,Cheung:2009dc,Badger:2013gxa,Badger:2017jhb}.
 
-
-Comparing to the form-factor decomposition no projections are required at all.
+Note that, in contrast to the form-factor decomposition in \cref{sec:helampl_projectors}, we did not need any projectors.
 
 \subsection{Embedding of Spinor States}
-\label{sec:Clifford}
+\label{sec:embedding_spinors}
 
-
-We consider fermions in $D_s$ dimensions, as is for instance
-necessary when a CDR gluon or a singular HV gluon is emitted 
-from a quark line. If the fermion line closes upon itself, as in
-e.g.\ the $N_f$ corrections to gluon amplitudes
-(i.e.\  corrections with a closed massless-quark loop), 
-we only need the defining
-property of the Clifford algebra
-\begin{equation} \label{eqn:defClifford}
-\{ \gamma_{[D_s]}^\mu, \gamma_{[D_s]}^\nu \} = 
-2 g_{[D_s]}^{\mu\nu}\mathbb{1}_{[D_s]}^{\vphantom{\mu\nu}} \,,
-\end{equation}
-where we explicitly write the dimension $D_s$
-as a subscript of the $\gamma$-matrices and the metric, and
-use a metric with mostly-minus Minkowski signature, 
-$g_{[D_s]}=\mathrm{diag}\{1, -1 , ... , -1 \}$.
-Here $\mathbb{1}_{[D_s]}$ is the identity operator in the representation space of 
-the Clifford algebra.
-In the presence of external fermions, however, 
-we must also describe the corresponding states and
-an explicit
-representation of the $D_s$-dimensional Clifford algebra is
-required. Since we are ultimately interested in specifying
-four-dimensional
-external states, it is furthermore convenient to construct 
-the representation in a factorized way starting from four dimensions
-(see e.g.\ refs.~\cite{Kreuzer:susylectures,Collins:1984xc}).
-We thus consider a Clifford algebra
-in $D_s$ dimensions as the tensor product of a
-four-dimensional and a $(D_s-4)$-dimensional one:
-\begin{equation}\label{eqn:cliffordrecursion}
-%
-(\gamma_{[D_s]}^\mu)_{a\kappa}^{\,b\lambda}  = \left\{ 
-\begin{array}{ll} 
-		\left(\gamma_{[4]}^\mu\right)_a^{\;b} \,
-		\delta_\kappa^\lambda\,, &\quad  0\le\mu \le 3 \,,\\&\\
-		\left(\tilde\gamma_{[4]}\right)_a^{\;b} 
-		\left(\gamma_{[D_s-4]}^{(\mu-4)}\right)_\kappa^{\;\lambda}\,, 
-        &\quad \mu > 3 \,,
-\end{array}
-		\right.
-%
-\end{equation}
-where $\tilde\gamma_{[4]}\equiv i(\gamma_{[4]}^0
-\gamma_{[4]}^1 \gamma_{[4]}^2 \gamma_{[4]}^3)$, such that 
-$(\tilde\gamma_{[4]})^2 =\mathbb{1}_{[4]}$ is the identity
-operator
-in the four-dimensional algebra.
-The indices $a,b$ denote the spinor indices in the
-four-dimensional algebra and $\kappa,\lambda$ the ones of the 
-$(D_s-4)$-dimensional one.
-The $\gamma^\mu_{[D_s-4]}$ form themselves a 
-$(D_s-4)$-dimensional Clifford algebra with signature
-$g_{[D_s-4]}=\mathrm{diag}\{ -1 , ... , -1 \}$.
-
-The spinor states associated with the $D_s$-dimensional 
-Clifford algebra live in a $D_t$-dimensional space.\footnote{We 
-remind the reader that although $D_t=2^{D_s/2}$ for any 
-finite-dimensional representation, $D_t$ is set to $4$ in 
-dimensional regularization \cite{Collins:1984xc}.}
-For four-dimensional momenta they can be constructed from a 
-tensor-product representation as
-%%
-\begin{equation} 
-\label{eq:fermionicStates}
-\psi_{s,a \kappa} =  (u_h)_a (\eta^i)_\kappa \,,
-\quad\mbox{and}\quad
-\bar \psi_s^{a \kappa} = 
-(\bar u_h)^{a}  (\bar \eta_i)^\kappa\,,
-\end{equation}
-%
-where we have introduced an index $s=\{h, i \}$ to denote the
-polarization states in terms of spinors of the four- and 
-$(D_s-4)$-dimensional subspaces. 
-Without loss of generality we can
-require that $(\eta^i)_\kappa$ and $(\bar \eta_i)^\kappa$ 
-be dual to each other,
-%
+We now consider amplitudes with external fermions.
+There are $2^{\frac{D_s}{2}-1}$ spinor states in $D_s$ dimensions, 
+which can be constructed through the representations of Clifford algebras (see \cref{sec:clifford_algebra_ds}).
+The polarization sum with the momentum $p \in \mathsf{S}_{[4]}$ is
 \begin{equation}
-\label{eqn:qspinors}
-(\bar \eta_i)^\kappa (\eta^j)_\kappa = \delta_i^j\,,
+  \sum_{j=1}^{2^{\frac{D_s}{2}-1}} u^\alpha_j(p){\overline{u}_j^\beta}(p) = \qty(\slashed{p}_{[D_s]}  \pm m\,\mathbb{1}_{[D_s]})^{\alpha\beta} \equiv 
+  \qty(\slashed{p}_{[4]} \pm m \cdot \mathbb{1}_{[4]})^{\bar{\alpha}\bar{\beta}} \qty(\mathbb{1}_{[D_s-4]})^{\hat{a}\hat{b}},
 \end{equation}
-and choose a canonical basis for the 
-spinors in the $(D_s-4)$-dimensional space,
-i.e.\ set $(\eta^i)_\kappa=\delta^i_\kappa$.
-%
-In an on-shell computation in $D_s$ dimensions we use the 
-spinor states defined in eq.~\eqref{eq:fermionicStates}
-as external fermion wave functions.
-Given the choice of a canonical basis for the 
-$(D_s-4)$-dimensional states, we can identify the
-$(D_s-4)$ polarization label $i$ with the spinor index 
-$\kappa$ in eq.~\eqref{eq:fermionicStates}.
-Thus, in the following we only insert four-dimensional spinors
-and keep track of the $(D_s-4)$-dimensional embedding with 
-the open $(D_s-4)$ spinor index.
-
-\todo{ 
-  As opposed to the case of vector particles we see that it's not possible to embed the spinor states from $\mathsf{S}_{[4]}$
-  into $\mathsf{S}_{[D_s]}$ without introducing a preferred direction in $\mathsf{S}_{[D_s-4]}$
+where the indices $\alpha = \bar{\alpha}\otimes\hat{\alpha}$,  $\beta = \bar{\beta}\otimes \hat{\beta}$ are factorized into 
+$\{\bar{\alpha},\bar{\beta}\}\in \mathsf{S}_{[4]}$ and $\{\hat{\alpha},\hat{\beta}\}\in \mathsf{S}_{[D_s-4]}$.
+Comparing to \cref{eq:4d_completeness_relations}, we see that we can embed the four-dimensional spinors as
+\begin{align} \label{eq:fermionicStates}
+    \qty(u_{\lambda,i})^{\bar{\alpha}\hat{\alpha}} =  u_{\lambda}^{\bar{\alpha}} \cdot \delta_i^{\hat{\alpha}}, && i = 1,\ldots{},2^{\frac{D_s}{2}-2},
+\end{align}
+where we replaced the index $j \to \{\lambda, i \}$ to make the four-dimensional helicity $\lambda \in  \{+\frac{1}{2},-\frac{1}{2}\}$ manifest.
+Thus the amplitudes in $D_s$ dimensions with any of the spinors $\qty(u_{\lambda,i})^{\bar{\alpha}\hat{\alpha}}$ taken as external fermionic states\footnote{
+  The fact the these spinors also satisfy the Dirac equation in $D_s$ dimension can be easily verified.
 }
-So we construct the tensor decomposition.
-
-
-
+(and with the vector states taken as in \cref{sec:embedding_vectors}) have the correct little-group scaling.
+However, as opposed to the case of vector particles, we observe that 
+all of the states in \cref{eq:fermionicStates} introduce a \emph{preferred direction} in  $\mathsf{S}_{[D_s-4]}$
+via the indices $\hat{\alpha}$.
+Hence the corresponding amplitudes are \textbf{not} symmetric under the rotations $\mathrm{SO}(D_s-4)$.
+From a different point of view, we have many states with the same helicity, which creates an ambiguity as to what 
+should be the helicity amplitude.
+On that account, we turn to the tensor decomposition of indices $\hat{\alpha}$.
 
 \subsection{Tensor Decomposition in $D_s-4$}
 \label{sec:HelAmplHV}
 
-In amplitude calculations we naturally encounter products of
-$\gamma$ matrices, and in this paper we will mainly focus
-on chains of $\gamma_{[D_s-4]}$ matrices. 
-We thus define a convenient basis for these chains, 
-constructed by anti-symmetrizing over their Lorentz
-indices and given by (see e.g.\ \cite{Kreuzer:susylectures})
+We decompose an amplitude with external fermions in $D_s$ dimensions as
+\begin{equation} \label{eq:tensorDecomposition}
+  \mathcal{A} = \sum_n v_n A_n,
+\end{equation}
+where all spinor indices $\hat{\alpha}_i \in \mathsf{S}_{[D_s-4]}$ (and only them) are absorbed into $v_n$,
+and, consequently, $A_n$ are scalars of $\mathsf{S}_{[D_s-4]}$.
+In the following we will show how to construct a convenient basis of the tensor structures $v_n$ 
+for any number of external fermions.
+
+First we observe that only the spinor chains of the form
+\begin{equation}
+  u^{\hat{\alpha}}_i \; \qty( \prod_k \gamma^{\mu_k}_{[D_s -4 ]} )^{\hat{\alpha}\hat{\beta}} \; u^{\hat{\beta}}_j \quad\equiv\quad 
+  \qty( \prod_k \gamma^{\mu_k}_{[D_s -4 ]} )^{i j},
+\end{equation}
+with indices $\mu_i \in \mathsf{S}_{[D_s -4]}$ contracted to other spinor chains, contribute to $v_n$.
+This is the consequence of the following facts:
+\begin{itemize}
+  \item Thanks to our choice of states for vector particles, all Lorentz vectors that can be contracted with $\gamma^{\mu_i}_{[D_s]}$
+    project them into $\mathsf{S}_{[4]}$:
+    \begin{align} \label{eq:trivialTens1}
+      a_{\mu}
+      \left( \gamma_{[D_s]}^\mu \right)_{\bar{\alpha}\hat{\alpha}}^{\bar{\beta}\hat{\beta}} =
+      a_{\mu}\left(\gamma_{[4]}^\mu \right)_{\bar{\alpha}}^{\bar{\beta}} \delta_{\hat{\alpha}}^{\hat{\beta}}\,,
+      &&
+      a \in \{p_i,\varepsilon_{1,2}(p_i)\}
+    \end{align}
+  \item Any Lorentz indices inside the same spinor chain can be contracted yielding  
+    \begin{equation} \label{eq:trivialTens2}
+      \left(\gamma_{[D_s]}^\mu\right)_{\bar{\alpha}\hat{\alpha}}^{\bar{\kappa}\hat{\kappa}}
+      \left(\gamma_{[D_s]\mu}^{\phantom{\mu}}\right)_{\bar{\kappa}\hat{\kappa}}^{\bar{\beta}\hat{\beta}}
+      =D_s~\delta_{\bar{\alpha}}^{\bar{\beta}}\delta_{\hat{\alpha}}^{\hat{\beta}}\,.
+    \end{equation} 
+  \item Due to the factorized representation of the Clifford algebra (see \cref{eqn:cliffordrecursion}),
+    any spinor chain can be factorized.
+\end{itemize}
+Non-trivial tensors $v_n$ are thus obtained by contracting
+Lorentz indices of multiple chains of $\gamma_{[D_s-4]}$ matrices.
+Some examples of $v_n$ are
+\begin{equation}
+  \begin{aligned}
+    & \delta^{i_1}_{j_1} \delta^{i_2}_{j_2},\\
+    & (\gamma_{[D_s-4]}^{\mu_1} )_{i_1}^{j_1} (\gamma_{[D_s-4]\mu_1}^{\phantom{\mu}})_{i_2}^{j_2}, \\
+    & (\gamma_{\mu_1[D_s-4]}^{\phantom{\mu}} )_{i_1}^{j_1} (\gamma_{[D_s-4]}^{\mu_1}\gamma_{[D_s-4]}^{\mu_2} )_{i_2}^{j_2} (\gamma_{[D_s-4]\mu_2}^{\phantom{\mu}})_{i_3}^{j_3},\\
+    & \qquad \vdots{}
+  \end{aligned}
+\end{equation}
+
+Evidently to construct a basis of tensor structures $v_n$ we can
+decompose each of the spinor chains 
+into the standard set of antisymmetric (see e.g.\ \cite{Veltman:1988au}) 
 \begin{align}\label{eq:basisGammaChainDs}
 \gamma_{[D_s-4]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in S_n} \sgn(\sigma) \gamma_{[D_s-4]}^{\mu_{\sigma(1)}} \ldots \gamma_{[D_s-4]}^{\mu_{\sigma(n)}}\,,
 \end{align}
@@ -296,225 +296,45 @@ where $S_n$ denotes the set of all permutations of $n$
 integers and $\sgn(\sigma)$ the signature of the permutation
 $\sigma\in S_n$.
 
-
-
-
-
-The tensor product representation of the Clifford algebra is
-particularly useful to separate four- and 
-$(D_s-4)$-dimensional spinor indices in $\gamma$-matrix chains. 
-Indeed, a product of
-$\gamma$ matrices where some
-Lorentz indices are within four dimensions (denoted
-$\mu_i$),
-and some are beyond four dimensions (denoted $\hat\mu_i$) is
-split into two blocks, a four-dimensional and a 
-$(D_s-4)$-dimensional one. For instance, we have
-\begin{align}
-  \begin{split}
-    \left(\gamma_{[D_s]}^{\mu_1}
-    \gamma_{[D_s]}^{\hat \mu_2}
-    \gamma_{[D_s]}^{\mu_3}
-    \gamma_{[D_s]}^{\hat\mu_4}\right)_{a\kappa}^{\,b\lambda} &=
-    -\left(
-    \gamma_{[D_s]}^{\mu_1}
-    \gamma_{[D_s]}^{\mu_3}
-    \gamma_{[D_s]}^{\hat \mu_2}
-    \gamma_{[D_s]}^{\hat\mu_4} \right)_{a\kappa}^{\,b\lambda} \\
-    &=-\left( 
-    \gamma_{[4]}^{\mu_1}
-    \gamma_{[4]}^{\mu_3}
-    \right)_a^{\,b}   \,\left(
-    \gamma_{[D_s-4]}^{(\hat \mu_2-4)}
-    \gamma_{[D_s-4]}^{(\hat \mu_4-4)}
-    \right)_\kappa^{\,\lambda}  \,.
-  \end{split}
-\end{align}
-Consider now contracting the above
-product of $\gamma$ matrices with a four-dimensional fermion state,
-such as the $u$ and $\bar u$ spinors:
-\begin{equation}
-	\label{eq:tensorChain}
-	\bar u^a
-	\left(\gamma_{[D_s]}^{\mu_1}
-	\gamma_{[D_s]}^{\hat \mu_2}
-	\gamma_{[D_s]}^{\mu_3}
-	\gamma_{[D_s]}^{\hat\mu_4}\right)_{a\kappa}^{\,b\lambda}
-	u_b=
-	-\left(\bar u
-	\gamma_{[4]}^{\mu_1}
-	\gamma_{[4]}^{\mu_3}
-	u\right)
-	\left(
-	\gamma_{[D_s-4]}^{(\hat \mu_2-4)}
-	\gamma_{[D_s-4]}^{(\hat \mu_4-4)}
-	\right)_\kappa^{\,\lambda}\,.
+In practical calculations, one is interested in computing
+specific coefficients $M^{(k)}_n$ in the decomposition
+of eq.~\eqref{eq:tensorDecomposition}. We construct the
+basis $\{v_n\}$ such that this operation is trivial, i.e.\  it
+satisfies
+\begin{equation}\label{eqn:vnproducts}
+	v_n^\dagger\cdot v_m=c_n\delta^n_m\,,
+	\quad
+    c_0(D_s) = 1\,\quad\mbox{and}\quad  c_{n>0}(D_s)={\cal O}(\epsilon)\,.
 \end{equation}
-The result is a tensor with open indices in the
-$(D_s-4)$-dimensional space.
-We recall that these are in one-to-one
-correspondence with a $(D_s-4)$-dimensional state, and the above expression (\ref{eq:tensorChain}) is
-thus equivalent to a contraction with on-shell helicity states in $D_s$ dimensions.
-%
-Our ultimate goal is the calculation of amplitudes relevant for 
-cross-section computations, and we must then understand which
-tensor structures beyond four dimensions are necessary. 
-This will be done in the next subsections.
-
-We finish this section with two comments. First, we note that in the
-HV scheme this tensor decomposition results in simpler expressions
-than in CDR. Consider for instance the tree-level $q\bar q\to Q\bar
-Q$ amplitude
-\begin{equation}
-  \left(M^{(0)}\right)_{\kappa_1 \kappa_2}^{\lambda_1 \lambda_2}
-  \;\sim\;\; 
-  \bar u^{a_1}
-  \left(
-  \gamma_{[D_s]}^\mu
-  \right)_{a_1 \kappa_1}^{b_1 \lambda_1}
-  u_{b_1}
-  \,\,
-  \bar u^{a_2}
-  \left(
-  \gamma_{[D_s]\mu}
-  \right)_{a_2 \kappa_2}^{b_2 \lambda_2}
-  u_{b_2}
-  \,.
-\end{equation}
-In the HV scheme, the gluon between the two quark lines is
-four dimensional, i.e.\  $\mu\leq3$, while
-in the CDR scheme, the gluon is $D_s$ dimensional.
-From eq.~\eqref{eqn:cliffordrecursion} we thus get
-\begin{equation}
-  \label{eq:HVvsCDR}
-  \left(M^{(0)}\right)_{\kappa_1,\kappa_2}^{\lambda_1,\lambda_2}
-  =
-  \begin{cases}
-    M^{(0)}_{0}\, \delta_{\kappa_1}^{\lambda_1}
-    \delta_{\kappa_2}^{\lambda_2}& \textrm{in HV,}\\
-    M^{(0)}_{0}\, \delta_{\kappa_1}^{\lambda_1}
-    \delta_{\kappa_2}^{\lambda_2}+
-    M^{(0)}_{1}\,\Bigl(\gamma_{[D_s-4]}^{\mu}\Bigl)_{\kappa_1}^
-    {\lambda_1}
-    \Bigl(\gamma_{[D_s-4]\mu}\Bigl)_{\kappa_2}^{\lambda_2}
-    &\textrm{in CDR,}
-  \end{cases}
-\end{equation}
-where the $M_i^{(0)}$ are coefficients that are determined from
-products of four-dimensional $\gamma$-matrices contracted with
-four-dimensional spinors.
-In the HV scheme the amplitude is
-determined by a single coefficient, 
-while in CDR two are needed. In the
-remainder of this paper we thus choose to work in the HV scheme.
-Nevertheless, our discussion
-generalizes to the CDR scheme in a straightforward way.
-
-The second comment we wish to make is that, 
-although in this section we consider $D_s=4-2\epsilon$, which
-means the Clifford algebra defined in 
-eq.~\eqref{eqn:cliffordrecursion} is infinite dimensional, in
-numerical calculations one might need to construct an explicit
-representation of the Clifford algebra and thus
-take $D_s$ to be an even integer (larger than 4).
-The construction 
-of eq.~\eqref{eqn:cliffordrecursion} still holds and, in fact, 
-it can be iterated: any even $D_s$ can be reached
-by constructing a tensor product of the
-$(D_s-2)$ algebra with a 2-dimensional algebra, even if the 
-$(D_s-2)$ algebra 
-was already constructed as a tensor product of two
-algebras.
-
-We consider a helicity amplitude $M$, expanded in 
-perturbation theory, with the $k$-th order term written as
-$M^{(k)}$.
-We saw previously that these are tensors in the
-$(D_s-4)$-dimensional spinor space, see
-eq.~\eqref{eq:HVvsCDR} for an explicit example.
-Here we introduce a basis for the associated tensor space in the
-spinor indices beyond four dimensions, whose elements are 
-denoted as $v_n$. In general,
-the basis depends on the physical process described 
-by $M$ and on the order $k$ in the perturbative
-expansion. We will suppress this dependence for simplicity of 
-the notation and write
-\begin{equation}
-  M^{(k)}= \sum_n  v_n M^{(k)}_n,
-\label{eq:tensorDecomposition}
-\end{equation}
-where the $M^{(k)}_n$ are computed from
-$\gamma_{[4]}^{\mu}$ matrices and external states in four dimensions, and the tensor structure
-of the amplitude in the spinor indices beyond four dimensions is
-fully contained in the $v_n$.
-In the following, we explicitly construct the basis $\{v_n\}$
-for two families of amplitudes: those with a pair $q\bar q$ of
-external
-quarks and any number of external gluons, and
-those with two pairs $q\bar q$ and $Q\bar Q$
-of external quarks (of either different or identical
-flavor) and any number of external gluons.
-
-The different tensors $v_n$ are constructed by contracting the
-Lorentz indices of chains of $\gamma_{[D_s]}$ matrices with
-other Lorentz vectors in the amplitude after all loop
-integrations have been performed. The remaining objects that
-carry Lorentz indices are four-dimensional external momenta,
-four-dimensional polarization vectors and chains of $\gamma_{[D_s]}$
-matrices. Any Lorentz index in a $\gamma_{[D_s]}$-matrix 
-chain that is contracted with a four-dimensional object becomes
-four-dimensional, contributing only a trivial tensor structure 
-in the $(D_s-4)$-dimensional space. For instance, if $\varepsilon_\mu$ represents a
-four-dimensional polarization vector of an external gluon,
-\begin{equation}
-	\label{eq:trivialTens1}
-	\varepsilon_\mu
-	\left(
-	\gamma_{[D_s]}^\mu
-	\right)_{a\kappa}^{b\lambda}
-	=\varepsilon_\mu\left(\gamma_{[4]}^\mu
-	\right)_{a}^{b}\delta_{\kappa}^{\lambda}\,.
-\end{equation}
-Similarly when two Lorentz indices are contracted inside the 
-same chain of $\gamma_{[D_s]}$ matrices, the tensor structure
-beyond four dimensions is trivial, as follows from:
-\begin{equation}
-	\label{eq:trivialTens2}
-	\left(\gamma_{[D_s]}^\mu\right)_{a \kappa}^{b_1 \lambda_1}
-        \left(\gamma_{[D_s]\mu}^{\phantom{\mu}}\right)_{b_1 \lambda_1}^{b \lambda}
-	=D_s\delta_{a}^{b}\delta_{\kappa}^{\lambda}\,.
-\end{equation}
-Non-trivial tensors $v_n$ are obtained by contracting
-Lorentz indices of two chains of $\gamma_{[D_s-4]}$ matrices.
-The basis introduced in eq.~\eqref{eq:basisGammaChainDs} 
-for these chains is particularly useful for
-computing these contractions.
-
-Let us consider an amplitude with a pair $q\bar q$ of external
-quarks and any number of external gluons. There is a single
-chain of $\gamma_{[D_s-4]}$ matrices and,
-as there are no other objects with $(D_s-4)$ indices, it
-follows from the discussion above that
-for this case there is a single term in the sum of
-eq.~\eqref{eq:tensorDecomposition}:
-\begin{equation}\label{eq:decompqqbar}
-	M^{(k)}
-	(q,\bar q,g,\ldots,g)
-	=w_0\,M^{(k)}_0\,,\qquad
-	\textrm{with}\quad
-	(w_0)_{\kappa}^{\lambda}=\delta_{\kappa}^{\lambda}\,.
-\end{equation}
-We define the dual tensor
-$w^0$ such that $w_0\cdot w^0=1$, with more details given in
+The calculation of the coefficients $c_n$ requires some 
+technical operations on $\gamma$ matrices that we present in
 appendix~\ref{sec:identities}.
+We then construct the dual basis $\{v^n\}$, with elements
+\begin{equation}\label{eq:dualBasis}
+	v^n=\frac{1}{c_n} (v_n)^\dagger\,.
+\end{equation}
+Using the dual basis, we directly get
+\begin{equation}\label{eqn:helampl}
+  M^{(k)}_n = v^n \cdot M^{(k)}.
+\end{equation}
 
-Let us now consider an amplitude with two quark pairs of 
+
+\subsubsection{Examples}
+
+As a first and trivial example let us consider an amplitude with a pair $q\bar q$ of external
+quarks and any number of external gluons. There is a single
+chain of $\gamma_{[D_s-4]}$ matrices and, as there are no other objects with $(D_s-4)$ indices,
+for this case there is only a single term in the decomposition in \cref{eq:tensorDecomposition}:
+\begin{equation}\label{eq:decompqqbar}
+  \mathcal{A}(q,\bar q,g,\ldots,g) =v_0\,A_0\,,\qquad \textrm{with}\quad (v_0)_{\hat{\alpha}}^{\hat{\beta}}=\delta_{\hat{\alpha}}^{\hat{\beta}}\,.
+\end{equation}
+
+As a second example we consider an amplitude with two quark pairs of 
 different flavors, $q\bar q$ and $Q\bar Q$, and any number of
-gluons. We can now contract Lorentz indices between two 
-different chains of $\gamma$ matrices, and the basis 
-$\{v_n\}$ is then larger in this case. Using the basis for the
-$\gamma$-matrix chains introduced in 
-eq.~\eqref{eq:basisGammaChainDs}, we construct the associated
+gluons. We can contract Lorentz indices between two 
+different spinor chains, and the basis 
+$\{v_n\}$ is then larger in this case. Using the basis spinor chains introduced in 
+\cref{eq:basisGammaChainDs}, we construct the associated
 basis $\{v_n\}$:
 \begin{align}
   \begin{split} \label{eqn:4qtensors}
@@ -542,7 +362,7 @@ We thus have
 \begin{equation} \label{eqn:4qampltensor}
 	M^{(k)} (q,\bar q,Q,\bar Q,g,\ldots,g) =\sum_{n=0}^{n_k} v_n M^{(k)}_n\,.
 \end{equation}
-In the HV scheme, the decomposition is independent of the number
+The decomposition is independent of the number
 of external gluons. In particular,
 the value of $n_k$ can be determined from the amplitude with no 
 external gluons, by examining the Feynman diagrams
@@ -550,31 +370,7 @@ with the most singular gluons.
 These are ladder-type four-point diagrams with the 
 gluons in the rungs. We find for instance that $n_0=0$,
 $n_1=3$ and $n_2=5$ for tree-level, one- and two-loop
-amplitudes, respectively. Our decomposition is similar to the 
-one presented in ref.~\cite{Glover:2004si}, but differs in the
-choice of basis tensors in eq.~\eqref{eq:tensorDecomposition}.
-
-In practical calculations, one is interested in computing
-specific coefficients $M^{(k)}_n$ in the decomposition
-of eq.~\eqref{eq:tensorDecomposition}. We construct the
-basis $\{v_n\}$ such that this operation is trivial, i.e.\  it
-satisfies
-\begin{equation}\label{eqn:vnproducts}
-	v_n^\dagger\cdot v_m=c_n\delta^n_m\,,
-	\quad
-    c_0(D_s) = 1\,\quad\mbox{and}\quad  c_{n>0}(D_s)={\cal O}(\epsilon)\,.
-\end{equation}
-The calculation of the coefficients $c_n$ requires some 
-technical operations on $\gamma$ matrices that we present in
-appendix~\ref{sec:identities}.
-We then construct the dual basis $\{v^n\}$, with elements
-\begin{equation}\label{eq:dualBasis}
-	v^n=\frac{1}{c_n} (v_n)^\dagger\,.
-\end{equation}
-Using the dual basis, we directly get
-\begin{equation}\label{eqn:helampl}
-  M^{(k)}_n = v^n \cdot M^{(k)}.
-\end{equation}
+amplitudes, respectively.
 
 Finally let us consider an amplitude with two identical quark
 pairs, which can be constructed by anti-symmetrizing the
@@ -816,6 +612,15 @@ So the only consistent method should be when $\gamma_5$ commutes with higher dim
 \subsection{Discussion}
 \label{sec:dshel_discussion}
 
+\todo{Validated extremely well by reproducing all the results computed from the form-factor decomposition} 
+
+\todo{Important transition between schemes} 
+The two schemes are consistent,
+in that their contributions to NNLO computations can be related by known
+transition rules~\cite{Broggio:2015dga}, but as we
+shall see below the HV scheme introduces some simplification in
+the calculation.
+
 The idea of embedding external states into higher-dimensional spaces to obtain
 helicity amplitudes in dimensional regularization is not new. 
 It has been employed in one-loop numerical generalized
@@ -840,6 +645,8 @@ From two-loop onwards the differences will appear already in the poles in $\epsi
 For example the single embedding was used in \cite{DeFreitas:2004kmi} for the computation of two-loop four-quark amplitudes,
 and the result for the amplitude differs significantly from our results and the result of \cite{Glover:2004si}.
 In \cref{sec:relevant_tensors} we explained why the finite remainders agree.
+
+\todo{All particles can be massive, nothing changes, but the little-group scaling is replaced by the q-helicity scaling.} 
 
 
  

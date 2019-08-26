@@ -35,12 +35,12 @@ to be generalized to $D$ dimensions.
 The are different flavors of DR making particular choices on how this generalization is accomplished (see e.g.\ \cite{Gnendiger:2017pys}).
 
 The conceptually simplest variant of DR, the \emph{conventional dimensional regularization} (CDR)
-treats all Lorentz structures uniformly in $D$ dimensions, effectively replacing the $SO(1,3)$ Lorentz symmetry by $SO(1,D-1)$.
+treats all Lorentz structures uniformly in $D$ dimensions, effectively replacing the $\mathrm{SO}(1,3)$ Lorentz symmetry by $\mathrm{SO}(1,D-1)$.
 CDR has been successfully employed in many analytic computations.
 In this thesis however we are concerned with numerical methods, for which CDR is not very practical due to the
 formally infinite number of external states.
-Instead we use the 't Hooft -- Veltman (HV) scheme which keeps all external states and momenta in four dimensions and
-extends the space-time symmetry group to $SO(1,3)\otimes SO(D-4)$.
+Instead we use the 't Hooft -- Veltman (HV) scheme which keeps all external states and momenta in four dimensions.
+%and extends the space-time symmetry group to $\mathrm{SO}(1,3)\otimes \mathrm{SO}(D-4)$.
 
 It is advantageous to distinguish in the intermediate stages of computation the dimensionality of loop integration (or loop momenta) $D$ and
 the dimensionality of internal particles $D_s \geq  D$.
@@ -63,7 +63,7 @@ The most general form of any $L$-loop amplitude with $N$ external particles with
   \sum_{\Gamma \in \Delta} \sum_{\gamma_\Gamma} \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~ 
   \frac{\mathcal{N}_{\Gamma,\gamma_\Gamma}%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
     }{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma j}}},
-    \qquad \tilde{\dd{\ell_i}} \equiv \frac{\dd[D]{\ell_i}}{(2\pi)^{D}}.
+    \qquad \tilde{\dd{\ell_i}} \coloneqq \frac{\dd[D]{\ell_i}}{(2\pi)^{D}}.
   \label{eq:general_amplitude}
 \end{equation}
 Here $\rho_j = q_j^2 - m_j^2$ is a denominator of a propagator with momentum $q_j$ and mass $m_j$. The sum $\sum_{\gamma_\Gamma}$ runs over all assignments
@@ -81,7 +81,7 @@ And it is thus sufficient to consider a significantly smaller set of integrals $
 as \emph{master integrals}. Then the amplitude can be written in the form
 \begin{equation}
   \sum_{\Gamma \in \Delta_M} \sum_{i\in M_\Gamma} ~ c_{\Gamma,i} ~ I_{\Gamma,i}, 
-    \qquad I_{\Gamma,i} \equiv 
+    \qquad I_{\Gamma,i} \coloneqq 
       \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}},
   \label{eq:amplitude_integrated}
 \end{equation}
@@ -145,7 +145,7 @@ where the sum runs over all monomials $m^{\va{i}}(\vb*{sp})$ with \emph{total de
 $ H_{\Gamma} $. $ H_{\Gamma} $ is determined by the UV structure of the model in consideration.
 
 
-For a given topology $\Gamma$ in \cref{eq:general_amplitude} we chose $N_p$ denominators $\vb*{\rho}\equiv\{\rho_1,\ldots,\rho_{N_p}\} \in P_\Gamma$ as
+For a given topology $\Gamma$ in \cref{eq:general_amplitude} we chose $N_p$ denominators $\vb*{\rho}\coloneqq\{\rho_1,\ldots,\rho_{N_p}\} \in P_\Gamma$ as
 independent variables. Then $N_p$ scalar products from the set $\vb*{sp}$
 can be expressed as functions of the denominators $\vb*{\rho}$.
 This implies
@@ -154,7 +154,7 @@ one of the denominators and attributed to a topology with less propagators.
 For this reason these scalar products are commonly called \emph{reducible scalar products} (RSP).
 We choose the remaining scalar products
 \begin{equation}
-  \vb*{\alpha} \equiv \vb*{sp} \setminus \{\text{RSPs}\} , \qquad \dim{\vb*{\alpha}} \equiv N_\text{ISP} =  \dim{\vb*{sp}}-N_p,
+  \vb*{\alpha} \coloneqq \vb*{sp} \setminus \{\text{RSPs}\} , \qquad N_\text{ISP} \coloneqq \dim{\vb*{\alpha}}   =  \dim{\vb*{sp}}-N_p,
 \end{equation}
 which are called
 \emph{irreducible scalar products} (ISP) to be the rest of our independent variables.
@@ -194,8 +194,8 @@ exhibits many other useful properties, nonetheless we will not need to adopt it 
   %\begin{equation}
     %\ell_l = \ell_{l[4]} + \ell_{l[D-4]}, \qquad 
     %\begin{array}[]{ll}
-      %\ell^\mu_{l[4]} &\equiv g^{\mu\nu}_{[4]} \ell_\nu \\
-      %\ell^\mu_{l[D-4]} &\equiv g^{\mu\nu}_{[D-4]} \ell_\nu \\
+      %\ell^\mu_{l[4]} &\coloneqq g^{\mu\nu}_{[4]} \ell_\nu \\
+      %\ell^\mu_{l[D-4]} &\coloneqq g^{\mu\nu}_{[D-4]} \ell_\nu \\
     %\end{array},
     %\qquad
     %\ell_{l[4]}\cdot\ell_{l[D-4]} = 0,
@@ -207,7 +207,7 @@ exhibits many other useful properties, nonetheless we will not need to adopt it 
     %\ell_{l[D-4]} &=  \sum_{i\in\tilde{\mathcal{B}}} \mu^i_l ~ \tilde{n}^{i},
   %\end{align}
 %\end{subequations}
-%where $v^{i}$ are basis vectors of the vector space $\mathcal{B}_{\text{phys}} \equiv \spn{p_1,\cdots,p_{N-1}}$ spanned by $N-1$ external momenta;
+%where $v^{i}$ are basis vectors of the vector space $\mathcal{B}_{\text{phys}} \coloneqq \spn{p_1,\cdots,p_{N-1}}$ spanned by $N-1$ external momenta;
 %the vectors $\tau_i$ span the orthogonal complement of $\mathcal{B}_{\text{phys}}$ to the four-dimensional Minkowski space $\mathcal{M}_{[4]}$.
 
 
@@ -256,7 +256,7 @@ the topology with the maximal number of propagators, which we will call a \emph{
 If we allow exponents $\gamma_j$ in \cref{eq:rsp_reduced_amplitude} to be $\leq0$,
 all integrals in \cref{eq:rsp_reduced_amplitude} can be cast into \emph{families}
 \begin{equation} \label{eq:integral_families}
-    I_{\Delta_i}[\va{\gamma},\va{i}] \equiv 
+    I_{\Delta_i}[\va{\gamma},\va{i}] \coloneqq 
   \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) ~  
   \frac{m^{\va{i}}_{\Gamma_{\Delta_i}}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
     }{\prod_{j\in P_{\Gamma_{\Delta_i}}} \rho_j^{\gamma_{j}}}.

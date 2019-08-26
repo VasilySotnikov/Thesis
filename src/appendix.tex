@@ -158,13 +158,13 @@ $\displaystyle= \frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$&
 %integrals are scaleless and vanish in dimensional regularization. They
 %are given in dimensional regularization with $D=4-2\epsilon$ by
 %\begin{align}\label{eq:tadint}
-%I_1(m^2) \equiv I_{1}=\frac{\mu_R^{2\epsilon}}{ic_{\Gamma}}\int
+%I_1(m^2) \coloneqq I_{1}=\frac{\mu_R^{2\epsilon}}{ic_{\Gamma}}\int
   %\frac{\dd[D]{\ell}}{(2\pi)^D}\frac{1}{(\ell^2-m^2)} =
    %m^2\left(\frac{1}{\epsilon}+\log(\frac{\mu_R^2}{m^2})+1 \right)+\mathcal{O}(\epsilon),
 %\end{align}
 %and
 %\begin{align}\label{eq:olbmint}
-%I_2(m^2;0,m^2) \equiv
+%I_2(m^2;0,m^2) \coloneqq
 %I_{2,m^2}=\frac{\mu_R^{2\epsilon}}{ic_{\Gamma}} \int
   %\frac{\dd[D]{\ell}}{(2\pi)^D}\frac{1}{\ell^2((\ell-p)^2-m^2)} =
   %\left(\frac{1}{\epsilon}+\log(\frac{\mu_R^2}{m^2})+2 \right)+\mathcal{O}(\epsilon),
@@ -440,7 +440,7 @@ usage of finite fields in \cite{Klappert:2019emp,Peraro:2016wsq,Peraro:2019svx}
       \node [below right = 0cm and 0.1cm of xmod1] () {$\vdots$};
 
       \node [ellipse, draw, text centered, right =6cm of x, node distance = 3cm, text width = 1.5cm, inner sep = 1pt] (crt) {\baselineskip=-10pt \tiny Chinese Remainder Theorem \par};
-      \node [right = 0.5cm of crt] (cmodP) {\minibox{ $c\mod P$  \\ \footnotesize $\left(P\equiv\prod_i p_i\right)$} };
+      \node [right = 0.5cm of crt] (cmodP) {\minibox{ $c\mod P$  \\ \footnotesize $\left(P\coloneqq\prod_i p_i\right)$} };
 
       \node [rectangle, draw, text centered, right of=cmodP, node distance = 3cm] (c) {$c$};
 
@@ -642,8 +642,8 @@ the \cref{eq:helicity_def} is written in a covariant way as
 for positive and negative helicities correspondingly.
 Here 
 \begin{equation}
-  \sigma_{A \dot{B}}^{\mu} \equiv  \left( 1 , - \vec{\sigma} \right) \qand \bar{\sigma}^{\mu \dot{A} B} \equiv  \left( 1 ,  \vec{\sigma} \right),
-  \qquad \vec{\sigma}\equiv (\sigma_x,\sigma_y,\sigma_z),
+  \sigma_{A \dot{B}}^{\mu} \coloneqq  \left( 1 , - \vec{\sigma} \right) \qand \bar{\sigma}^{\mu \dot{A} B} \coloneqq  \left( 1 ,  \vec{\sigma} \right),
+  \qquad \vec{\sigma}\coloneqq (\sigma_x,\sigma_y,\sigma_z),
 \end{equation} 
 with the standard Pauli matrices
 \begin{eqnarray}
@@ -683,18 +683,18 @@ which satisfies the properties
 We will use a convenient notation of angle and square brackets,
 \begin{equation}
   \begin{aligned}
-    \ket{p} &\equiv \lambda_A(p), \quad \bra{p} &\equiv \lambda^A(p),  \\
-    \sket{p} &\equiv \lambda^{\dot{A}}(p), \quad \sbra{p} &\equiv \lambda_{\dot{A}}(p),
+    \ket{p} &\coloneqq \lambda_A(p), \quad \bra{p} &\coloneqq \lambda^A(p),  \\
+    \sket{p} &\coloneqq \lambda^{\dot{A}}(p), \quad \sbra{p} &\coloneqq \lambda_{\dot{A}}(p),
   \end{aligned}
 \end{equation}
 to write compactly the spinor products,
 \begin{subequations}
   \begin{equation}
-    \spaa(p,q) \equiv \lambda^A(p) \lambda_A(q), \qquad \spbb(p,q) \equiv \lambda_{\dot{A}}(p) \lambda^{\dot{A}}(q),
+    \spaa(p,q) \coloneqq \lambda^A(p) \lambda_A(q), \qquad \spbb(p,q) \coloneqq \lambda_{\dot{A}}(p) \lambda^{\dot{A}}(q),
   \end{equation}
   and spinor chains such as
   \begin{equation} \label{eq:vectors_from_spinors}
-    \sbraket(p,\gamma^\mu,q) = \brasket(q,\gamma^\mu,p)  \equiv \lambda_{\dot{A}}(p) \bar\sigma^{\mu\dot{A}B} \lambda_B(q).
+    \sbraket(p,\gamma^\mu,q) = \brasket(q,\gamma^\mu,p)  \coloneqq \lambda_{\dot{A}}(p) \bar\sigma^{\mu\dot{A}B} \lambda_B(q).
   \end{equation}
 \end{subequations}
 
@@ -735,6 +735,49 @@ And the little group scaling is
 
 
 \todo{Stefan's paper on spinors\cite{DittmaierWeyl}} 
+
+
+\chapter{Clifford Algebras in $D_s$ Dimensions}
+\label{sec:clifford_algebra_ds}
+The defining property of the Clifford algebra is
+\begin{equation} \label{eqn:defClifford}
+\acomm{\gamma_{[D_s]}^\mu}{\gamma_{[D_s]}^\nu} = 2 g_{[D_s]}^{\mu\nu}\mathbb{1}_{[D_s]}^{\vphantom{\mu\nu}},
+\end{equation}
+where $\mathbb{1}_{[D_s]}$ is the identity of the Clifford algebra.
+The representations are constructed via recursive application of tensor products (see e.g.\ refs.~\cite{Collins:1984xc,Kreuzer:susylectures}):
+\begin{align}\label{eq:gammait}
+  \gamma^\mu_{[Ds]}  = 
+  \begin{dcases}
+    \mathbb{1}_{[2]} \otimes \gamma^\mu_{[D_s-2]}, & \mu =0\leq D_s-3,\\
+    (\sigma_2\,\sigma_3) \otimes \gamma^\star_{[D_s-2]}, & \mu = D_s-2,\\
+    (\sigma_3\,\sigma_1) \otimes \gamma^\star_{[D_s-2]}, & \mu = D_s-1,\\
+  \end{dcases}
+\end{align}
+where $\{\sigma_1,\sigma_2,\sigma_3\}$ are Pauli matrices, and
+\begin{equation}
+  \begin{gathered}
+    \gamma^\star_{[D_s]} \coloneqq i^{\frac{D_s}{2}-1} \gamma^0_{[D_s]}\cdots{}\gamma^{D_s -1 }_{[D_s]} ~\equiv~ \sigma_3 \otimes \gamma^\star_{[D_s-2]}, \\
+    \acomm{\gamma^\star_{[D_s]}}{\gamma^\mu_{[D_s]}}=0, \qquad \gamma^\star_{[D_s]} \gamma^\star_{[D_s]} = \mathbb{1}_{[D_s]}.
+  \end{gathered}
+\end{equation}
+We can thus write the Clifford algebra in $D_s$ dimensions in a factorized way,
+\begin{equation}\label{eqn:cliffordrecursion}
+  \qty(\gamma_{[D_s]}^\mu)_{a\kappa}^{\,b\lambda}  =
+  \begin{dcases}
+    \qty(\gamma_{[4]}^\mu)_a^{\;b} \, \delta_\kappa^\lambda\,, &  0\le\mu \le 3 \,,\\
+    \qty(\gamma^{\star}_{[4]})_a^{\;b} \qty(\gamma_{[D_s-4]}^{(\mu-4)})_\kappa^{\;\lambda}\,, & \mu>3 \,,
+  \end{dcases}
+\end{equation}
+where the indices $a,b$ denote the spinor indices in $\mathsf{S}_{[4]}$ and $\kappa,\lambda$ the ones in $\mathsf{S}_{[D_s - 4]}$.
+Note that $\gamma^\mu_{[D_s-4]}$ represent a $(D_s-4)$-dimensional Clifford algebra.
+
+%The spinor states for a particle with momentum $p$ satisfy the Dirac equation
+%\begin{equation}
+  %\qty(\slashed{p}_{[D_s]} \pm m \cdot \mathbb{1}_{[D_s]}) \psi  = 0,
+%\end{equation}
+
+\todo{construction of spinor states} 
+
 
 
 \chapter{Parametrization of Integrands of Amplitudes with External Fermions}
