@@ -44,6 +44,7 @@ by dimensionally reducing kinematically-independent degrees of freedom in higher
 
 
 \section{Helicity Amplitudes}
+\label{sec:HV_helicity_amplitudes}
 
 A helicity amplitude $\helampl$
 is defined as an $\mathcal{S}$-matrix element
@@ -249,7 +250,7 @@ In the following we will show how to construct a convenient basis of the tensor 
 for any number of external fermions.
 
 First we observe that only the spinor chains of the form
-\begin{equation}
+\begin{equation} \label{eq:generic_dsm_4_schain}
   u^{\hat{\alpha}}_i \; \qty( \prod_k \gamma^{\mu_k}_{[D_s -4 ]} )^{\hat{\alpha}\hat{\beta}} \; u^{\hat{\beta}}_j \quad\equiv\quad 
   \qty( \prod_k \gamma^{\mu_k}_{[D_s -4 ]} )^{i j},
 \end{equation}
@@ -286,8 +287,8 @@ Some examples of possible $v_n$ are
   \end{aligned}
 \end{equation}
 
-Evidently to construct a basis of tensor structures $v_n$ we can decompose each of the spinor chains enetring it
-into the standard basis of antisymmetrized product of gamma-matrices (see e.g.\ \cite{Veltman:1988au}),
+Evidently to construct a basis of tensor structures $v_n$ we can decompose each of the spinor chains entering it
+into the standard basis of anti-symmetrized products of gamma-matrices (see e.g.\ \cite{Veltman:1988au}),
 \begin{align}\label{eq:basisGammaChainDs}
 \gamma_{[D_s-4]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in S_n} \sgn(\sigma) \gamma_{[D_s-4]}^{\mu_{\sigma(1)}} \ldots \gamma_{[D_s-4]}^{\mu_{\sigma(n)}}\,,
 \end{align}
@@ -295,320 +296,187 @@ where $S_n$ denotes the set of all permutations of $n$
 integers and $\sgn(\sigma)$ the signature of the permutation
 $\sigma\in S_n$.
 It can be shown (see \cref{sec:identities}), that the
-projectors $\mathcal{P}_n$ onto $v_n$ can be taken from the conjugated tensors $v_n^\dagger$ as
+projectors $\mathcal{P}_n$ onto $v_n$ can be constructed from the conjugated tensors $v_n^\dagger$ as
 \begin{align} \label{eq:dsm_4_projectors}
-  \mathcal{P}_n [v_m] \coloneqq \prod_{s_1}^{n_s} \Tr_s \qty(v_n^\dagger v_m) = c_n(D_s) \delta_{n m},  %&& c_n = \frac{(D_s-4)!\,n!}{(D_s-4-n)!},
+  \mathcal{P}_n [v_m] \coloneqq \prod_{s_1}^{n_s} \Tr_s \qty(v_n^\dagger v_m) = c_n(D_s)~\delta_{n m},  %&& c_n = \frac{(D_s-4)!\,n!}{(D_s-4-n)!},
 \end{align}
-whith the traces are taken over each of $n_s$ spinor chains, and we drop the irrelevant total factor of $\qty(\Tr\mathbb{1}_{[D_s -4 ]})^{n_s}$.
-The coefficients $c_n$ can be computed for each $n_s$ combinatrially, as demonstrated in \cref{eq:cnCalc}.
+with the traces are taken over each of $n_s$ spinor chains, and we drop the irrelevant total factor of $\qty(\Tr\mathbb{1}_{[D_s -4 ]})^{n_s}$.
+The coefficients $c_n$ can be computed for each $n_s$ combinatorially, as demonstrated in \cref{eq:cnCalc}.
+We emphasize that, unlike the projectors in \cref{sec:helampl_projectors}, the ones in \cref{eq:dsm_4_projectors}
+operate on the explicitly-represented objects, hence can be evaluated numerically.
+We now consider two examples.
 
-Before we get to the examples, we would like to make two comments.
-
-First of all, there is always 
-\begin{equation}
-  v_0 \coloneqq \delta^{\hat{\alpha}_1}_{\hat{\beta}_1} \cdots \delta^{\hat{\alpha}_s}_{\hat{\beta}_s}
-\end{equation}
-which corresponds to the projector formalism and to the implementation in Spinney.
-
-Second compared to the projectors in \cref{sec:helampl_projectors}, the projectors \cref{eq:dsm_4_projectors}
-operate on pyhs
-
-
-
-\subsubsection{Examples}
-
-As a first and trivial example let us consider an amplitude with a pair $q\bar q$ of external
-quarks and any number of external gluons. There is a single
-chain of $\gamma_{[D_s-4]}$ matrices and, as there are no other objects with $(D_s-4)$ indices,
-for this case there is only a single term in the decomposition in \cref{eq:tensorDecomposition}:
+\paragraph{One pair of external fermions.}
+As a first and trivial example we consider an amplitude with one pair of external fermions (and any number of external gauge bosons). 
+There is only a single chain of matrices $\gamma_{[D_s-4]}$, so
+there is only a single term in the decomposition of \cref{eq:tensorDecomposition},
 \begin{equation}\label{eq:decompqqbar}
-  \mathcal{A}(q,\bar q,g,\ldots,g) =v_0\,A_0\,,\qquad \textrm{with}\quad (v_0)_{\hat{\alpha}}^{\hat{\beta}}=\delta_{\hat{\alpha}}^{\hat{\beta}}\,.
+  \mathcal{A} =v_0\,A_0\,,\qquad \textrm{with}\quad (v_0)_{\hat{\alpha}}^{\hat{\beta}}=\delta_{\hat{\alpha}}^{\hat{\beta}}\,.
 \end{equation}
-
-As a second example we consider an amplitude with two quark pairs of 
-different flavors, $q\bar q$ and $Q\bar Q$, and any number of
-gluons. We can contract Lorentz indices between two 
-different spinor chains, and the basis 
-$\{v_n\}$ is then larger in this case. Using the basis spinor chains introduced in 
-\cref{eq:basisGammaChainDs}, we construct the associated
-basis $\{v_n\}$:
+\paragraph{Two pairs of distinct fermions.}
+As a second example we consider an amplitude with two fermion pairs of different flavors, (and any number of gauge bosons). 
+The basis $\{v_n\}$ consists of contraction between two spinor chains of the form \cref{eq:generic_dsm_4_schain}:
 \begin{align}
   \begin{split} \label{eqn:4qtensors}
-    (v_0)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}   = &
-    \delta_{\kappa_1}^{\lambda_1} \delta_{\kappa_2}^{\lambda_2}\,, \\
-    (v_1)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
-    &(\gamma_{[D_s-4]}^{\mu_1} )_{\kappa_1}^{\lambda_1} 
-    (\gamma_{[D_s-4]\mu_1}^{\phantom{\mu}})_{\kappa_2}^{\lambda_2}\,, \\
+    (v_0)_{j_1j_2}^{i_1i_2}   = &
+    \delta_{j_1}^{i_1} \delta_{j_2}^{i_2}\,, \\
+    (v_1)_{j_1j_2}^{i_1i_2}=
+    &(\gamma_{[D_s-4]}^{\mu_1} )_{j_1}^{i_1} 
+    (\gamma_{[D_s-4]\mu_1}^{\phantom{\mu}})_{j_2}^{i_2}\,, \\
     & \vdots\\
-    (v_m)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
-    &(\gamma_{[D_s-4]}^{\mu_1 \ldots  \mu_m})_{\kappa_1}^{\lambda_1}
-    (\gamma_{[D_s-4]\mu_1 \ldots \mu_m}^{\phantom{\mu}})_{\kappa_2}^{\lambda_2}\,,\\
+    (v_k)_{j_1j_2}^{i_1i_2}=
+    &(\gamma_{[D_s-4]}^{\mu_1 \ldots  \mu_m})_{j_1}^{i_1}
+    (\gamma_{[D_s-4]\mu_1 \ldots \mu_m}^{\phantom{\mu}})_{j_2}^{i_2}\,,\\
     & \vdots\,
   \end{split}
 \end{align}
-where we have made explicit the indices in the $
-(D_s-4)$-dimensional space.
-The basis $\{v_n\}$ is infinite dimensional for
-$D_s=4-2\epsilon$ (because there are infinitely many independent
-terms of the form of eq.~\eqref{eq:basisGammaChainDs}), but at
-each order in the perturbative
-expansion only a finite number of basis elements contribute, 
-as follows from inspecting the corresponding Feynman diagrams.
-We thus have
-\begin{equation} \label{eqn:4qampltensor}
-	M^{(k)} (q,\bar q,Q,\bar Q,g,\ldots,g) =\sum_{n=0}^{n_k} v_n M^{(k)}_n\,.
-\end{equation}
-The decomposition is independent of the number
-of external gluons. In particular,
-the value of $n_k$ can be determined from the amplitude with no 
-external gluons, by examining the Feynman diagrams
-with the most singular gluons. 
-These are ladder-type four-point diagrams with the 
-gluons in the rungs. We find for instance that $n_0=0$,
-$n_1=3$ and $n_2=5$ for tree-level, one- and two-loop
-amplitudes, respectively.
+The number of elements in the basis $\{v_n\}$ depends on $D_s$,
+and is infinite for non-integer $D_s$ (because the basis of the Clifford algebra \cref{eq:basisGammaChainDs} is infinite).
+But for any given number of loops $L$ only a finite number of basis elements $n^{(L)}\coloneqq \dim\{v_n\}$ can appear.
+This number can be found from inspecting the diagrams without external gauge bosons 
+with maximal number of propagators.
+For instance we have $n^{(0)}=0$, $n^{(1)}=3$ and $n^{(2)}=5$.
 
-Finally let us consider an amplitude with two identical quark
-pairs, which can be constructed by anti-symmetrizing the
-distinct-flavor amplitude $M^{(k)}$ over the two
-flavors~\cite{DeFreitas:2004kmi,Glover:2004si}.
-It is then easy to see that the decomposition of
-eq.~\eqref{eq:tensorDecomposition} requires an enlarged basis
-compared to the distinct-quark case of
-eq.~\eqref{eqn:4qtensors}. We thus define the tensors
-$\{\tilde v_n\}$ as
-\begin{equation}\label{eq:basisIdentical}
-	(\tilde v_n)_{\kappa_1\kappa_2}^{\lambda_1\lambda_2}=
-	(v_n)_{\kappa_1\kappa_2}^{\lambda_2\lambda_1}\,,
-\end{equation}
-and the decomposition of eq.~\eqref{eq:tensorDecomposition}
-is over the sets $\{v_n\}$ and $\{\tilde v_n\}$.
-The basis tensors satisfy
-\begin{equation}\label{eq:dualBasisIdentical}
-	v_nv^m=\delta^m_n\,,\qquad
-	\tilde v_n\tilde v^m=\delta^m_n\,,\qquad
-	v_n\tilde v^m=
-	\delta^m_0\,\delta_{n,0}+\mathcal{O}(\epsilon)\,,
-\end{equation}
-where the set $\{\tilde v^n\}$ is constructed to be dual to
-$\{\tilde v_n\}$ in the same way as in 
-eq.~\eqref{eq:dualBasis}.
+Each coefficient $A_n$ in the decomposition of \cref{eq:tensorDecomposition} satisfies our desiderata 
+of the HV amplitudes from \cref{sec:HV_helicity_amplitudes}, so, in principle, we need to determine all of them to obtain the full amplitude.
+In the next section we argue that, at least to NNLO, it is not the case, 
+and all physically-relevant information can be extracted from just one coefficient.  
 
-We finish this subsection with a comment on the case where $D_s$
-is a finite integer $D_s^0$. 
-All the discussion above holds, but one
-must be careful with a small detail. 
-The basis of the Clifford algebra in 
-eq.~\eqref{eq:basisGammaChainDs} now contains only a finite 
-number of terms, and the basis of tensors $\{v_n\}$ is
-consequently restricted by the dimension $D^0_s$. 
-If one wants to compute the coefficient of a given tensor 
-$v_i$, one must thus choose $D_s^0$ large enough such
-that $v_i \in \{v_n\}$. Nevertheless, one can check that a 
-calculation done in $D_s^0$ dimensions agrees 
-with the $D_s=D_s^0$ limit of the same calculation done in
-generic $D_s$.
-
-
-\subsection{Relevant Tensor Coefficients}
+\subsection{Relevant Coefficients}
 \label{sec:relevant_tensors}
 
-We have established that helicity amplitudes in dimensional
-regularization are tensors in the $(D_s-4)$-dimensional space and
-introduced a basis of that space on which we can decompose the
-amplitude.  We should in
-principle compute all coefficients in the decomposition. However, it
-turns out that in a given phenomenological application not all
-coefficients may be relevant. We discuss below the two cases
-involving external quarks pertinent to the subject of this 
-paper, the amplitudes with only external gluons being trivial in
-this regard.
-
-\todo{Compared to the form-factor decomposition in \cref{sec:helampl_projectors} it is easy to see that $v_0$ is the coefficient in HV scheme} 
-
-\subsubsection{Examples}
-
-\paragraph{Two-loop $q\bar qg\ldots g$ amplitude:}
-For the case of an amplitude with a pair $q\bar q$ of external
-quarks and any number of external gluons,
-there is a single coefficient to determine, 
-see eq.~\eqref{eq:decompqqbar}. At order $k$ in perturbation
-theory we call this object $A^{(k)}$. It is
-computed using
-\begin{equation}\label{eq:qqProj}
-    A^{(k)}(q,\bar q,g,\ldots,g)=M^{(k)}_0(q,\bar q,g,\ldots,g) =
-	w^0\cdot M^{(k)}(q,\bar q,g,\ldots,g)\,,
+It was shown in \cite{Weinzierl:2011uz} that for NNLO computations only the $\order{\eps^0}$ terms of the 
+\emph{finite remainders} $\mathcal{F}^{(1)}$ and $\mathcal{F}^{(2)}$ of one- and two-loop amplitudes are required.
+They are defined by subtracting the universal divergent structure of one- and two-loop amplitudes, 
+\begin{subequations}
+  \begin{align}
+    \label{eq:F0}
+    \mathcal{F}^{(0)} &\coloneqq \mathcal{A}^{(0)}, \\ 
+     \label{eq:F1}
+    \mathcal{F}^{(1)} &\coloneqq \mathcal{A}^{(1)} - \mathbf{I}^{(1)} \mathcal{A}^{(0)}, \\ 
+     \label{eq:F2}
+    \mathcal{F}^{(2)} &\coloneqq \mathcal{A}^{(2)}  - \mathbf{I}^{(1)} \mathcal{A}^{(1)} - \mathbf{I}^{(2)} \mathcal{A}^{(0)}.
+  \end{align}
+\end{subequations}
+The operators $\mathbf{I}^{(1)}$ and $\mathbf{I}^{(2)}$ can be found in \cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}.
+Here for convenience we also introduced a finite remainder for tree amplitudes, which is simply an alias for the amplitude itself.
+We can expand both sides of \cref{eq:F0,eq:F1,eq:F2} in terms of tensor structures of \cref{eq:tensorDecomposition}
+to get the corresponding coefficients $\mathcal{F}^{(i)}_n$ of the finite remainders.
+\todo{possibly comment on why we can do this} 
+The cross-section is obtained by squaring the finite remainders, possibly multiplied by some
+finite operator $\mathbf{F}$ (we refer to \cite{Weinzierl:2011uz} for details),
+\begin{equation} \label{eq:Fsq}
+  \Ree{\mathcal{F}^{(i)}}{\mathbf{F}\mathcal{F}^{(j)}} = \sum_m\sum_n\; \mathcal{P}_m \qty[v_n]  \; \Ree{\mathcal{F}^{(i)}_m}{\mathbf{F}\mathcal{F}^{(j)}_n} = 
+     \sum_n c_n \; \Ree{\mathcal{F}^{(i)}_n}{\mathbf{F}\mathcal{F}^{(j)}_n},
 \end{equation}
-i.e.\ by
-tracing over the $(D_s-4)$-dimensional indices of the
-fermion line. In this paper we are mostly interested in $k=2$.
-
-\paragraph{Two-loop $q\bar qQ\bar Qg\ldots g$ amplitude:}
-For a
-two-loop amplitude with two quark pairs of 
-different flavors, $q\bar q$ and $Q\bar Q$, and any number of
-gluons there are in principle six coefficients to determine. 
-However, in an NNLO computation (that is not loop-induced) 
-the two-loop amplitude is 
-interfered with the tree amplitude, which has a single tensor
-structure in the HV scheme. The contribution we must compute is of the form
-\begin{equation}\label{eq:qqQQProj}
-  \left(M^{(0)}\right)^\dagger M^{(2)}=
-  \left(M^{(0)}_0\right)^\dagger M^{(2)}_0\,,
-\end{equation}
-where we have used the orthogonality of the tensors
-$v_n$ and the fact that $c_0(D_s)=1$, see 
-eq.~\eqref{eqn:vnproducts}. 
-For NNLO corrections, it is
-thus sufficient to compute the coefficients
-$M^{(2)}_0$ through
+where in the last equality we used \cref{eq:dsm_4_projectors}.
+For non-identical pairs of fermions\footnote{we discuss identical fermions below} 
+the first element of the basis $\{v_n\}$ is
 \begin{equation}
-  \label{eq:AmplitudeDefinition}
-  A^{(2)}(q,\bar q,Q,\bar Q,g,\ldots,g)=
-  M^{(2)}_0 = v^0 \cdot 
-  M^{(2)}(q,\bar q,Q,\bar Q,g,\ldots,g),
+  v_0  = \delta^{\hat{\alpha}_1}_{\hat{\beta}_1}\cdots \delta^{\hat{\alpha}_{n_s}}_{\hat{\beta}_{n_s}},
 \end{equation}
-which amounts to computing the 
-$(D_s-4)$-dimensional trace of $M^{(2)}$ on
-each fermion line.  
-We define the amplitude
-$A^{(k)}(q,\bar q,Q,\bar Q,g,\ldots,g)$ for any order $k$
-in an analogous way.
-
-This approach is similar to the one of
-ref.~\cite{Glover:2004si} and is in
-agreement with the prescription of ref.~\cite{Anger:2018ove}.
-On a first look, it might however look inconsistent with the 
-way $q\bar qQ\bar Q$ helicity amplitudes are defined in
-ref.~\cite{DeFreitas:2004kmi}. Written in the formalism
-we have introduced in this section, the authors compute
+and the corresponding coefficient $c_0 = 1$.
+As demonstrated in \cref{sec:identities}, the coefficients of all other tensor structures
+contribute to higher orders in $\eps$ when we set $D_s\to 4-2\eps$,
 \begin{equation}
-	\label{eq:AmpDefAlt}
-	\tilde v^0\cdot M^{(2)}
-	(q,\bar q,Q,\bar Q)\,,
+  c_i=\order{\eps}, \qfor i\geq 1,
 \end{equation}
-and, given the relations of eq.~\eqref{eq:dualBasisIdentical}, this
-would not necessarily give the same 
-$A^{(2)}(q,\bar q,Q,\bar Q)$ defined in 
-eq.~\eqref{eq:AmplitudeDefinition}. For
-phenomenological applications, however, 
-one can show that only the
-so-called \emph{finite remainder} is relevant 
-\cite{Weinzierl:2011uz},
-and we now show that the choices of 
-eqs.~\eqref{eq:AmplitudeDefinition} and \eqref{eq:AmpDefAlt}
-give the same result for this quantity.\footnote{This was 
-already pointed out by the authors of 
-ref.~\cite{DeFreitas:2004kmi}, who discuss the agreement of 
-their finite remainder results with those of ref.~\cite{Glover:2004si}.}
-We first recall that the infrared poles of a renormalized QCD
-amplitude $M_R$ have a universal structure, and we can
-write an amplitude in terms of its universal pole structure
-and a finite remainder
-which we will denote $\CF$
-\cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}.
-More explicitly, 
-for a two-loop amplitude we have
-\begin{equation}\label{eq:remainderDef}
-	M^{(2)}_R=
-	\mathbf{I}^{(2)}M^{(0)}_R
-	+\mathbf{I}^{(1)}M^{(1)}_R
-	+\CF^{(2)}\,,
+We can drop all $\order{\eps}$ terms in \cref{eq:Fsq}.
+Thus we conclude that all we need to know is the coefficient of $v_0$.
+
+
+\subsubsection{Identical Fermions}
+To illustrate how to handle the cases with identical fermions,
+we consider an amplitude with two pairs of fermions with the same flavor. 
+It can be constructed by anti-symmetrizing the corresponding amplitude with distinct flavors.
+In this way, we start from the basis in \cref{eqn:4qtensors},
+and extend it with anti-symmetrized tensors $\{\tilde v_n\}$ as
+\begin{equation}\label{eq:basisIdentical}
+	(\tilde v_n)_{j_1j_2}^{i_1i_2}= (v_n)_{j_1j_2}^{i_2i_1}\,,
 \end{equation}
-where $\mathbf{I}^{(1)}$ and $\mathbf{I}^{(2)}$ are operators in color
-space. We refer the reader to appendix~\ref{sec:IR} for 
-explicit expressions for these operators in the leading-color
-approximation of the amplitudes considered in this paper. Since
-$\CF^{(2)}$ is finite, we have
-\begin{equation}
-	v^0\cdot \CF^{(2)}
-	=\tilde v^0\cdot \CF^{(2)}+\mathcal{O}(\epsilon),
-        \label{eq:RemainderEquivalence}
+so our basis is now $\{v_n\}\cup \{\tilde{v}_n\}$.
+It satisfies the following properties:
+\begin{equation}\label{eq:dualBasisIdentical}
+  \mathcal{P}_n[v_m]= c_n \delta_{m n}\,,\qquad
+  \mathcal{\tilde{P}}_n[\tilde{v}_m]= \tilde{c}_n \delta_{m n}\,,\qquad
+  \mathcal{P}_n[\tilde{v}_m] = \delta_{m 0}\,\delta_{n 0}+\mathcal{O}(\epsilon)\,.
 \end{equation}
-and the remainder computed from 
-eq.~\eqref{eq:AmplitudeDefinition} thus agrees with the 
-one computed from eq.~\eqref{eq:AmpDefAlt}. 
+The coefficients in the first two equations are the same as for the case of distinct fermions. 
+We do not provide the closed form for the coefficients in the last equation, but
+the fact that they are always proportional to $(D_s-4)$ can be straightforwardly verified.
 
+Now consider the interference between the two-loop finite remainder and 
+the corresponding tree amplitude, which are anti-symmetrized over flavors individually,
+\begin{multline}
+  \qty(\mathcal{F}^{(0)} - \mathsf{f}\circ\mathcal{F}^{(0)})^\dagger \cdot 
+    \qty(\mathcal{F}^{(2)} - \mathsf{f}\circ\mathcal{F}^{(2)}) = \\
+    \qty(\mathcal{P}_0\qty[\mathcal{F}^{(0)}] - \mathcal{P}_0\qty[\mathsf{f}\circ\mathcal{F}^{(0)}])^\dagger \cdot 
+    \qty( \mathcal{P}_0\qty[\mathcal{F}^{(2)}] - \mathcal{P}_0\qty[\mathsf{f}\circ\mathcal{F}^{(2)}]) ~+~ \order{\epsilon}.
+\end{multline}
+Here the application of $f\circ$ exchanges the flavors. 
+On the right hand side we used the identities from \cref{eq:dualBasisIdentical} to
+show that, to $\order{\epsilon}$, 
+we can anti-symmetrize the coefficients $\mathcal{F}_0$ of the remainders.
+And the latter are computed as in the case of distinguishable fermions.
 
-\subsection{Identical Quarks}
-Finally, we now show that in the case of two pairs of
-identical quarks we can also use the
-definition of eq.~\eqref{eq:AmplitudeDefinition} 
-for NNLO phenomenology.
-The relevant contribution is the interference of the 
-tree-level amplitude with the remainder, i.e.\ \begin{equation}
-  \left(M^{(0)} - \tilde{M}^{(0)}\right) \cdot \left( \CF^{(2)} - \tilde{\CF}^{(2)}\right)
-  =
-  \left(M^{(0)}_0 - \tilde{M}^{(0)}_0 \right) \left( v_0\cdot \CF^{(2)} - \tilde{v}_0\cdot \tilde{\CF}^{(2)}\right) + O(\eps),
-  \label{eq:LikeInterference}
-\end{equation}
-where we denote with tildes the flavor exchanged objects.  Here, we
-have used the orthogonality of the $v_n$ and $\tilde{v}_n$ up to
-$O(\eps)$ to simplify the expression. Importantly, the right hand side
-of eq.~\eqref{eq:LikeInterference} now only contains terms that can be
-computed through the definition of 
-eq.~\eqref{eq:AmplitudeDefinition}.
+As another interesting application of these observations, we can explain why 
+two different results for the two-loop helicity amplitudes of the four-quark scattering in QCD
+from \cite{Glover:2004si} and \cite{DeFreitas:2004kmi} give the same
+value for the finite remainder\footnote{The fact that the finite remainders agree was recognized by the authors of \cite{DeFreitas:2004kmi}}.
+The authors of the former computed 
+\[
+  \mathcal{P}_0\qty[\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q})],
+\]
+while the authors of the latter computed
+\[
+  \tilde{\mathcal{P}}_0\qty[\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q})].
+\]
+Clearly these results will not be the same. 
+However, taking into an account the \cref{eq:dualBasisIdentical}, we get
+\[
+  \mathcal{P}_0\qty[\mathcal{F}^{(2)}] = \tilde{\mathcal{P}}_0\qty[\mathcal{F}^{(2)}] ~+~ \order{\epsilon}.
+\]
 
+\subsection{Chiral Couplings}
 
-When considering amplitudes with two identical quark lines, contributions where
-index contractions lead to a single trace as in figure~\ref{fig_SingleTrace} 
-should also be considered. Nevertheless, at the level of the
-finite remainder, amplitudes with identical quarks can be obtained by
-antisymmetrizing distinct-flavor
-expressions~\cite{DeFreitas:2004kmi,Abreu:2018jgq} obtained from
-eq.~\eqref{eq:defAmpsTensb}. Thus, our results are sufficient for 
-NNLO QCD phenomenological studies of processes involving 
-identical quarks.
+It is well known, that dimensional regularization fails to regularize chiral theories consistently
+(see e.g.\ \cite{Larin:1993tq,Boughezal:2019xpp,Jegerlehner:2000dz,Bonneau:1980yb,Bruque:2018bmy,Baikov:1991qz,Kreimer:1989ke}).
+More colloquially this problem is known as ``the $\gamma_5$ problem'', because it is it's analytic
+continuation to $D$ dimensions which causes contradictions explicitly.
+The dimensional regularization can still be employed in these models, 
+but some additional manual interference is required in some cases. 
 
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[]
-  \begin{center}
-    \begin{tikzpicture}[scale=.9]
-    % 5 point masters
-    \node at (0,0){\includegraphics[scale=0.5]
-    {figures/singleQuark.pdf}};
-    % 5 point masters
-    \node at (7,-.1){\includegraphics[scale=0.5]
-    {figures/doubleTrace.pdf}};
-\end{tikzpicture}
-\end{center} 
-\caption{Contraction of the open $(D_s-4)$-dimensional spinor indices for amplitudes
-with external quarks: each quark line closes upon itself.
-Indices connected by red dashed lines are traced over.}
-\label{fig_traces}
-\end{figure}
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[]
-  \begin{center}
-  	\includegraphics[scale=0.5]
-    {figures/singleTrace.pdf}
-\end{center} 
-\caption{Alternative contraction of $(D_s-4)$-dimensional spinor indices leading to a
-single trace. Indices connected by green dashed lines are traced
-over.}
-\label{fig_SingleTrace}
-\end{figure}
-
-
-
-
-
-\subsection{Chiral couplings ($\gamma_5$)}
-
-\todo{do I really want this to be here\ldots?}
-
-We emphasize that we do not invent regularization scheme thus there's nothing new we say about $\gamma_5$ issue.
-
-At least general remarks should be written 
-
-One clearer insight is that inconsistent algebras cannot be applied here due to non-analyticity.
-So the only consistent method should be when $\gamma_5$ commutes with higher dim. matrices.
-
+In this thesis we only consider two-loop amplitudes in pure QCD, so we do not have to explore the issue. 
+Nevertheless we would like to comment on how our method of extraction of helicity amplitudes might be affected by it.
+First of all, we emphasize that we \emph{did not} construct a new flavor of dimensional regularization,
+and our results are that of the HV scheme.  So the discussion found in the literature applies to our results without modifications.
+To this end, a prescription with  the ``four-dimensional'' $\gamma_5$ \cite{tHooft:1972tcz,Breitenlohner:1977hr,Larin:1993tq},
+\[\commutator{\gamma_{5}}{\gamma^{\mu}_{[D_s]}}=0, \quad \forall \mu\geq 4,\]
+can be trivially incorporated in our approach with the following:
+\[
+  \qty(\gamma_{5[D_s]})^{\bar{\alpha}\hat{\alpha}}_{\bar{\beta}\hat{\beta}} = \qty(\gamma^\star_{[4]})^{\bar{\alpha}}_{\bar{\beta}}\,\delta^{\hat{\alpha}}_{\hat{\beta}},
+\]
+and an explicit addition of counter-term contributions might be required.
+Finally, it is worth mentioning that using the ``anti-commuting'' $\gamma_5$, that is
+\[
+  \anticommutator{\gamma_{5}}{\gamma^{\mu}_{[D_s]}}=0, \quad \forall \mu, \qquad\Longleftrightarrow\qquad \gamma_{5[D_s]} \equiv \gamma^\star_{[D_s]},
+\]
+in combination with dimensional reconstruction is not possible, since
+in this case the amplitudes behave non-smoothly as functions of $D_s$ at all integer values.
 
 \subsection{Discussion}
 \label{sec:dshel_discussion}
 
+
+\todo{Compared to the form-factor decomposition in \cref{sec:helampl_projectors} it is easy to see that $v_0$ is the coefficient in HV scheme} 
+It is then rather straight-forward to see that the coefficient $A_0$ of $v_0$ coincides with
+the amplitude obtained following the prescription of \cref{sec:helampl_projectors}, as well
+as the result of the``'t Hooft-Veltman algebra'' implemented in \cite{Cullen2010}.
+
+In agreement with the prescription of ref.~\cite{Anger:2018ove}.
+
 \todo{Validated extremely well by reproducing all the results computed from the form-factor decomposition} 
+In summarry, as long as phenomenological applications concerned, we only need to consider $v_0$.
 
 \todo{Important transition between schemes} 
 The two schemes are consistent,
@@ -627,9 +495,10 @@ and the relation to the HV scheme were largely glossed over,
 which caused some confusion in the past.
 
 For example if one takes a ``single'' embedding of external quarks \todo{expand on this, reference an explicit state} ,
-one effectively considers an amplitude polarized in $\mathsf{S}_{[D_s-4]}$ \todo{unify space names},
+one effectively considers an amplitude polarized in $\mathsf{S}_{[D_s-4]}$ ,
 so the computation carried out in this way do not correspond to the HV scheme.
 Strictly speaking then the arguments we used for the dimension of embedding of loop momenta are invalidated.
+\todo{list of cases when single embedding fails} 
 
 At the integrand level this manifests itself as appearing of explicit components of $\ell^\mu_{i[D-4]}$, not as scalar products $\mu_{ij}$ (see \cref{sec:PartialFractions}).
 At one loop this was observed as ``odd $\mu$ powers'' in \cite{Fazio:2014xea,Badger:2017gta}.
