@@ -265,18 +265,18 @@ This is the consequence of the following facts:
       &&
       a \in \{p_i,\varepsilon_{1,2}(p_i)\}
     \end{align}
+    This has an effect that kinematics cannnot enter $v_n$.
   \item Any Lorentz indices inside the same spinor chain can be contracted yielding  
     \begin{equation} \label{eq:trivialTens2}
       \left(\gamma_{[D_s]}^\mu\right)_{\bar{\alpha}\hat{\alpha}}^{\bar{\kappa}\hat{\kappa}}
       \left(\gamma_{[D_s]\mu}^{\phantom{\mu}}\right)_{\bar{\kappa}\hat{\kappa}}^{\bar{\beta}\hat{\beta}}
       =D_s~\delta_{\bar{\alpha}}^{\bar{\beta}}\delta_{\hat{\alpha}}^{\hat{\beta}}\,.
     \end{equation} 
-  \item Due to the factorized representation of the Clifford algebra (see \cref{eqn:cliffordrecursion}),
-    any spinor chain can be factorized.
+  \item Due to the factorized representation of the Clifford algebra (see \cref{eqn:cliffordrecursion}), any spinor chain can be written in a factorized form.
 \end{itemize}
 Non-trivial tensors $v_n$ are thus obtained by contracting
-Lorentz indices of multiple chains of $\gamma_{[D_s-4]}$ matrices.
-Some examples of $v_n$ are
+Lorentz indices between multiple chains of  matrice $\gamma_{[D_s-4]}$.
+Some examples of possible $v_n$ are
 \begin{equation}
   \begin{aligned}
     & \delta^{i_1}_{j_1} \delta^{i_2}_{j_2},\\
@@ -286,37 +286,33 @@ Some examples of $v_n$ are
   \end{aligned}
 \end{equation}
 
-Evidently to construct a basis of tensor structures $v_n$ we can
-decompose each of the spinor chains 
-into the standard set of antisymmetric (see e.g.\ \cite{Veltman:1988au}) 
+Evidently to construct a basis of tensor structures $v_n$ we can decompose each of the spinor chains enetring it
+into the standard basis of antisymmetrized product of gamma-matrices (see e.g.\ \cite{Veltman:1988au}),
 \begin{align}\label{eq:basisGammaChainDs}
 \gamma_{[D_s-4]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in S_n} \sgn(\sigma) \gamma_{[D_s-4]}^{\mu_{\sigma(1)}} \ldots \gamma_{[D_s-4]}^{\mu_{\sigma(n)}}\,,
 \end{align}
 where $S_n$ denotes the set of all permutations of $n$
 integers and $\sgn(\sigma)$ the signature of the permutation
 $\sigma\in S_n$.
+It can be shown (see \cref{sec:identities}), that the
+projectors $\mathcal{P}_n$ onto $v_n$ can be taken from the conjugated tensors $v_n^\dagger$ as
+\begin{align} \label{eq:dsm_4_projectors}
+  \mathcal{P}_n [v_m] \coloneqq \prod_{s_1}^{n_s} \Tr_s \qty(v_n^\dagger v_m) = c_n(D_s) \delta_{n m},  %&& c_n = \frac{(D_s-4)!\,n!}{(D_s-4-n)!},
+\end{align}
+whith the traces are taken over each of $n_s$ spinor chains, and we drop the irrelevant total factor of $\qty(\Tr\mathbb{1}_{[D_s -4 ]})^{n_s}$.
+The coefficients $c_n$ can be computed for each $n_s$ combinatrially, as demonstrated in \cref{eq:cnCalc}.
 
-In practical calculations, one is interested in computing
-specific coefficients $M^{(k)}_n$ in the decomposition
-of eq.~\eqref{eq:tensorDecomposition}. We construct the
-basis $\{v_n\}$ such that this operation is trivial, i.e.\  it
-satisfies
-\begin{equation}\label{eqn:vnproducts}
-	v_n^\dagger\cdot v_m=c_n\delta^n_m\,,
-	\quad
-    c_0(D_s) = 1\,\quad\mbox{and}\quad  c_{n>0}(D_s)={\cal O}(\epsilon)\,.
+Before we get to the examples, we would like to make two comments.
+
+First of all, there is always 
+\begin{equation}
+  v_0 \coloneqq \delta^{\hat{\alpha}_1}_{\hat{\beta}_1} \cdots \delta^{\hat{\alpha}_s}_{\hat{\beta}_s}
 \end{equation}
-The calculation of the coefficients $c_n$ requires some 
-technical operations on $\gamma$ matrices that we present in
-appendix~\ref{sec:identities}.
-We then construct the dual basis $\{v^n\}$, with elements
-\begin{equation}\label{eq:dualBasis}
-	v^n=\frac{1}{c_n} (v_n)^\dagger\,.
-\end{equation}
-Using the dual basis, we directly get
-\begin{equation}\label{eqn:helampl}
-  M^{(k)}_n = v^n \cdot M^{(k)}.
-\end{equation}
+which corresponds to the projector formalism and to the implementation in Spinney.
+
+Second compared to the projectors in \cref{sec:helampl_projectors}, the projectors \cref{eq:dsm_4_projectors}
+operate on pyhs
+
 
 
 \subsubsection{Examples}

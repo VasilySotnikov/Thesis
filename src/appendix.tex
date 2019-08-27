@@ -216,200 +216,33 @@ $\displaystyle= \frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$&
 
 
 
-\chapter{Operations on \texorpdfstring{$\gamma$}{Gamma} Matrices}\label{sec:identities}
 
+\chapter{The van Neerven-Vermaseren Basis}
+\label{sec:vNV_basis}
 
-In the following we derive the values of the contraction of the
-tensors $w_0$ and $v_n$ which are used in 
-eqs.~\eqref{eq:decompqqbar} and \eqref{eqn:4qampltensor}.
-%
-In this appendix we take $d$ to be an even integer denoting the
-dimension of the space for which the Clifford algebra is defined
-and we denote the dimension of the $\gamma$-matrix
-representation by
-$d_t=\Tr(\mathbb{1}_{[d]})=2^{d/2}$.
-In the main text, we are interested in the case
-%
-\begin{eqnarray}
-  d = (D_s-4)\,.
-\end{eqnarray}
-%
-Since amplitude computations are homogeneous in the
-factor $d_t$, it can be factored out and replaced by 
-a suitable value in order to suit the four-dimensional 
-limit. In this appendix, we keep the parameter $d_t$ in analytic
-form in order to maintain a consistent finite-dimensional
-algebra and for clarity of the equations. 
-In the main text we use formulas with the replacement
-$d_t\rightarrow 1$ imposed, which is the value consistent with a
-calculation in dimensional regularization \cite{Collins:1984xc}.
-
-We start with the trivial case of $w_0$ which appears in 
-eq.~\eqref{eq:decompqqbar}. It is easy to find that
-%
-\begin{eqnarray}
-  w_0=\delta_\kappa^\lambda\,,\qquad 
-  w^0=\delta^\kappa_\lambda/d_t\,,\qquad 
-  w_0\cdot w^0=\delta_\kappa^\lambda  \delta^\kappa_\lambda/d_t=1\,.
-\end{eqnarray}
-
-For the tensors $v_n$ of eq.~\eqref{eqn:4qampltensor} we
-must first consider traces of $\gamma$-matrix chains of
-the form
-%
-\begin{align}\label{eq:basisGammaChainII}
-\gamma_{[d]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in
-S_n} \sgn(\sigma) \gamma_{[d]}^{\mu_{\sigma(1)}} \ldots
-\gamma_{[d]}^{\mu_{\sigma_n}}\,,
+The van Neerven-Vermaseren basis \cite{Neerven1984a,Ellis:2007br}
+takes a list of $n<D$ vectors $\{p_1,\ldots{}p_n\}$ as an input, 
+and decomposes the full vector space in $D$ dimensions $M_{[D]}$ into
+a direct sum,
+\begin{subequations}
+  \begin{gather}
+    M_{[D]} = \spn{v_1,\ldots{},v_n} \oplus \spn{\tau_1,\ldots{},\tau_{D-n}},
+    \intertext{with $\spn{p_1,\ldots{},p_n} = \spn{v_1,\ldots{},v_n}$, and dual vectors $v_i = \qty(G^{-1})_{ij}\,p_j$, such that}
+    \sp(\tau_i,p_j) = \sp(\tau_i,v_j) = 0, \\
+    \sp(v_i,p_j) = \delta_{ij}, \qquad \sp(\tau_i,\tau_j) = \delta_{ij} (\tau_{j})^2,
+  \end{gather}
+\end{subequations}
+where $G^{-1}$ is the inverse of the Gram matrix $G_{ij}=\sp(p_i,p_j)$.
+The basis vectors of the transverse space $\tau_i$ can be obtained by projecting any $(D-n)$ linear independent seed vectors
+into the transverse space with
+\begin{align}\label{eq:metricpron}
+  g_\tau^{\mu\nu} =  g^{\mu\nu} - \sum_{i=1}^{n}p_i^\mu v_i^\nu,
 \end{align}
-with $S_n$ denoting the set of permutations of $n$
-integers and $\sgn(\sigma)$ the signature of the permutation $\sigma\in S_n$.
-%
-Given a unitary
-representation of the $\gamma_{[d]}^\mu$ matrices, hermitian
-conjugation reverses the $\gamma$-matrix chains and flips the
-Lorentz index position.
-%
-This can be seen from the definition of the Clifford algebra
-(\cref{eqn:defClifford}) which implies 
-$\gamma_{[d]}^\mu \gamma^{}_{[d]\mu} = \mathbb{1}_{[d]}$ for 
-any fixed~$\mu$.
-Assuming that the $\gamma_{[d]}^\mu$ are unitary, i.e.\ 
-$(\gamma_{[d]}^\mu)^\dagger = (\gamma_{[d]}^\mu)^{-1}$,
-then implies
-$(\gamma_{[d]}^\mu)^\dagger=\gamma_{[d]\mu}$. 
-For the above product of $\gamma$ matrices this in turn leads to
-%
-\begin{eqnarray}
-  (\gamma_{[d]}^{\mu_1 \ldots \mu_n} )^\dagger =\,
-  \gamma_{[d]\mu_n \ldots \mu_1}^{\phantom{\mu}} \,.
-\end{eqnarray}
-%
-%
-Unitary representations for the Clifford algebra can always be
-found as explained for example in 
-ref.~\cite{Kreuzer:susylectures}.
-%
-We will require the following traces of antisymmetric
-$\gamma$-matrix chains,
-%
-\begin{eqnarray}
-  \label{eq:traceChain}
-  \Tr(\gamma_{[d]}^{\mu_1 \ldots \mu_n} \gamma^{
-    \phantom{\mu}}_{[d]\,\nu_m \ldots \nu_1})= 
-    \left\{ \begin{array}{cc} d_t 
-      \sum_{ \sigma\in  S_n} \sgn(\sigma)
-      \delta^{\mu_{\sigma(1)}}_{\nu_1}\cdots\delta^{\mu_{\sigma(n)}}_
-      {\nu_n} &\qquad m=n   \\
-      0 &\qquad m\neq n\end{array}  
-    \right. 
-    \,,
-  \end{eqnarray}
-%
-where the summation runs over all permutations $S_n$ of $n$ elements.
-The traces are computed in fixed integer dimensions where the dimensions of the
-$\gamma$-matrix representation is taken to be $d_t$ dimensional.
-For contracted Lorentz indices we will also use that
-\begin{eqnarray}
-  \label{eqn:simpletrace}
-  \sum_{\mu_1,\ldots,\mu_n} 
-  \sum_{ \sigma\in  S_n} \sgn(\sigma)
-  \delta^{\mu_{\sigma(1)}}_{\mu_1}\ldots
-  \delta^{\mu_{\sigma(n)}}_{\mu_n}
-  = \frac{d!}{(d-n)! }\,.
-\end{eqnarray}
-The sum counts the number of antisymmetric tensors of
-rank $n$ in $d$ dimensions, which is the number of ways to 
-choose an ordered subset of $n$ elements from a fixed set of $d$
-elements.
-%
-With these preparatory equations we can
-compute the inner products of the $v_n$ tensors of 
-\cref{eqn:4qtensors}
-which yield the normalisation factors $c_n$
-of \cref{eqn:vnproducts}:
-\begin{align}
-  \begin{split}
-    \label{eq:cnCalc}
-    c_n=v_n^\dagger\cdot v_n =&\,
-%
-    \Tr(\gamma_{[d]\,\mu_n \ldots \mu_1} \gamma_{[d]}^
-    {\nu_1 \ldots \nu_n}) \,
-%
-    \Tr(\gamma_{[d]}^{\mu_n \ldots \mu_1} \gamma_{
-    [d]\,\nu_1 \ldots \nu_n}) \\
-    =&\,
-    d_t^2 \sum_{\sigma\in  S_n} 
-    \sum_{\mu_1,\ldots,\mu_n}
-    \sum_{\tilde \sigma\in S_n}
-    \sum_{\nu_1,\ldots,\nu_n}
-%
-    \sgn(\sigma)
-    \sgn(\tilde\sigma)
-    \delta^{\mu_{\sigma(n)}}_{\nu_1}\cdots\delta^{\mu_{\sigma(1)}}_{\nu_n}
-    \delta_{\mu_{\tilde\sigma(n)}}^{\nu_1}\cdots
-    \delta_{\mu_{\tilde\sigma(1)}}^{\nu_n}
-    \\
-%
-    =&\,d_t^2 \sum_{\sigma\in  S_n} 
-    \sgn(\sigma)
-    \left(
-    \sum_{\mu_1,\ldots,\mu_n}\sum_{\tilde \sigma\in S_n}
-%
-    \sgn(\tilde\sigma)
-    \delta^{\mu_{\sigma(n)}}_{\mu_{\tilde\sigma(n)}}
-    \cdots
-    \delta^{\mu_{\sigma(1)}}_{\mu_{\tilde\sigma(1)}}
-    \right)
-    \\
-%
-    =&\, d_t^2 \sum_{\sigma\in  S_n} 
-    \sgn(\sigma)^2 \frac{d!}{(d-n)!}\\
-    =&\, d_t^2 \frac{d!\,n!}{(d-n)!}\,.
-  \end{split}
-\end{align}
-In the above formulas the summation over the indices $\nu_i$ is 
-trivially performed. In the next step, we isolate a contribution
-of the form that we computed in eq.~\eqref{eqn:simpletrace},
-which gives the same result for each permutation $\sigma$ but
-multiplied by $\sgn(\sigma)$. The final results follows
-trivially.
-As expected, for each $n$ the result has zeros in the dimensions
-$d$ for which there are insufficient distinct labels 
-$\mu_i$ and $\nu_i$ available to form antisymmetric index 
-configurations of $n$ indices.
-We recall that in the main text we set $d_t=1$ and $d=D_s-4$.
+and orthogonalizing them via the Gram-Schmidt process.
 
-
-Finally we collect the results for the contractions of the 
-tensor $\tilde v_m$ and $v_n$ required for amplitudes with two
-quark lines of identical flavor,
-see \cref{eq:basisIdentical}.
-These contractions lead to a single trace instead of a product 
-of traces as was the case in eq.~\eqref{eq:cnCalc}.
-We refer to the above intuitive argument: tensor 
-contractions including $v_n$ or $\tilde v_n$ vanish 
-whenever the dimensionality $d$ is insufficient to accommodate
-the respective antisymmetric index arrangements in the Lorentz 
-indices $\mu_i$ and $\nu_i$.
-In particular this implies that contractions including the
-tensors $v_{n}$ are proportional to $d$ for $n\neq0$. We find
-that 
-\begin{align}
-  \begin{split}
-    \tilde v_0^\dagger \cdot v_0 &=
-    \delta^{\kappa_1}_{\lambda_2} \delta^{\kappa_2}_{\lambda_1}
-    \delta_{\kappa_1}^{\lambda_1} \delta_{\kappa_2}^{\lambda_2} 
-    = d_t \,, \\
-    \tilde v_m^\dagger \cdot v_{n} &=d_t\,d\,p_{mn}(d) = 
-    {\cal O}(\epsilon)\,,\qquad\textrm{for }\{m,n\}\neq\{0,0\}\,.
-  \end{split}
-\end{align}
-Here $p_{mn}(d)$ is a polynomial-valued matrix which we 
-will not require explicitly for the present paper, and in the
-last equality we made explicit the fact that in this paper we 
-are interested in the case $d=D_s-4={\cal O}(\epsilon)$.
-
+The algorithm works for any dimension $D$ and metric signature.%
+\footnote{There are some subtleties connected to non-positive-definite metric signatures (see e.g.\ the bubble topology in \cref{sec:ms_examples})}
+It also works over arbitrary field as long as we don't require the transverse vectors to be normalized.
 
 
 \chapter{Numerical Algorithms}
@@ -739,6 +572,8 @@ And the little group scaling is
 
 \chapter{Clifford Algebras in $D_s$ Dimensions}
 \label{sec:clifford_algebra_ds}
+
+\section{Representations}
 The defining property of the Clifford algebra is
 \begin{equation} \label{eqn:defClifford}
 \acomm{\gamma_{[D_s]}^\mu}{\gamma_{[D_s]}^\nu} = 2 g_{[D_s]}^{\mu\nu}\mathbb{1}_{[D_s]}^{\vphantom{\mu\nu}},
@@ -775,6 +610,203 @@ Note that $\gamma^\mu_{[D_s-4]}$ represent a $(D_s-4)$-dimensional Clifford alge
 %\begin{equation}
   %\qty(\slashed{p}_{[D_s]} \pm m \cdot \mathbb{1}_{[D_s]}) \psi  = 0,
 %\end{equation}
+\section{Basis}
+\label{sec:identities}
+
+In the following we derive the values of the contraction of the
+tensors $w_0$ and $v_n$ which are used in 
+eqs.~\eqref{eq:decompqqbar} and \eqref{eqn:4qampltensor}.
+%
+In this appendix we take $d$ to be an even integer denoting the
+dimension of the space for which the Clifford algebra is defined
+and we denote the dimension of the $\gamma$-matrix
+representation by
+$d_t=\Tr(\mathbb{1}_{[d]})=2^{d/2}$.
+In the main text, we are interested in the case
+%
+\begin{eqnarray}
+  d = (D_s-4)\,.
+\end{eqnarray}
+%
+Since amplitude computations are homogeneous in the
+factor $d_t$, it can be factored out and replaced by 
+a suitable value in order to suit the four-dimensional 
+limit. In this appendix, we keep the parameter $d_t$ in analytic
+form in order to maintain a consistent finite-dimensional
+algebra and for clarity of the equations. 
+In the main text we use formulas with the replacement
+$d_t\rightarrow 1$ imposed, which is the value consistent with a
+calculation in dimensional regularization \cite{Collins:1984xc}.
+
+We start with the trivial case of $w_0$ which appears in 
+eq.~\eqref{eq:decompqqbar}. It is easy to find that
+%
+\begin{eqnarray}
+  w_0=\delta_\kappa^\lambda\,,\qquad 
+  w^0=\delta^\kappa_\lambda/d_t\,,\qquad 
+  w_0\cdot w^0=\delta_\kappa^\lambda  \delta^\kappa_\lambda/d_t=1\,.
+\end{eqnarray}
+
+For the tensors $v_n$ of eq.~\eqref{eqn:4qampltensor} we
+must first consider traces of $\gamma$-matrix chains of
+the form
+%
+\begin{align}\label{eq:basisGammaChainII}
+\gamma_{[d]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in
+S_n} \sgn(\sigma) \gamma_{[d]}^{\mu_{\sigma(1)}} \ldots
+\gamma_{[d]}^{\mu_{\sigma_n}}\,,
+\end{align}
+with $S_n$ denoting the set of permutations of $n$
+integers and $\sgn(\sigma)$ the signature of the permutation $\sigma\in S_n$.
+%
+Given a unitary
+representation of the $\gamma_{[d]}^\mu$ matrices, hermitian
+conjugation reverses the $\gamma$-matrix chains and flips the
+Lorentz index position.
+%
+This can be seen from the definition of the Clifford algebra
+(\cref{eqn:defClifford}) which implies 
+$\gamma_{[d]}^\mu \gamma^{}_{[d]\mu} = \mathbb{1}_{[d]}$ for 
+any fixed~$\mu$.
+Assuming that the $\gamma_{[d]}^\mu$ are unitary, i.e.\ 
+$(\gamma_{[d]}^\mu)^\dagger = (\gamma_{[d]}^\mu)^{-1}$,
+then implies
+$(\gamma_{[d]}^\mu)^\dagger=\gamma_{[d]\mu}$. 
+For the above product of $\gamma$ matrices this in turn leads to
+%
+\begin{eqnarray}
+  (\gamma_{[d]}^{\mu_1 \ldots \mu_n} )^\dagger =\,
+  \gamma_{[d]\mu_n \ldots \mu_1}^{\phantom{\mu}} \,.
+\end{eqnarray}
+%
+%
+Unitary representations for the Clifford algebra can always be
+found as explained for example in 
+ref.~\cite{Kreuzer:susylectures}.
+%
+We will require the following traces of antisymmetric
+$\gamma$-matrix chains,
+%
+\begin{eqnarray}
+  \label{eq:traceChain}
+  \Tr(\gamma_{[d]}^{\mu_1 \ldots \mu_n} \gamma^{
+    \phantom{\mu}}_{[d]\,\nu_m \ldots \nu_1})= 
+    \left\{ \begin{array}{cc} d_t 
+      \sum_{ \sigma\in  S_n} \sgn(\sigma)
+      \delta^{\mu_{\sigma(1)}}_{\nu_1}\cdots\delta^{\mu_{\sigma(n)}}_
+      {\nu_n} &\qquad m=n   \\
+      0 &\qquad m\neq n\end{array}  
+    \right. 
+    \,,
+  \end{eqnarray}
+%
+where the summation runs over all permutations $S_n$ of $n$ elements.
+The traces are computed in fixed integer dimensions where the dimensions of the
+$\gamma$-matrix representation is taken to be $d_t$ dimensional.
+For contracted Lorentz indices we will also use that
+\begin{eqnarray}
+  \label{eqn:simpletrace}
+  \sum_{\mu_1,\ldots,\mu_n} 
+  \sum_{ \sigma\in  S_n} \sgn(\sigma)
+  \delta^{\mu_{\sigma(1)}}_{\mu_1}\ldots
+  \delta^{\mu_{\sigma(n)}}_{\mu_n}
+  = \frac{d!}{(d-n)! }\,.
+\end{eqnarray}
+The sum counts the number of antisymmetric tensors of
+rank $n$ in $d$ dimensions, which is the number of ways to 
+choose an ordered subset of $n$ elements from a fixed set of $d$
+elements.
+%
+With these preparatory equations we can
+compute the inner products of the $v_n$ tensors of 
+\cref{eqn:4qtensors}
+which yield the normalisation factors $c_n$
+of \cref{eqn:vnproducts}:
+\begin{align}
+  \begin{split}
+    \label{eq:cnCalc}
+    c_n=v_n^\dagger\cdot v_n =&\,
+%
+    \Tr(\gamma_{[d]\,\mu_n \ldots \mu_1} \gamma_{[d]}^
+    {\nu_1 \ldots \nu_n}) \,
+%
+    \Tr(\gamma_{[d]}^{\mu_n \ldots \mu_1} \gamma_{
+    [d]\,\nu_1 \ldots \nu_n}) \\
+    =&\,
+    d_t^2 \sum_{\sigma\in  S_n} 
+    \sum_{\mu_1,\ldots,\mu_n}
+    \sum_{\tilde \sigma\in S_n}
+    \sum_{\nu_1,\ldots,\nu_n}
+%
+    \sgn(\sigma)
+    \sgn(\tilde\sigma)
+    \delta^{\mu_{\sigma(n)}}_{\nu_1}\cdots\delta^{\mu_{\sigma(1)}}_{\nu_n}
+    \delta_{\mu_{\tilde\sigma(n)}}^{\nu_1}\cdots
+    \delta_{\mu_{\tilde\sigma(1)}}^{\nu_n}
+    \\
+%
+    =&\,d_t^2 \sum_{\sigma\in  S_n} 
+    \sgn(\sigma)
+    \left(
+    \sum_{\mu_1,\ldots,\mu_n}\sum_{\tilde \sigma\in S_n}
+%
+    \sgn(\tilde\sigma)
+    \delta^{\mu_{\sigma(n)}}_{\mu_{\tilde\sigma(n)}}
+    \cdots
+    \delta^{\mu_{\sigma(1)}}_{\mu_{\tilde\sigma(1)}}
+    \right)
+    \\
+%
+    =&\, d_t^2 \sum_{\sigma\in  S_n} 
+    \sgn(\sigma)^2 \frac{d!}{(d-n)!}\\
+    =&\, d_t^2 \frac{d!\,n!}{(d-n)!}\,.
+  \end{split}
+\end{align}
+In the above formulas the summation over the indices $\nu_i$ is 
+trivially performed. In the next step, we isolate a contribution
+of the form that we computed in eq.~\eqref{eqn:simpletrace},
+which gives the same result for each permutation $\sigma$ but
+multiplied by $\sgn(\sigma)$. The final results follows
+trivially.
+As expected, for each $n$ the result has zeros in the dimensions
+$d$ for which there are insufficient distinct labels 
+$\mu_i$ and $\nu_i$ available to form antisymmetric index 
+configurations of $n$ indices.
+We recall that in the main text we set $d_t=1$ and $d=D_s-4$.
+
+
+Finally we collect the results for the contractions of the 
+tensor $\tilde v_m$ and $v_n$ required for amplitudes with two
+quark lines of identical flavor,
+see \cref{eq:basisIdentical}.
+These contractions lead to a single trace instead of a product 
+of traces as was the case in eq.~\eqref{eq:cnCalc}.
+We refer to the above intuitive argument: tensor 
+contractions including $v_n$ or $\tilde v_n$ vanish 
+whenever the dimensionality $d$ is insufficient to accommodate
+the respective antisymmetric index arrangements in the Lorentz 
+indices $\mu_i$ and $\nu_i$.
+In particular this implies that contractions including the
+tensors $v_{n}$ are proportional to $d$ for $n\neq0$. We find
+that 
+\begin{align}
+  \begin{split}
+    \tilde v_0^\dagger \cdot v_0 &=
+    \delta^{\kappa_1}_{\lambda_2} \delta^{\kappa_2}_{\lambda_1}
+    \delta_{\kappa_1}^{\lambda_1} \delta_{\kappa_2}^{\lambda_2} 
+    = d_t \,, \\
+    \tilde v_m^\dagger \cdot v_{n} &=d_t\,d\,p_{mn}(d) = 
+    {\cal O}(\epsilon)\,,\qquad\textrm{for }\{m,n\}\neq\{0,0\}\,.
+  \end{split}
+\end{align}
+Here $p_{mn}(d)$ is a polynomial-valued matrix which we 
+will not require explicitly for the present paper, and in the
+last equality we made explicit the fact that in this paper we 
+are interested in the case $d=D_s-4={\cal O}(\epsilon)$.
+
+
+
+\section{Spinors}
 
 \todo{construction of spinor states} 
 
@@ -812,34 +844,6 @@ from traces of products of $\gamma_{[D_s-4]}$, so
 where the sum is over all possible ways to pair the indices $\{ \rho_1 \ldots \rho_n,\,\sigma_1 \ldots \sigma_m \}$.
 Inserting this into the previous equation we see that only on the invariants $\mu_{ij}$ appear in the integrand of $M_n^{(k)}$.
 
-
-
-\chapter{The van Neerven-Vermaseren Basis}
-\label{sec:vNV_basis}
-
-The van Neerven-Vermaseren basis \cite{Neerven1984a,Ellis:2007br}
-takes a list of $n<D$ vectors $\{p_1,\ldots{}p_n\}$ as an input, 
-and decomposes the full vector space in $D$ dimensions $M_{[D]}$ into
-a direct sum,
-\begin{subequations}
-  \begin{gather}
-    M_{[D]} = \spn{v_1,\ldots{},v_n} \oplus \spn{\tau_1,\ldots{},\tau_{D-n}},
-    \intertext{with $\spn{p_1,\ldots{},p_n} = \spn{v_1,\ldots{},v_n}$, and dual vectors $v_i = \qty(G^{-1})_{ij}\,p_j$, such that}
-    \sp(\tau_i,p_j) = \sp(\tau_i,v_j) = 0, \\
-    \sp(v_i,p_j) = \delta_{ij}, \qquad \sp(\tau_i,\tau_j) = \delta_{ij} (\tau_{j})^2,
-  \end{gather}
-\end{subequations}
-where $G^{-1}$ is the inverse of the Gram matrix $G_{ij}=\sp(p_i,p_j)$.
-The basis vectors of the transverse space $\tau_i$ can be obtained by projecting any $(D-n)$ linear independent seed vectors
-into the transverse space with
-\begin{align}\label{eq:metricpron}
-  g_\tau^{\mu\nu} =  g^{\mu\nu} - \sum_{i=1}^{n}p_i^\mu v_i^\nu,
-\end{align}
-and orthogonalizing them via the Gram-Schmidt process.
-
-The algorithm works for any dimension $D$ and metric signature.%
-\footnote{There are some subtleties connected to non-positive-definite metric signatures (see e.g.\ the bubble topology in \cref{sec:ms_examples})}
-It also works over arbitrary field as long as we don't require the transverse vectors to be normalized.
 
 
 \chapter{Twistor Parametrization}
