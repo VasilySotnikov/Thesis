@@ -132,7 +132,7 @@ the construction of form-factors in  \cref{eq:cdr_projectors} seems to be an unn
 And indeed a way to avoid these steps and construct the projector onto helicity amplitudes directly has been suggested recently \cite{Peraro:2019cjj}.
 This somewhat mitigates the first issue, but the projectors have to be still applied to analytic expressions.
 
-\section{Helicity Amplitudes in the HV Scheme from Embedding of States}
+\section{Helicity Amplitudes from Embedding of External States}
 \label{sec:helampl_embeding}
 
 In this section we explain how multi-loop helicity amplitudes
@@ -140,11 +140,8 @@ with vector and spinor external particles can be obtained in dimensional regular
 from appropriate embedding of helicity states into spaces of higher dimensionality $\mathsf{S}_{[D_s]}$.
 As in \cref{sec:evaluation_of_cuts}, in this \namecref{chap:dshel} we will denote the dimensionality of particles'
 representations as $D_s$.
-
-\todo{
-  We build up independently from the projector approach, in the context of dimensional reconstruction. 
-  However the correspondence can be straightforwardly established
-}
+Our approach is built up independently from the one described in the previous chapter, but we establish
+the connection in the end.
 
 In HV the space-time symmetry group is extended to $\mathrm{SO}(1,D_s-1)$, and the external particles are kept in four dimensions. 
 More precisely this means that, like in CDR, the tensor and Clifford algebras are performed in $D_s$ dimensions,
@@ -184,7 +181,7 @@ The corresponding polarization sum for a particle with momentum $p$ is
 where we used $p \in \mathsf{S}_{[4]}$
 to make the $(D_s-4)$-dimensional part explicit.
 Comparing this to \cref{eq:4d_completeness_relations} we see that we can embed the helicity states as
-\begin{align}
+\begin{align} \label{eq:embedding_vectors}
   \varepsilon_{1,2}^\mu =
     \begin{dcases}
       \varepsilon^\mu_{+,-}, & \mu\in \mathsf{S}_{[4]},\\
@@ -257,7 +254,7 @@ First we observe that only the spinor chains of the form
 with indices $\mu_i \in \mathsf{S}_{[D_s -4]}$ contracted to other spinor chains, contribute to $v_n$.
 This is the consequence of the following facts:
 \begin{itemize}
-  \item Thanks to our choice of states for vector particles, all Lorentz vectors that can be contracted with $\gamma^{\mu_i}_{[D_s]}$
+  \item Thanks to our choice of states for vector particles, all Lorentz vectors, which can be contracted with $\gamma^{\mu_i}_{[D_s]}$,
     project them into $\mathsf{S}_{[4]}$:
     \begin{align} \label{eq:trivialTens1}
       a_{\mu}
@@ -266,7 +263,7 @@ This is the consequence of the following facts:
       &&
       a \in \{p_i,\varepsilon_{1,2}(p_i)\}
     \end{align}
-    This has an effect that kinematics cannnot enter $v_n$.
+    This has an effect that no kinematics-dependence can enter $v_n$.
   \item Any Lorentz indices inside the same spinor chain can be contracted yielding  
     \begin{equation} \label{eq:trivialTens2}
       \left(\gamma_{[D_s]}^\mu\right)_{\bar{\alpha}\hat{\alpha}}^{\bar{\kappa}\hat{\kappa}}
@@ -292,13 +289,11 @@ into the standard basis of anti-symmetrized products of gamma-matrices (see e.g.
 \begin{align}\label{eq:basisGammaChainDs}
 \gamma_{[D_s-4]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in S_n} \sgn(\sigma) \gamma_{[D_s-4]}^{\mu_{\sigma(1)}} \ldots \gamma_{[D_s-4]}^{\mu_{\sigma(n)}}\,,
 \end{align}
-where $S_n$ denotes the set of all permutations of $n$
-integers and $\sgn(\sigma)$ the signature of the permutation
-$\sigma\in S_n$.
+where $S_n$ is the set of all permutations of $n$ integers, and $\sgn(\sigma)$ is the signature of the permutation $\sigma\in S_n$.
 It can be shown (see \cref{sec:identities}), that the
 projectors $\mathcal{P}_n$ onto $v_n$ can be constructed from the conjugated tensors $v_n^\dagger$ as
 \begin{align} \label{eq:dsm_4_projectors}
-  \mathcal{P}_n [v_m] \coloneqq \prod_{s_1}^{n_s} \Tr_s \qty(v_n^\dagger v_m) = c_n(D_s)~\delta_{n m},  %&& c_n = \frac{(D_s-4)!\,n!}{(D_s-4-n)!},
+  \mathcal{P}_n [v_m] \coloneqq \qty(\prod_{s=1}^{n_s} \Tr_s) v_n^\dagger\; v_m = c_n(D_s)~\delta_{n m},  %&& c_n = \frac{(D_s-4)!\,n!}{(D_s-4-n)!},
 \end{align}
 with the traces are taken over each of $n_s$ spinor chains, and we drop the irrelevant total factor of $\qty(\Tr\mathbb{1}_{[D_s -4 ]})^{n_s}$.
 The coefficients $c_n$ can be computed for each $n_s$ combinatorially, as demonstrated in \cref{eq:cnCalc}.
@@ -315,7 +310,7 @@ there is only a single term in the decomposition of \cref{eq:tensorDecomposition
 \end{equation}
 \paragraph{Two pairs of distinct fermions.}
 As a second example we consider an amplitude with two fermion pairs of different flavors, (and any number of gauge bosons). 
-The basis $\{v_n\}$ consists of contraction between two spinor chains of the form \cref{eq:generic_dsm_4_schain}:
+The basis $\{v_n\}$ consists of contractions between two spinor chains of the form \cref{eq:generic_dsm_4_schain}:
 \begin{align}
   \begin{split} \label{eqn:4qtensors}
     (v_0)_{j_1j_2}^{i_1i_2}   = &
@@ -358,7 +353,10 @@ They are defined by subtracting the universal divergent structure of one- and tw
     \mathcal{F}^{(2)} &\coloneqq \mathcal{A}^{(2)}  - \mathbf{I}^{(1)} \mathcal{A}^{(1)} - \mathbf{I}^{(2)} \mathcal{A}^{(0)}.
   \end{align}
 \end{subequations}
-The operators $\mathbf{I}^{(1)}$ and $\mathbf{I}^{(2)}$ can be found in \cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}.
+The operators $\mathbf{I}^{(1)}$ and $\mathbf{I}^{(2)}$ can be found in \cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}.\footnote{
+  We also include renormalization into these operators, which is possible in massless QCD.
+  Alternatively we simply consider $\mathcal{A}^{(L)}$ to denote renormalized amplitudes in this section.
+}
 Here for convenience we also introduced a finite remainder for tree amplitudes, which is simply an alias for the amplitude itself.
 We can expand both sides of \cref{eq:F0,eq:F1,eq:F2} in terms of tensor structures of \cref{eq:tensorDecomposition}
 to get the corresponding coefficients $\mathcal{F}^{(i)}_n$ of the finite remainders.
@@ -366,8 +364,8 @@ to get the corresponding coefficients $\mathcal{F}^{(i)}_n$ of the finite remain
 The cross-section is obtained by squaring the finite remainders, possibly multiplied by some
 finite operator $\mathbf{F}$ (we refer to \cite{Weinzierl:2011uz} for details),
 \begin{equation} \label{eq:Fsq}
-  \Ree{\mathcal{F}^{(i)}}{\mathbf{F}\mathcal{F}^{(j)}} = \sum_m\sum_n\; \mathcal{P}_m \qty[v_n]  \; \Ree{\mathcal{F}^{(i)}_m}{\mathbf{F}\mathcal{F}^{(j)}_n} = 
-     \sum_n c_n \; \Ree{\mathcal{F}^{(i)}_n}{\mathbf{F}\mathcal{F}^{(j)}_n},
+  \Re\qty(\mathcal{F}^{\dagger(i)}\mathbf{F}\mathcal{F}^{(j)}) = \sum_m\sum_n\; \mathcal{P}_m \qty[v_n]  \; \Re\qty(\mathcal{F}^{\dagger(i)}_m\mathbf{F}\mathcal{F}^{(j)}_n) = 
+     \sum_n c_n \; \Re\qty(\mathcal{F}^{\dagger(i)}_n\mathbf{F}\mathcal{F}^{(j)}_n),
 \end{equation}
 where in the last equality we used \cref{eq:dsm_4_projectors}.
 For non-identical pairs of fermions\footnote{we discuss identical fermions below} 
@@ -381,7 +379,7 @@ contribute to higher orders in $\eps$ when we set $D_s\to 4-2\eps$,
 \begin{equation}
   c_i=\order{\eps}, \qfor i\geq 1,
 \end{equation}
-We can drop all $\order{\eps}$ terms in \cref{eq:Fsq}.
+and we can drop all $\order{\eps}$ terms in \cref{eq:Fsq}.
 Thus we conclude that all we need to know is the coefficient of $v_0$.
 
 
@@ -392,7 +390,7 @@ It can be constructed by anti-symmetrizing the corresponding amplitude with dist
 In this way, we start from the basis in \cref{eqn:4qtensors},
 and extend it with anti-symmetrized tensors $\{\tilde v_n\}$ as
 \begin{equation}\label{eq:basisIdentical}
-	(\tilde v_n)_{j_1j_2}^{i_1i_2}= (v_n)_{j_1j_2}^{i_2i_1}\,,
+	(\tilde v_n)_{j_1j_2}^{i_1i_2} \coloneqq  (v_n)_{j_1j_2}^{i_2i_1}\,,
 \end{equation}
 so our basis is now $\{v_n\}\cup \{\tilde{v}_n\}$.
 It satisfies the following properties:
@@ -403,10 +401,10 @@ It satisfies the following properties:
 \end{equation}
 The coefficients in the first two equations are the same as for the case of distinct fermions. 
 We do not provide the closed form for the coefficients in the last equation, but
-the fact that they are always proportional to $(D_s-4)$ can be straightforwardly verified.
+we verified the fact that they are proportional to $(D_s-4)$.
 
 Now consider the interference between the two-loop finite remainder and 
-the corresponding tree amplitude, which are anti-symmetrized over flavors individually,
+the corresponding tree amplitude, which should be anti-symmetrized over flavors individually,
 \begin{multline}
   \qty(\mathcal{F}^{(0)} - \mathsf{f}\circ\mathcal{F}^{(0)})^\dagger \cdot 
     \qty(\mathcal{F}^{(2)} - \mathsf{f}\circ\mathcal{F}^{(2)}) = \\
@@ -462,85 +460,109 @@ Finally, it is worth mentioning that using the ``anti-commuting'' $\gamma_5$, th
   \anticommutator{\gamma_{5}}{\gamma^{\mu}_{[D_s]}}=0, \quad \forall \mu, \qquad\Longleftrightarrow\qquad \gamma_{5[D_s]} \equiv \gamma^\star_{[D_s]},
 \]
 in combination with dimensional reconstruction is not possible, since
-in this case the amplitudes behave non-smoothly as functions of $D_s$ at all integer values.
+in this case the amplitudes behave non-smoothly as functions of $D_s$ at all integer values due to the relation
+\begin{equation}
+  \Tr\qty(\gamma^\star_{[D_s]} \prod_{i=1}^{n} \gamma^{\mu_i}_{[D_s]}) \sim \delta^n_{D_s}.
+\end{equation}
+
 
 \subsection{Discussion}
 \label{sec:dshel_discussion}
 
+To summarize, the result of this section is the following algorithm for
+a (numerical if desired) computation of helicity amplitudes in the HV scheme of dimensional regularization:
+\begin{enumerate}[label={\arabic*.}]
+  \item Evaluate amplitudes with all particles placed in generic $D_s$ dimensions (which can be finite integers for instance), 
+    and the external gauge bosons and fermions embedded as given by \cref{eq:embedding_vectors,eq:fermionicStates}.
+  \item Per each pair of external fermions take a trace over their indices $\{\hat{\alpha}_i,\hat{\beta}_i\} \in \mathsf{S}_{[D_s-4]}$ 
+    to project onto the coefficient $\mathcal{A}_0^{(L)}$ of $\delta^{\hat{\alpha}_1}_{\hat{\beta}_1}\cdots \delta^{\hat{\alpha}_{n_s}}_{\hat{\beta}_{n_s}}$.
+  \stepcounter{enumi}\item[(\arabic{enumi})]  If $D_s$ is set to a particular integer value (e.g.\ in a numerical computation),
+    repeat with a sample of different $D_s$ values to reconstruct the polynomial dependence of $\mathcal{A}_0^{(L)}$ (see \cref{sec:dimensional_reconstruction}).
+  \item Set $D_s\to D\to 4-2\eps$.
+\end{enumerate}
+This algorithm coincides with the one from \cite{Anger:2018ove}, where it was found from a different perspective.
+It is rather straight-forward to see, that
+helicity amplitudes obtained 
+with our algorithm are exactly the same as the ones 
+obtained following the prescription explained in \cref{sec:helampl_projectors}, 
+as well as the result of the ``'t Hooft-Veltman algebra'' implemented in a \texttt{FORM} library ``Spinney'' \cite{Cullen2010}.
+The difference is that our approach admits a direct numerical implementation, since it
+operates on explicitly-represented finite objects.
 
-\todo{Compared to the form-factor decomposition in \cref{sec:helampl_projectors} it is easy to see that $v_0$ is the coefficient in HV scheme} 
-It is then rather straight-forward to see that the coefficient $A_0$ of $v_0$ coincides with
-the amplitude obtained following the prescription of \cref{sec:helampl_projectors}, as well
-as the result of the``'t Hooft-Veltman algebra'' implemented in \cite{Cullen2010}.
+We have implemented our algorithm in a framework of $D$-dimensional numerical unitarity computations 
+of one- and two-loop helicity amplitudes to obtain the results presented in \cref{chap:wbb_pheno,chap:5parton}.
+We also reproduced a number of results from the literature. 
+The validity of the approach is thus thoroughly established by practical applications.
 
-In agreement with the prescription of ref.~\cite{Anger:2018ove}.
-
-\todo{Validated extremely well by reproducing all the results computed from the form-factor decomposition} 
-In summarry, as long as phenomenological applications concerned, we only need to consider $v_0$.
-
-\todo{Important transition between schemes} 
-The two schemes are consistent,
-in that their contributions to NNLO computations can be related by known
-transition rules~\cite{Broggio:2015dga}, but as we
-shall see below the HV scheme introduces some simplification in
-the calculation.
-
+We conclude this section with some comments.
+\paragraph{1.} 
 The idea of embedding external states into higher-dimensional spaces to obtain
 helicity amplitudes in dimensional regularization is not new. 
 It has been employed in one-loop numerical generalized
-unitary methods \cite{Ellis:2007br,Giele:2008ve}, as well as as 
-the so-called six-dimensional helicity formalism \cite{Bern2011,Cheung:2009dc,Badger:2013gxa,Badger:2017jhb} for two loops.
+unitary methods \cite{Ellis:2007br,Giele:2008ve}, as well as 
+the six-dimensional helicity formalism \cite{Bern2011,Cheung:2009dc,Badger:2013gxa,Badger:2017jhb} for two loops.
 However the embedding of fermionic states, in particular any number of them,
-and the relation to the HV scheme were largely glossed over,
+and the relation to the HV scheme were somewhat glossed over,
 which caused some confusion in the past.
 
-For example if one takes a ``single'' embedding of external quarks \todo{expand on this, reference an explicit state} ,
-one effectively considers an amplitude polarized in $\mathsf{S}_{[D_s-4]}$ ,
-so the computation carried out in this way do not correspond to the HV scheme.
-Strictly speaking then the arguments we used for the dimension of embedding of loop momenta are invalidated.
-\todo{list of cases when single embedding fails} 
+For example, instead of constructing invariants under the rotations in $\mathrm{SO}(D_s-4)$
+with projections, one could attempt to simply consider a single embedding by
+selecting $\hat{\alpha}_i=1$ in \cref{eq:fermionicStates} for all fermionic states.
+In fact, for all one-loop amplitudes with any number of \emph{massless} external quarks,
+this can be arranged \cite{Anger:2018ove}
+to be equivalent to an explicit computation of traces.
+In general, however, this will introduce a preferred direction in $\mathsf{S}_{[D_s-4]}$,
+which breaks the rotational invariance, 
+so the computation carried out this way does not correspond to the HV scheme.
+This, in turn, implies that the components of loop momenta $\va{\mu}_i \coloneqq \ell^\mu_{i[D-4]}$ can explicitly appear in the integrands (see \cref{sec:ParamIntegrands} for some details),
+and, strictly speaking, the argument we used for determining the minimal dimensionality $D^{(L)}$ for embedding of loop momenta is invalidated.
+At one loop, this fact has been noticed in \cite{Fazio:2014xea,Badger:2017gta},
+where it has also been proposed to remove these components from the integrands by hand.
+The latter works for one-loop amplitudes with no more than one pair of \emph{massive} external quarks in addition
+to any number of massless quarks.
+In other cases $\order{\epsilon}$ differences with respect to amplitudes computed in HV will appear.
+Starting from two loops the differences will appear already in poles in $\epsilon$. 
 
-At the integrand level this manifests itself as appearing of explicit components of $\ell^\mu_{i[D-4]}$, not as scalar products $\mu_{ij}$ (see \cref{sec:PartialFractions}).
-At one loop this was observed as ``odd $\mu$ powers'' in \cite{Fazio:2014xea,Badger:2017gta}.
-It can be shown that if there are less than two \emph{massive} quark pairs, simply discarding 
-the odd $\mu$ powers leads to the HV results to $\order{\eps^0}$.
-However the differences will appear starting from $\order{\epsilon}$ for any amplitude
-with more than two quark pairs, massive or not.
-From two-loop onwards the differences will appear already in the poles in $\epsilon$. 
-For example the single embedding was used in \cite{DeFreitas:2004kmi} for the computation of two-loop four-quark amplitudes,
-and the result for the amplitude differs significantly from our results and the result of \cite{Glover:2004si}.
-In \cref{sec:relevant_tensors} we explained why the finite remainders agree.
+\paragraph{2.}
+In this section we discussed the computation of loop amplitudes in the HV scheme, which addresses the divergences of loop integrals.
+In the computation of observables (see \cref{eq:NNLO_xs}) also divergences from the integrals over unresolved phase space appear,
+which are normally regulated by CDR.
+In this regard, one might be worried that knowing the amplitudes in the HV scheme is not sufficient for phenomenological applications.
+It turns out, that the amplitudes computed in the two different schemes can be converted into each other with the known transition rules \cite{Broggio:2015dga}.
 
-\todo{All particles can be massive, nothing changes, but the little-group scaling is replaced by the q-helicity scaling.} 
-
+\paragraph{3.}
+In some places in our argument we referenced the little-group scaling 
+of particles' states, which, strictly speaking, applies only when these states
+are massless.
+The helicity eigenstates can, of course, also be constructed for
+massive particles as well, relative to some light-like reference spinor $\ket{q}$.
+In this case the notion of the little-group scaling can be considered with respect
+to this reference spinor \cite{Cohen:2010mi}.
+Then all considerations in this chapter apply without any modifications.
 
  
 
 \section{$D_s$-Dependence From Dimensional Reduction}
 \label{sec:ds_reduction}
-Here we explain how to improve the extraction of $D_s$-dependence.
-This is crucial for amplitudes with external fermions due to the exponential scaling of the representation.
 
+In this section we focus on the polynomial $D_s$-dependence of 
+the coefficients $A^{(L)}_n$ in the tensor decomposition in \cref{eq:tensorDecomposition},
+which we need to know analytically to be able to set $D_s=4-2\epsilon$ in the HV scheme.
+In \cref{sec:dimensional_reconstruction} we explained the analytic dependence on $D_s$ 
+can be reconstructed from numerical evaluations.
+Here we propose an alternative way of obtaining the coefficients of $D_s$-polynomials.
+This represents an opportunity for a significant optimization, 
+which is critical for amplitudes with external fermions.
 
-The amplitudes $A$ defined in eq.~\eqref{eq:defAmpsTens} are polynomials in $D_s$,
+The coefficients $A^{(L)}_n$ in \cref{eq:tensorDecomposition} are polynomials in $D_s$,
 \begin{equation}
-  A(D_s) = \sum_{i=0}^{N} \mathcal{K}_i~D_s^{i}\ ,
+  A(D_s) = \sum_{i=0}^{N} \mathcal{K}_i~D_s^{i}\ .
   \label{eq:ds-poly}
 \end{equation}
-where $N$, the maximal power of $D_s$, 
-varies depending on the process, the loop order, and the choice of tensor structure 
-in eq.~\eqref{eq:tensorDecomposition}.
-For the amplitudes considered in this paper $N\leq2$.
-In this section we will suppress all arguments of $A$ and only keep track of the 
-dependence on~$D_s$.
-%
-In a numerical framework, $A(D_s)$ can only be evaluated for integer $D_s$ values for which 
-the particle states are well defined.
-To be able to set $D_s=4-2\epsilon$ in the HV scheme, the knowledge of the coefficients $\mathcal{K}_i$ is required.
-One way to obtain them is to reconstruct the polynomial \eqref{eq:ds-poly} from
-a sample of $(N+1)$ integer values of $D_s$.
-This procedure is known as dimensional reconstruction \cite{Giele:2008ve} and has  previously been applied
-in \cite{Ellis:2008ir,Boughezal:2011br,Abreu:2017xsl,Abreu:2017hqn}.
+where $N$ is determined by the number of loops, tensor structure,
+and a particular scattering process. 
+In QCD we normally have $N=L - \#_f$ for $A^{(L)}_0$, 
+where $\#_f$ is the number of closed fermion loops.
 
 While being generic and straightforward to implement, this approach has drawbacks which
 become particularly evident in amplitudes with fermions.
@@ -552,16 +574,9 @@ only for even values of $D_s$,
 which pushes the sample values higher compared to the case of vector particles in the loops.
 Beyond the obvious detrimental effect on the numerical complexity, the dimensionality of the
 spinor representation determines the number of terms entering the evaluation of the traces
-to obtain the helicity amplitudes through  eq.~\eqref{eq:defAmpsTens}. For
+to obtain the helicity amplitudes through  \cref{eq:dsm_4_projectors}. For
 the case of amplitudes with multiple external quark pairs this makes the computation
 of traces unnecessarily time consuming.
-
-These considerations motivate the search for more efficient alternatives to dimensional
-reconstruction. Here we employ one such alternative, based on the idea of
-dimensional reduction, which has recently been presented in ref.~\cite{Anger:2018ove} 
-and already applied to the computation of one-loop amplitudes in ref.~\cite{Anger:2017glm}.
-In the remainder of this section we give a brief overview of this method 
-and refer the reader to ref.~\cite{Anger:2018ove} for more technical details.
 
 We start by rearranging eq.~\eqref{eq:ds-poly} in the following way:
 \begin{equation}

@@ -85,6 +85,12 @@
 
 \titlespacing{\chapter}{0cm}{-1cm}{0.5cm}[0cm]
 
+\titlespacing{\paragraph}{%
+  0pt}{%              left margin
+  0.5\baselineskip}{% space before (vertical)
+  1em}%               space after (horizontal)
+
+
 %\titleformat{\chapter}[display]
 %  {\bfseries\Large}
 %  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
@@ -224,6 +230,8 @@
 %\ #1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{enumitem}
 
 \usepackage{cmap}
 \usepackage{indentfirst}
