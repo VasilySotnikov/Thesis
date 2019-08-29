@@ -1,20 +1,20 @@
 In \cref{chap:stdtech} we sketched how a generic loop amplitude \eqref{eq:general_amplitude} can be reduced
 to a sum of master integrals \eqref{eq:amplitude_integrated} in two stages.
-First all reducible numerators are maximally canceled against corresponding denominators.
-And after that the remaining numerators are reduced with IBP identities.
+First, all reducible numerators are maximally cancelled against corresponding denominators.
+After that, the remaining numerators are reduced with IBP identities.
 We indicated that the former can be rather challenging in some cases,
 and the latter is one of the main bottlenecks in computations of
 multi-scale two-loop amplitudes.
-In this chapter we introduce a generalization of one-loop integrand-level unitarity-based methods \cite{Ossola:2006us,Giele:2008ve,Ellis:2008ir}
-to two loops, which offers an alternative path to reduction of amplitudes and addresses the mentioned bottlenecks in an elegant way.
+In this chapter, we introduce a generalization of one-loop integrand-level unitarity-based methods \cite{Ossola:2006us,Giele:2008ve,Ellis:2008ir}
+to two loops, which offers an alternative path for reduction of amplitudes and also elegantly addresses the mentioned bottlenecks.
 The foundations of this approach have been laid out in works \cite{Ita:2015tya,Abreu:2017xsl,Abreu:2017hqn,Abreu:2017idw}.
 Some related work can also be found in 
 \cite{Mastrolia:2011pr,Badger:2012dp,Badger:2013gxa,Zhang:2012ce,Mastrolia:2013kca,Mastrolia:2016dhn,Mastrolia:2012an,Kleiss:2012yv,Feng:2012bm,Kosower:2011ty}.
-Notably it is designed to be amenable for automation and efficient numerical implementation, which is indispensable
+Notably, it is designed to be amenable for automation and efficient numerical implementation, which is indispensable
 for addressing the problem of large expressions in multi-scale problems.
 
-The approach we discuss in this chapter broadly speaking consists of two major ingredients.
-This first is a special choice of integrand parametrization\footnote{sometimes also called \emph{ansatz}},
+The approach we discuss in this chapter, broadly speaking, consists of two major ingredients.
+The first is a special choice of integrand parametrization\footnote{sometimes also called \emph{ansatz}},
 which we discuss in \cref{sec:ansatz_integrand}.
 The second is exploiting integrand-level factorization limits of amplitudes originating from generalized unitarity (see \cref{sec:unitarity}),
 which we discuss in \cref{sec:cut_equations}.
@@ -35,28 +35,28 @@ which we discuss in \cref{sec:cut_equations}.
 We start by again considering a generic $L$-loop amplitude in \cref{eq:general_amplitude},
 and  the classification of numerators from \cref{sec:classification_numerators}.
 We organize all topologies hierarchically as described around \cref{eq:topology_order,eq:topology_sequence}.
-but we \emph{do not} cast integrals into families by allowing exponents $\gamma_{\Gamma j}$ of propagators $\vb*{\rho}$ to be non-positive.
+But, we \emph{do not} cast integrals into families by allowing exponents $\gamma_{\Gamma j}$ of propagators $\vb*{\rho}$ to be non-positive.
 
-Instead we will construct a special basis of numerator functions for each topology independently,
+Instead, we will construct a special basis of numerator functions for each topology independently,
 \begin{equation} \label{eq:master_surface_basis}
   \mathcal{N}_{\Gamma \gamma_\Gamma} = \sum_{i \in M_{\Gamma\gamma_\Gamma} \cup S_{\Gamma\gamma_\Gamma}} c_{\Gamma\gamma_\Gamma, i}(\vb*{x},D) \; m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha}),
 \end{equation}
-where $S_{\Gamma\gamma_\Gamma}$ is a set of numerators which vanish upon integration, which we call \emph{surface terms}, $M_{\Gamma\gamma_\Gamma}$ is a set of numerators associated to master integrals.
-Here we introduced a notation for distinguishing the arguments of $m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha})$,
+where $S_{\Gamma\gamma_\Gamma}$ is a set of numerators which vanish upon integration, which we call \emph{surface terms}, $M_{\Gamma\gamma_\Gamma}$ is a set of numerators associated with master integrals.
+Here, we introduced a notation for distinguishing the arguments of $m_{\Gamma\gamma_\Gamma, i} (\vb*{x},D;\vb*{\rho},\vb*{\alpha})$,
 which we will use throughout this chapter. 
 It means that $m_{\Gamma\gamma_\Gamma, i}$ is a rational function of arguments on the left of ``;'', and \emph{polynomial} in the arguments on the right. 
 
-We will refer to this basis as \emph{master/surface} basis or decomposition.
+We will refer to this basis as a \emph{master/surface} basis or decomposition.
 The advantage of having a master/surface basis is that
 reducing an amplitude to it achieves
 a complete reduction by construction,
 and the coefficients $c_{\Gamma\gamma_\Gamma,i}$ for $i\in M_{\Gamma\gamma_\Gamma}$ are the coefficients
 of master integrals in \cref{eq:amplitude_integrated}.
-Also we do not need to consider topologies with $N_p > 4L + \frac{1}{2}L(L+1)$ since as we discussed in \cref{sec:classification_numerators}
+Also, we do not need to consider topologies with $N_p > 4L + \frac{1}{2}L(L+1)$ since as we discussed in \cref{sec:classification_numerators}
 they are reducible to topologies lower in the hierarchy.
 
 Of course, this basis can be obtained from the standard approach of \cref{chap:stdtech}, which would not be a very illuminating exercise.
-However the construction of master/surface decomposition can be cast into a much simpler computational problem than solving all IBP relations.
+However, the construction of master/surface decomposition can be cast into a much simpler computational problem than solving all IBP relations.
 In what follows we review how this is accomplished.
 
 
@@ -67,12 +67,12 @@ Consider a numerator $\mathcal{N}_{\Gamma\gamma_\Gamma}$ of a topology $\Gamma$ 
 In this section we focus on one such numerator at a time, so we drop the topology labels.
 
 What is meant by a set of numerator insertions $m_{i}(\vb*{x},D;\vb*{\rho},\vb*{\alpha})$ being a basis is that
-$\spn{m_{i}}$ is equivalent
+$\spn{m_{i}}$ is equivalent to
 modulo RSPs (i.e.\ with the on-shell constraints $\rho_j = 0,\;\forall j\in P_\Gamma$ imposed)
 as a linear vector space to a ring of polynomials $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$.
-Evidently how $m_{i}$ depend on $\vb*{\rho}$ is of no relevance for what concerns constructing
-a basis in $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$, but, as we will see shortly, sometimes the presence
-of $\vb*{\rho}$ might be important for ensuring other features of $m_{i}$ such as vanishing
+Evidently, how $m_{i}$ depends on $\vb*{\rho}$ is of no relevance for what concerns constructing
+a basis in $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$. But, as we will see shortly, sometimes, the presence
+of $\vb*{\rho}$ might be important for ensuring other features of $m_{i}$, such as vanishing
 upon integration.
 
 %\footnote{
@@ -91,16 +91,16 @@ It is convenient to start constructing the master/surface basis from a natural b
 where we allow coefficients $c_{i}$ to depend on $\vb*{\rho}$.
 %except for $\eval{c_{\va{i}}}_{\rho_j \to 0} = 0$,
 %such that all monomials  stay irreducible.
-The basis of the linear vector space of all monomials from $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$ is of course infinite,
-but the maximal degree  we need to consider $\mathsf{P}$ in practice is always limited from above by UV behavior of the particular model under consideration.
+The basis of the linear vector space of all monomials from $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$ is, of course, infinite,
+but the maximal degree $\mathsf{P}$ we need to consider in practice is always limited from above by UV behavior of the particular model under consideration.
 The number of basis elements is thus 
 \begin{equation} \label{eq:number_of_monomials}
   \dim{\spn{\vb*{\alpha}^{\va{i}} : \abs{\va{i}} \leq  \mathsf{P}}} =  \frac{(N_\text{ISP} + \mathsf{P})!}{N_\text{ISP}! \mathsf{P}!}.
 \end{equation}
 
-Recall that some of the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
+Recall that, some of the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
 We will denote these as $\vb*{\alpha}^\tau$.
-From Lorentz symmetry an $L$-loop integral of an arbitrary rational function $f(\vb*{\vb*{x},\vb*{\rho}},D)$ is
+From Lorentz symmetry, an $L$-loop integral of an arbitrary rational function $f(\vb*{\vb*{x},\vb*{\rho}},D)$ is
 \begin{equation} \label{eq:rank_1_tensor_integral}
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \ell_k^{\mu} = \sum_{i}^{}c_i(\vb*{x},D)\;p^\mu_i.
 \end{equation}
@@ -108,10 +108,10 @@ Contracting both sides with $\tau^\mu_j$ and using the orthogonality condition w
 \begin{equation}
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \alpha^{\tau}_{k j}( \equiv \sp(\ell_k,\tau_j)) \quad = 0.
 \end{equation}
-Following the same argument it is easy to see that all monomials $\vb*{\alpha}^{\va{i}}$ with at least
-one of the transverse ISPs taken to an odd power are vanishing upon integration and thus can be taken as surface terms as is.
+Following the same argument, it is easy to see that all monomials $\vb*{\alpha}^{\va{i}}$ with at least
+one of the transverse ISPs taken to an odd power are vanishing upon integration and thus can be taken as surface terms as it is.
 
-Next we consider a rank 2 tensor integral
+Next, we consider a rank 2 tensor integral
 \begin{equation}
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \ell_k^{\mu}\ell_k^{\nu} = c_0\,g^{\mu\nu}_{[D]} + \sum_{i,j}^{}c_{i,j}\;p^\mu_i p^\nu_j,
 \end{equation}
@@ -121,7 +121,7 @@ Upon contraction with $g^{\mu\nu}_{[D-4]}$ or $\tau_j^\mu\tau_j^\nu$, and taking
   g^{\mu\nu}_{[D]}g^{\phantom{\mu\nu}}_{[D-4]\nu\mu} = D-4,
 \]
 only $c_0$ survives.
-We can then easily find a combination of two contractions which make the right-hand side vanish. Applying it to the left-hand side, we have
+We can then easily find a combination of two contractions that make the right-hand side vanish. Applying it to the left-hand side, we have
 \begin{equation}
   \qty(\tau_j^\mu\tau_j^\nu - \frac{g^{\mu\nu}_{[D-4]}}{D-4}) ~ \ell_k^{\mu}\ell_k^{\nu} = (\alpha_j^\tau)^2 - \frac{\mu_{kk}(\vb*{\rho},\vb*{\alpha})}{D-4} \longrightarrow 0,
 \end{equation}
@@ -135,7 +135,7 @@ They can all be generated with the projector \todo{is it a projector?}
 \end{equation}
 where the sum is over all inequivalent ways to distribute indices $\{\mu_1,\ldots{},\mu_n\}$ in the summand.
 We will refer to such relations as \emph{traceless completions}.
-Note that although $\mu_{kj}(\vb*{\rho},\vb*{\alpha})$ are partially reducible to lower topologies,
+Note that, although $\mu_{kj}(\vb*{\rho},\vb*{\alpha})$ are partially reducible to lower topologies,
 we cannot use their reduction $\mu_{kj}(0,\vb*{\alpha})$ in traceless completion. If we do use it, the
 corresponding insertion will no longer be vanishing upon integration.
 The same applies in general for all surface terms.
@@ -151,14 +151,14 @@ As an example, we list all traceless completions sufficient for the computation 
 \end{align}
 
 To summarize, all transverse ISPs are either trivially surface terms or can be turned into surface terms with the replacements of \cref{eq:traceless_completion_replacements}.
-After this is done we are left to consider monomials from the ring $\mathbb{Q}[\vb*{\alpha}\setminus\vb*{\alpha}^\tau]$ only.
+After this is done, we are left to consider monomials from the ring $\mathbb{Q}[\vb*{\alpha}\setminus\vb*{\alpha}^\tau]$ only.
 
 
 We conclude this section with two remarks.
-First, at one loop the master/surface decomposition is hereby complete since all ISPs are transverse.\footnote{%
+First, at one loop, the master/surface decomposition is hereby complete since all ISPs are transverse.\footnote{%
   there is a peculiar exception, see examples in \cref{sec:ms_examples}
 }
-Second, the traceless completions of transverse ISPs alternatively
+Second, the traceless completions of transverse ISPs, alternatively,
 can be obtained through a specially constructed IBP identities \cite{Ita:2015tya}.
 
 \todo{Note that propagator exponents are irrelevant for traceless completion} 
@@ -171,7 +171,7 @@ can be obtained through a specially constructed IBP identities \cite{Ita:2015tya
 
 \subsection{Unitarity-Compatible IBP Identities}
 \label{sec:unitarity_compatible_ibps}
-So far our set of numerator insertions $m_{\Gamma,i}$ consists of monomials with odd powers of transverse ISPs and traceless-completions of
+So far, our set of numerator insertions $m_{\Gamma,i}$ consists of monomials with odd powers of transverse ISPs and traceless-completions of
 monomials with even powers of transverse ISPs, which are all surface terms.
 This leaves us to consider the span of polynomial ring $\mathbb{Q}_{\vb*{x},D}[\hat{\vb*{\alpha}}\coloneqq \vb*{\alpha}\setminus\vb*{\alpha}^\tau]$,
 %truncated by the imposed power counting condition,
@@ -185,26 +185,26 @@ related through IBP identities \eqref{eq:ibps}. So what we need to do is
     These identities can all be taken as surface terms, but they are not independent. 
     \label{item1}
   \item  Viewing each surface term as a vector in the linear space of monomials $\hat{\vb*{\alpha}}^{\va{i}}$, take
-    a basis of this space as the set $\hat{S}_\Gamma$
+    a basis of this space as the set $\hat{S}_\Gamma$.
     \label{item2}
-  \item The vectors from the complement $\mathbb{Q}[\hat{\vb*{\alpha}}]\setminus \hat{S}_\Gamma$ are then master terms $M_\Gamma$
+  \item The vectors from the complement $\mathbb{Q}[\hat{\vb*{\alpha}}]\setminus \hat{S}_\Gamma$ are then master terms $M_\Gamma$.
     \label{item3}
 \end{enumerate}
 
-In principle the described procedure can be carried out with standard IBP reduction techniques discussed in \cref{sec:ibp}.
-However this would be rather wasteful
+In principle, the described procedure can be carried out with standard IBP reduction techniques discussed in \cref{sec:ibp}.
+However, this would be rather wasteful
 since the vast majority of IBP identities involve relations between different topologies and doubling of denominators.
 And indeed currently publicly available reduction programs
 \cite{Studerus:2009ye,vonManteuffel:2012np, Smirnov:2008iw,Smirnov:2014hma, Lee:2012cn,Lee:2013mka, Maierhoefer:2017hyi,Maierhofer:2018gpa}
 have problems with reducing high degrees of ISPs in many variables.
 
-Instead we can generate from the start only the IBP identities described in \cref{item1},
+Instead, we can generate from the start only the IBP identities described in \cref{item1},
 known as \emph{unitarity-compatible} IBP identities \cite{Gluza:2010ws,Schabinger:2011dz,Ita:2015tya}, by
 restricting the IBP vectors $v_i^\mu$ in \cref{eq:ibps} to satisfy
 \begin{equation} \label{eq:non_doubling_ibp_vectors}
   \sum_i v_i^\mu(\vb*{x},D;\vb*{\rho},\vb*{\alpha}) ~ \pdv{\ell^\mu_i} \rho_k = f(\vb*{x},D;\vb*{\rho},\vb*{\alpha}) ~ \rho_k, \qquad \forall k\in P_\Gamma,
 \end{equation}
-where it is crucial that both the arbitrary function $f$ and the vector components $v_i^\mu$ are polynomial in $\vb*{\rho}$ and $\vb*{\alpha}$, not rational.
+where it is crucial that both the arbitrary function $f$ and the vector components $v_i^\mu$ are polynomials in $\vb*{\rho}$ and $\vb*{\alpha}$, not rational.
 
 {
   \def\coeff{c^{(\text{loop, ext})}_{ij,\va{k}_\rho \va{k}_{\hat{\alpha}}}}
@@ -217,13 +217,13 @@ where it is crucial that both the arbitrary function $f$ and the vector componen
   into \cref{eq:non_doubling_ibp_vectors}.
   The linear constraints for coefficients $\coeff$ can be then solved with standard linear algebra.
 }%
-In practice much more powerful methods of solving \cref{eq:non_doubling_ibp_vectors}  based on computational
+In practice, much more powerful methods of solving \cref{eq:non_doubling_ibp_vectors}  based on computational
 algebraic geometry can be employed \cite{Larsen:2015ped,Boehm:2018fpv,Zhang:2016kfo,Abreu:2017xsl,Bendle2019}.
 
 Having unitarity-compatible IBP vectors lets us trivially generate an overcomplete set of surface terms%
 \footnote{
   It is worth noting that one has to be careful with power counting constraints at this stage.
-  In general it is necessary to keep higher degree terms before eliminating linear dependences to get a complete set.
+  In general, it is necessary to keep higher degree terms before eliminating linear dependences to get a complete set.
 }
 by inserting the vectors in \cref{eq:ibps}.
 The spanning set (i.e.\ complete and non-redundant) is then obtained as outlined in \cref{item2,item3}.
@@ -233,7 +233,7 @@ This can be very helpful when the size of the basis gets large.
 Another useful observation is that the surface terms obtained for a particular choice of exponents $\gamma_\Gamma$
 of propagators from topology $\Gamma$ 
 can be recycled for any other choice of exponents with minimal modifications.
-Sometimes the set $M_\Gamma$ is found to be empty, which means that there are
+Sometimes, the set $M_\Gamma$ is found to be empty, which means that there are
 no master integrals on this topology.
 
 
@@ -244,14 +244,14 @@ no master integrals on this topology.
 \label{sec:ms_examples}
 
 We now consider some examples of constructing the master/surface basis.
-First we take a look at all one-loop topologies, 
+First, we take a look at all one-loop topologies, 
 and then a two-loop topology.
 
 \subsection{One-Loop Topologies}
 
 Once a multi-loop generalization of the technology for finding master/surface decomposition 
 is set up, the case $L=1$ seems to be nothing but a simple warm-up. 
-Most of general features of the approach do in fact appear in one-loop topologies,
+Most of the general features of this approach do in fact appear in one-loop topologies,
 so it is instructive to consider.
 Although, of course, the reader familiar with the one-loop literature may find
 their application somewhat superfluous.
@@ -259,7 +259,7 @@ their application somewhat superfluous.
 Compared to the ``usual'' basis of one-loop numerator insertions of \cite{Ossola:2006us,Giele:2008ve},
 our basis will contain explicit $D$-dependence, and so will the coefficients.
 This is the price paid for requiring to have the least amount of master integrals possible.
-From efficiency perspective this is probably not a good idea for NLO computations,
+From an efficiency perspective this is probably not a good idea for NLO computations
 since the terms of $\mathcal{O}(\epsilon)$ can be dropped
 and extra master integrals can be arranged to be trivial, generating a so-called rational part.
 For NNLO computations and beyond, where higher orders in the $\epsilon$-expansion are required, 
@@ -287,7 +287,7 @@ Hence topologies with the number of propagators $N_p>5$ are reducible.
 
 \textbf{Pentagon}
 
-For pentagon topologies the 5 propagators $\{\rho_1,\ldots{}\rho_5\}$ are chosen as 5 independent variables,
+For pentagon topologies, the 5 propagators $\{\rho_1,\ldots{}\rho_5\}$ are chosen as 5 independent variables,
 so there are no irreducible insertions except for the scalar, and there are no IBP identities involving it. 
 The one master insertion is usually chosen to be $\mu^2$, such that
 the corresponding integral contributes only from  $\order{\epsilon}$.
@@ -296,7 +296,7 @@ the corresponding integral contributes only from  $\order{\epsilon}$.
 
 \textbf{Box}
 
-For boxes we have  4 propagators $\{\rho_1,\ldots{}\rho_4\}$ and an ISP $ \alpha_1 = \sp(\ell,\tau_1), $
+For boxes, we have  4 propagators $\{\rho_1,\ldots{}\rho_4\}$ and an ISP $ \alpha_1 = \sp(\ell,\tau_1), $
 corresponding to one transverse direction.
 The possible monomials up to degree 4 are 
 \[
@@ -320,15 +320,15 @@ we have two less master integrals.
 \textbf{Triangle}
 
 For triangles there are two ISPs: $ \alpha_1 = \sp(\ell,\tau_1)$, and $\alpha_2 = \sp(\ell,\tau_2)$,
-corresponding to two transverse direction.
+corresponding to two transverse directions.
 The 10 possible monomials up to total degree 3 are:
 \[
 \{1,~\alpha_1,~\alpha_2,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_2^2,~ \alpha_1^3,~ \alpha_1^2\alpha_2,~ \alpha_1\alpha_2^2,~ \alpha_2^3\}.
 \]
 from which all except $\{1,~\alpha_1^2,~\alpha_2^2\}$ are trivial surface terms,
 and the last two are traceless completed.
-For boxes and pentagons our considerations did not depend on a particular kinematics configuration.
-For triangles this is not the case. For generic kinematics with massive propagators
+For boxes and pentagons, our considerations did not depend on a particular kinematics configuration.
+For triangles, this is not the case. For generic kinematics with massive propagators
 and all $p_i^2\neq 0$, the decomposition is 
 \begin{align*}
   M_{\Gamma_\text{tri} } &= \{1\}, \\
@@ -351,7 +351,7 @@ Inserting it in \cref{eq:ibps} we obtain a surface term
 \[  
   (D-4) \sp(p_1,p_2) + (D-3) (\rho_2-\rho_3).
 \]
-So for this kinematics configuration the whole space is spanned by surface terms,
+So for this kinematics configuration, the whole space is spanned by surface terms,
 \begin{align*}
   M_{\Gamma_\text{tri} } &= \{\}, \\
    S_{\Gamma_\text{tri} } &= 
@@ -363,7 +363,7 @@ This happens very frequently starting from two loops.
 
 \textbf{Bubble}
 
-For generic kinematics we have 3 ISPs, $\{\alpha_1,~\alpha_2,~\alpha_3\}$, and
+For generic kinematics, we have 3 ISPs, $\{\alpha_1,~\alpha_2,~\alpha_3\}$, and
 10 monomials up to the total degree 2,
 \[
   \{1,~\alpha_1,~\alpha_2,~\alpha_3,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_1\alpha_3,~\alpha_2^2,~\alpha_2\alpha_3,~ \alpha_3^2\}.
@@ -379,8 +379,8 @@ There is an exceptional kinematical configuration,
 \end{equation*}
 for which something peculiar happens:
 because $p_1$ is light-like, the transverse ``complement'' to it has to contain $p_1$ itself, thus the full four-dimensional space
-cannot be decomposed into a direct sum of $\spn{p_1}$ and it's transverse, like we have done before.
-Instead we have to introduce a random light-like vector $\tau_\chi^\mu$,
+cannot be decomposed into a direct sum of $\spn{p_1}$ and its transverse, same as we have done before.
+Instead, we have to introduce a random light-like vector $\tau_\chi^\mu$,
 \[
   \tau_\chi^2=0, \qquad \sp(\tau_\chi,\tau_{\{1,2\}}) = 0, \qquad  \sp(p_1,\tau_\chi) \neq 0,
 \]
@@ -399,13 +399,13 @@ and can choose $\chi$ as the one master. The master/surface decomposition is thu
    S_{\Gamma_\text{b0} } &= 
   \{s_1,~s_2,~\alpha_1,~\alpha_2,~\alpha_1^2 - \frac{\mu^2}{D-4},~\alpha_1\alpha_2,~ \alpha_1\chi,~\alpha_2^2-\frac{\mu^2}{D-4},~\alpha_2\chi \}.
 \end{align*}
-Of course in this case the master integrals from insertions $\chi$ and $\chi^2$ can be computed trivially by direct integration.
-For $m^2=0$ the corresponding integrals are scaleless, and vanish in dimensional regularization,
+Of course, in this case, the master integrals from insertions $\chi$ and $\chi^2$ can be computed trivially by direct integration.
+For $m^2=0$ the corresponding integrals are scaleless and vanish in dimensional regularization,
 so this topology can be discarded.
 
 \textbf{Tadpole}
 Massless tadpoles vanish in dimensional regularization and can be discarded.
-For massive tadpoles there are 4 transverse ISPs, and one master integral,
+For massive tadpoles, there are 4 transverse ISPs, and one master integral,
 so the decomposition is done in the same way as above.
 
 \subsection{Two-Loop Sunrise}
@@ -413,8 +413,8 @@ so the decomposition is done in the same way as above.
 \begin{wrapfigure}{l}{0.25\linewidth}
   \includegraphics[width=1\linewidth]{sunrise_kinmatics_example}
 \end{wrapfigure}
-As a two-loop example we choose a two-loop massless ``sunrise'' topology, which is simple enough to fit the answer on a page.
-For $L=2$ we have 11 scalar products. There are 3 propagators in the sunrise, so we have 8 ISPs in total.
+As a two-loop example, we choose a two-loop massless ``sunrise'' topology, which is simple enough to fit the answer on a page.
+For $L=2$ we have 11 scalar products. There are 3 propagators in the sunrise, so we have 8 ISPs \todo{clarify including transverse} in total.
 From them 6 are transverse. 
 We choose the independent variables to be 
 \begin{align*}
@@ -443,12 +443,12 @@ A couple of examples are:
 \end{equation*}
 where $s\coloneqq p_1^2$.
 We use all these vectors to obtain the corresponding surface terms. 
-In the next step we find the spanning set.
-To do this we treat each surface term as a vector from the vector space 
+In the next step, we find the spanning set.
+To do this, we treat each surface term as a vector from the vector space 
 $\spn{1,~ \alpha_1,~ \alpha_2,~\alpha_1^2,~\alpha_1\alpha_2,~\alpha_2^2}$,
 and find a basis of the subspace spanned by all surface terms. 
 It is important that we do this modulo RSPs, i.e.\ (temporarily) set $\rho_j\to 0$.
-In this case we find that 5 of them are independent:
+In this case, we find that 5 of them are independent:
 \begin{equation*}
   \small
   \begin{array}{l|l}
@@ -460,8 +460,8 @@ In this case we find that 5 of them are independent:
   \end{array}
 \end{equation*}
 This leaves us with just one master integral, which
-we can choose to be any insertion linear independent from $\spn{s_1,\ldots{},s_5}$.
-For example it can be the scalar integral.
+we can choose to be any insertion linearly independent from $\spn{s_1,\ldots{},s_5}$.
+For example, it can be the scalar integral.
 
 
 
@@ -481,7 +481,7 @@ we can choose to abandon all-together the idea of not having it there.}
 \label{sec:cut_equations}
 {
 
-In the previous section we discussed how to construct a master/surface basis
+In the previous section, we discussed how to construct a master/surface basis
 of all possible numerators for each topology, so the integrand of an amplitude must 
 be reducible to the form
 \begin{equation} \label{eq:unitarity_ansatz}
@@ -491,18 +491,18 @@ be reducible to the form
     {\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i, j}}},
 \end{equation}
 whatever the initial representation of the amplitude on the left-hand side is.
-For example it can be obtained as a sum of all Feynman diagrams.
+For example, it can be obtained as a sum of all Feynman diagrams.
 The only thing left to compute the amplitude is then
 to extract the coefficients $c_{\Gamma\gamma_\Gamma, i}$.
-In principle we could sample the expression on the left-hand side with sufficient number of loop momenta,
+In principle, we could sample the expression on the left-hand side with a sufficient number of loop momenta,
 and get a linear system of equations for $c_{\Gamma\gamma_\Gamma, i}$ by matching it to our ansatz on the right hand side.
-But the system obtained this way would be so humongous that even a numerical solution would be problematic,
+But the system obtained in this way would be so humongous that even a numerical solution would be problematic,
 not to mention that evaluating the left hand side is usually not cheap either.
 
 \def\gleading{{\gamma^{\textit{(l)}}_{\Gamma}}}
-Fortunately the insights from generalized unitarity (see \cref{sec:unitarity}) suggest
+Fortunately, the insights from generalized unitarity (see \cref{sec:unitarity}) suggest
 a physics-motivated way of block-triangularizing the linear system for the coefficients $c_{\Gamma\gamma_\Gamma, i}$.
-If we pick a topology $\Gamma$ and arrange loop momenta to satisfy it's on-shell limit $\rho_j \to 0,\;\forall j\in P_\Gamma$ (i.e.\ perform a cut),
+If we pick a topology $\Gamma$ and arrange loop momenta to satisfy its on-shell limit $\rho_j \to 0,\;\forall j\in P_\Gamma$ (i.e.\ perform a cut),
 the coefficients $c_{\Gamma\gleading,i}$ of the leading term in this limit
 can be obtained through \emph{cut equations},
 \begin{multline} \label{eq:cut_equations}
@@ -522,7 +522,9 @@ which we should take into an account when choosing sample values to generate the
 In this way, going from the top of the hierarchy to the bottom
 we solve cut equations one topology at a time, recycling the coefficients obtained earlier, effectively making the initial system block-triangular.
 
-What is even better is that the left-hand side of \cref{eq:cut_equations} in the on-shell limit
+\todo{clarify it's the central equation} 
+
+What is even better is that the left-hand side of \cref{eq:cut_equations}, in the on-shell limit,
 can be evaluated as products of on-shell tree amplitudes,
 \begin{equation} \label{eq:cut_amplitude}
     \lim_{\ell^{\phantom{\Gamma}}_l \to \ell_l^{\Gamma}}\qty\Big( A^{(L)} \; {\prod_{j\in P_\Gamma} \rho_j^{\qty(\gleading)_j}} ) \longrightarrow 
@@ -530,23 +532,23 @@ can be evaluated as products of on-shell tree amplitudes,
 \end{equation}
 where the sum is over all states in $D$ dimensions, and $T_\Gamma$ corresponds to
 all vertices of the topology $\Gamma$. The fact that this factorization takes place
-at the level of \emph{integrand} is closely related but does not directly follow from generalized unitarity.
+at the level of the \emph{integrand} is closely related but does not directly follow from generalized unitarity.
 In practice the factorization can be rather straightforwardly realized by noticing the following \cite{Eden:1966dnq}: 
 if one collects together all Feynman diagrams contributing to a particular topology,
 each vertex of this topology is a sum of all tree graphs with fixed external legs,
 hence it can be nothing else than a tree amplitude.
-For an explicit example of how this happens see \cref{fig:example_factorization}. 
+For an explicit example of how this happens, see \cref{fig:example_factorization}. 
 A notable exception to this observation can be found in the models which
-contain non-trivial wave-function and mass renormalization for some of its' particles,
+contain non-trivial wave-function and mass renormalization for some of its particles,
 i.e.\ when there are non-vanishing one-particle-reducible diagrams \cite{Ellis:2008ir,Ellis:2011cr}.
 These Feynman diagrams are absorbed into renormalization and have to be discarded from amplitudes by hand (\todo{see figure .}), hence
 the vertices of the cut topologies to which they would contribute are \emph{not} tree amplitudes.
 There is an interesting proposal to work around this issue \cite{Badger:2017gta}.
-In practice however\footnote{%
+In practice, however\footnote{%
   in this thesis we do not aim to follow the philosophy of ``never going off-shell'',
   but rather opt for whichever solution deemed more practical
-}
-it does not prevent us from using cut equations, but rather
+},
+it does not prevent us from using cut equations but rather
 demands some additional booking-keeping.
 
 \begin{figure}[ht]
@@ -568,7 +570,7 @@ demands some additional booking-keeping.
 
 Let us now mention how do we handle
 the cases when the set of choices of propagators' exponents for some topology $\Gamma$
-contains more than one element, that is there are propagators raised to powers greater than 1 \cite{Abreu:2017idw}.
+contains more than one element, that is, there are propagators raised to powers greater than 1 \cite{Abreu:2017idw}.
 As we mentioned above, the \cref{eq:cut_equations} directly isolates coefficients of 
 the propagator structure with maximal total degree $\gleading$. For this propagator structure
 also the factorization of \cref{eq:cut_amplitude} applies.
@@ -584,15 +586,15 @@ possible sets of exponents,
     \{1,1,1,1,1,1\} &\leftarrow \gamma_{{\Gamma_1},2} &
   \end{pmatrix}
 \]
-First we solve the cut equations for coefficients of $\gamma_{{\Gamma_1},1}$, and proceed down the hierarchy normally until we reach
+First, we solve the cut equations for coefficients of $\gamma_{{\Gamma_1},1}$, and proceed down the hierarchy normally until we reach
 the bubble-box topology $\Gamma_2$, not considering equations for the coefficients $\gamma_{{\Gamma_1},2}$.
 We obtain the latter through the cut equations for $\Gamma_2$, treating them as unknowns together with 
-the coefficients of the topology $\Gamma_2$ itself. Clearly this ``trick'' can always be performed
+the coefficients of the topology $\Gamma_2$ itself. Clearly, this ``trick'' can always be performed
 notwithstanding how many doubled (or tripled, etc.\@) propagators we encounter.
-The only cost is that of solving the equations for larger number of coefficients.
+The only cost is that of solving the equations for a larger number of coefficients.
 
 Another possibility is to realize that the only cases when propagators can be raised to higher powers 
-are from self-energy insertions on internal lines, which are associated to renormalization.
+are from self-energy insertions on internal lines, which are associated with renormalization.
 It turns out \cite{Baumeister:2019rmh} that
 it is possible to cook up \emph{integrand-level} UV counter-terms such that
 the integrand of the amplitude gets renormalized,
@@ -640,9 +642,9 @@ pose any significant problem.
 \section{Evaluation of Cuts}
 \label{sec:evaluation_of_cuts}
 
-In this section we discuss evaluation of the left-hand side of the cut equations \eqref{eq:cut_equations}
+In this section, we discuss the evaluation of the left-hand side of the cut equations \eqref{eq:cut_equations}
 in the factorized form of \cref{eq:cut_amplitude}.
-For this we will need to know the explicit components of loop momenta solving the on-shell conditions for each topology.
+For this, we will need to know the explicit components of loop momenta solving the on-shell conditions for each topology.
 
 \subsection{On-Shell Loop Momenta}
 \label{sec:osm}
@@ -654,14 +656,14 @@ the cut conditions,
   \rho_j = 0, \quad \forall j\in P_\Gamma,
 \]
 are satisfied. 
-In principle the equations can be solved case by case given any initial choice of degrees of freedom.
-However we would like the solution to be universal so that we can easily
+In principle, the equations can be solved case by case given any initial choice of degrees of freedom.
+However, we would like the solution to be universal so that we can easily
 implement it in a computer program once and for all. 
-Furthermore, to be able to use it for both floating point and exact (finite field) numerical evaluations, 
+Furthermore, to be able to use it for both floating-point and exact (finite field) numerical evaluations, 
 we would like to avoid non-rational operations as much as possible.
 The latter is in general non-trivial since the cut conditions are quadratic, and
 define an algebraic variety in a $(D\cdot L)$-dimensional space.
-To this end we closely follow the construction of ``natural'' coordinates described in \cite{Ita:2015tya, Abreu:2017xsl}.
+To this end, we closely follow the construction of ``natural'' coordinates described in \cite{Ita:2015tya, Abreu:2017xsl}.
 
 \begin{figure}[ht]
   \centering
@@ -671,7 +673,7 @@ To this end we closely follow the construction of ``natural'' coordinates descri
 \end{figure}
 
 We begin by considering each strand (see \cref{fig:topo_kinematics}) of the topology $\Gamma$ independently.
-First we separate four-dimensional part and $(D-4)$-dimensional parts as
+First, we separate four-dimensional part and $(D-4)$-dimensional parts as
 \begin{equation}
   \ell^l = \ell_{[4]}^l + \sum_{i\in \tilde{B}} \tilde{n}_j~\mu^l_{j}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0, 
 \end{equation}
@@ -706,7 +708,7 @@ and give \emph{linear} equations between $\alpha_j^l$ which can be used to
 relate them to any choice of remaining ISPs $\hat{\vb*{\alpha}}$.
 %This way we parametrized $4 L +\frac{1}{2}L(L+1)$ (recall \cref{eq:sps_all}) degrees of freedom from $(D\cdot L)$
 %with the scalar products.
-This in fact provides the lower bound on the dimension $D^{(L)}$ in which we can embed $L$ loop momenta
+This, in fact, provides the lower bound on the dimension $D^{(L)}$ in which we can embed $L$ loop momenta
 to be able to reproduce the required number of the scalar products,
 \begin{equation}
   D^{(L)}  >  4 +\frac{1}{2}(L+1).
@@ -721,8 +723,8 @@ and the only remaining constraints are for the components of $\va{\mu}_j$,
   \va{\mu}_i \cdot \va{\mu}_j  \equiv  \mu_{ij} (\vb*{\rho},\vb*{\alpha}) = \ell_i\cdot \ell_j - \ell_{i[4]}\cdot \ell_{j[4]},
 \end{equation}
 which can be easily solved once and for all.
-Is is also possible to workaround the square roots appearing from this equations (see \cref{sec:muij_square_roots} for details),
-so the parametrization can employed for computations with finite fields.
+It is also possible to work around the square roots appearing from these equations (see \cref{sec:muij_square_roots} for details),
+so the parametrization can be employed for computations with finite fields.
 
 We conclude this section with two remarks.
 \todo{
@@ -730,9 +732,9 @@ We conclude this section with two remarks.
   and also loop momenta can be real
 }
 Although in principle the parametrization described in this
-section is amenable for both floating point and exact evaluations,
-the former require the issues of numerical stability to be considered.
-Ans in principle better suited parametrizations can be derived (see e.g.\ \cite{Kilgore:2007qr,Berger:2008sj} for one-loop examples),
+section is amenable for both floating-point and exact evaluations,
+the former requires the issues of numerical stability to be considered.
+And in principle better-suited parametrizations can be derived (see e.g.\ \cite{Kilgore:2007qr,Berger:2008sj} for one-loop examples),
 which can be rather tedious already at one loop.
 
 \subsection{Evaluation of Tree Amplitudes}
@@ -754,7 +756,7 @@ and only after all master coefficients are determined will we set $D_s\to D\to 4
 In \cref{chap:dshel} we examine closely how to deal with the $D_s$-dependence efficiently.
 In any case we need to be able to evaluate the tree amplitudes in arbitrary $D_s$ dimensions.
 
-To this end we choose to utilize the off-shell Berends-Giele recursion \cite{Berends:1987me}
+To this end, we choose to utilize the off-shell Berends-Giele recursion \cite{Berends:1987me}
 as a very flexible and efficient way to organize tree-level calculations
 which admits a seamless generalization to $D_s$ dimensions.
 The Berends-Giele recursion is formulated in terms of
@@ -775,11 +777,11 @@ can recursively (see \cref{fig:BG_recution}) build up the final current
   \caption{A step of the off-shell recursion for a model with 3- and 4-point vertices. All possible permutations of $\{1,\ldots{},n\}$ are considered on the right.}
   \label{fig:BG_recution}
 \end{figure}
-containing all but one external particles.
+containing all but one external particle.
 The tree amplitude is then obtained by contracting this current with the last remaining external state.
 This topic is very well covered in the literature (see e.g.\ \cite{Ellis:2011cr,Weinzierl:2016bus}), so we will refrain from further details.
 
-One of the consequence of unitarity is that the numerators of on-shell propagators are
+One of the consequences of unitarity is that the numerators of on-shell propagators are
 sums over physical polarization states (in $D_s$ dimensions),
 e.g.\ for spin 1 and spin $\frac{1}{2}$ particles
 \begin{subequations}
@@ -793,7 +795,7 @@ The off-shell recursion provides a very convenient way to take advantage of this
 Consider \cref{fig:topo_cut}. Given a choice of a path along the cut,
 we decompose into the state sums only the cut propagators at the beginning and at the end of the path.
 Moving along the path, 
-for each tree amplitude we build it's final current,
+for each tree amplitude we build its final current,
 but instead of contracting it with the external state, we feed it through
 the corresponding cut propagator as an input to the next tree amplitude.
 Only at the end of the path do we contract the final current with a state from a polarization sum.
@@ -842,7 +844,7 @@ that these evaluations reproduce correctly the corresponding limits from the for
 
 We do however need to know the full analytic dependence on both $D$ and $D_s$ to be able
 to set them to $4-2\epsilon$ eventually.
-To this end we employ the function interpolation techniques (see \cref{sec:func_reconstruction})
+To this end, we employ the function interpolation techniques (see \cref{sec:func_reconstruction})
 and reconstruct the rational dependence on $D$ and polynomial dependence on $D_s$ for each coefficient from numerical samples.
 This idea is known by the name of
 \emph{dimensional reconstruction} \cite{Giele:2008ve,Ellis:2008ir,Boughezal:2011br,Abreu:2017xsl,Abreu:2017hqn}.
@@ -869,7 +871,6 @@ have important implications for numerical efficiency of the dimensional reconstr
 \end{itemize}
 
 \section{Discussion}
-
 In this chapter we laid out the central concepts of the multi-loop $D$-dimensional numerical unitarity approach.
 We formulated it in a way directly amenable for automation.
 And indeed we implemented the presented algorithms to obtain the results of \cref{chap:5parton}.
@@ -902,5 +903,3 @@ like a single Feynman diagram or a numerator insertion on a particular topology.
 %Given the consideration above,
 
 %On the opposite side the master/surface basis and do the full reduction in place.
-
-
