@@ -175,7 +175,7 @@ and that we can ignore all vector particles.
 Consider the amplitudes for the scattering of massless vector particles.
 There are $(D_s - 2)$ states for each particle in $D_s$ dimensions. 
 The corresponding polarization sum for a particle with momentum $p$ is 
-\begin{equation}
+\begin{equation} \label{eq:vector_pol_sum_ds}
   \sum_{j=1}^{D_s-2} \varepsilon^\mu_j(p){\varepsilon^\nu_j}^{\star{}}(p) = -g_{[4]}^{\mu\nu} + \frac{p^\mu \eta^\nu + p^\nu \eta^\mu}{\sp(p,\eta)} \;-\; g_{[D_s-4]}^{\mu\nu}, 
 \end{equation}
 where we used $p \in \mathsf{S}_{[4]}$
@@ -550,7 +550,8 @@ the coefficients $A^{(L)}_n$ in the tensor decomposition in \cref{eq:tensorDecom
 which we need to know analytically to be able to set $D_s=4-2\epsilon$ in the HV scheme.
 In \cref{sec:dimensional_reconstruction} we explained the analytic dependence on $D_s$ 
 can be reconstructed from numerical evaluations.
-Here we propose an alternative way of obtaining the coefficients of $D_s$-polynomials.
+Here we propose an alternative way of obtaining the coefficients of $D_s$-polynomials, 
+inspired by dimensional reduction.
 This represents an opportunity for a significant optimization, 
 which is critical for amplitudes with external fermions.
 
@@ -564,192 +565,242 @@ and a particular scattering process.
 In QCD we normally have $N=L - \#_f$ for $A^{(L)}_0$, 
 where $\#_f$ is the number of closed fermion loops.
 
-While being generic and straightforward to implement, this approach has drawbacks which
-become particularly evident in amplitudes with fermions.
-%
-The dimension of the spinor representation scales exponentially (as $2^{D_s/2}$) with $D_s$,
-as opposed to the linear scaling of the vector representation.
-Furthermore, the external spinor states with definite helicity can be embedded consistently
-only for even values of $D_s$,
-which pushes the sample values higher compared to the case of vector particles in the loops.
-Beyond the obvious detrimental effect on the numerical complexity, the dimensionality of the
-spinor representation determines the number of terms entering the evaluation of the traces
-to obtain the helicity amplitudes through  \cref{eq:dsm_4_projectors}. For
-the case of amplitudes with multiple external quark pairs this makes the computation
-of traces unnecessarily time consuming.
+One way to obtain the coefficients $\mathcal{K}_i$ 
+is with dimensional reconstruction (see \cref{sec:dimensional_reconstruction}).
+This approach is conceptually straightforward and generic, 
+but it has some drawbacks which we discuss in the following.
+The dimensionality of vector representation of $\mathrm{SO}(1,D_s-1)$ scales linearly with $D_s$.
+And the dimensionality of the representation of Clifford algebra scales exponentially as $2^{D_s/2}$.
+Furthermore, in presence of fermions we can sample only even values for $D_s$,
+which forces the values to be higher compared to the case of vector particles only.
+For example, for two-loop QCD the minimal choice is $\{6,8,10\}$, and the number of components
+of spinors is $32$ for $D_s=10$. 
+This is a significant obstacle as far as numerical efficiency is concerned.
+In addition we have to evaluate traces in \cref{eq:dsm_4_projectors} by explicit summation
+over indices $\{\hat{\alpha}_i,\hat{\beta}_i\}$.
+For amplitudes with $n_s$ pairs of external quarks this amounts to $(n_s \cdot 2^{\frac{D_s}{2}-2})$ contributions.
+These issues can lead to a combined slowdown by a factor of $\sim 100$ 
+for the evaluation of amplitudes with four quarks, relative to the amplitudes with only gluons.
+Fortunately, this can be avoided with the technique we present in this chapter.
 
-We start by rearranging eq.~\eqref{eq:ds-poly} in the following way:
-\begin{equation}
-  A(D_s) = \sum_{i=0}^{N} \tilde{\mathcal{K}}_i~(D_s-D_0)^{i},
-  \label{eq:ds-poly-alt}
+First, we trivially rearrange \cref{eq:ds-poly} as
+\begin{equation} \label{eq:ds-poly-alt}
+  A(D_s) = \sum_{i=0}^{N} \tilde{\mathcal{K}}_i~\mathcal{D}^{i}, \qquad \mathcal{D} = D_s - D_0,
 \end{equation}
-where $D_0$ is some \textit{base} dimension, and the coefficients $\tilde{\mathcal{K}}_i$
-can be obtained by a linear transformation of the coefficients $\mathcal{K}_i$ in eq.~\eqref{eq:ds-poly}.
-It turns out that, given a suitable choice of $D_0$,
-the dependence of $A(D_s)$ on degrees of freedom higher than $D_0$ can
-be captured in a kinematic-independent way.  
-This observation allows one to analytically separate this
-dependence, and thus evaluate each coefficient $\tilde{\mathcal{K}}_i$
-directly. Furthermore, these evaluations are then performed in the base
-dimension $D_0$, resulting in spinor representations of much lower dimensionality
-compared to those encountered in the framework of dimensional reconstruction.
-
-For reasons that will become clear shortly, one chooses the base
-dimension $D_0$ to be the minimal dimension which allows to embed 
-all loop-momentum components without introducing new relations.
-For two-loop amplitudes we have $D_0=6$, and we
-shall specialize to this case henceforth. We write the metric tensor as
-a direct sum,
-  \begin{align}
-    \label{eq:ds-split-metric}
-    g^{\mu\nu}_{[D_s]}  = g^{\mu\nu}_{[D_s-6]} + g^{\mu\nu}_{[6]},  \qquad
-    g^{\mu\nu}_{[D_s-6]}g^{\phantom{\mu\nu}}_{\mu\nu\,[6]} = 0\,,
-  \end{align}
-  and the gamma matrices as a direct product 
-  (see e.g.\ \cite{Collins:1984xc,Kreuzer:susylectures}),
-\begin{equation}
+where $D_0$ is some \textit{base} dimension, which we choose such that $ D_0 \geq D^{(L)} $ (e.g.\ $D_0=6$ for $L=2$ ).
+Next we split the vector indices into direct sums, and spinor indices into direct products
+with respect to $D_0$, exactly in the same way as we did with respect to $D_s=4$ in \cref{sec:helampl_embeding}.
+For the metric tensor we get
+\begin{align} \label{eq:ds-split-metric}
+  g^{\mu\nu}_{[D_s]}  = g^{\mu\nu}_{[\mathcal{D}]} + g^{\mu\nu}_{[D_0]},  \qquad
+  g^{\mu\nu}_{[\mathcal{D}]}g^{\phantom{\mu\nu}}_{\mu\nu\,[D_0]} = 0\,,
+\end{align}
+and for the gamma matrices,
+\begin{equation} \label{eq:ds-gamma}
   (\gamma_{[D_s]}^\mu)_{a\kappa}^{\,b\lambda}  = \left\{ 
     \begin{array}{ll} 
-      \left(\gamma_{[6]}^\mu\right)_a^{\;b} \,
-      \delta_\kappa^\lambda\,, &\quad  0\le\mu \le 5 \,,\\&\\
-      \left(\gamma^\star_{[6]}\right)_a^{\;b} 
-      \left(\gamma_{[D_s-6]}^{(\mu-6)}\right)_\kappa^{\;\lambda}\,, 
-      &\quad \mu \geq 6 \,,
+      \left(\gamma_{[D_0]}^\mu\right)_a^{\;b} \,
+      \delta_\kappa^\lambda\,, &\quad  0\le\mu \le D_0-1 \,,\\&\\
+      \left(\gamma^\star_{[D_0]}\right)_a^{\;b} 
+      \left(\gamma_{[\mathcal{D}]}^{(\mu-D_0)}\right)_\kappa^{\;\lambda}\,, 
+      &\quad \mu \geq D_0 \,,
     \end{array}
     \right.
-    \label{eq:ds-gamma}
 \end{equation}
-where $\gamma^\star_{[6]}$ is a six-dimensional analogue of $\gamma_5$ in four dimensions, i.e.\ $\{\gamma^\star_{[6]},\gamma_{[6]}^\mu\} = 0$ for all $\mu \in \{0,5\}$, and $(\gamma^\star_{[6]})^2 = 1$.
-The product representation allows us to factorize any chain of gamma matrices into a product of $6$- and $D_s-6$-dimensional gamma-matrix chains.
-Then, using the fact that the trace of a direct product of two matrices is the product of their traces,
-we can split the traces required to obtain the coefficients of tensor structures in eq.~\eqref{eq:tensorDecomposition}
-as follows:
-\begin{equation}
+Again, as in \cref{sec:helampl_embeding}, 
+we can factorize all spinor chains, now with respect to $D_0$.
+Then using the property
+\[
+  \Tr\qty(A \otimes B) = \Tr(A) \cdot \Tr(B),
+\]
+all traces required for the projections in \eqref{eq:dsm_4_projectors},
+can be written as
+\begin{equation} \label{eq:ds-split-traces}
   \Tr\left(\prod_{\mu_i\in \mathcal{G}}\gamma^{\mu_i}_{[D_s]}\right) =
-  \Tr\left(\prod_{\mu_i\in \tilde{\mathcal{G}}}\gamma^{\mu_i}_{[D_s-6]}\right) \cdot
-  \Tr\left(\prod_{\mu_i\in \mathcal{G}}\gamma^{\mathfrak{I}(\mu_i)}_{[6]}\right),
-  \label{eq:ds-split-traces}
+  \Tr\left(\prod_{\mu_i\in \tilde{\mathcal{G}}}\gamma^{(\mu_i-D_0)}_{[\mathcal{D}]}\right) \cdot
+  \Tr\left(\prod_{\mu_i\in \mathcal{G}}\gamma^{\mathfrak{I}(\mu_i)}_{[D_0]}\right).
 \end{equation}
-where the product on the left-hand side is over a sequence $\mathcal{G}$ of $D_s$-dimensional Lorentz indices,
-$\tilde{\mathcal{G}} = \{ \mu_i \in \mathcal{G} ~\vert~ \mu_i \geq 6 \}$, and the map $\mathfrak{I}$ is defined as
+The product on the left hand side is over a sequence $\mathcal{G}$ of $D_s$-dimensional vector indices,
+$\tilde{\mathcal{G}} = \{ \mu_i \in \mathcal{G} ~:~ \mu_i \geq D_0 \}$, and the map $\mathfrak{I}$ is defined as
 \begin{equation}
   \mathfrak{I} : \mu \to
     \begin{cases}
-      \mu, & 0\le\mu \le 5\,, \\
-      \star, & \mu \geq 6\,.
+      \mu, & 0\le\mu \le D_0-1\,, \\
+      \star, & \mu \geq D_0\,.
     \end{cases}
 \end{equation}
-The traces of $\prod_{\mu_i\in\tilde{\mathcal{G}}}\gamma^{\mu_i}_{[D_s-6]}$ can be 
-evaluated analytically using well-known Clifford algebra identities,
-which produce sums of products of $g^{\mu_i\mu_j}_{[D_s-6]}$.
-%
-The crucial observation is that the only object to be contracted with the indices beyond 
-$(D_s-6)$ is $g^{\mu\nu}_{[D_s-6]}$.
-This is ensured by our choice of the base dimension.
-These indices then always contribute terms of the form $g^\mu_{[D_s-6]\mu} = (D_s-6)$, 
-generating contributions to the coefficients $\tilde{\mathcal{K}}_i$ with $i>0$ 
-in eq.~\eqref{eq:ds-poly-alt}. At this point, all degrees of freedom beyond $(D_s-6)$
-are traded for polynomials in $(D_s-6)$ with integer factors, and the coefficients
-$\tilde{\mathcal{K}}_i$ are expressed in terms of six-dimensional objects only.
+The traces in $\mathsf{S}_{[\mathcal{D}]}$ are evaluated with usual Clifford algebra to yield
+\begin{equation} \label{eq:trace_d0}
+  \Tr\qty(\prod_{i=1} \gamma_{[\mathcal{D}]}^{\tilde{\mu}_i}) =  \sum_\sigma \qty( c_\sigma \prod_{i,j} g_{[\mathcal{D}]}^{\tilde{\mu}_{\sigma_i}\tilde{\mu}_{\sigma_j}}),
+\end{equation}
+where the indices  $\tilde{\mu}_i$ are understood to be from $\mathsf{S}_{[\mathcal{D}]}$, and the sum is over all ways
+of splitting the set of all indices $\{\tilde{\mu}_i\}$ into pairs.
+Recall that $D_0\geq D^{(L)}$, which implies $\ell_i^\mu = 0$ for $\mu\geq D_0$.
+The only other Lorentz vectors we have are external momenta and vector states, which only have non-vanishing components
+in four dimensions. 
+Therefore, metric tensors $g^{\mu\nu}_{[\mathcal{D}]}$ are the only objects with indices beyond $D_0$ we find
+in the integrand after the evaluation of traces in  \cref{eq:trace_d0}.
+Contracting these indices will produce terms of the form $g^\mu_{[\mathcal{D}]\mu} = \mathcal{D}$, 
+and the expressions they are factors of will contribute to the coefficients $\tilde{\mathcal{K}}_i$ with $i>0$ in \cref{eq:ds-poly-alt}. 
+The crucial observation is that in doing so we never touch external or loop kinematics.
+This allows us to contract all these indices and distribute 
+all diagrams contributing to the amplitude into coefficients $\tilde{\mathcal{K}}_i$ before
+we do any other evaluations.
+The remaining evaluations can then be performed in the base dimension $D_0$,
+eliminating the problem of large representations.
 
-\todo{Put examples of tree and 1-loop.}
-
-\subsection{Dimensionally Reduced Feynman Rules}
+\subsection{Diagrammatic Algorithm}
 \label{sec:DsFeynRules}
-In the table~\ref{tab:Ds-FeynRules} we list the color-ordered Feynman rules for vertices involving the scalar particles introduced in section~\ref{sec:Ds}.
-The $(D_s-6)$-dimensional part of these rules can be fully contracted in each Feynman diagram yielding kinematic-independent factors.
+
+In this section we illustrate how the decomposition \cref{eq:ds-poly-alt} can
+be constructed systematically with an example of color-ordered QCD.
+
+We apply the relations \labelcref{eq:ds-split-metric,eq:ds-gamma}
+to the original Feynman rules  of the theory (see \cref{sec:cofr}) to obtain their dimensionally-reduced version
+showed in \cref{tab:Ds-FeynRules}. 
+Slightly abusing the terminology, we refer to the $\mathcal{D}$-dimensional gluon as the ``scalar'' 
+both before and after the corresponding indices in $\mathsf{S}_{\mathcal{D}}$ are contracted.
 \begin{table}[h]
   \centering
   \begin{minipage}[t]{0.4\textwidth}
-    \small
   \begin{tabular}{cl}
-    $\vcenter{\hbox{\hspace{-2ex}\includegraphics[width=13ex]{figures/Vssg}}}$ & $ \frac{i}{\sqrt{2}}(p_2-p_1)^\mu~ g^{\alpha\beta}_{[D_s-6]}$ \\
-    $\vcenter{\hbox{\includegraphics[width=15ex]{figures/Vssgg}}}$ & $ -\frac{i}{2}~g^{\mu\nu}_{[6]}~g^{\alpha\beta}_{[D_s-6]}$ \\
-    $\vcenter{\hbox{\includegraphics[width=15ex]{figures/Vsgsg}}}$ & $ i~g^{\mu\nu}_{[6]}~g^{\alpha\beta}_{[D_s-6]}$ \\
+    $\vcenter{\hbox{\hspace{-2ex}\includegraphics[width=13ex]{figures/Vssg}}}$ & $ \frac{i}{\sqrt{2}}(p_2-p_1)^\mu~ g^{\alpha\beta}_{[\mathcal{D}]}$ \\
+    $\vcenter{\hbox{\includegraphics[width=15ex]{figures/Vssgg}}}$ & $ -\frac{i}{2}~g^{\mu\nu}_{[D_0]}~g^{\alpha\beta}_{[\mathcal{D}]}$ \\
+    $\vcenter{\hbox{\includegraphics[width=15ex]{figures/Vsgsg}}}$ & $ i~g^{\mu\nu}_{[D_0]}~g^{\alpha\beta}_{[\mathcal{D}]}$ \\
   \end{tabular}
   \end{minipage}
   \quad
   \begin{minipage}[t]{0.5\textwidth}
-    \small
   \begin{tabular}{cl}
     $\vcenter{\hbox{\includegraphics[width=15ex]{figures/Vssss1}}}$ &
       $
       \begin{aligned}
-        i~g^{\alpha\gamma}_{[D_s-6]} g^{\beta\delta}_{[D_s-6]} - ~ & \\
-                \frac{i}{2}~(g^{\alpha\beta}_{[D_s-6]} g^{\gamma\delta}_{[D_s-6]} & + g^{\alpha\delta}_{[D_s-6]} g^{\beta\gamma}_{[D_s-6]})
+        i~g^{\alpha\gamma}_{[\mathcal{D}]} g^{\beta\delta}_{[\mathcal{D}]} - ~ & \\
+                \frac{i}{2}~(g^{\alpha\beta}_{[\mathcal{D}]} g^{\gamma\delta}_{[\mathcal{D}]} & + g^{\alpha\delta}_{[\mathcal{D}]} g^{\beta\gamma}_{[\mathcal{D}]})
       \end{aligned}
       $ \\
-        $\vcenter{\hbox{\includegraphics[width=11ex]{figures/VqqsR}}}$ & $- \frac{i}{\sqrt{2}}~\gamma^\star_{[6]} \gamma^\alpha_{[D_s-6]}$ \\
-        $\vcenter{\hbox{\includegraphics[width=11ex]{figures/VqqsL}}}$ & $ \frac{i}{\sqrt{2}}~\gamma^\star_{[6]} \gamma^\alpha_{[D_s-6]}$ \\
+        $\vcenter{\hbox{\includegraphics[width=11ex]{figures/VqqsR}}}$ & $- \frac{i}{\sqrt{2}}~\gamma^\star_{[D_0]} \gamma^\alpha_{[\mathcal{D}]}$ \\
+        $\vcenter{\hbox{\includegraphics[width=11ex]{figures/VqqsL}}}$ & $ \frac{i}{\sqrt{2}}~\gamma^\star_{[D_0]} \gamma^\alpha_{[\mathcal{D}]}$ \\
   \end{tabular}
   \end{minipage}
-  \caption{Color-ordered Feynman rules for vertices with scalar particles explicitly introduced by dimensional reduction of gluons.}
+  \caption{Color-ordered Feynman rules for vertices with scalars, which are introduced from dimensional reduction of gluons.}
   \label{tab:Ds-FeynRules}
 \end{table}
 
-\FloatBarrier
+To obtain the coefficients $\mathcal{K}_i$ in \cref{eq:ds-poly-alt} for an amplitude, we process each contributing  Feynman diagram with the following steps:
+\begin{enumerate}
+  \item Split all gluon lines in loops with \cref{eq:ds-split-metric} into a sum of $D_0$-dimensional gluon and a $\mathcal{D}$-dimensional gluon.
+  \item Factorize all quark lines according to \cref{eq:ds-gamma}.
+  \item Insert the Feynman rules from \cref{tab:Ds-FeynRules} and expand, keeping all $D_0$-dimensional objects untouched.
+  \item Evaluate traces \eqref{eq:trace_d0}, and contract all $\mathcal{D}$-dimensional indices. 
+     This replaces the $\mathcal{D}$-dimensional gluon by a scalar, and generates factors, which are polynomials in $\mathcal{D}$ with integer coefficients.
+\end{enumerate}
+An example of this procedure is given in \cref{fig:ds-example-diagram}.
 
-From a Feynman diagrammatic perspective, the contributions to the
-coefficients of the polynomial in $(D_s-6)$
-can be represented by introducing a scalar particle. 
-The Feynman rules associated to this particle can be readily
-derived from dimensional reduction of the original Feynman rules of the
-theory \cite{Bern:2002zk,Badger:2013gxa,Giele:2008ve,Anger:2018ove} by
-applying the relations \eqref{eq:ds-split-metric} and \eqref{eq:ds-gamma}.
-We list them in the appendix \ref{sec:DsFeynRules} for convenience.
-To illustrate this procedure we now give an example. 
-Consider a decomposition of a Feynman diagram with $D_s$-dimensional particles on the 
-left-hand side of figure~\ref{fig:ds-example-diagram}. The four non-vanishing 
-contributions after evaluating partial traces and contracting all 
-$(D_s-6)$-dimensional indices are shown on the right-hand side, 
-where the scalars are introduced to represent what remains of these contractions.
-
-\begin{figure}
+\begin{figure}[ht]
   \newlength\diagramWidth
   \setlength{\diagramWidth}{18ex}
   \centering
   \begin{align*}
     \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example_B.pdf}}} \hspace{-10ex} & \hspace{15ex} = \hspace{6ex}
-    \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example.pdf}}} \quad +\\
-    \Big(~ &
+    \mathcal{D}^0 ~\cdot~ \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example.pdf}}} \quad +\\
+     & \mathcal{D}^1 ~\cdot~ \qty(~ 
     \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example-1-1.pdf}}} \quad+\quad
     \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example-1-2.pdf}}}
-    ~\Big) ~\cdot~ (D_s-6) \quad +\\
-    &
-    \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example-2.pdf}}}
-    ~\cdot~ (D_s-6)^2,
+    ~) \quad +\\
+     & \mathcal{D}^2 ~\cdot~ \quad \vcenter{\hbox{\includegraphics[width=\diagramWidth]{figures/Ds-example-2.pdf}}}
   \end{align*}
   \caption{Example of diagrams with scalar particles,
     representing the contributions to the coefficients of $\tilde{\mathcal{K}}_i$ in eq.~\eqref{eq:ds-poly-alt}.
     The thick lines in the diagram on the left-hand side represent particles in arbitrary $D_s$ dimensions.
-    The (red) dashed lines connecting external-quark lines represent the traces required to obtain the coefficient of the tensor structure of eq.~\eqref{eq:defAmpsTensb}.
-    All particles on the right-hand side are in six dimensions.}
+    The (red) dashed represent the traces required for the projection in \cref{eq:dsm_4_projectors}.
+    All particles on the right-hand side are $\mathcal{D}$-dimensional.}
   \label{fig:ds-example-diagram}
 \end{figure}
 
 
-We would like to conclude this section with some remarks.
-First, the remaining non-trivial traces of eq.~\eqref{eq:ds-split-traces},
-i.e.\ those of $\prod_k\gamma^{\mu_k}_{[6]}$, cannot be simplified generically
-as the indices appear contracted with the loop momenta at the integrand level.
-We evaluate them by the direct summation over a specially constructed set of external states
-(in an analogous way to the sums performed in~\cite{Abreu:2018jgq} 
-for dimensional reconstruction).
-Secondly, in the absence of fermions in the loops, this method coincides with the so called
-six-dimensional formalism employed in refs.~\cite{Badger:2013gxa,Badger:2017jhb}, and can 
-thus be viewed as an extension thereof to amplitudes with fermions.
-Finally, we note that the method presented in this section can be straightforwardly
-generalized to higher number of loops by adjusting the base dimension $D_0$,
-as well as to the extraction of coefficients of different tensor structures in 
-eq.~\eqref{eq:tensorDecomposition}.
+Some comments are in order.
+\begin{itemize}
+  \item As a result of the algorithm presented above, all indices beyond $D_0$ are contracted.
+    Taking the $\mathcal{D}$-dimensional traces, originated from the projections in \cref{eq:dsm_4_projectors}, was one of the prerequisites.
+    These projections still need to be completed by evaluating the remaining traces over $(D_0-4)$-dimensional spinor indices,
+    which can be done as in dimensional reconstruction
+  \item For two-loop amplitudes with no external fermions our method corresponds to the so called
+six-dimensional helicity formalism \cite{Bern2011,Cheung:2009dc,Badger:2013gxa,Badger:2017jhb}.
+From this point of view, our method can then be considered an extension thereof to amplitudes with fermions.
+  \item Finally, although in this section we specialized to two-loop color-ordered QCD,
+the generalization to different models and higher number of loops is straight-forward.
+\end{itemize}
 
 
 
-\subsection{Unitarity-Compatible Implementation}
-decomposition of trees through simplified off-shell recursion.
-    Collecting $(D_s-6)$ powers and factors. Implementation in process libraries.
+\subsection{Unitarity-Compatible Algorithm}
 
-    \todo{Use tree example here}
+The algorithm for decomposition of amplitudes into $\mathcal{D}$-polynomials, 
+described in the previous section, was formulated 
+in terms of operating on individual Feynman diagrams.
+In this regard, one might wonder if it can be employed together with
+the numerical unitarity methods, where we evaluate
+the products of tree amplitudes through the off-shell recursion, 
+as discussed in \cref{sec:evaluation_of_tree_amplitudes}.
+Here we explain how this can be done.
+
+Instead of decomposing Feynman diagrams, 
+we need to decompose \emph{cut diagrams}, 
+i.e.\ the diagrams with vertices being tree amplitudes 
+(see \cref{sec:evaluation_of_cuts} for details).
+To this end, we process each cut diagram as follows:
+\begin{enumerate}
+  \item Perform the dimensional reduction of each vertex $V_{[D_s]i}$ of the cut diagram by applying steps 1 to 3 of the algorithm from the previous section,
+    taking into an account that only the gluons originating from the cuts contribute non-trivially.
+    As a result, each vertex is expanded into a linear combination of the form
+    \begin{equation}
+      V_{[D_s]i} = \sum_k T_k^{\vb*{\alpha}} \; \tilde{V}_{[D_0]i}^{(k)},
+    \end{equation}
+    where $T_i^{\vb*{\alpha}}$ are the tensor structures of spinor and vector indices $\vb*{\alpha} \in \mathsf{S}_{[\mathcal{D}]}$.
+    The new vertices $\tilde{V}_{[D_0]}^{(i)}$ ``remember'' 
+    the tensor structures they originated from by allowing the dimensionally-reduced particles 
+    to couple only in the way consistent with the corresponding tensor structure.\footnote{
+      In the off-shell recursion this can be implemented by simply removing all currents which do not match the expected couplings.
+    }
+    Note that no restrictions are imposed on external gluons.
+    We illustrate this step by an example shown in \cref{fig:example_dstree}.
+
+    %, in addition to the list of external $D_0$-dimensional particles,
+    %are identified by a restriction on how 
+  \item Evaluate traces \eqref{eq:trace_d0}, and contract all $\mathcal{D}$-dimensional indices
+    to bring the cut diagram to the form
+    \begin{equation}
+      \prod_i V_{[D_s]i} ~\to~  \sum_k c_k(\mathcal{D}) \prod_i \tilde{V}_{[D_0]i}^{(k_i)},
+    \end{equation}
+    which is then trivially rearranged into \cref{eq:ds-poly-alt}.  We give an example in \cref{fig:example_ds_cut2}.
+\end{enumerate}
+
+In this way the analytic $D_s$-dependence of each cut diagram is determined.
+The reduction with numerical unitarity techniques of \cref{chap:numunitarity} 
+can therefore be applied directly to the coefficients $\mathcal{\mathcal{K}}_i$, which are evaluated in $\mathsf{S}_{[D_0]}$.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.9\textwidth]{example_dstree}
+  \caption{An example of a dimensional reduction of a (color-ordered) 
+    tree amplitude with particles in $D_s$ dimensions (on the left) into
+    a linear combination of amplitudes in $D_0$ dimensions (on the right). 
+    Only indices from $\mathsf{S}_{[\mathcal{D}]}$ are explicitly shown on the right.
+    The shaded blobs specify subsets of diagrams with a particular coupling structure of the dimensionally-reduced particles, 
+    which corresponds to the tensor structure in $\mathsf{S}_{[\mathcal{D}]}$.
+  }
+  \label{fig:example_dstree}
+\end{figure}
 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\textwidth]{example_ds_cut2}
+  \caption{
+    An example of the decomposition of a two-loop cut diagram in $D_s$ dimensions into coefficients $\tilde{\mathcal{K}}_i$ in \cref{eq:ds-poly-alt}.
+    All diagrams on the right are in $D_0$ dimensions. The meaning of shaded blobs is as in \cref{fig:example_dstree}.
+  }
+  \label{fig:example_ds_cut2}
+\end{figure}
 
