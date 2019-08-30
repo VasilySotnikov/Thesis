@@ -273,6 +273,30 @@ We shift \cite{Signer:2008va} the amplitude by
 to convert it to the HV scheme.
 
 
+
+\subsection{Validation}
+
+The upgrade to the new version of \BlackHat{} involved significant new developments,
+as well as replacing a considerable number of old components.
+We have extensively validated the new version with the following checks:
+\begin{enumerate}
+  \item We have reproduced all amplitudes available in \BlackHat{} before the upgrade.
+  \item We perform a number of automated internal consistency checks:
+    \begin{itemize}
+      \item We extend the ansatz for the integrands on the right-hand side of \cref{eq:cut_equations} with the terms which are guaranteed to be zero, for example, by the power-counting constraints.
+        We then solve the equations for the coefficients, and check if the coefficients of these term vanish.
+      \item We check the known pole structure \cite{Catani:2000ef} of each primitive amplitude.
+    \end{itemize}
+  \item We have checked the IR poles of squared matrix elements against the integrated subtraction terms,
+    as implemented in the \SHERPA{} library.
+  \item We have reproduced the helicity amplitudes from \cite{Ellis:2008ir}.
+  \item We have performed a systematic comparison of squared matrix elements 
+    of all subprocesses of $pp\rightarrow t\bar t+(\leq 2)-$jet, $pp\rightarrow b\bar b+(\leq 2)-$, and
+$Wb\bar b+(\leq3)-$ processes against publicly available generators 
+\textsc{Recola}~\cite{Actis:2016mpe} and \textsc{OpenLoops}~\cite{Cascioli:2011va} 
+(both powered by the \textsc{Collier} library~\cite{Denner:2016kdg}).
+\end{enumerate}
+
 \subsection{Numerical Stability}
 %
 In this section, we explore the numerical stability of the new version of \BlackHat{}.
@@ -315,98 +339,44 @@ Overall we see, that our program is numerically stable,
 with only a few points with precision worse then $10^{-3}$,
 which have no effect on the observables.
 
-One of the advantages of unitarity methods is that they allow a fine-grained control of the evaluation process
-of the amplitude. 
-We set up several number of tests, targeted onto small subsets of the evaluation,
-and reevaluate only these subsets with higher precision whenever required.
-
-
-\subsection{Validation}
-We have carried out a number of checks with the new implementation of \BlackHat{}.
-In particular, we have systematically reproduced all massless results
-that were carried out with all the earlier versions of the library, and found
-excellent agreement.
-
-We also apply a number of internal checks. For each primitive amplitude we
-check consistency of the integrand reduction by attempting to compute a
-high-rank tensor coefficient, which is known to vanish from power counting. We
-also check that the matrix elements reproduce the known IR and UV singularity structure~\cite{Catani:2000ef}. Both
-of these checks are also used to control the precision of the computation.
-Explicit cancellation of the infrared poles of the renormalized one-loop matrix
-elements is also checked by comparing to the integrated subtraction terms, after
-PDF renormalization, as performed with the~\SHERPA{} library.
-
-We also reproduced the results presented by Ellis \textit{et al.}
-in~\cite{Ellis:2008ir} at the level of primitive amplitudes. Even more, we have
-cross checked fully interfered, matrix-element squared results against
-publicly available matrix-element generators. This includes comparisons of all
-one-loop matrix elements necessary for $pp\rightarrow t\bar t+(\leq 2)-$jet and
-$pp\rightarrow b\bar b+(\leq 2)-$jet at NLO QCD against the
-\textsc{Recola}~\cite{Actis:2016mpe} and
-\textsc{OpenLoops}~\cite{Cascioli:2011va} libraries (both using the
-\textsc{Collier} library~\cite{Denner:2016kdg}), as well as all the ones needed
-for $Wb\bar b+(\leq3)-$jet with \textsc{Recola}.
-
-Finally, we made dedicated comparisons at the level of physical observables
-against the MCFM program~\cite{mcfm7} for the inclusive production of \Wbb{}
-at NLO QCD at the LHC with $\sqrt{s}=13$ TeV. Agreement was found at the permil level for total cross sections
-and differential distributions.
-
-
-
+One of the advantages of unitarity methods is that they allow a fine-grained control of the evaluation process.
+We convert all the internal consistency tests listed in the previous section into
+the precision-monitoring system.  
+It identifies when the computation becomes unstable, and reevaluates
+only the small part with higher precision whenever required.
 
 
 
 \section{Monte Carlo Integration}
 \label{sec:wbb:mc_integration}
 
-We obtain NLO QCD predictions by using the \SHERPA{} 
-Monte Carlo program~\cite{Sherpa} to integrate Born, virtual and real-radiation
-matrix elements. The virtual matrix elements are provided by our new \BlackHat{} library. In order to increase the efficiency of the phase-space integration, we exploit the color structure of virtual matrix
-elements by splitting them into leading and subleading color
-terms~\cite{BH:W3jDistributions,Ita:2011ar}. The subleading color terms are computationally expensive. However, due to their color suppression, they need to be evaluated less often to reach a
-given total statistical-integration error and we sample the two parts independently over
-phase space.
 
-Before a numerical integration can be performed, the infrared singularities that appear in real-emission corrections have to be canceled explicitly against their counterparts in virtual matrix elements. In our calculation, we
-use the subtraction scheme based on massive dipoles~\cite{Catani2002}.
-In particular, we use the automated implementation provided by
-the \COMIX{} package~\cite{Comix}, which is part of the \SHERPA{}
-library~\cite{Sherpa}. The latter implementation has been checked extensively, for example in the recent calculation of $t\bar t$ production in association
-with up to three light jets~\cite{ttjjj}. 
 
-Furthermore, we use the \SHERPA{} library to handle subprocess generation and
-mappings, the integration techniques necessary to deal with complex final-state
-phase spaces as well as the internal analysis package. 
+We employ \SHERPA{}\cite{Sherpa} for managing the Monte-Carlo integration,
+subprocess generation and phase-space mappings.
+And we interface it to our library for virtual matrix-element generation.
+We split the virtual matrix elements into leading and subleading color contributions
+to optimize the integration. The latter are more expensive to compute, but contribute less to the observables,
+so they can be samples less frequently \cite{BH:W3jDistributions,Ita:2011ar}.
+We employ massive dipoles \cite{Catani2002} for IR subtraction as implemented in \COMIX{}~\cite{Comix}.
 %
+
+We perform a fixed-order parton-level computation. Non-perturbative effects, such as hadronization, as well as parton showers are considered in our study.
 All results that we provide are fixed-order parton-level predictions and we include neither parton-shower effects nor hadronization corrections or other
 non-perturbative effects.
-%
-We use the flexible \texttt{ROOT}~\cite{ROOT} \ntuple{} file format to store our results. This allows for a-posteriori variations of the strong coupling,
-PDFs and choices of renormalization and factorization
-scales in our NLO QCD results. The \ntuple{} format was developed in
-Ref.~\cite{BH:Ntuples} and the correct definition of the weights for
-one-loop amplitudes involving massive particles can be found in \cref{sec:scaledep}.
 
 \subsection{Input Parameters: Partons Distributions, Couplings and Masses}
 \label{sec:base_setup}
-For our predictions we use PDFs from {\texttt CT14}~\cite{CT14},
+We use PDFs from {\texttt CT14}~\cite{CT14},
 with LO ({\texttt CT14llo\_NF4}) and NLO ({\texttt CT14nlo\_NF4}) PDF sets, as
-implemented in the LHAPDF library~\cite{LHAPDF}. The corresponding strong
-coupling is given by $\alps(M_Z)=0.125$ at LO and
-$\alps(M_Z)=0.1128$ at NLO. We evolve $\alps(\mu)$ with
-the QCD beta function for four massless quark flavors, for all $\mu$. This is
-achieved by introducing a decoupling shift for massive quarks, see \cref{chap:renorm}. We
-use a one-loop running of $\alps$ at LO and a two-loop running at NLO. We
-choose the quark masses consistent with the PDF sets and use a bottom-quark mass of $m_b=4.75$ GeV and a top-quark mass of $m_t=172$ GeV. The top-quark
-mass appears in closed-loop contributions.
+implemented in the LHAPDF library~\cite{LHAPDF}. 
+The strong coupling is taken to by $\alps(M_Z)=0.125$ at LO and
+$\alps(M_Z)=0.1128$ at NLO. 
+The bottom-quark mass is $m_b=4.75$ GeV.
 
-
-The electroweak parameters are obtained in the $G_\mu$
-scheme \cite{Denner2000c} at leading order in the electroweak coupling. This fixes the
-$W$-boson couplings to fermions with the SM input
-parameters as specified in \cref{tab:ewinput}. We compute the parameters $\alpf(M_Z)$,
-$\sin^2(\theta_W)$ and $g_W^2$ using the tree-level relations
+The electroweak parameters are evaluated in the LO $G_\mu$ scheme \cite{Denner2000c}. The fixed and computed
+parameters as given in \cref{tab:ewinput}. The $\alpf(M_Z)$,
+$\sin^2(\theta_W)$ and $g_W^2$ are computed with
 \begin{align}\label{eq:ewlorel}
 \sin^2(\theta_W) &= \left(1-\frac{M_W^2}{M_Z^2}\right)\ , & \alpf(M_Z)&=\frac{\sqrt{2}}{\pi}G_F M_W^2
   \sin^2(\theta_W)\ ,\notag\\
@@ -428,77 +398,54 @@ g_W^2&=\frac{4\pi\alpf(M_Z) }{\sin^2(\theta_W)}\ .
     $g_W^2$ & $0.42635$ (calculated)\\
     \bottomrule
   \end{tabular}
-  \caption{Electroweak parameters used in this work. We use the $G_\mu$
-    scheme with real parameters and leading order relations. The input parameters
-    are chosen in accordance with 2016 PDG
-    values~\cite{Patrignani:2016xqp}.}
-    \label{tab:ewinput}
-  \end{table}
+  \caption{Electroweak parameters used in our study, which are chosen in accordance with 2016 PDG values~\cite{Patrignani:2016xqp}.}
+  \label{tab:ewinput}
+\end{table}
 
-Mass and width of the $W$ boson are specified in \cref{tab:ewinput} and the lepton-pair invariant mass follows a relativistic Breit-Wigner distribution. We approximate the CKM matrix by a unit matrix. This
-results in a small change of the total cross sections for the setup we use, as
-estimated by LO evaluations with the full CKM matrix. We find that these differences are of the order 1\% for \Wbb{} production and
-below 0.5\% for \Wbbnj[1]{} and \Wbbnj[2]{} production.
+The CKM matrix is approximated by a unit matrix. 
+The leads to difference of  the order of at most 1\%,
+as determined from the LO analysis.
 
-We include contributions from virtual bottom and top quarks, and we confirm the
-expected percent-level effect on
-cross-sections~\cite{BH:W4j,BH:Z4j,Campbell:2016tcu}. We work with a single massless
-lepton pair, an approximation that can be applied to the electron or muon
-families and we treat all light quarks ($u$, $d$, $s$, $c$) as massless particles.
+We find that the contribution of the closed top quarks has a order $1\%$ effect on
+the cross-sections. This is according to expectations ~\cite{BH:W4j,BH:Z4j,Campbell:2016tcu}. 
 
 \subsection{Kinematics, Observables and Exclusive Sums}
 \label{sec:kin}
-In our phenomenological analysis, we use several standard observables. The pseudorapidity $\eta$ and the
-angular separation between any two objects (partons, jets, leptons) $\Delta R$ are given by
+In this section, we provide the definition for observables we employ in our study.
+The pseudorapidity $\eta$ and the
+angular separation between two partons, leptons, or jets $\Delta R$ are defined as
 \begin{align}
-  \eta &= -\ln\left(\tan\frac{\theta}{2}\right),&  \Delta R &= \sqrt{(\Delta \phi)^2+(\Delta \eta)^2},
+  \eta &= -\ln\left(\tan\frac{\theta}{2}\right),&  \Delta R &= \sqrt{(\Delta \phi)^2+(\Delta \eta)^2}.
 \end{align}
-where $\theta$ denotes the polar angle with respect to the beam axis, $\Delta\phi$ the difference in the azimuthal angle in the
-plane transverse to the beam axis and
-$\Delta\eta$ the difference in the pseudorapidities. Furthermore, the transverse
-energy of the $W$ boson $E_T^W$ and the total partonic transverse energy $\HTpartonicp$ are given by
+Here $\Delta\phi$ is the difference in the azimuthal angle in the transverse plane,
+$\theta$ is the polar angle with respect to the beam axis, and
+$\Delta\eta$ the difference in $\eta$. 
+The transverse energy of $W$, $E_T^W$, and the total partonic transverse energy $\HTpartonicp$ are defined as
 \begin{align}\label{eq:htpart}
-  E_T^W&=\sqrt{M_W^2+\left(p_T^W \right)^2},& \HTpartonicp&=\sum_j p_{\textrm T}^j+E_{\textrm T}^W,
+  E_T^W&=\sqrt{M_W^2+\left(p_T^W \right)^2},& \HTpartonicp&=\sum_j p_{\textrm T}^j+E_{\textrm T}^W, \qquad p_T=\sqrt{p_x^2+p_y^2}
 \end{align}
-where the sum runs over all final state partons $j$, independent of
-whether or not they are inside a jet that passes the cuts. The scalar
-transverse momentum $p_T$ of a parton is given by
-$p_T=\sqrt{p_x^2+p_y^2}$. The total partonic transverse energy is not directly measurable. Nevertheless, it is
-a suitable candidate for choosing unphysical renormalization and
-factorization scales since changing the cuts does not affect the
-matrix element at a given phase-space point. We define jet invariant masses by
+with the sum over all final state partons $j$.
+The jet invariant masses are defined by
 \begin{align}
   M_{ij}^2 = \left(p_i^{\text{jet}}+p_j^{\text{jet}}\right)^2,
 \end{align}
-and jets are labeled in order of decreasing transverse momentum
-$p_T$. The transverse mass of the $W$ boson is computed from the
-kinematics of its decay products
+and we label  jets in order of decreasing transverse momentum $p_T$. 
+The transverse mass of $W$ is
 \begin{align}
   M_T^W=\sqrt{2E_T^eE_T^\nu(1-\cos(\Delta\phi_{e\nu}))}\ .
 \end{align}
 
-The predictions we show in Section~\ref{sec:hw} are based on exclusive
-sums~\cite{ESums}. We can exploit our high-multiplicity results to build these observables. The main idea is to replace tree-like contributions in NLO
-corrections by the corresponding full NLO results. In order to avoid double counting, one combines exclusive (with respect to the presence of an extra light jet)
-predictions $\sigma^{\text{exc}}_n$ for all but the last multiplicity under consideration,
-and an inclusive prediction $\sigma^{\text{inc}}_n$  for the last.
- We use
-exclusive sums for observables in \Wbb$+X$ production (0 light jets) and use our high-multiplicity
-results to define the exclusive sums labeled `NLO+' and `NLO++':
+We now explain how do we build the exclusive-sum observables from multi-jet samples.
+We choose the cut $p_{T}^{\text{excl}}$, with respect to which we take an exclusive cross-section $\sigma^{\text{exc}}_n$
+for each jet multiplicity $n$, except the one with maximal  $n$, for which we take the inclusive result,
 \begin{align}\label{eq:excsums}
   \sigma^{\text{NLO+}}_0 &= \sigma^{\text{exc}}_0 + \sigma^{\text{inc}}_1\ , &
 \sigma^{\text{NLO++}}_0 &= \sigma^{\text{exc}}_0 +\sigma^{\text{exc}}_1+
 \sigma^{\text{inc}}_2\ .
 \end{align}
-
-\subsection{Dynamical Scale Choice}
-\label{sec:scale}
-We use a standard approach to dynamical scale setting with a functional form of the central scale defined by $\mu_0=\HTpartonicp/2$, see Eq.~\eqref{eq:htpart}, and we keep factorization and renormalization
-scales equal, $\mu_R=\mu_F=\mu_0$. We compute the renormalization and factorization scale dependence of cross sections by using correlated variations around the central scale $\mu_0$ by factors of
-$(1/2,1/\sqrt{2},1,\sqrt{2},2)$. An independent variation of those scales lead to similar results as with the correlated variations. We will label results for leading-order QCD with the central scale
-$\mu_0=\HTpartonicp/2$ by ``LO'' and the corresponding results at next-to-leading
-order QCD by ``NLO''.
-
+The expectation is that replacing the, effectively leading order contributions, from the real radiation with the full NLO
+corrections mitigates the problem of large $K$ factors, and at the time, the sensitivity to $p_{T}^{\text{excl}}$ is not as high 
+as in the case of the exclusive computation.
 
 \section{Phenomenology}
 \label{sec:wbb:pheno}
@@ -517,7 +464,6 @@ $b$ jets. The renormalization and factorization scales are chosen to be equal an
 event-by-event basis by $\mu=\HTpartonicp/2$, according to
 \cref{eq:htpart}. We define our jets by employing the
 anti-$k_T$ jet algorithm~\cite{antikT} with $R=0.4$, as implemented in the
-
 \texttt{FastJet} package~\cite{Cacciari:2011ma}.
 
 \subsection{Total Cross Section and Scale Dependence}
@@ -528,6 +474,12 @@ both $W^-$ and $W^+$ accompanied by two $b$ jets and zero to three
 light jets. The numerical integration uncertainty is given in parenthesis and
 the scale dependence is quoted in superscripts and subscripts. We also show
 the ratio of NLO over LO results, so called $K$-factors, in separate columns.
+
+We employ the standard dynamical choice of factorization and renormalization scales $\mu_R=\mu_F=\mu_0=\HTpartonicp/2$ (see \cref{eq:htpart}).
+We estimate the error from the missing orders of the perturbation series expansion in the coupling constants with the standard technique of
+the scale variations around the central scale $\mu_0$. 
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{table}[ht]
