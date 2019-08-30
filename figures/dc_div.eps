@@ -1,15 +1,15 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Creator: dvips(k) 5.996 Copyright 2016 Radical Eye Software
-%%Title: /home/sotnikov/workspace/DsHel/figures/Jaxo_tmp.dvi
-%%CreationDate: Fri Nov 10 14:19:30 2017
-%%BoundingBox: 115 450 480 721
+%%Creator: dvips(k) 5.994 Copyright 2014 Radical Eye Software
+%%Title: /home/sotnikov/Documents/GRK2017_talk/figures/Jaxo_tmp.dvi
+%%CreationDate: Wed Sep 13 13:12:22 2017
+%%BoundingBox: 161 603 434 721
 %%EndComments
 %DVIPSWebPage: (www.radicaleye.com)
 %DVIPSCommandLine: dvips -E -o
-%+ /home/sotnikov/workspace/DsHel/figures/g.eps
-%+ /home/sotnikov/workspace/DsHel/figures/Jaxo_tmp.dvi
+%+ /home/sotnikov/Documents/GRK2017_talk/figures/dc_div.eps
+%+ /home/sotnikov/Documents/GRK2017_talk/figures/Jaxo_tmp.dvi
 %DVIPSParameters: dpi=600
-%DVIPSSource:  TeX output 2017.11.10:1519
+%DVIPSSource:  TeX output 2017.09.13:1312
 %%BeginProcSet: tex.pro 0 0
 %!
 /TeXDict 300 dict def TeXDict begin/N{def}def/B{bind def}N/S{exch}N/X{S
@@ -62,7 +62,7 @@ B/g{0 M}B/h{1 M}B/i{2 M}B/j{3 M}B/k{4 M}B/w{0 rmoveto}B/l{p -4 w}B/m{p
 % $Id: pstricks.pro 919 2014-05-19 18:42:47Z herbert $
 %
 %% PostScript prologue for pstricks.tex.
-%% Version 1.24, 2016/04/22
+%% Version 1.23, 2014/07/31
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the LaTeX Project Public License Distributed from CTAN archives
@@ -886,6 +886,7 @@ gsave
   /Shift Symbol stringwidth pop 2 div def 
   CurvePath 
 } def
+
 %
 /SQ { /r ED r r moveto r r neg L r neg r neg L r neg r L fill } def
 /ST { /y ED /x ED x y moveto x neg y L 0 x L fill } def
@@ -2520,22 +2521,32 @@ neg sub neg TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr
 -1 roll add 2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S
 TR}if}N/cp{pop pop showpage pm restore}N end}if}if}N/normalscale{
 Resolution 72 div VResolution 72 div neg scale magscale{DVImag dup scale
-}if 0 setgray}N/@beginspecial{SDict begin/SpecialSave save N gsave
-normalscale currentpoint TR @SpecialDefaults count/ocount X/dcount
-countdictstack N}N/@setspecial{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto
-0 vs rlineto hs neg 0 rlineto closepath clip}if ho vo TR hsc vsc scale
-ang rotate rwiSeen{rwi urx llx sub div rhiSeen{rhi ury lly sub div}{dup}
-ifelse scale llx neg lly neg TR}{rhiSeen{rhi ury lly sub div dup scale
-llx neg lly neg TR}if}ifelse CLIP 2 eq{newpath llx lly moveto urx lly
-lineto urx ury lineto llx ury lineto closepath clip}if/showpage{}N
-/erasepage{}N/setpagedevice{pop}N/copypage{}N newpath}N/@endspecial{
-count ocount sub{pop}repeat countdictstack dcount sub{end}repeat
-grestore SpecialSave restore end}N/@defspecial{SDict begin}N
-/@fedspecial{end}B/li{lineto}B/rl{rlineto}B/rc{rcurveto}B/np{/SaveX
-currentpoint/SaveY X N 1 setlinecap newpath}N/st{stroke SaveX SaveY
-moveto}N/fil{fill SaveX SaveY moveto}N/ellipse{/endangle X/startangle X
-/yrad X/xrad X/savematrix matrix currentmatrix N TR xrad yrad scale 0 0
-1 startangle endangle arc savematrix setmatrix}N end
+}if 0 setgray}N/psfts{S 65781.76 div N}N/startTexFig{/psf$SavedState
+save N userdict maxlength dict begin/magscale true def normalscale
+currentpoint TR/psf$ury psfts/psf$urx psfts/psf$lly psfts/psf$llx psfts
+/psf$y psfts/psf$x psfts currentpoint/psf$cy X/psf$cx X/psf$sx psf$x
+psf$urx psf$llx sub div N/psf$sy psf$y psf$ury psf$lly sub div N psf$sx
+psf$sy scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub
+TR/showpage{}N/erasepage{}N/setpagedevice{pop}N/copypage{}N/p 3 def
+@MacSetUp}N/doclip{psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll
+newpath 4 copy 4 2 roll moveto 6 -1 roll S lineto S lineto S lineto
+closepath clip newpath moveto}N/endTexFig{end psf$SavedState restore}N
+/@beginspecial{SDict begin/SpecialSave save N gsave normalscale
+currentpoint TR @SpecialDefaults count/ocount X/dcount countdictstack N}
+N/@setspecial{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs
+neg 0 rlineto closepath clip}if ho vo TR hsc vsc scale ang rotate
+rwiSeen{rwi urx llx sub div rhiSeen{rhi ury lly sub div}{dup}ifelse
+scale llx neg lly neg TR}{rhiSeen{rhi ury lly sub div dup scale llx neg
+lly neg TR}if}ifelse CLIP 2 eq{newpath llx lly moveto urx lly lineto urx
+ury lineto llx ury lineto closepath clip}if/showpage{}N/erasepage{}N
+/setpagedevice{pop}N/copypage{}N newpath}N/@endspecial{count ocount sub{
+pop}repeat countdictstack dcount sub{end}repeat grestore SpecialSave
+restore end}N/@defspecial{SDict begin}N/@fedspecial{end}B/li{lineto}B
+/rl{rlineto}B/rc{rcurveto}B/np{/SaveX currentpoint/SaveY X N 1
+setlinecap newpath}N/st{stroke SaveX SaveY moveto}N/fil{fill SaveX SaveY
+moveto}N/ellipse{/endangle X/startangle X/yrad X/xrad X/savematrix
+matrix currentmatrix N TR xrad yrad scale 0 0 1 startangle endangle arc
+savematrix setmatrix}N end
 
 %%EndProcSet
 %%BeginProcSet: color.pro 0 0
@@ -2910,7 +2921,7 @@ grestore } def
  
 @fedspecial end TeXDict begin
 40258437 52099154 1000 600 600
-(/home/sotnikov/workspace/DsHel/figures/Jaxo_tmp.dvi)
+(/home/sotnikov/Documents/GRK2017_talk/figures/Jaxo_tmp.dvi)
 @start end
 %%EndProlog
 %%BeginSetup
@@ -2918,95 +2929,68 @@ grestore } def
 TeXDict begin
  end
 %%EndSetup
-TeXDict begin 1 0 bop  0 TeXcolorgray  Black 0 TeXcolorgray
-0 0 a
+TeXDict begin 1 0 bop  0 TeXcolorgray  Black 0 0 a
  /pssetRGBcolor /setrgbcolor load def /pssetCMYKcolor /setcmykcolor
 load def /pssetGraycolor /setgray load def
- 0 0 a 0 0 a
+ 0
+0 a 0 0 a
 tx@Dict begin  gsave STV CP T /ps@rot 0 def grestore  end
  0 0 a 0 0 a
 tx@Dict begin  gsave STV CP T /ps@refangle 0.  def grestore  end
- 0 0 a 0 TeXcolorgray 0
-TeXcolorgray 1 TeXcolorgray 1 TeXcolorgray 1 TeXcolorgray
-370 2237 3020 2234 v 1 TeXcolorgray 0 TeXcolorgray -274
-1357 a @beginspecial @setspecial
-Black   {  1 2 5 0.2  arrowVTriangle  } 0.5   false 0 0 112 0 add -73
-0 add 157 0 add -28 0 add 1.0  1.0  dasharrowdoubleline
+ 0 0 a 0 TeXcolorgray 0 TeXcolorgray
+0 TeXcolorgray 1 TeXcolorgray 1 TeXcolorgray 1 TeXcolorgray
+756 966 2248 964 v 1 TeXcolorgray 0 TeXcolorgray -1972
+352 a @beginspecial @setspecial
+Black   {  1 2 5 0.2  arrowVTriangle  } 0.5   false 0 0 512 0 add -18
+0 add 592 0 add -66 0 add 1.0  1.0  dasharrowdoubleline
  
 @endspecial @beginspecial
 @setspecial
-Red   {  1 4.8 12 0.2  arrowVTriangle  } 0.5   false 0 0 224 0 add
--9 0 add 288 0 add 23 0 add 4.0  1.0  dasharrowdoubleline
+Black   { } 0  false 0 0 512 0 add -18 0 add 592 0 add 30 0 add 1.0
+ 1.0  dasharrowdoubleline
  
 @endspecial @beginspecial @setspecial
-Red   {  1 4.8 12 0.2  arrowVTriangle  } 0.5   false 0 0 288 0 add
-23 0 add 336 0 add 87 0 add 4.0  1.0  dasharrowdoubleline
+Black   {  1 2 5 0.2  arrowVTriangle  } 0.5   false 0 0 336 0 add -18
+0 add 432 0 add -18 0 add 1.0  1.0  dasharrowdoubleline
  
 @endspecial
 @beginspecial @setspecial
-Black 224 0 add -9 0 add 240 0 add -57 0 add 6.5 4 0 1.0 1.0 doublegluon
+Black  {  1 2 5 0.2  arrowVTriangle  } 0.5   false 0 0 false 40.792
+-168.69 -11.31 472 0 add -10 0 add 1.0 1.0 arc2
  
 @endspecial @beginspecial
 @setspecial
-Black 288 0 add 23 0 add 336 0 add -9 0 add 6.5 5 0 1.0 1.0 doublegluon
+Black 5.5 11 0 true 40.792 168.69 11.31 472 0 add -26 0 add 1.0 1.0
+doublegluearc
  
 @endspecial @beginspecial @setspecial
-Black 259 0 add -22 0 add 1.414 1.0 vertex
+512 0 add -18 0 add 22 22 0 0.882 1.0 1.0 goval
  
 @endspecial
 @beginspecial @setspecial
-Black 285 0 add -7 0 add 1.414 1.0 vertex
+Black 557 0 add -1 0 add 2 1.0 vertex
  
 @endspecial @beginspecial
 @setspecial
-Black 273 0 add -15 0 add 1.414 1.0 vertex
+Black 561 0 add -16 0 add 2 1.0 vertex
  
 @endspecial @beginspecial @setspecial
-Black 101 0 add -86 0 add 16 16 0 1.0 1.0 oval
+Black 557 0 add -33 0 add 2 1.0 vertex
  
 @endspecial
 @beginspecial @setspecial
-Black 245 0 add -72 0 add 16 16 0 1.0 1.0 oval
+Black   { } 0  false 0 4  472 0 add 38 0 add 472 0 add -10 0 add 1.0
+ 1.0  dasharrowdoubleline
  
 @endspecial @beginspecial
 @setspecial
-Black 418 0 add 87 0 add 16 16 0 1.0 1.0 oval
+Black   { } 0  false 0 4  472 0 add -26 0 add 472 0 add -74 0 add 1.0
+ 1.0  dasharrowdoubleline
  
-@endspecial @beginspecial @setspecial
-Black 349 0 add -18 0 add 16 16 0 1.0 1.0 oval
- 
-@endspecial
-@beginspecial @setspecial
-Black   {  1 2 5 0.2  arrowVTriangle  } 0.5   false 0 0 336 0 add 87
-0 add 400 0 add 87 0 add 1.0  1.0  dasharrowdoubleline
- 
-@endspecial @beginspecial
-@setspecial
-Red 110 0 add 51 0 add 160 0 add -25 0 add 6.5 7 0 3.0 1.0 doublegluon
- 
-@endspecial @beginspecial @setspecial
-Red 289 0 add 140 0 add 336 0 add 87 0 add 6.5 6 0 3.0 1.0 doublegluon
- 
-@endspecial
-@beginspecial @setspecial
-Red   {  1 4.8 12 0.2  arrowVTriangle  } 0.5   false 0 0 160 0 add
--25 0 add 224 0 add -9 0 add 4.0  1.0  dasharrowdoubleline
- 
-@endspecial @beginspecial
-@setspecial
-Red 336 0 add 87 0 add 4.472 1.0 vertex
- 
-@endspecial @beginspecial @setspecial
-Red 160 0 add -25 0 add 4.472 1.0 vertex
- 
-@endspecial
-@beginspecial @setspecial
-Black 191 0 add 103 0 add 21 108 25 0.6 1.0 oval
- 
-@endspecial 1 TeXcolorgray
-1 TeXcolorgray 367 3 3026 4 v 367 2238 4 2237 v 3390
-2238 V 367 2240 3026 4 v 0 TeXcolorgray 0 TeXcolorgray
-0 TeXcolorgray eop end
+@endspecial 1 TeXcolorgray 1 TeXcolorgray
+753 3 2254 4 v 753 968 4 967 v 3004 968 V 753 970 2254
+4 v 0 TeXcolorgray 0 TeXcolorgray 0 TeXcolorgray eop
+end
 %%Trailer
 
 userdict /end-hook known{end-hook}if

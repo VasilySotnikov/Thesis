@@ -1,136 +1,191 @@
+In this chapter, we present one of the main results of this thesis:
+the NLO QCD predictions for the production of \Wbb{} in association with up to three light jets.
+We carry out the computation in the four-flavor-number scheme (4FNS), thus including effects due to the non-vanishing bottom-quark mass.
+The motivation to undertake this challenging computation is two-fold.
+Firstly, the class of processes we consider are important irreducible backgrounds to the recently discovered decay of the Higgs boson 
+to a pair of bottom quarks, produced in association with heavy vector bosons \cite{Sirunyan:2018kst,Aaboud:2018zhk}.
+By providing NLO QCD predictions in samples of light-jet multiplicity we hope to improve the theoretical 
+understanding of the backgrounds, and, herewith, improve the measurements of the observables associated to 
+the coupling of the Higgs boson to bottom quarks.
+Secondly, understanding of one-loop numerical unitarity methods with massive particles
+was an important stepping stone towards extending the computational techniques to a multi-loop setting,
+and tackling much more complicated two-loop amplitudes in \cref{chap:5parton}.
+In particular, the ideas of \cref{chap:dshel} have originally arisen from the necessity of the efficient
+numerical evaluation of one-loop helicity amplitudes with external massive quarks.
 
-In this part of the thesis, we present phenomenological
-predictions obtained using the methods presented in
-Chapters~\ref{chap:vme2}-\ref{chap:renorm}. In particular, we provide NLO QCD predictions for \Wbb{} production in association with up to three light
-jets at the LHC, as shown in
-Ref.~\cite{wbbpaper}. These processes have diverse final states including leptons, heavy and light jets and missing
-transverse energy, and so they provide a natural testing ground for precise measurements of complex signatures at the LHC.
-Furthermore, \Wbb{} signatures are reducible and irreducible backgrounds to $HW$ associated
-production, with the Higgs boson decaying into a bottom-quark pair ($b\bar b$). Due to its relevance for constraining the coupling of the Higgs to $b$ quarks, this process
-receives currently increased attention by both LHC experiment.
-%
-We provide results as a function of the light-jet multiplicity and thus add jet probes to the core
-production process. This allows to construct ratio observables~\cite{JetRatios1,JetRatios2,JetRatios3,JetRatios4,BH:Wratios} which give a further handle to improve the understanding of these QCD processes. 
+This work is published in \cite{Anger:2017glm}, 
+and the presentation in this chapter follows closely the one from the article.
+In \cref{sec:wbb:relevance} we overview the status of theoretical and experimental studies of
+the \Wbb{}+jets production, and its phenomenological relevance.
+In \cref{sec:BHMassiveImpl} we briefly note on some of the
+key developments we have implemented in a new version of the \BlackHat{} library,
+which we employed to obtain the virtual matrix elements for this process.
+In \cref{sec:wbb:setup} we discuss out computational setup for the Monte-Carlo integration
+in \cref{sec:wbb:mc_integration}. Finally, in \cref{sec:wbb:pheno} we present our phenomenological studies.
 
-\todo{Technology speaking this required the developments of \cref{chap:dshel} }
+\section{Introduction}
+\label{sec:wbb:relevance}
 
-\todo{
-  Note: edit references for discovery of H->bb and so on,
-  can take them from here:
-  https://arxiv.org/pdf/1907.05836.pdf
-  Add reference for this prediction (NNLO WH)
-}
+The first NLO QCD theoretical studies of the \Wbb{} production were carried out in 
+the context of the 4FNS in the approximation of massless bottom quarks about 20 years ago \cite{Bern:1997sc,Ellis:1998fv},
+and were implemented in the first version of the MCFM program~\cite{mcfm7}.
+The first results including the bottom-quark mass, but with on-shell $W$-boson 
+appeared in \cite{FebresCordero:2006sj,Cordero:2009kv,Badger:2010mg,Oleari:2011ey}.
+The phenomenological studies of NLO QCD \Wbbnj[1]{} production have be performed in \cite{Luisoni:2015mpa}.
+Also, related studies of inclusive production of $W$-boson with a single $b$-tagged jet
+can be found in \cite{Campbell:2006cu,Campbell:2008hh,Caola:2011pz}.
+Finally, the signature of the process \Wbb{}+jets can be also produced from
+the off-shell decays of the top quarks, which was studied in \cite{Denner:2017kzu}.
+On the experimental side, several dedicated measurements
+have been performed by the CDF \cite{Aaltonen:2009qi}, D0 \cite{D0:2012qt}, ATLAS \cite{Aad:2013vka}, and CMS \cite{Chatrchyan:2013uza,CMS:2016bb}
+experiments.
 
-\section{Phenomenological relevance}
+In \cite{Anger:2017glm} we presented, for the first time, NLO QCD corrections to \Wbbnj[2]{} and
+\Wbbnj[3]{} production. As illustrated in \cref{fig:wbb_channels} for an examples of $n=2$ light jets,
+the final state signature we consider can be produced through different orders of the EW and strong couplings.
+We study the QCD corrections of to the LO $\order{\alps^{2+n}\alpf^2}$ production,
+which are the most important contribution outside of the single or double top-quark resonant regions.
+Near the resonances the most important contributions are obtained from the QCD corrections to the LO $\order{\alps^{n}\alpf^4}$ production,
+and EW corrections to the LO $\order{\alps^{1+n}\alpf^3}$. The latter were studied in \cite{Denner:2017kzu}.
 
-The earliest NLO QCD studies of \Wbb{}
-production appeared about twenty years ago~\cite{Ellis:1998fv} and were already included in the first version
-of the MCFM program~\cite{mcfm7}. Those initial predictions were performed in the context of the four-flavor number
-scheme (4FNS) though they approximate all quarks but the top quark to be massless (employing the one-loop helicity amplitudes of Ref.~\cite{Bern:1997sc}).
-Results including full $b$-mass effects appeared in
-Refs.~\cite{FebresCordero:2006sj,Cordero:2009kv} with on-shell $W$ bosons and
-subsequent refinements in Refs.~\cite{Badger:2010mg,Oleari:2011ey}. NLO QCD
-corrections for \Wbbnj[1]{} production were obtained
-in Ref.~\cite{Luisoni:2015mpa}.  Also studies with
-more inclusive samples of $b$ jets have been carried out. In
-Ref.~\cite{Campbell:2006cu} NLO QCD corrections were computed for $W+b+1$-light
-jet production, while NLO QCD results were presented for $W$ production in
-association with a single $b$ jet in Refs.~\cite{Campbell:2008hh,Caola:2011pz}. Several experimental measurements on this process have been carried out by the CDF experiment for $W$
-production with one or two $b$ jets~\cite{Aaltonen:2009qi} (including samples
-with light jets), by the D0 experiment for inclusive $W$ production with a single $b$
-jet~\cite{D0:2012qt}, by the ATLAS experiment for $W$ with up to two $b$
-jets~\cite{Aad:2013vka} and also by the CMS experiment for $W$ and two $b$
-jets~\cite{Chatrchyan:2013uza,CMS:2016bb}.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\textwidth]{wbb_channels}
+  \caption{
+    Different contributions to the $W(\to 2l)b\bar{b}jj$ final state.
+    We consider the NLO QCD corrections to the channel with the least power of the EW coupling $\alpha$, which
+    is dominant outside of the top-quark resonance region.
+    The figure is based on \cite{Denner:2017kzu}.
+  }
+  \label{fig:wbb_channels}
+\end{figure}
 
-The prediction we provide in Ref.~\cite{wbbpaper}, and show in this
-part of the thesis, present for the first time NLO QCD corrections to \Wbbnj[2]{} and
-\Wbbnj[3]{} production, and for completeness we recompute the cases with zero
-and one light jet. 
-%
-These ${\cal O}(\alps)$ corrections are computed to the corresponding
-leading-order (LO) results at ${\cal O}(\alps^{2+n}\alpf^2)$, with $n$ the number of light jets in the process.
-%
-At higher orders in the fine-structure constant $\alpf$, the same
-collider signatures can be obtained from processes involving top quarks which we do not consider here.
-%
-Since the early calculations of inclusive \Wbb{}
-production~\cite{Ellis:1998fv,FebresCordero:2006sj,Cordero:2009kv} it has been
-observed that the NLO QCD corrections are quite large. This is mainly due to
-the opening of a gluon-initiated channel as part of the real contributions to
-the NLO QCD corrections, as well as to the release of a LO
-kinematical constraint which fixes the $p_T$ of the $W$ boson to that of the
-$b\bar b$ system. In other words, these processes suffer from giant
-$K$-factors~\cite{Rubin:2010xp}. The corrections to \Wbbnj[1]{} production on the
-other hand show better behavior~\cite{Luisoni:2015mpa}, and it is expected that
-for even larger light-jet multiplicities, $K$-factors will be more moderate. We show that this is indeed the case in our
-results.
 
-Initial attempts to obtain reliable predictions in spite of giant $K$-factors for \Wbb{} production have focused on
-exclusive analyses~\cite{FebresCordero:2006sj}, including jet vetoes. But sensitivity to the
-$p_T^{\textrm veto}$ cut tends to spoil the convergence of the
-perturbative series~\cite{Tackmann:2012bt}. Instead, we employ exclusive sums~\cite{ESums} as an alternative to
-stabilize these predictions, considering exclusive combinations of up to two
-light jets. The perturbative series for exclusive-sum observables is
-better behaved, as confirmed by comparison to LHC
-data for $W+1$-jet
-production \cite{Aad:2014qxa,ATLAS:ratio2017}. Results based on exclusive sums can contain some large next-to-next-to-leading order
-(NNLO) corrections, and so in the lack of a full NNLO QCD study of \Wbb{} production,
-our results represent a useful parton-level prediction for \Wbb{} observables. 
-We put particular emphasis on observables associated to $H(\rightarrow b{\bar b})W$ 
-production, that is we study the $p_T^{b\bar b}$, $p_T^W$, and
-$M_{b\bar b}$ exclusive-sum distributions.
+Already the firs studies of \Wbb{} production
+recognized \cite{Ellis:1998fv,FebresCordero:2006sj,Cordero:2009kv} that the NLO QCD corrections are large. 
+The main reasons are that the real radiation opens a new
+gluon-induced production channel, and the that
+the kinematical constraint on the transverse momentum of  $W$ is released.
+These effects are collectively known as ``giant $K$-factors'' \cite{Rubin:2010xp}. 
+Including an additional light jet in the final state improves the  behavior \cite{Luisoni:2015mpa}.
+However only starting from \Wbbnj[2]{}, i.e.\ from two additional light jets, are all possible production
+channels open at the LO.  We show that this in this case, as expected, the $K$-factors are moderate.
 
-We obtained our results using the \BlackHat{} library~ \cite{Berger:2008sj} after
-a significant upgrade and the addition of new algorithms, as described
-in Chapters~\ref{chap:vme2}-\ref{chap:renorm}.  Most notably, the new version of the
-program allows to compute one-loop matrix elements
-including massive fermions. For the real-emission
-corrections we use the massive-dipole formalism~\cite{Catani2002}, as
-implemented in the \COMIX{} package~\cite{Comix} which is part of
-the \SHERPA{} Monte Carlo program~\cite{Sherpa}. We store our results in a set
-of \ntuple{} files~\cite{BH:Ntuples} which allow fast a-posteriori studies of
-our results, including scale variations, PDF and $\alps$ reweighting as well as the evaluation of additional observables. 
 
-This part of the thesis is organized as follows. In the present chapter, we give
-our calculational setup, details about coupling
-schemes and input parameters employed as well as the choices for the renormalization and
-factorization scales. In
-\cref{chap:wbb_validation}, we validate our new matrix elements
-and provide thorough checks against automated tools and
-higher-precision targets. In \cref{chap:wbb_results}, we
-present and analyze the results obtained.
-
+One of the first ideas to address the problem of large $K$-factors was exploiting the jet vetoes 
+for more exclusive studies \cite{FebresCordero:2006sj}.
+Unfortunately, the sensitivity to the $p_T^{\textrm veto}$ cut upsets
+the precision  of the predictions in this case.
+The latter can be mitigated by employing the so-called ``exclusive-sum'' techniques \cite{ESums},
+which take advantage of the available multi-jet NLO samples.
+In particular, we use them in \cref{sec:wbb:pheno} for our predictions of observables associated to the  $H(\rightarrow b{\bar b})W$ 
+production: the $p_T^{b\bar b}$, $p_T^W$, and $M_{b\bar b}$ distributions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Implementation of Numerical Unitarity Methods with Massive Particles in \BlackHat{}}
+\section{Numerical Unitarity with Massive Particles in \BlackHat{}}
 \label{sec:BHMassiveImpl}
-In this section we discuss he upgrade of \BlackHat{} which has been carried out in order to be able
-to evaluate one-loop amplitudes with massive quarks.
 
-\todo{1-loop master integral basis}
-\subsection{Additional Topologies}
-\subsection{Singular Contributions from Wave-Function Renormalization}
-\subsection{Loop momentum parametrizations}
-\subsection{Relative Alignment of loop momenta (first here, at two loop everywhere)}
-\subsection{Fitting of 4-dimensional coefficients through $\mu^2=0$ loop momenta}
-\subsection{Integrals with Masses}
+The original version of the \texttt{C++} library \BlackHat{} \cite{Berger:2008sj,Berger:2008ag} has been
+implemented having only massless QCD in mind. 
+And the technical details went into that implementation are very different than
+the multi-loop generalization we presented in \cref{chap:numunitarity}.
+In this section we discuss the developments for the new version of \BlackHat{},
+which has been required to be able to compute one-loop amplitudes with massive quarks.
 
+A comprehensive review of the issues connected with the application of
+one-loop numerical unitarity methods to massive particles can be found in \cite{Ellis:2011cr,Ellis:2008ir}.
+Furthermore, some details of our implementation have been already discussed in \cite{FelixDiss},
+so we limit ourselves to a very brief summary.
+
+\paragraph{The strategy of handling the dimensional regularization}
+was the most significant change.
+The \BlackHat{} library was based on the numerical unitarity methods in four dimensions to extract the cut-constructable part
+of the amplitude \cite{Ita:2011hi,Berger:2008sj,Berger:2008ag}. As for the rational part, either the special on-shell recursion, or the SUSY decomposition, have been employed.
+Both approaches are not suitable for amplitudes with massive quarks.
+To this end, we have reorganized the computation strategy to follow closer the $D$-dimensional unitarity method described in \cref{chap:numunitarity}\footnote{
+  We did not, however, introduce the $D$-dependence into the coefficients as we did in the examples in \cref{sec:ms_examples}.
+},
+also taking advantage of our developments in \cref{chap:dshel} with some additional tricks explained in \cite{Anger:2018ove}.
+
+Nevertheless, as an optimization opportunity,
+we still extract the cut-constructable coefficients by sampling 
+the cut equations \eqref{eq:cut_equations} 
+with the four-dimensional loop momenta first.
+We then transfer these coefficients to the left-hand side of \cref{eq:cut_equations} and use only a few additional
+sample points with five-dimensional loop momenta to obtain the remaining coefficients.
+This, in turn, implies that the general parametrization of on-shell loop-momenta, that we discussed in \cref{sec:evaluation_of_cuts},
+is not suitable\footnote{
+  it is also not suitable for the reason of numerical stability
+}. For this reason we have constructed and implemented the on-shell loop-momenta parametrizations
+for all topologies with massive particles in the loop, based on \cite{Kilgore:2007qr}.
+
+
+
+\paragraph{The extraction of master coefficients} was previously organized according to a more analytics-oriented approach of \cite{Forde2007}.
+With massive particles in the loop this approach becomes rather clunky.
+Furthermore, we found that it does not offer any benefits over numerically-oriented OPP-like subtractions
+in the cut equations \eqref{eq:cut_equations}. Therefore, we replaced the former by the latter.
+
+
+\paragraph{Additional topologies.}
+The tadpole and bubble topologies with the single on-shell particle in the corner (which we dub ``on-shell bubbles'')  no longer correspond to scaleless
+integrals if massive particles are involved, hence they cannot be discarded.
+We have implemented the construction of hierarchies for these topologies, as well the corresponding
+on-shell loop-momentum parametrizations. 
+In addition, there are some new features associated to these topologies:
+\begin{enumerate}
+  \item The cuts of all tadpoles and on-shell bubbles contain explicitly divergent contributions associated
+    to the mass and wave-function renormalization (see \cref{fig:wbb:singdoublecut} for an example).
+    We mentioned this towards the end of \cref{sec:cut_equations}.
+    \begin{figure}[h]
+      \[
+        \vcenter{\hbox{\includegraphics[height=12ex]{./figures/dc_div_left.eps}}} =
+        \vcenter{\hbox{\includegraphics[height=12ex]{./figures/dc_div_r.eps}}}~+~
+        \vcenter{\hbox{\includegraphics[height=12ex]{./figures/dc_div2_cross.eps}}}
+      \]
+      \caption{
+        A double cut with the single on-shell massive quark in the corner (on the left), containing
+        a divergent contribution associated to the mass and wave-function renormalization (the second term on the right),
+        which has to be manually removed.
+      }
+      \label{fig:wbb:singdoublecut}
+    \end{figure}
+    Following the approach of \cite{Ellis:2008ir} we have implemented the removal of this contributions in our off-shell recursion.
+
+  \item The topology in \cref{fig:dc_div2}, in addition to containing a divergent contribution mentioned above,
+    has another special feature: the transverse complement of its single light-like external momentum contains this momentum.
+    We discussed this in \cref{sec:ms_examples}.
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width=0.3\textwidth]{dc_div2}
+      \caption{A special one-loop topology with a massless on-shell leg in the corner and massive cut propagators.}
+      \label{fig:dc_div2}
+    \end{figure}
+    This has two consequences. First, there are more coefficients with master integrals, and we evaluate the corresponding integrals explicitly.
+    Second, as opposed to other one-loop topologies, the ansatz for the integrand of this topology is \emph{not} invariant under loop momentum shifts.
+    This slightly complicates the construction of hierarchies, since it implies that the tadpoles below have to be carefully aligned.
+    Interestingly, this is a generic feature beyond one loop, i.e.\ the ansätze for integrands of \emph{all} topologies are not invariant under loop momenta shifts.
+\end{enumerate}
+
+
+\paragraph{Integrals with internal masses.} Finally,
+we have implemented all one-loop master integrals with real internal masses to $\order{\epsilon^0} $, based
+on the results from \cite{Carrazza:2016gav,vanHameren:2010cp}. This allows us to incorporate
+them in our automated numerical precision tracking and rescue system.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Setup}
+\label{sec:wbb:setup}
 
 \subsection{Channels}
 \label{sec:calcsetup}
 
-We provide NLO QCD prediction for the production of \Wbb~in association with $n$ light jets ($n =
-0,1,2,3$) at the LHC $\sqrt{s} = 13$ TeV. We treat the decay of the charged vector boson to a
-massless charged-lepton and its corresponding (anti-)neutrino at the
-amplitude level. 
-The partonic subprocesses of Born and virtual contributions
-can be obtained from the following subprocesses
-%
+We compute NLO QCD corrections for the production of \Wbb~in association with $n$ light jets ($n =
+0,1,2,3$) at the LHC $\sqrt{s} = 13$ TeV. 
+We include the leptonic decays of the off-shell vector bosons at the level of amplitudes.
+The parton-level cross-sections are obtained from the following channels:
 \begin{subequations}
   \begin{align}
     n=0:&\qquad 0\rightarrow Wb{\bar b}q{\bar q}'\ ,\\
@@ -139,16 +194,16 @@ can be obtained from the following subprocesses
     n=3:&\qquad 0\rightarrow Wb{\bar b}q{\bar q}'ggg\ ,\quad  0\rightarrow Wb{\bar b}q{\bar q}'Q{\bar Q}g\ ,
   \end{align}
 \end{subequations}
-by crossing. Light-quark flavors are denoted by the labels $q$ and $Q$ and we consider bottom quarks to be massive (except when
-explicitly stated otherwise). We include contributions from closed fermions loops of light
-quarks as well as top and bottom quarks. In Fig.~\ref{fig:FDsWbb3j} we show sample Feynman diagrams for the seven-parton amplitudes. Real-emission subprocesses are obtained from the above list by adding a gluon
-or replacing a gluon by a $Q'{\bar Q'}$ pair. 
+which we wrote in a crossing-symmetric form. 
+Here the light quarks are denoted with $q$ and $Q$, and the $b$ quarks are considered massive.
+The contributions from closed $b$ and $t$ loops are included. \footnote{
+  Although the contribution of the latter is negligible.
+}
+We demonstrate some representative Feynman diagrams contributing to the channels of \Wbbjjj{} in \cref{fig:FDsWbb3j}.
 
-We generate fixed order parton-level predictions and do not include parton-shower
-effects. All observables considered will be constructed from events containing
-exactly two observable $b$ jets, defined in an infrared safe
-way~\cite{Banfi:2006hf}. We do not introduce any corrections due to possible
-mistagging of heavy and/or light jets. 
+We consider fixed order predictions at parton-level and discard parton-shower
+effects. We will require exactly two tagged infrared-safe $b$ jets \cite{Banfi:2006hf}
+in all observables we examine.
 
 \begin{figure}[h]
   \centering
@@ -157,28 +212,24 @@ mistagging of heavy and/or light jets.
   \subfloat[][$qg\rightarrow q^\prime g g W^{\pm}b\bar{b}$]{\label{subfloat:nf} \includegraphics[width=0.28\textwidth]{figures/Wbb2q3g_nf}}
   \quad
   \subfloat[][$q{\bar Q}\rightarrow q^\prime \bar{Q} g W^{\pm}b\bar{b}$]{ \includegraphics[width=0.28\textwidth]{figures/Wbb4q1g}}
-  \caption{Sample one-loop diagrams contributing
+  \caption{Representative one-loop diagrams contributing
     to \mbox{$pp\rightarrow$ \Wbbnj[3]{}} production. Massive quark
-    lines are printed thick and the diagram \protect\subref{subfloat:nf} displays a contribution
-  from closed loops of top and bottom quarks.}
+    lines are printed thick and the diagram \protect\subref{subfloat:nf} displays a contribution from closed loops of top and bottom quarks.}
   \label{fig:FDsWbb3j}
 \end{figure}
 
 
 
 \subsection{Renormalization}
-We use the FDH variant of dimensional regularization in intermediate steps to
-regularize UV and IR divergences. At the end we convert the renormalized
-amplitude to the 't Hooft-Veltman (HV) scheme~\cite{tHooft:1972tcz}.
+
+We regularize UV and IR divergences in the FDH scheme in the computation of virtual matrix elements,
+and use the known transition rules to convert our results to the HV scheme.
 
 \todo{fix error in renormalization}
 
-In \cref{tab:renorm} we summarize the renormalization counterterms
-in the FDH scheme. For all external states we use the on-shell
-scheme and for the QCD coupling we use the $\overline{MS}$ scheme. The gluon
-wave-function-renormalization counterterm receives contributions from all
-active heavy quarks. In the decoupling limit this counterterm is set to
-zero.
+We give all counter-terms required for the renormalization in the FDH scheme, as well as additional finite shifts in \cref{tab:renorm}.
+For the mass and wave-function renormalization we use the on-shell scheme,
+and for the $\overline{\text{MS}}$ scheme for the QCD coupling.
 \begin{table}[h]
   \begin{tabular}{lcll}
     \textbf{Renormalization} & \textbf{Scheme} & \textbf{Counterterm} \\
@@ -192,54 +243,42 @@ zero.
     Decoupling shift & --- & $\displaystyle     \Delta_i ~=~  -\frac{2}{3}\ln{\frac{\mu^2}{m_i^2}} $\\
     \bottomrule
   \end{tabular}
-  \caption{Renormalization counterterms. Here $\mu$ is the renormalization
+  \caption{The renormalization counter-terms. Here $\mu$ is the renormalization
     scale, $m_{i}$ are the masses for heavy quarks, $N_f$ is the number of light flavors,
     $N_h$ the number of heavy flavors, and $N_c$ the number of colors.
-    A common factor of $-4\pi\alpha_s c_\Gamma$ has been factored out.
   }
   \label{tab:renorm}
 \end{table}
-In the 4FNS, the number of light flavors $N_f$ is set to four, and the
-number of heavy flavors $N_h$ is set to two, accounting for bottom-
-and top-quark loops. For each heavy quark included we also add a finite
-decoupling shift. Thus the full renormalized amplitude $\mathcal{A}^{(ren)}$ is
-obtained from an amplitude with renormalized quark masses, $\mathcal{A}^{(bare)}_{m_R}$ as
-%
+We set $N_f=4$, and $N_h=2$, as we work in the 4FNS, and 
+add the decoupling shifts for top and bottom quarks to correctly reproduce the corresponding decoupling limits.
+Except for the mass renormalization, which we perform via an explicit computation,
+the whole renormalization is proportional to the tree amplitude, 
+and the renormalized amplitude $\mathcal{A}^{(ren)}$ is
+obtained as
 \begin{equation}
   \mathcal{A}^{(ren)} =
   \mathcal{A}^{(bare)}_{m_R} - 4\pi \alpha_s c_\Gamma 
   \left( \sum_i N_{Q_i} \frac{\delta_{2,i}}{2} + N_{g}\delta_3 + \frac{N_{\alps}}{2}\left(\delta_{\alps} + \sum_{i\in N_h}\Delta_i\right) \right)  \mathcal{A}^{(born)},
   \label{renfull}
 \end{equation}
-%
-where $\displaystyle c_\Gamma={(4\pi)^{-(2-\epsilon)}{\Gamma(1+\epsilon)\Gamma^2(1-\epsilon)}/\Gamma(1-2\epsilon)}$,
-$N_{Q_i}$ is the number of external heavy quarks of flavor $i$, $N_g$ is the number of external
-gluons and $N_{\alps}$ is the $\alps$ order (at Born level).
-
-The renormalization of quark masses cannot be represented as a contribution proportional to the tree amplitude. We explicitly
-compute mass counterterm contributions using a dedicated recursive tree-like computation at the level of primitive loop amplitudes.
-
-The conversion to the 't Hooft-Veltman scheme is performed by a finite shift~\cite{Signer:2008va}
-%
+where $\mathcal{A}^{(bare)}_{m_R}$ is the amplitude with renormalized masses,
+$\displaystyle c_\Gamma={(4\pi)^{-(2-\epsilon)}{\Gamma(1+\epsilon)\Gamma^2(1-\epsilon)}/\Gamma(1-2\epsilon)}$,
+$N_g$ and $N_{Q_i}$ are the numbers of external gluons and heavy quarks of flavor $i$ correspondingly,
+and $N_{\alps}$ is the power of $\alps$ of the tree amplitude.
+We shift \cite{Signer:2008va} the amplitude by
 \begin{equation}
   \mathcal{A}^{(ren)}_{HV} - \mathcal{A}^{(ren)}_{FDH} = -4\pi \alpha_s c_\Gamma\left(N_{g}~\frac{N_c}{6} + \frac{N_q}{4}\left(N_c -\frac{1}{N_c}\right)\right)\mathcal{A}^{(born)},
   \label{schemeshift}
 \end{equation}
-%
-where $N_q$ stands for the number of light external quarks in the respective amplitude.
+to convert it to the HV scheme.
 
 
 \subsection{Numerical Stability}
 %
-The numerical unitarity approach has proven to be numerically stable even when
-computing high-multiplicity one-loop matrix elements (see for example~\cite{BH:W3jDistributions,BH:W5j}). Nevertheless,
-there are phase-space regions where the on-shell loop-momentum parameterizations break down. This occurs particularly where Gram determinants are close
-to zero. For such configurations incomplete cancellations of large contributions can
-lead to a loss of numerical precision. 
-In this section we study
-the numerical stability of our  massive one-loop matrix elements by comparing
-results computed in normal-production mode ($d\sigma_V^\mathrm{prod}$) with computations performed in
-quadruple precision~\cite{QD} ($d\sigma_V^\mathrm{HP}$), i.e.\ up to 32 digits of precision.
+In this section, we explore the numerical stability of the new version of \BlackHat{}.
+We compare the normal matrix elements $d\sigma_V^\mathrm{prod}$ with the ones obtained from quadruple-precision evaluations $d\sigma_V^\mathrm{HP}$.\footnote{
+  We use the \cite{QD} library for high-precision arithmetics
+}
 
 \begin{figure}[h]
   \centering
@@ -249,10 +288,6 @@ quadruple precision~\cite{QD} ($d\sigma_V^\mathrm{HP}$), i.e.\ up to 32 digits o
     for two types of subprocesses contributing to the \Wbbjj~production calculation. On the
     left we show results for the
     six-quark and on the right for four-quark matrix elements, respectively.
-    We use a set of $10^5$ phase-space points
-    sampled for the LHC setup with $\sqrt{s}=13$ TeV, in the same way as the phenomenological
-    study presented in this paper, and use a dedicated calculation in
-    quadruple precision for computing reference results.
     The dashed (blue) line represents the precision of the double pole, the dotted
     (green) line represents the single pole and the
   solid (black) line the precision of the finite piece of the calculation.}
@@ -268,56 +303,23 @@ four-quark matrix elements.}
 \label{fig:stabilityWbb3j}
 \end{figure}
 
-We produce histograms of the logarithmic relative error $\delta$:
+
+We study the most complex sub-processes
+by generating the histograms (see \cref{fig:stabilityWbb2j,fig:stabilityWbb3j}) of the logarithmic relative error $\delta$,
 \begin{equation}
-  \delta = \log_{10}\left(\frac{\left|d\sigma^{\text{prod}}_V - d\sigma^{\text{HP}}_V\right|}{\left|d\sigma^{\text{HP}}_V\right|}\right)\ ,
+  \delta = \log_{10}\left(\frac{\left|d\sigma^{\text{prod}}_V - d\sigma^{\text{HP}}_V\right|}{\left|d\sigma^{\text{HP}}_V\right|}\right)\ .
   \label{reldiff}
 \end{equation}
-for sample subprocesses of the most complex types in our calculations. 
-The superscripts ``prod'' and ``HP'' mean normal-production evaluation and
-quadruple floating-point evaluation respectively.
-In \cref{fig:stabilityWbb2j,fig:stabilityWbb3j} we show a numerical stability plot for \Wbbjj{} and
-\Wbbjjj{} production respectively. For the \Wbbjj{} process we include the two types of
-subprocesses: those associated to the four-quark ($0\rightarrow Wb{\bar b}q{\bar q}'gg$)
-and the six-quark ($0\rightarrow Wb{\bar b}q{\bar q}'Q{\bar Q}$) matrix elements, respectively.
-Similarly, for the \Wbbjjj{} process we show results for the four-quark ($0\rightarrow Wb{\bar b}q{\bar q}'ggg$)
-and six-quark ($0\rightarrow Wb{\bar b}q{\bar q}'Q{\bar Q}g$) matrix elements.
-%
-Each figure shows the estimated precision of the double-pole and
-single-pole terms as well as the finite part in the $\epsilon$ expansion of the 
-matrix elements. The double-pole term is
-commonly computed with an accuracy of 14 digits, while the single-pole and the
-finite-part distributions peak at about 10 digits.
+We sample $10^5$ phase-space points from the same distribution that we used in our phenomenological studies.
+Overall we see, that our program is numerically stable,
+with only a few points with precision worse then $10^{-3}$,
+which have no effect on the observables.
 
-To control the precision of the computation we implemented a rescue system which 
-identifies phase-space points 
-which lead to numerically unreliable computations
-by performing checks at several
-stages of the calculation\footnote{With some minor adaptations we use the same
-implementation as described in \cite{Berger:2008sj,BH:W3jDistributions}.}. Whenever
-any of those checks fail we switch the computation to use higher-precision 
-arithmetics  locally, i.e.\ only for parts of the computation which failed the check.
-Typically, the fraction of time spent on these recomputations is small.
+One of the advantages of unitarity methods is that they allow a fine-grained control of the evaluation process
+of the amplitude. 
+We set up several number of tests, targeted onto small subsets of the evaluation,
+and reevaluate only these subsets with higher precision whenever required.
 
-Overall we observe
-very good precision, with less than $1$ in $10^4$ phase-space
-points computed to an accuracy worse than three digits\footnote{This precision target 
-is chosen to allow for matrix element evaluation to a much better
-precision than the achievable statistical 
-error in Monte Carlo integrations.}.
-%
-Some of the few points in the low-precision tail
-%of the histogram are caused by instabilities in finite box
-%integrals with three and four internal masses as well as by an accidental failure of the rescue system.
-%Most of the time instabilities 
-can be traced
-to the fact, that the scale set by the bottom mass $m_b$ and other scales of the problem $s_{ij}$ at
-sufficiently high energy are separated by several orders of magnitude.
-Ratios of the form $(m_b^2/s_{ij})^k$ enter loop-momentum parameterizations and can cause loss of precision.
-%
-We have observed that
-the contribution of the points in the low-precision tail is several orders of magnitude smaller than the total
-statistical errors for the observables studied.
 
 \subsection{Validation}
 We have carried out a number of checks with the new implementation of \BlackHat{}.
@@ -356,6 +358,7 @@ and differential distributions.
 
 
 \section{Monte Carlo Integration}
+\label{sec:wbb:mc_integration}
 
 We obtain NLO QCD predictions by using the \SHERPA{} 
 Monte Carlo program~\cite{Sherpa} to integrate Born, virtual and real-radiation
@@ -498,6 +501,7 @@ order QCD by ``NLO''.
 
 
 \section{Phenomenology}
+\label{sec:wbb:pheno}
 In this section we present NLO QCD results for \Wbbn~production in
 $pp$ collisions at $\sqrt{s}=13$ TeV, the experimental configuration
 of the LHC Run-II. We present results for a set of distributions and

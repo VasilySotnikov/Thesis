@@ -414,8 +414,8 @@ so the decomposition is done in the same way as above.
   \includegraphics[width=1\linewidth]{sunrise_kinmatics_example}
 \end{wrapfigure}
 As a two-loop example, we choose a two-loop massless ``sunrise'' topology, which is simple enough to fit the answer on a page.
-For $L=2$ we have 11 scalar products. There are 3 propagators in the sunrise, so we have 8 ISPs \todo{clarify including transverse} in total.
-From them 6 are transverse. 
+For $L=2$ we have 11 scalar products. There are 3 propagators in the sunrise, so we have 8 ISPs in total, 
+from which 6 are transverse. 
 We choose the independent variables to be 
 \begin{align*}
   \rho_1 &= \ell_1^2,            \qquad & \alpha_1 = 2 (\sp(\ell_1,p_1)), \\
@@ -541,7 +541,7 @@ For an explicit example of how this happens, see \cref{fig:example_factorization
 A notable exception to this observation can be found in the models which
 contain non-trivial wave-function and mass renormalization for some of its particles,
 i.e.\ when there are non-vanishing one-particle-reducible diagrams \cite{Ellis:2008ir,Ellis:2011cr}.
-These Feynman diagrams are absorbed into renormalization and have to be discarded from amplitudes by hand (\todo{see figure .}), hence
+These Feynman diagrams (see \cref{fig:wbb:singdoublecut}) are absorbed into renormalization and have to be discarded from amplitudes by hand, hence
 the vertices of the cut topologies to which they would contribute are \emph{not} tree amplitudes.
 There is an interesting proposal to work around this issue \cite{Badger:2017gta}.
 In practice, however\footnote{%
@@ -560,7 +560,7 @@ demands some additional booking-keeping.
     \mathfigure{height=\figureheight}{example_tree_corner/f4} \longrightarrow 
     \mathfigure{height=1.5\figureheight}{example_tree_corner/corner}
   \]
-  \caption{An illustration of diagrammatic ``proof'' of factorization. 
+  \caption{An illustration of diagrammatic verification of factorization. 
     On the left we show all Feynman diagrams contributing to a four-point one-loop amplitude of any theory with 3- and 4-point vertices
     in the channel $\{\ell^2,(\ell-p_1)^2,(\ell-p_1-p_2)^2\}\to 0$ given by the topology on the right.
     The tree amplitudes in the corners of the topology are assembled explicitly.
@@ -677,8 +677,7 @@ First, we separate four-dimensional part and $(D-4)$-dimensional parts as
 \begin{equation}
   \ell^l = \ell_{[4]}^l + \sum_{i\in \tilde{B}} \tilde{n}_j~\mu^l_{j}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0, 
 \end{equation}
-where $\tilde{n}_i$ is some basis in $M_{[D-4]}$.
-\todo{Unify the notion of spaces} 
+where $\tilde{n}_i$ is some basis in $\mathsf{S}_{[D-4]}$.
 For each strand $l$ we construct a van Neerven-Vermaseren basis (see \cref{sec:vNV_basis})
 in $D=4$ with respect to the set $B^l = B^l_p \cup B^l_t$ of $\max(4,N-1)$ external momenta selected in the following order:
 \begin{enumerate}
