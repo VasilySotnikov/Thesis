@@ -1,24 +1,211 @@
+In this chapter, we present the central result of the thesis:
+the analytic expressions for all two-loop five-parton helicity amplitudes in the leading-color approximation.
+%To this date, performing the computation of this level of complexity is
+%out of reach of the standard computational techniques discussed in \cref{chap:stdtech}.
+To obtain our results, we exploit the full power of the novel multi-loop generalization of the numerical $D$-dimensional unitarity method,
+which we discussed in \cref{chap:numunitarity,chap:dshel}.
+With these methods, we are able to perform efficient numerical evaluations of the amplitudes in floating-point arithmetics, as well as any number field.
+We then obtain the analytic expressions for the amplitudes from numerical evaluations over finite fields,
+employing the functional interpolation techniques.
+
+The subject of this chapter have been published in \cite{Abreu:2018jgq,Abreu:2019odu},
+and our presentation here is based on those papers.
+This chapter is organized as follows.
+In \cref{5parton:sec:intro} we give our motivation, and review the state-of-the-art of the related two-loop computations.
+In \cref{5parton:sec:amplitudes} we provide a precise definition  of the objects we compute.
+In \cref{5parton:sec:tech} we consider some technical details of our implementation, including
+the construction of cut equations \eqref{eq:cut_equations}.
+We present the high-precision benchmark values for the amplitudes in \cref{sec:5parton:numerics},
+and discuss their validation in \cref{sec:Validation-5parton}.
+Finally, in \cref{sec:AnalyticForm} we explain how we obtain the analytic expressions from numerical samples,
+and analyze their structure.
+
 \section{Introduction}
-Here motivation and status, references to results.
+\label{5parton:sec:intro}
+
+Two-loop amplitudes are ingredients in the NNLO cross-section.
+The computation of two-loop amplitudes is much more challenging than one-loop,
+Another challenging component is the handling of IR divergences, which we don't discuss.
+
+Are obtain via numerical Monte-Carlo integration. 
+
+The NLO has been success.
+We would like to ideally have the same story for NNLO
+
+Our results are an important step towards the automation of
+the calculation of two-loop partonic amplitudes, which
+are in turn an important ingredient towards obtaining
+theory predictions to three-jet production at hadron colliders
+at next-to-next-to-leading order (NNLO) in QCD.
+
+Experience at one loop has shown that the direct numerical computation of
+scattering amplitudes can avoid difficulties encountered in analytic
+approaches. However, while numerical evaluation is sufficient for
+phenomenological applications, compact analytic results are still very useful.  
+Indeed, the numerical evaluation of analytic expressions is
+generally straightforward to set up and oftentimes more stable and efficient
+than the purely numerical approach.  Furthermore, explicit formulae allow for a
+detailed analysis of the analytic properties of amplitudes in order to learn
+about  higher-order perturbation theory.
+
+Recently, significant
+progress has been made regarding the computation of two-loop multi-particle
+amplitudes.  In the case of five-point QCD amplitudes, the first one to be studied
+was the leading-color five-gluon amplitude with all helicities positive, initially
+evaluated numerically~\cite{Badger:2013gxa} and  
+afterwards presented analytically~\cite{Gehrmann:2015bfy,Dunbar:2016aux}.
+Building on this result, the all-plus two-loop six- and seven-gluon amplitudes were
+obtained~\cite{Dunbar:2016gjb,Dunbar:2017nfy}.  By now all leading-color
+two-loop five-parton amplitudes (i.e., with external gluons and/or
+massless quarks) have been computed
+numerically~\cite{Badger:2017jhb, Abreu:2017hqn, Badger:2018gip,
+Abreu:2018jgq}. 
+Very recently, numerical algorithms were combined with
+functional reconstruction techniques~\cite{Peraro:2016wsq} resulting in
+analytic expressions for the planar two-loop five-gluon single-minus helicity
+amplitude~\cite{Badger:2018enw} and for all two-loop five-gluon helicity
+amplitudes~\cite{Abreu:2018zmy}. These calculations rely on the availability
+of the planar two-loop five-point master
+integrals, which have been given in refs.~\cite{Papadopoulos:2015jft,Gehrmann:2018yef}. 
+Progress with full-color five-gluon amplitudes~\cite{Badger:2015lda} is 
+gaining momentum with recent results towards the computation of non-planar master
+integrals~\cite{Abreu:2018aqd,Chicherin:2018old}.
+In more conventional approaches, integration-by-parts relations were
+obtained~\cite{Boels:2018nrr,Chawdhry:2018awn} which can be, in principle, used to compute the
+same type of two-loop five-point amplitudes.
+
+finite-field arithmetic~\cite{vonManteuffel:2014ixa,Peraro:2016wsq} in order to
+functionally reconstruct~\cite{Peraro:2019svx,Peraro:2016wsq,Klappert:2019emp} the multivariate rational
+coefficients of a basis of special functions~\cite{Gehrmann:2018yef}. We have
+already shown that this strategy can be employed to compute amplitudes of
+relevance to LHC phenomenology, by providing the analytic expressions of all
+planar two-loop five-gluon amplitudes~\cite{Abreu:2018zmy}. In this article we
+further improve on the latter work by producing compact analytic results for
+all leading-color two-loop five-parton amplitudes in QCD.  
+
+Second, we modify the multivariate reconstruction algorithm that we employed
+in ref.~\cite{Abreu:2018zmy} in order to use an ansatz in terms of Mandelstam variables
+instead of twistor variables~\cite{Hodges:2009hk}. This is achieved by
+exploiting the analytic structure of amplitudes with five external massless
+partons in order to obtain target functions which are rational functions of
+Mandelstam variables. This has a dramatic impact in reducing the degree of the
+multivariate polynomials that we reconstruct, allowing us to obtain all
+analytic expressions with a modest computational effort.
+
+Removing the bottleneck of dimensional reconstruction with the methods described in \cref{chap:dshel} 
+was the key ingredient to be able to evaluate amplitudes with fermions efficiently.
+
+
+Finally, in order to employ a single finite field for rational
+reconstruction, we perform a systematic analysis of the analytic structure of
+the reconstructed functions which takes advantage of two major simplification
+procedures. As a by-product, the procedure results in rather compact expressions
+for all helicity amplitudes, which we provide as ancillary files. 
+We first analyze the dimension of the function
+space spanned by all the pentagon-function coefficients on each amplitude. It
+turns out that this dimension is an order of magnitude smaller (on average)
+than the number of pentagon functions. Then we simplify each member of the
+basis of this space with a multivariate partial-fraction decomposition.  All
+taken into account, the final expressions we present are reduced in byte size
+by up to two orders of magnitude, with final results that can easily be handled
+for future analytic and numerical evaluations.
 
 Do not forget \todo{reference Wjj benchmark}
 
+\todo{Also susy stuff and all-plus full color} 
+
 \section{Setup}
+\label{5parton:sec:amplitudes}
 
-\todo{Describe construction of hierarchies, i.e. process library} 
+We consider all
+two-loop amplitudes required for the computation of the NNLO QCD corrections to three-jet production at
+hadron colliders.
+This includes the
+five-parton processes with five gluons, two quarks and three gluons, and four
+quarks and one gluon,  
+\begin{align*}
+  &\mathcal{A}^{(2)}(g,g,g,g,g), \\
+  &\mathcal{A}^{(2)}(q,\bar{q},g,g,g), \\
+  &\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q},g),
+\end{align*}
+and we include the contributions with one or two closed fermion loops.
+The representative diagrams are given in \cref{fig_parents5g,fig_parents2q3g,fig_parents4q1g}.
+For the $\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q},g)$ amplitude, we explicitly provide results for the case 
+of different flavours. And the case of identical flavours can be obtain through the anti-symmetrization.
 
-take a lot of information from "Construction of Cut Equations" from 5-gluon paper.
-in particular important about fast surface terms and FORM,
-perhaps mention possible improvements with power counting equation solving
+For each process we consider a full set of helicity amplitudes, which we 
+define as described in \cref{chap:dshel}.
+We take into account charge and parity transformations to reduce
+the number of independent helicity amplitudes.
 
-warmup procedure
+%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}[scale=.9]
+    % 5 point masters
+    \node at (0,0){\includegraphics[scale=0.5]
+    {figures/5g.pdf}};
+    % 5 point masters
+    \node at (5,0){\includegraphics[scale=0.5]
+    {figures/5gnf.pdf}};
+    % Level 2 
+    \node at (10,0){\includegraphics[scale=0.5]
+    {figures/5gnf2.pdf}};
+\end{tikzpicture}
+\end{center} 
+\caption{Representative Feynman diagrams for leading-color
+$\CA^{(2)}(g,g,g,g,g)$ amplitudes, contributing at order
+$N_f^0$, $N_f^1$ and $N_f^2$.}
+\label{fig_parents5g}
+\end{figure}
 
+%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}[scale=.9]
+    % 5 point masters
+    \node at (0,0){\includegraphics[scale=0.5]
+    {figures/2q3g.pdf}};
+    % 5 point masters
+    \node at (5,0){\includegraphics[scale=0.5]
+    {figures/2q3gnf.pdf}};
+    % Level 2 
+    \node at (10,0){\includegraphics[scale=0.5]
+    {figures/2q3gnf2.pdf}};
+\end{tikzpicture}
+\end{center} 
+\caption{Representative Feynman diagrams for leading-color
+$\CA^{(2)}(q,\bar q,g,g,g)$ amplitudes, 
+contributing at order
+ $N_f^0$, $N_f^1$ and $N_f^2$.}
+\label{fig_parents2q3g}
+\end{figure}
 
+%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}[scale=.9]
+    % 5 point masters
+    \node at (0,0){\includegraphics[scale=0.5]
+    {figures/4q1g.pdf}};
+    % 5 point masters
+    \node at (5,.4){\includegraphics[scale=0.5]
+    {figures/4q1gnf.pdf}};
+    % Level 2 
+    \node at (10,.4){\includegraphics[scale=0.5]
+    {figures/4q1gnf2.pdf}};
+\end{tikzpicture}
+\end{center} 
+\caption{Representative Feynman diagrams for leading-color
+$\CA^{(2)}(q,\bar q,Q,\bar Q,g)$ amplitudes, 
+contributing at order
+$N_f^0$, $N_f^1$ and $N_f^2$.}
+\label{fig_parents4q1g}
+\end{figure}
 
-\subsection{Colour Structures}
-The gluon and fermion amplitudes \eqref{eq:defAmpsTens}
-can be decomposed 
-in terms of color structures. 
+\subsection{Color Structure}
+\label{5parton:sec:color_structures}
+We decompose all amplitudes in terms of color structures. 
 We denote the fundamental generators of the
 $SU(\NC)$-group by $(T^a)^{\;\bar{\jmath}}_{i}$, where the
 adjoint index $a$ runs over $\NC^2-1$ values and the 
@@ -99,79 +286,245 @@ leading-color approximation. In figs.~\ref{fig_parents5g},
 \ref{fig_parents2q3g} and \ref{fig_parents4q1g} we give representative
 diagrams for each of these contributions.
 
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
-  \begin{center}
-    \begin{tikzpicture}[scale=.9]
-    % 5 point masters
-    \node at (0,0){\includegraphics[scale=0.5]
-    {figures/5g.pdf}};
-    % 5 point masters
-    \node at (5,0){\includegraphics[scale=0.5]
-    {figures/5gnf.pdf}};
-    % Level 2 
-    \node at (10,0){\includegraphics[scale=0.5]
-    {figures/5gnf2.pdf}};
-\end{tikzpicture}
-\end{center} 
-\caption{Representative Feynman diagrams for leading-color
-$\CA^{(2)}(g,g,g,g,g)$ amplitudes, contributing at order
-$N_f^0$, $N_f^1$ and $N_f^2$.}
-\label{fig_parents5g}
-\end{figure}
 
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
-  \begin{center}
-    \begin{tikzpicture}[scale=.9]
-    % 5 point masters
-    \node at (0,0){\includegraphics[scale=0.5]
-    {figures/2q3g.pdf}};
-    % 5 point masters
-    \node at (5,0){\includegraphics[scale=0.5]
-    {figures/2q3gnf.pdf}};
-    % Level 2 
-    \node at (10,0){\includegraphics[scale=0.5]
-    {figures/2q3gnf2.pdf}};
-\end{tikzpicture}
-\end{center} 
-\caption{Representative Feynman diagrams for leading-color
-$\CA^{(2)}(q,\bar q,g,g,g)$ amplitudes, 
-contributing at order
- $N_f^0$, $N_f^1$ and $N_f^2$.}
-\label{fig_parents2q3g}
-\end{figure}
+\subsection{Divergence Structure}
+\label{sec:IR}
 
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
-  \begin{center}
-    \begin{tikzpicture}[scale=.9]
-    % 5 point masters
-    \node at (0,0){\includegraphics[scale=0.5]
-    {figures/4q1g.pdf}};
-    % 5 point masters
-    \node at (5,.4){\includegraphics[scale=0.5]
-    {figures/4q1gnf.pdf}};
-    % Level 2 
-    \node at (10,.4){\includegraphics[scale=0.5]
-    {figures/4q1gnf2.pdf}};
-\end{tikzpicture}
-\end{center} 
-\caption{Representative Feynman diagrams for leading-color
-$\CA^{(2)}(q,\bar q,Q,\bar Q,g)$ amplitudes, 
-contributing at order
-$N_f^0$, $N_f^1$ and $N_f^2$.}
-\label{fig_parents4q1g}
-\end{figure}
+\subsubsection{Renormalization}
 
+We perform renormalization of the QCD coupling in the 
+$\overline{\text{MS}}$ scheme. It is implemented by replacing 
+the bare coupling by the renormalized one, denoted $\alpha_s$, 
+in eq.~\eqref{eq:partials}.
+The bare and renormalized couplings are related through
+\begin{equation}\label{eq:renormCoupling}
+    \alpha_0\mu_0^{2\epsilon}S_{\epsilon}
+  =\alpha_s\mu^{2\epsilon}\left(
+  1-\frac{\beta_0}{\epsilon}\frac{\alpha_s}{4\pi}
+  +\left(\frac{\beta_0^2}{\epsilon^2}-\frac{\beta_1}{\epsilon}\right)
+  \left(\frac{\alpha_s}{4\pi}\right)^2+\mathcal{O}
+  \left(\alpha_s^3\right)\right),
+\end{equation}
+where $S_\epsilon=(4\pi)^{\eps}e^{-\eps\gamma_E}$, with
+$\gamma_E=-\Gamma'(1)$ the Euler-Mascheroni constant.
+$\mu_0^2$ is the scale introduced in dimensional regularization
+to keep the coupling dimensionless in the QCD Lagrangian, 
+and $\mu^2$ is the renormalization scale. In the following, we
+set $\mu_0^2=\mu^2=1$. The leading-color coefficients of the QCD
+$\beta$-function are
+\begin{equation}
+  \beta_0=\frac{\NC}{3} \left( 11 - 2\frac{N_f}{\NC}
+  \right),\qquad
+  \beta_1=\frac{\NC^2}{3} \left( 17 - \frac{13}{2} \frac{N_f}{\NC} \right).
+\end{equation}
+The perturbative expansion of the renormalized amplitude is
+\begin{equation}\label{eq:renormAmp}
+  \mathcal{A}_R = S_\epsilon^{-\frac{\lambda}{2}}
+  g_s^\lambda\left(
+  \mathcal{A}_R^{(0)}
+  +\frac{\alpha_s}{4\pi}\NC\,\mathcal{A}_R^{(1)}
+  +\left(\frac{\alpha_s}{4\pi}\right)^2\NC^2\mathcal{A}_R^{(2)}
+  +\mathcal{O}(\alpha_s^3)
+  \right),
+\end{equation}
+where $\lambda$ is the power of $g_0$ in the tree amplitude, 
+with $\alpha_0=g_0^2/(4\pi)$ and similarly for $\alpha_s$.
+For four-parton amplitudes $\lambda=2$, and for five-parton 
+amplitudes $\lambda=3$.
+The renormalized amplitudes $\mathcal{A}_R^{(i)}$ are related 
+to the bare amplitudes $\mathcal{A}^{(i)}$ as follows:
+\begin{align}
+  \begin{split}
+    \label{eq:twoLoopUnRenorm}
+    &\mathcal{A}_R^{(0)}=\mathcal{A}^{(0)}, \\
+    & \mathcal{A}_R^{(1)}=S_{\epsilon}^{-1}\mathcal{A}^{(1)}
+    -\frac{\lambda}{2\epsilon}\frac{\beta_0}{\NC}
+    \mathcal{A}^{(0)}\,,\\
+    &\mathcal{A}_R^{(2)}=
+    S_{\epsilon}^{-2}\mathcal{A}^{(2)}
+    -\frac{\lambda+2}{2\epsilon}\frac{\beta_0}{\NC}S_{\epsilon}^
+    {-1}
+    \mathcal{A}^{(1)}
+    +\left(\frac{\lambda(\lambda+2)}{8\epsilon^2}\left(\frac{\beta_0}
+    {\NC}\right)^2
+    -\frac{\lambda}{2\epsilon}\frac{\beta_1}{\NC^2}\right)
+    \mathcal{A}^{
+    (0)}\,.
+  \end{split}
+\end{align}
+
+
+
+\subsubsection{Infrared Behavior}
+
+The poles of renormalized amplitudes are of infrared origin and
+can be predicted from the previous orders in the perturbative 
+expansion 
+\cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}:
+\begin{align}
+  \begin{split}\label{eq:catani}
+    A_R^{(1)}&=\mathbf{I}^{(1)}_{[n]}(\epsilon)
+    A_R^{(0)}+\mathcal{O}
+    (\epsilon^0)\,,\\
+    A_R^{(2)}&=\mathbf{I}^{(2)}_{[n]}(\epsilon)A_R^{(0)}+\mathbf{I}^{(1)}_{[n]}(\epsilon)
+    A_R^{(1)}+\mathcal{O}(\epsilon^0)\,,
+  \end{split}
+\end{align}
+with the operators $\mathbf{I}^{(1)}_{[n]}$ and
+$\mathbf{I}^{(2)}_{[n]}$ depending on the number and the type of
+the scattering particles. This dependence is denoted by the 
+subscript $[n]$.
+For amplitudes in the leading-color approximation and for which
+all quark lines have distinct flavor, the operators
+$\mathbf{I}^{(1)}_{[n]}$ and $\mathbf{I}^{(2)}_{[n]}$ are 
+diagonal in color space and can be written in a very compact
+form. The operator $\mathbf{I}^{(1)}_{[n]}$ is given by
+%
+\begin{equation}
+  \mathbf{I}^{(1)}_{[n]}(\eps)=-\frac{e^{\gamma_E\eps}}{\Gamma(1-\epsilon)}
+  \sum_{i=1}^n\gamma_{a_i,a_{i+1}}
+  \left( -s_{i,i+1}\right)^{-\epsilon}\,,
+\end{equation}
+with the indices defined cyclically.
+The index $a_i$ denotes a type of particle with momentum $p_i$, i.e.\  in the context of our paper,
+$a_i\in\{g,q,\bar q, Q, \bar Q\}$. We introduced the auxiliary symbols $\gamma_{a,b}$, 
+symmetric under the exchange of indices, 
+$\gamma_{a,b}=\gamma_{b,a}$, and defined according to:
+\begin{align}
+  \begin{split}
+    \gamma_{g,g}&=\frac{1}{\epsilon^2}+\frac{1}{2\eps}
+    \frac{\beta_0}{\NC}\,, \\
+    \gamma_{q,Q}&=\gamma_{q,\bar Q}=
+    \gamma_{\bar q, Q}=\gamma_{\bar q, \bar Q} 
+    =\frac{1}{\epsilon^2}+\frac{3}{2\eps}\,,\\
+    \gamma_{g,q}&=\gamma_{g,\bar q}=
+    \gamma_{g,Q}=\gamma_{g,\bar Q}=
+    \frac{\gamma_{g,g}+\gamma_{q,Q}}{2}\,,\\
+    \gamma_{q,\bar q}&=\gamma_{Q,\bar Q}=0\,.
+  \end{split}
+\end{align}
+The operator~$\mathbf{I}^{(2)}_{[n]}$ is
+\begin{align}
+  \label{eqn:Iop}
+  \begin{split} 
+    \mathbf{I}^{(2)}_{[n]}(\eps)=&
+    -\frac{1}{2}\mathbf{I}^{(1)}_{[n]}(\eps)\mathbf{I}^{(1)}_{[n]}(\eps)
+    -\frac{\beta_0}{\NC\epsilon}\mathbf{I}^{(1)}_{[n]}(\eps) + 
+    \frac{e^{-\gamma_E\epsilon}\Gamma(1-2\epsilon)}
+    {\Gamma(1-\epsilon)}
+    \left(\frac{\beta_0}{\NC\epsilon}+K\right)
+    \mathbf{I}^{(1)}_{[n]}(2\epsilon) + 
+    \mathbf{H}_{[n]}(\epsilon)\,,
+  \end{split}
+\end{align}
+where 
+\begin{equation}
+K=\frac{67}{9}-\frac{\pi ^2}{3}-\frac{10}{9}\frac{\NF}{\NC}\,,
+\end{equation}
+and $\mathbf{H}_{[n]}(\epsilon)$ is a diagonal operator at 
+leading color that depends on the number of external quarks 
+and gluons in the process,
+\begin{align}
+  \begin{split}
+    \mathbf{H}_{[n]}(\epsilon)&=
+    \frac{e^{\gamma_E\epsilon}}{\epsilon\Gamma(1-\epsilon)}
+    \sum_{i=1}^n\left(
+    \delta_{a_i,g}H_g+
+    (\delta_{a_i,q}+\delta_{a_i,\bar q}
+    +\delta_{a_i,Q}+\delta_{a_i,\bar Q})
+    H_q
+    \right)\,,
+  \end{split}
+\end{align}
+with (see e.g.\ \cite{Bern:2003ck})
+\begin{align}
+  \begin{split}
+    H_g&= \left(\frac{\zeta_3}{2}+\frac{5}{12}+
+    \frac{11\pi^2}{144}\right)
+    -\left(\frac{\pi^2}{72}+\frac{89}{108}\right)\frac{N_f}{\NC}
+    +\frac{5}{27}\left(\frac{N_f}{\NC}\right)^2\,,\\
+    H_q&=
+    \left(\frac{7\zeta_3}{4}+\frac{409}{864}
+    -\frac{11\pi^2}{96}\right)
+    +\left(\frac{\pi^2}{48}-\frac{25}{216}\right)\frac{N_f}{\NC}\,.
+  \end{split}
+\end{align}
+
+The poles of the bare amplitudes, as presented for example in
+tables~\ref{tab:results4parton} and \ref{tab:results5parton}, can be recovered
+from those of the renormalized amplitude by using
+eqs.~\eqref{eq:twoLoopUnRenorm}.
+
+\subsubsection{Finite Remainder}\label{sec:remainders}
+
+%As we have seen above,
+%the bare scattering amplitudes defined in eq.~\eqref{eq:nfdecomposition}
+%have divergences of ultraviolet and infrared origin which can be predicted from lower orders in perturbation theory.
+%It is convenient to remove this redundant information and define a \emph{finite remainder} that contains the new two-loop information.
+%If one is concerned only about removing the divergences a definition of the remainder is not unique, so we now discuss our conventions.
+
+We use the divergent structure of amplitudes, given by  \cref{eq:twoLoopUnRenorm,eq:catani},
+to define a finite remainder $\mathcal{F}^{(2)}$ as
+\begin{equation}\label{eq:remainderDef}
+  \mathcal{F}^{(2)}=\mathcal{A}_R^{(2)}
+  -\mathbf{I}_{[n]}^{(1)}\mathcal{A}_R^{(1)}
+  -\mathbf{I}_{[n]}^{(2)}\mathcal{A}_R^{(0)}
+  +\mathcal{O}(\epsilon)\,.
+\end{equation}
+Here we expand one-loop amplitudes $\mathcal{A}_R^{(1)}$ to order $\eps^2$ to capture the terms of order $\eps^0$
+from the cancellation with the corresponding $\frac{1}{\eps^2}$ pole in the operator $\mathbf{I}_{[n]}^{(1)}$.
+
+%This subtracts non-trivial contributions from
+%the finite term of $\mathcal{A}_R^{(2)}$ that are related to 
+%the lower-loop amplitudes.
+%In section \ref{sec:AnalyticForm} we will obtain analytic expression for the finite remainder directly.
+%If necessary one can then recover the two-loop bare amplitude $\CA^{(2)}$ by inverting
+%the relations \eqref{eq:twoLoopUnRenorm}:
+%\begin{align}
+  %\begin{split}
+    %\label{eq:ampFromRem}
+    %{\mathcal{A}}^{(2)}=&\,\mathcal{F}^{(2)}+
+    %S_\epsilon{\mathcal{A}}^{(1)}
+    %\left(\mathbf{I}_{[n]}^{(1)}+\frac{5}{2\epsilon}
+    %\frac{\beta_0}
+    %{N_c}\right)\\
+    %&-S_\epsilon^2 {\mathcal{A}}^{(0)}
+    %\left(
+    %\frac{15}{8\epsilon^2}
+    %\left(\frac{\beta_0}{N_c}\right)^2+\frac{3}{2\epsilon}
+    %\left(\frac{\beta_0}{N_c}\mathbf{I}_{[n]}^{(1)}-
+    %\frac{\beta_1}{N_c^2}\right)-\mathbf{I}_{[n]}^{(2)}
+    %\right)+\mathcal{O}(\epsilon)\,.
+  %\end{split}
+%\end{align}
 
 \subsection{Construction of Cut Equations}
+\label{5parton:sec:tech}
 
-\todo{here describe generation of hierarchies}
+\subsubsection{Master/Surface Integrand Parametrization}
 
-\subsubsection{Unitarity-Compatible Color Decomposition}
-\todo{Process library belongs here or to the appendix?}
-Here describe the approach of how process library does the colour decomposition.
+Let us first describe how do we obtain the master/surface integrand parametrization (see \cref{sec:ansatz_integrand} for details)
+in the right-hand  side of \cref{eq:cut_equations} for all of the topologies appearing in five-parton amplitudes (see \cref{fig:PropagatorStructures}).
+We employ the implementation of computational algebraic geometry methods in the package \textsc{Singular} \cite{DGPS}
+to solve the non-doubling conditions \eqref{eq:non_doubling_ibp_vectors},
+and find the corresponding unitarity-compatible IBP vectors.
+Some technical details of our setup can be found in \cite{Abreu:2017hqn}.
+We then use these vectors to generated an overcomplete set of surface terms by multiplying
+them with all monomials in ISPs, and inserting them into \cref{eq:ibps}.
+Finally, we identify the spanning set with imposed on-shell conditions, on a randomly chosen numerical 
+point.
+
+
+The fast evaluation of surface terms is crucial in our approach.
+To this end, we employ the following optimizations:
+\begin{itemize}
+  \item We represent the analytic expressions for the surface terms
+    as the linear combinations of components of IBP-generating vectors, multiplied by derivatives of the ISPs,
+    plus the divergences of the IBP-vectors (multiplied by ISPs). 
+    Effectively, this implements the caching of common sub-expressions, which would be found in the full expression for the corresponding surface term.
+  \item We optimize the expressions with the help of the command \texttt{\#optimize} from \texttt{FORM} \cite{Vermaseren:2000nd},
+    which implements an extensive set of methods to bring the polynomials into the most efficient computational form.
+\end{itemize}
 
 %%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
 \begin{figure}[ht] 
@@ -308,14 +661,105 @@ Here describe the approach of how process library does the colour decomposition.
       (5.25,-17){\includegraphics[scale=0.6]{figures/topologies/Sunrise}};
     \end{tikzpicture}
   \end{center}
-  \caption{Hierarchy of topologies for two-loop five-parton scattering.
-    Only topologically inequivalent structures are shown. All lines
-  are massless, with massive external legs being denoted by two massless external lines entering a vertex.}
+  \caption{A complete set of topologies appearing in two-loop five-parton scattering, arranged
+    in the order of decreasing number of propagators.
+    All lines are massless, with massive external legs being denoted by two massless external lines entering a vertex.
+    The figure is taken from \cite{Abreu:2017hqn}.
+  }
   \label{fig:PropagatorStructures}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%% FIGURE %%%%%%%%%%%%%%%%%%
+\subsubsection{Hierarchies and Color Decomposition}
+
+We now describe how do we organize the amplitudes into a set of cut equations \cref{eq:cut_equations} for master/surface coefficients.
+
+First we generate all cut diagrams contributing to the amplitude with \textsc{QGRAF} \cite{Nogueira:1991ex}.
+To obtain the \emph{cut diagrams}, instead of Feynman diagrams,
+we list all possible tree amplitudes as allowed vertices in the model files,
+and request the one-particle-irreducible diagrams only.
+
+We then process these diagrams with a custom  \texttt{Mathematica} code, which performs three steps:
+\begin{enumerate}
+  \item Organize the cut diagrams into the hierarchy (see \cref{eq:topology_order,eq:topology_sequence}) 
+    This amounts to constructing a layered tree graph with vertices as nodes,
+    and the relation of adding/removing propagators as edges.
+  \item Color decomposition into partial amplitudes.
+  \item Decomposition of each cut diagram into polynomials in $(D_s-6)$, as described in \cref{dshel:sec:unitarity-compatible}.
+\end{enumerate}
+In principle, the order of these steps is irrelevant.
+The purpose of color decomposition is to separate the color factors from the rest of the computation, 
+such that  the partial amplitudes (see \cref{5parton:sec:color_structures}) are evaluated in terms of color-stripped Feynman rules of \cref{sec:cofr}.
+Our color decomposition is based on \cite{Ochirov:2016ewn,Ochirov:2019mtf},
+and is accomplished in the same ``unitarity-compatible'' spirit of the algorithm discussed in \cref{dshel:sec:unitarity-compatible}.
+We process each cut diagram separately in the following way:
+\begin{enumerate}
+  \item Decompose each of it's vertices (i.e.\ tree amplitudes) into linear combinations of color-ordered tree amplitudes multiplied by color factors.
+  \item Insert the decompositions from the previous step into the diagram and expand.
+  \item Contract all internal color indices through the cut propagators, and perform the color algebra
+  \item Collect the terms with the same color factor, $N_c$, and $N_ f$ powers. 
+\end{enumerate}
+In this way, we find all terms contributing to the partial amplitudes,
+and, by construction, the tree amplitudes in the corners of all cut diagrams are color-ordered tree amplitudes.
+
+
+\subsubsection{Color-Stripped Cuts}
+The products of tree amplitudes in cut diagrams contributing to the partial amplitudes are evaluated
+numerically with the custom \texttt{C++} implementation of the off-shell recursion, as described in \cref{sec:evaluation_of_cuts}.
+We have implemented evaluations both in multi-precision floating-point arithmetic, and over finite fields with cardinalities of the order $2^{31}$.
+For the former we use the QD \cite{QD} library. And for the latter we use \texttt{Givaro} \cite{Givaro} with 
+custom optimizations of multiplications through Barrett reduction \cite{Barrett1987a,Hoeven2014}.
+The finite-filed evaluations are crucial for the reconstruction of the analytic expressions.
+
+In the off-shell recursion we use explicit components of six-dimensional loop momenta 
+satisfying the cut conditions (see \cref{sec:osm} for details). 
+This has an important implication for the evaluations over finite fields, where
+we cannot take square roots originating from the quadratic equations.
+We workaround this complication by allowing the off-shell currents to
+take values in an algebraic extension of the finite field.
+We consider this in more detail in \cref{sec:muij_square_roots}.
+However, since the cuts of properly defined (normalized) helicity amplitudes are Lorentz scalars,
+we can still solve the cut equations \eqref{eq:cut_equations} in non-extended finite fields.
+For the same reason, the signature of the metric tensor is non-essential, as long as values 
+of the invariants do not change. This allows us to employ the alternating metric signature $\{+,-,+,-,\ldots{}\}$
+and avoid the usage of complex numbers whatsoever, which represents a significant optimization.
+
+We solve the linear systems of equations for the coefficients with a custom implementation of PLU factorization and back substitution
+when working with finite fields. In floating-point arithmetic we solve the equations with the QR factorization,
+as implemented in \texttt{Eigen} \cite{eigen}.
+
+
+
+
+\section{Numerical Results}
+\label{sec:5parton:numerics}
+
+In this section, we provide the numerical benchmark values for a full set of  five-parton two-loop helicity amplitudes.
+For completeness we also provide the values  of the corresponding one-loop amplitudes to $\order{\eps^2}$.
+We also provide the values of the four-parton two-loop amplitudes, which we used for the validation.
+
+The partial two-loop helicity amplitudes are represented in terms of master integrals $I_{\Gamma,i}$ (see \cref{fig:MasterInt}) as
+\begin{equation} \label{eq:ampl_master_integrals}
+  \mathcal{A}^{(2)}=\sum_{\Gamma\in\Delta}
+  \sum_{i\in M_\Gamma} c_{\Gamma,i}\,
+  \mathcal{I}_{\Gamma,i}\,,
+  \quad
+    \qquad I_{\Gamma,i} =
+      \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}},
+\end{equation}
+and we obtain the master coefficients as explained in great detail above.
+The master integrals are computed as a Laurent series in $\eps$, 
+%The master integrals for planar five-parton amplitudes has been computed in \cite{Papadopoulos:2015jft,Gehrmann:2018yef}.
+with the coefficient of each power evaluated to linear combinations of multiple polylogarithms (MPLs). 
+We now also expand the master-integral coefficients (which are rational functions of $D=4-2\eps$) in a Laurent series in $\eps$.
+To obtain the numerical values of the amplitudes we employ two different choices of master integrals.
+In both cases we will limit ourselves to the \emph{Euclidian} region, which for the case of five-parton
+amplitudes corresponds to all invariants being negative. In \cite{Gehrmann:2018yef} the analytic
+continuation to all physical regions has been carried out, so it is rather straightforward to extend
+our results to these regions.\footnote{
+  Note that our method of obtaining master-integral coefficients is indifferent to the choice of the region.
+}
+
 \begin{figure}[ht] 
   \begin{center}
     \begin{tikzpicture}[scale=1.2]
@@ -377,351 +821,106 @@ Here describe the approach of how process library does the colour decomposition.
       \node at (5,-9){1 master};
     \end{tikzpicture}
   \end{center}
-  \caption{Topologies with master integrals}
+  \caption{Topologies with master integrals.
+    The figure is taken from \cite{Abreu:2017hqn}.
+  }
   \label{fig:MasterInt}
 \end{figure}
 
-\todo{reference \ref{fig:MasterInt} and \ref{fig:PropagatorStructures} from text}
 
-\subsection{Tensors}
+\paragraph{PTW basis.}
+For the five-point master integrals we make use of the publicly available implementation distributed with the paper \cite{Papadopoulos:2015jft}.
+For lower point integrals, we implemented the analytic expressions provided in \cite{Gehrmann:2000zt}.
+In the case of factorizable topologies we choose the
+scalar integral as a master and calculate them independently. In order
+to evaluate the necessary multiple polylogarithms we use the
+implementation in \texttt{GiNaC}~\cite{Vollinga:2004sn}, which can be
+tuned to the desired precision.
 
+\paragraph{Pentagon functions.}
+The MPLs are a class of special functions with 
+only logarithmic singularities that can be equipped with algebraic
+structures that allow one to algorithmically find relations between
+them~\cite{Goncharov:2010jf,Duhr:2011zq,Duhr:2012fh}. One can then
+construct a basis for the space of MPLs relevant for five-parton
+scattering amplitudes, and this was achieved in~\cite{Gehrmann:2018yef}
+where the so-called pentagon functions were introduced.
+Further, MPLs are equipped with a notion of weight, which can
+be used to organize the pentagon functions. Indeed, there are
+no relations between pentagon functions of different weight so we can
+separate the space of pentagon functions into subspaces of different 
+weights. 
+The motivation for this decomposition is
+that order by order in $\eps$ the master integrals satisfy more
+IBP identities. These additional relations are manifested by the pentagon
+function decomposition.
 
-\section{Divergence Structure}
-\label{sec:IR}
-
-We use the HV dimensional regularization
-scheme to handle both ultraviolet and infrared divergences.
-UV divergences are removed through renormalization and the
-remaining infrared poles can be computed from the corresponding
-lower-order
-amplitudes~\cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,
-Gardi:2009qi}. In this appendix we detail this procedure.
-Reproducing the pole structure of the amplitudes we have 
-computed is an important check of our results.
-
-
-\subsection{Renormalization}
-
-We perform renormalization of the QCD coupling in the 
-$\overline{\text{MS}}$ scheme. It is implemented by replacing 
-the bare coupling by the renormalized one, denoted $\alpha_s$, 
-in eq.~\eqref{eq:partials}.
-The bare and renormalized couplings are related through
-\begin{equation}\label{eq:renormCoupling}
-    \alpha_0\mu_0^{2\epsilon}S_{\epsilon}
-  =\alpha_s\mu^{2\epsilon}\left(
-  1-\frac{\beta_0}{\epsilon}\frac{\alpha_s}{4\pi}
-  +\left(\frac{\beta_0^2}{\epsilon^2}-\frac{\beta_1}{\epsilon}\right)
-  \left(\frac{\alpha_s}{4\pi}\right)^2+\mathcal{O}
-  \left(\alpha_s^3\right)\right),
+For two-loop amplitudes, we need the pentagon functions of at most weight 4.
+After expansion in epsilon, the amplitude can, thus, be written as
+\begin{equation} \label{eq:pentagon_function_decomposition}
+  \mathcal{A}^{(2)}=
+    \sum_{i\in B}\sum_{k=-4}^0\epsilon^{k}
+    d_{k,i}(\vb*{x})~h_i\,,
 \end{equation}
-where $S_\epsilon=(4\pi)^{\eps}e^{-\eps\gamma_E}$, with
-$\gamma_E=-\Gamma'(1)$ the Euler-Mascheroni constant.
-$\mu_0^2$ is the scale introduced in dimensional regularization
-to keep the coupling dimensionless in the QCD Lagrangian, 
-and $\mu^2$ is the renormalization scale. In the following, we
-set $\mu_0^2=\mu^2=1$. The leading-color coefficients of the QCD
-$\beta$-function are
-\begin{equation}
-  \beta_0=\frac{\NC}{3} \left( 11 - 2\frac{N_f}{\NC}
-  \right),\qquad
-  \beta_1=\frac{\NC^2}{3} \left( 17 - \frac{13}{2} \frac{N_f}{\NC} \right).
-\end{equation}
-The perturbative expansion of the renormalized amplitude is
-\begin{equation}\label{eq:renormAmp}
-  \mathcal{A}_R = S_\epsilon^{-\frac{\lambda}{2}}
-  g_s^\lambda\left(
-  \mathcal{A}_R^{(0)}
-  +\frac{\alpha_s}{4\pi}\NC\,\mathcal{A}_R^{(1)}
-  +\left(\frac{\alpha_s}{4\pi}\right)^2\NC^2\mathcal{A}_R^{(2)}
-  +\mathcal{O}(\alpha_s^3)
-  \right),
-\end{equation}
-where $\lambda$ is the power of $g_0$ in the tree amplitude, 
-with $\alpha_0=g_0^2/(4\pi)$ and similarly for $\alpha_s$.
-For four-parton amplitudes $\lambda=2$, and for five-parton 
-amplitudes $\lambda=3$.
-The renormalized amplitudes $\mathcal{A}_R^{(i)}$ are related 
-to the bare amplitudes $\mathcal{A}^{(i)}$ as follows:
-\begin{align}
-  \begin{split}
-    \label{eq:twoLoopUnRenorm}
-    &\mathcal{A}_R^{(0)}=\mathcal{A}^{(0)}, \\
-    & \mathcal{A}_R^{(1)}=S_{\epsilon}^{-1}\mathcal{A}^{(1)}
-    -\frac{\lambda}{2\epsilon}\frac{\beta_0}{\NC}
-    \mathcal{A}^{(0)}\,,\\
-    &\mathcal{A}_R^{(2)}=
-    S_{\epsilon}^{-2}\mathcal{A}^{(2)}
-    -\frac{\lambda+2}{2\epsilon}\frac{\beta_0}{\NC}S_{\epsilon}^
-    {-1}
-    \mathcal{A}^{(1)}
-    +\left(\frac{\lambda(\lambda+2)}{8\epsilon^2}\left(\frac{\beta_0}
-    {\NC}\right)^2
-    -\frac{\lambda}{2\epsilon}\frac{\beta_1}{\NC^2}\right)
-    \mathcal{A}^{
-    (0)}\,.
-  \end{split}
-\end{align}
+where we use the fact that the poles in $\epsilon$ of two-loop amplitudes are at most $\mathcal{O}(\epsilon^{-4})$.
+Here we denote the pentagon functions by $\{h_i\}_{i\in B}$, and the associated set of labels $B$. 
+For convenience we use the convention that the set of pentagon functions $\{h_i\}_{i\in B}$
+not only includes genuine functions, such as $\log(-s_{12})$, but also
+constants with weight, such as $\pi^2$, that correspond to the pentagon 
+functions evaluated at specific points. These are boundary conditions that
+are specific to the kinematic region where the amplitude is evaluated.
 
+We carried out an independent computation of all master integrals in terms of the pentagon functions, and
+we have implemented their semi-analytic representation in our \texttt{C++} framework. This is required  in order to 
+transform the amplitude from the form of \cref{eq:ampl_master_integrals} to the form of \cref{eq:pentagon_function_decomposition}.
+We obtain the numerical values of the pentagon functions from the \texttt{C++} library distributed with the ref.\ \cite{Gehrmann:2018yef}.
 
+All presented benchmark values for helicity amplitudes are computed with the renormalization scale $\mu=1$,
+and are normalized to be dimensionless.
+We provide explicitly the components of external momenta, for which the benchmark values are obtained.
+We note, however, that this information is redundant, and arbitrary Lorentz boosts
+can be performed.
+In order to expose the pole structure of the two-loop amplitudes (see \cref{sec:IR}) we normalize them to
+the corresponding tree-level amplitude if
+it is non-vanishing, or to the corresponding $\CA^{(1)[N_f^0]}(\epsilon=0)$ amplitude otherwise.
+The constant factors are fixed by the expansion in \cref{eq:partials,eq:nfdecomposition}
 
-\subsection{Infrared Behavior}
+\subsection{Four-Parton Amplitudes}
 
-The poles of renormalized amplitudes are of infrared origin and
-can be predicted from the previous orders in the perturbative 
-expansion 
-\cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}:
-\begin{align}
-  \begin{split}\label{eq:catani}
-    A_R^{(1)}&=\mathbf{I}^{(1)}_{[n]}(\epsilon)
-    A_R^{(0)}+\mathcal{O}
-    (\epsilon^0)\,,\\
-    A_R^{(2)}&=\mathbf{I}^{(2)}_{[n]}(\epsilon)A_R^{(0)}+\mathbf{I}^{(1)}_{[n]}(\epsilon)
-    A_R^{(1)}+\mathcal{O}(\epsilon^0)\,,
-  \end{split}
-\end{align}
-with the operators $\mathbf{I}^{(1)}_{[n]}$ and
-$\mathbf{I}^{(2)}_{[n]}$ depending on the number and the type of
-the scattering particles. This dependence is denoted by the 
-subscript $[n]$.
-For amplitudes in the leading-color approximation and for which
-all quark lines have distinct flavor, the operators
-$\mathbf{I}^{(1)}_{[n]}$ and $\mathbf{I}^{(2)}_{[n]}$ are 
-diagonal in color space and can be written in a very compact
-form. The operator $\mathbf{I}^{(1)}_{[n]}$ is given by
+We evaluate the four-gluon, two-quark two-gluon and four-quark
+amplitudes at the phase-space point%
+\footnote{Units of energy are chosen arbitrarily.
+  The amplitudes presented in the tables \cref{tab:results4parton,tab:results4parton1L}
+  are normalized to be dimensionless.
+}
 %
 \begin{equation}
-  \mathbf{I}^{(1)}_{[n]}(\eps)=-\frac{e^{\gamma_E\eps}}{\Gamma(1-\epsilon)}
-  \sum_{i=1}^n\gamma_{a_i,a_{i+1}}
-  \left( -s_{i,i+1}\right)^{-\epsilon}\,,
+  s_{12}=-\frac{3}{4}, \; s_{23}=-\frac{1}{4},
+  \quad
+  \begin{aligned}[c]
+    p_1 &= \vphantom{\frac{1}{48}}\left(1,1,-i,1\right), \\
+    p_2 &= -\frac{1}{16}\left(3,0,0,-3\right), \\
+  \end{aligned}
+  \quad
+  \begin{aligned}[c]
+    p_3 &= \frac{1}{48}\left(25,-51,45\,i,7\right),\\
+    p_4 &= -\frac{1}{48}\left(64,-3,-3\,i, 64\right), \\
+  \end{aligned}
+  \label{eq:EvalPoint4}
 \end{equation}
-with the indices defined cyclically.
-The index $a_i$ denotes a type of particle with momentum $p_i$, i.e.\  in the context of our paper,
-$a_i\in\{g,q,\bar q, Q, \bar Q\}$. We introduced the auxiliary symbols $\gamma_{a,b}$, 
-symmetric under the exchange of indices, 
-$\gamma_{a,b}=\gamma_{b,a}$, and defined according to:
-\begin{align}
-  \begin{split}
-    \gamma_{g,g}&=\frac{1}{\epsilon^2}+\frac{1}{2\eps}
-    \frac{\beta_0}{\NC}\,, \\
-    \gamma_{q,Q}&=\gamma_{q,\bar Q}=
-    \gamma_{\bar q, Q}=\gamma_{\bar q, \bar Q} 
-    =\frac{1}{\epsilon^2}+\frac{3}{2\eps}\,,\\
-    \gamma_{g,q}&=\gamma_{g,\bar q}=
-    \gamma_{g,Q}=\gamma_{g,\bar Q}=
-    \frac{\gamma_{g,g}+\gamma_{q,Q}}{2}\,,\\
-    \gamma_{q,\bar q}&=\gamma_{Q,\bar Q}=0\,.
-  \end{split}
-\end{align}
-The operator~$\mathbf{I}^{(2)}_{[n]}$ is
-\begin{align}
-  \label{eqn:Iop}
-  \begin{split} 
-    \mathbf{I}^{(2)}_{[n]}(\eps)=&
-    -\frac{1}{2}\mathbf{I}^{(1)}_{[n]}(\eps)\mathbf{I}^{(1)}_{[n]}(\eps)
-    -\frac{\beta_0}{\NC\epsilon}\mathbf{I}^{(1)}_{[n]}(\eps) + 
-    \frac{e^{-\gamma_E\epsilon}\Gamma(1-2\epsilon)}
-    {\Gamma(1-\epsilon)}
-    \left(\frac{\beta_0}{\NC\epsilon}+K\right)
-    \mathbf{I}^{(1)}_{[n]}(2\epsilon) + 
-    \mathbf{H}_{[n]}(\epsilon)\,,
-  \end{split}
-\end{align}
-where 
-\begin{equation}
-K=\frac{67}{9}-\frac{\pi ^2}{3}-\frac{10}{9}\frac{\NF}{\NC}\,,
-\end{equation}
-and $\mathbf{H}_{[n]}(\epsilon)$ is a diagonal operator at 
-leading color that depends on the number of external quarks 
-and gluons in the process,
-\begin{align}
-  \begin{split}
-    \mathbf{H}_{[n]}(\epsilon)&=
-    \frac{e^{\gamma_E\epsilon}}{\epsilon\Gamma(1-\epsilon)}
-    \sum_{i=1}^n\left(
-    \delta_{a_i,g}H_g+
-    (\delta_{a_i,q}+\delta_{a_i,\bar q}
-    +\delta_{a_i,Q}+\delta_{a_i,\bar Q})
-    H_q
-    \right)\,,
-  \end{split}
-\end{align}
-with (see e.g.\ \cite{Bern:2003ck})
-\begin{align}
-  \begin{split}
-    H_g&= \left(\frac{\zeta_3}{2}+\frac{5}{12}+
-    \frac{11\pi^2}{144}\right)
-    -\left(\frac{\pi^2}{72}+\frac{89}{108}\right)\frac{N_f}{\NC}
-    +\frac{5}{27}\left(\frac{N_f}{\NC}\right)^2\,,\\
-    H_q&=
-    \left(\frac{7\zeta_3}{4}+\frac{409}{864}
-    -\frac{11\pi^2}{96}\right)
-    +\left(\frac{\pi^2}{48}-\frac{25}{216}\right)\frac{N_f}{\NC}\,.
-  \end{split}
-\end{align}
+where $s_{ij}=(p_i+p_j)^2$. The components are given in the standard signature $\{+,-,-,\ldots{}\}$.
+The third component is complexified, such that the corresponding value in the alternating signature $\{+,-,+,-,\ldots{}\}$ 
+is explicit.
 
-The poles of the bare amplitudes, as presented for example in
-tables~\ref{tab:results4parton} and \ref{tab:results5parton}, can be recovered
-from those of the renormalized amplitude by using
-eqs.~\eqref{eq:twoLoopUnRenorm}.
-
-\subsection{Finite Remainder}\label{sec:remainders}
-
-As we have seen above,
-the bare scattering amplitudes defined in eq.~\eqref{eq:nfdecomposition}
-have divergences of ultraviolet and infrared origin which can be predicted from lower orders in perturbation theory.
-It is convenient to remove this redundant information and define a \emph{finite remainder} that contains the new two-loop information.
-If one is concerned only about removing the divergences a definition of the remainder is not unique, so we now discuss our conventions.
-
-%The renormalized amplitudes can be obtained from their bare counterparts
-%by replacing in eq.~\eqref{eq:partials} the bare QCD coupling $\alpha_0$
-%by the renormalized coupling $\alpha_s$ in $D=4-2\epsilon$ dimensions. 
-%The two couplings are related by
-%which we can use to define the perturbative expansion of the renormalized
-%amplitude,
-%\begin{equation}\label{eq:renormAmp}
-  %\mathcal{A}_R = S_\epsilon^{-\frac{3}{2}}
-  %g_s^3\left(
-  %\mathcal{A}_R^{(0)}
-  %+\frac{\alpha_s}{4\pi}\NC\,\mathcal{A}_R^{(1)}
-  %+\left(\frac{\alpha_s}{4\pi}\right)^2\NC^2\mathcal{A}_R^{(2)}
-  %+\mathcal{O}(\alpha_s^3)
-  %\right),
-%\end{equation}
-%where $S_\epsilon=(4\pi)^{\epsilon}e^{-\epsilon\gamma_E}\,$ and 
-%$\alpha_s=g_s^2/(4\pi)$. The $\beta_i$ are the coefficients in the
-%perturbative expansion of the QCD $\beta$-function, which we give explicitly
-%in appendix \ref{app:remainderDetails}. 
-%Here, $\mu_0^2$ is the scale introduced in dimensional regularization to keep the
-%coupling dimensionless in the QCD Lagrangian, and $\mu^2$ is the
-%renormalization scale. In the following, we set $\mu^2=\mu_0^2=1$ (with arbitrary dimensions).
-
-%The renormalized amplitudes $\CA^{(k)}_R$ have only infrared divergences,
-%which can be determined from lower-loop functions and well known universal 
-%factors \cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}. More
-%precisely, we have
-%\begin{align}\begin{split}\label{eq:catani}
-    %\CA_R^{(1)}&=\mathbf{I}^{(1)}_{[n]}(\epsilon)
-    %\CA_R^{(0)}+\mathcal{O}
-    %(\epsilon^0)\,,\\
-    %\CA_R^{(2)}&=\mathbf{I}^{(2)}_{[n]}(\epsilon)\CA_R^{(0)}+\mathbf{I}^{(1)}_{[n]}(\epsilon)
-    %\CA_R^{(1)}+\mathcal{O}(\epsilon^0)\,.
-%\end{split}\end{align}
-%The $\mathbf{I}^{(k)}_{[n]}$ are operators in color space that become diagonal
-%in the leading-color approximation. They contain some
-%process-specific components, and explicit expressions are given 
-%in appendix~\ref{app:remainderDetails}.
-
-Using \cref{eq:renormCoupling,eq:renormAmp,eq:catani}, we can predict
-the poles of the two-loop amplitudes we wish to compute. Alternatively, we
-can use them to define a finite remainder $\mathcal{R}^{(2)}$, according to
-\begin{equation}\label{eq:remaindeDef}
-  \mathcal{R}^{(2)}=\mathcal{A}_R^{(2)}
-  -\mathbf{I}_{[n]}^{(1)}\mathcal{A}_R^{(1)}
-  -\mathbf{I}_{[n]}^{(2)}\mathcal{A}_R^{(0)}
-  +\mathcal{O}(\epsilon)\,.
-\end{equation}
-Here we expand one-loop amplitudes $\mathcal{A}_R^{(1)}$ to order $\eps^2$ to capture the terms of order $\eps^0$
-from the cancellation with the corresponding $\frac{1}{\eps^2}$ pole in the operator $\mathbf{I}_{[n]}^{(1)}$.
-
-This subtracts non-trivial contributions from
-the finite term of $\mathcal{A}_R^{(2)}$ that are related to 
-the lower-loop amplitudes.
-In section \ref{sec:AnalyticForm} we will obtain analytic expression for the finite remainder directly.
-If necessary one can then recover the two-loop bare amplitude $\CA^{(2)}$ by inverting
-the relations \eqref{eq:twoLoopUnRenorm}:
-\begin{align}
-  \begin{split}
-    \label{eq:ampFromRem}
-    {\mathcal{A}}^{(2)}=&\,\mathcal{R}^{(2)}+
-    S_\epsilon{\mathcal{A}}^{(1)}
-    \left(\mathbf{I}_{[n]}^{(1)}+\frac{5}{2\epsilon}
-    \frac{\beta_0}
-    {N_c}\right)\\
-    &-S_\epsilon^2 {\mathcal{A}}^{(0)}
-    \left(
-    \frac{15}{8\epsilon^2}
-    \left(\frac{\beta_0}{N_c}\right)^2+\frac{3}{2\epsilon}
-    \left(\frac{\beta_0}{N_c}\mathbf{I}_{[n]}^{(1)}-
-    \frac{\beta_1}{N_c^2}\right)-\mathbf{I}_{[n]}^{(2)}
-    \right)+\mathcal{O}(\epsilon)\,.
-  \end{split}
-\end{align}
-
-\todo{possibly here section ``Implementation Details''}
-
-
-\section{Validation}
-\label{sec:Validation-5parton}
-\todo{restructure and add some missing items}
-
-
-We have validated our results by carrying out a set of
-checks. We verified that they satisfy the
-expected infrared pole structure \cite{Catani:1998bh}. We summarize the
-relevant formulae for this check in \cref{sec:IR}.
-Furthermore, we have carried out a systematic
-validation of the $\epsilon^0$ contributions of all of 
-our results against their known analytic
-expressions from refs.~\cite{Bern:2002tk,Bern:2003ck,
-DeFreitas:2004kmi,Glover:2004si}. 
-For the four-gluon amplitudes we have compared directly the
-$\epsilon^0$ pieces of our results with the analytic expressions
-of~\cite{Bern:2002tk}.
-
-For the two-quark two-gluon and four-quark amplitudes we have used the one-loop results given in \cref{tab:results4parton1L}
-to compute the corresponding finite remainders $\CF^{(2)}$ as
-defined in \cref{eq:remainderDef}. 
-After accounting for the different choices of 
-normalization for the $\mathbf{H}_{[n]}(\epsilon)$ operators 
-(see \cref{sec:IR})
-made in refs.~\cite{Bern:2003ck} and \cite{Glover:2004si},
-we have found perfect agreement.
-
-\begin{itemize}
-  \item surface terms with FIRE
-  \item N=N test
-\end{itemize}
-
-\section{Numerical Results}
-
-Here provide details of how numerical evaluation has been performed.
-
-Floating point and finite fields coefficients.
-Cite numerical libraries qd and givaro.
-
-Different sources for integrals: PTW, based on pentagon functions in Caravel.
-
-
-
-Once the coefficients $c_{\Gamma,i}$ in \cref{eq:AL} are computed,
-we obtain a decomposition of the amplitude into master integrals,
-\begin{equation}
-  \mathcal{A}^{(2)}=\sum_{\Gamma\in\Delta}
-  \sum_{i\in M_\Gamma} c_{\Gamma,i}\,
-  \mathcal{I}_{\Gamma,i}\,,
-  \label{eq:Amaster}
-\end{equation}
-where the $\mathcal{I}_{\Gamma,i}$ are the master integrals,
-\begin{equation}
-  \mathcal{I}_{\Gamma,i}=\int d^D\ell_l
-  \frac{m_{\Gamma,i}(\ell_l)}
-  {\prod_{j\in P_\Gamma}\rho_j}\,.
-\end{equation}
-For planar five-parton amplitudes, a basis of master integrals has been 
-computed~\cite{Papadopoulos:2015jft,Gehrmann:2018yef}.
-The master integrals evaluate to linear combinations of so-called 
-multiple polylogarithms (MPLs), which can be 
-numerically evaluated using available programs 
-(e.g.\ \cite{Vollinga:2004sn}). Once numerical values for the coefficients 
-$c_{\Gamma,i}$ have been  computed (using for example 
-the approach described in the previous subsection) one can obtain numerical values
-for the amplitudes.
-
-
-\subsection{One-Loop}
-
-One-loop amplitudes were known. Five-parton to order $\mathcal{O}(\eps^2)$ are presented for the first time.
+In \cref{tab:results4parton1L,tab:results4parton} we show numerical results for
+the bare one-loop and two-loop four-parton helicity amplitudes.
+The results have been obtained with exact values for the 
+integral coefficients\footnote{
+  The exact rational values are obtained via finite-field evaluations and rational reconstruction (see \cref{sec:ff_fp}).
+} 
+and with the master integrals 
+evaluated to a precision that allows to show 10
+significant digits.
 
 \begin{table}[h]
   \centering
@@ -789,6 +988,106 @@ One-loop amplitudes were known. Five-parton to order $\mathcal{O}(\eps^2)$ are p
     amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.}
   \label{tab:results4parton1L}
 \end{table}
+
+\begin{table}[h]
+  \begin{adjustbox}{width=1\textwidth}
+    \centering
+    \begin{tabular}{cccccc}
+      \toprule
+      $\CA^{(2)[N_f^0]}/\CA^\mathrm{(norm)}$	  &   $\epsilon^{-4}$   &   $\epsilon^{-3}$   &   $\epsilon^{-2}$   &   $\epsilon^{-1}$   &   $\epsilon^{0}$   \\
+      \midrule
+      $( 1_g^+, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $-4.000000000$ & $-23.74072126$ & $-63.52221777$ \\
+      $( 1_g^-, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $-4.000000000$ & $-35.31127327$ & $-133.5083818$ \\
+      $( 1_g^-, 2_g^-, 3_g^+, 4_g^+ )$ & $8.000000000$ & $55.65274878$ & $164.6421815$ & $222.3267401$ & $-8.390444844$ \\
+      $( 1_g^-, 2_g^+, 3_g^-, 4_g^+ )$ & $8.000000000$ & $55.65274878$ & $176.0091465$ & $332.2956004$ & $486.5023259$ \\
+      \midrule
+      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^+ )$ & 0 & 0 & $-3.000000000$ & $-24.41444952$ & $-74.97642231$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^- )$ & $4.500000000$ & $28.51508962$ & $73.34964082$ & $75.65107559$ & $-9.311163231$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_g^-, 4_g^+ )$ & $4.500000000$ & $28.51508962$ & $64.00475414$ & $-13.64171730$ & $-376.4555455$ \\
+      \midrule
+      $( 1_q^+, 2_{\bar q}^-, 3_Q^+, 4_{\bar Q}^- )$ & $2.000000000$ & $10.19374511$ & $8.003461515$ & $-55.57160018$ & $-92.52942183$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_Q^-, 4_{\bar Q}^+ )$ & $2.000000000$ & $10.19374511$ & $-4.028725695$ & $-134.3060579$ & $-234.1564069$ \\
+      \toprule
+      $\CA^{(2)[N_f^1]}/\CA^\mathrm{(norm)}$	  &   $\epsilon^{-4}$   &   $\epsilon^{-3}$   &   $\epsilon^{-2}$   &   $\epsilon^{-1}$   &   $\epsilon^{0}$   \\
+      \midrule
+      $( 1_g^+, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $4.000000000$ & $27.74072126$ & $86.81849458$ \\
+      $( 1_g^-, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $4.000000000$ & $39.31127327$ & $172.4199379$ \\
+      $( 1_g^-, 2_g^-, 3_g^+, 4_g^+ )$ & 0 & $-2.000000000$ & $-15.96133691$ & $-59.69423578$ & $-141.8161833$ \\
+      $( 1_g^-, 2_g^+, 3_g^-, 4_g^+ )$ & 0 & $-2.000000000$ & $-18.16301631$ & $-81.04594245$ & $-230.6319267$ \\
+      \midrule
+      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^+ )$ & 0 & 0 & $0.5454545455$ & $3.784151849$ & $3.326492162$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^- )$ & 0 & $0.5000000000$ & $4.307232180$ & $15.70646205$ & $21.70488360$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_g^-, 4_g^+ )$ & 0 & $0.5000000000$ & $4.307232180$ & $13.62982056$ & $-12.51632628$ \\
+      \midrule
+      $( 1_q^+, 2_{\bar q}^-, 3_Q^+, 4_{\bar Q}^- )$ & 0 & $1.666666667$ & $10.55774898$ & $23.90612711$ & $-30.33285238$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_Q^-, 4_{\bar Q}^+ )$ & 0 & $1.666666667$ & $10.55774898$ & $15.88466897$ & $-106.4874291$ \\
+      \toprule
+      $\CA^{(2)[N_f^2]}/\CA^\mathrm{(norm)}$	  &   $\epsilon^{-4}$   &   $\epsilon^{-3}$   &   $\epsilon^{-2}$   &   $\epsilon^{-1}$   &   $\epsilon^{0}$   \\
+      \midrule
+      $( 1_g^+, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & 0 & $1.444444444$ \\
+      $( 1_g^-, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0$ \\
+      $( 1_g^-, 2_g^-, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0.03086419753$ \\
+      $( 1_g^-, 2_g^+, 3_g^-, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0$ \\
+      \midrule
+      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & $0.1212121212$ & $1.189856320$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^- )$ & 0 & 0 & 0 & 0 & $0$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_g^-, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0$ \\
+      \midrule
+      $( 1_q^+, 2_{\bar q}^-, 3_Q^+, 4_{\bar Q}^- )$ & 0 & 0 & $0.4444444444$ & $3.473917619$ & $14.37639897$ \\
+      $( 1_q^+, 2_{\bar q}^-, 3_Q^-, 4_{\bar Q}^+ )$ & 0 & 0 & $0.4444444444$ & $3.473917619$ & $14.37639897$ \\
+      \bottomrule
+    \end{tabular}
+  \end{adjustbox}
+  \caption{The bare two-loop four-parton helicity amplitudes evaluated
+    at the phase space point in \cref{eq:EvalPoint4}. We set the
+    normalization factor $\CA^\mathrm{(norm)}$ to $\CA^{(1)[N_f^0]}(\epsilon=0)$ for the
+    amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.} 
+  \label{tab:results4parton}
+\end{table}
+
+
+\subsection{Five-Parton Amplitudes}
+\label{sec:fivepartonRes}
+We evaluate the five-parton amplitudes at the phase-space point%
+\footnote{Units of energy are chosen arbitrarily.
+  The amplitudes presented in \cref{tab:results5parton,tab:results5parton1L}
+  are normalized to be dimensionless.
+}
+\begin{equation}
+  \begin{aligned}[c]
+    p_1 &= \left( \frac{1}{2}, \frac{45}{272}, \frac{45 i}{272}, \frac{1}{2} \right), \\
+    p_2 &= \left( -\frac{1}{2}, 0, 0, \frac{1}{2} \right), \\
+    p_3 &= \left( \frac{21}{26}, -\frac{21}{26}, -\frac{5 i}{26}, -\frac{5}{26} \right),
+  \end{aligned}
+  \qquad
+  \begin{aligned}[c]
+    p_4 &= \left( -\frac{1169}{2652}, \frac{2165}{10608}, -\frac{13459 i}{38896}, -\frac{5075}{9724} \right),\\[3ex]
+    p_5 &= \left( -\frac{973}{2652}, \frac{581}{1326}, \frac{1813 i}{4862}, -\frac{2779}{9724} \right),
+  \end{aligned}
+  \label{eq:EvalPoint5}
+\end{equation}
+with corresponding invariants $s_{ij}=(p_i+p_j)^2$,
+\begin{align}
+  \label{eq:Invs5pt}
+  \begin{split}
+    s_{12} =& -1, \quad s_{23} = -8/13, \quad s_{34} = -1094/2431,\\
+    &s_{45} = -7/17, \quad s_{51} = -749/7293\ .
+  \end{split}
+\end{align}
+The components are given in the standard signature $\{+,-,-,\ldots{}\}$.
+The third component is complexified, such that the corresponding value in the alternating signature $\{+,-,+,-,\ldots{}\}$ 
+is explicit.
+
+In \cref{tab:results5parton1L,tab:results5parton} we show numerical results for
+the bare one-loop and two-loop four-parton helicity amplitudes.
+The results have been obtained with exact values for the 
+integral coefficients\footnote{
+  The exact rational values are obtained via finite-field evaluations and rational reconstruction (see \cref{sec:ff_fp}).
+} 
+and with the master integrals 
+evaluated to a precision that allows to show 10
+significant digits.
+
 
 \begin{table}[h]
   \centering
@@ -881,146 +1180,6 @@ One-loop amplitudes were known. Five-parton to order $\mathcal{O}(\eps^2)$ are p
   \label{tab:results5parton1L}
 \end{table}
 
-\subsection{Four-Parton}
-
-\todo{Move four-parton results to appendix and refer from validation? Or move to validation}
-
-We evaluate the four-gluon, two-quark two-gluon and four-quark
-amplitudes at the phase-space point%
-\footnote{Units of energy are chosen arbitrarily.
-  The amplitudes presented in the tables
-  \ref{tab:results4parton}, \ref{tab:results5parton}, 
-  \ref{tab:results4parton1L} and \ref{tab:results5parton1L}
-  are normalized to be dimensionless.
-}
-%
-\begin{equation}
-  \begin{aligned}[c]
-    p_1 &= \vphantom{\frac{1}{48}}\left(1,1,-i,1\right), \\
-    p_2 &= -\frac{1}{16}\left(3,0,0,-3\right), \\
-  \end{aligned}
-  \qquad
-  \begin{aligned}[c]
-    p_3 &= \frac{1}{48}\left(25,-51,45\,i,7\right),\\
-    p_4 &= -\frac{1}{48}\left(64,-3,-3\,i, 64\right), \\
-  \end{aligned}
-  \label{eq:EvalPoint4}
-\end{equation}
-with corresponding invariants $s_{12}=-3/4$ and $s_{23}=-1/4$ 
-where $s_{ij}=(p_i+p_j)^2$.
-%
-We set the regularization scale $\mu$ to 1 and the normalization
-of the results is fixed by the expansion in 
-\cref{eq:partials,eq:nfdecomposition}. All results are presented
-in the HV scheme.
-%
-\begin{table}[h]
-  \begin{adjustbox}{width=1\textwidth}
-    \centering
-    \begin{tabular}{cccccc}
-      \toprule
-      $\CA^{(2)[N_f^0]}/\CA^\mathrm{(norm)}$	  &   $\epsilon^{-4}$   &   $\epsilon^{-3}$   &   $\epsilon^{-2}$   &   $\epsilon^{-1}$   &   $\epsilon^{0}$   \\
-      \midrule
-      $( 1_g^+, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $-4.000000000$ & $-23.74072126$ & $-63.52221777$ \\
-      $( 1_g^-, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $-4.000000000$ & $-35.31127327$ & $-133.5083818$ \\
-      $( 1_g^-, 2_g^-, 3_g^+, 4_g^+ )$ & $8.000000000$ & $55.65274878$ & $164.6421815$ & $222.3267401$ & $-8.390444844$ \\
-      $( 1_g^-, 2_g^+, 3_g^-, 4_g^+ )$ & $8.000000000$ & $55.65274878$ & $176.0091465$ & $332.2956004$ & $486.5023259$ \\
-      \midrule
-      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^+ )$ & 0 & 0 & $-3.000000000$ & $-24.41444952$ & $-74.97642231$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^- )$ & $4.500000000$ & $28.51508962$ & $73.34964082$ & $75.65107559$ & $-9.311163231$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_g^-, 4_g^+ )$ & $4.500000000$ & $28.51508962$ & $64.00475414$ & $-13.64171730$ & $-376.4555455$ \\
-      \midrule
-      $( 1_q^+, 2_{\bar q}^-, 3_Q^+, 4_{\bar Q}^- )$ & $2.000000000$ & $10.19374511$ & $8.003461515$ & $-55.57160018$ & $-92.52942183$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_Q^-, 4_{\bar Q}^+ )$ & $2.000000000$ & $10.19374511$ & $-4.028725695$ & $-134.3060579$ & $-234.1564069$ \\
-      \toprule
-      $\CA^{(2)[N_f^1]}/\CA^\mathrm{(norm)}$	  &   $\epsilon^{-4}$   &   $\epsilon^{-3}$   &   $\epsilon^{-2}$   &   $\epsilon^{-1}$   &   $\epsilon^{0}$   \\
-      \midrule
-      $( 1_g^+, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $4.000000000$ & $27.74072126$ & $86.81849458$ \\
-      $( 1_g^-, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & $4.000000000$ & $39.31127327$ & $172.4199379$ \\
-      $( 1_g^-, 2_g^-, 3_g^+, 4_g^+ )$ & 0 & $-2.000000000$ & $-15.96133691$ & $-59.69423578$ & $-141.8161833$ \\
-      $( 1_g^-, 2_g^+, 3_g^-, 4_g^+ )$ & 0 & $-2.000000000$ & $-18.16301631$ & $-81.04594245$ & $-230.6319267$ \\
-      \midrule
-      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^+ )$ & 0 & 0 & $0.5454545455$ & $3.784151849$ & $3.326492162$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^- )$ & 0 & $0.5000000000$ & $4.307232180$ & $15.70646205$ & $21.70488360$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_g^-, 4_g^+ )$ & 0 & $0.5000000000$ & $4.307232180$ & $13.62982056$ & $-12.51632628$ \\
-      \midrule
-      $( 1_q^+, 2_{\bar q}^-, 3_Q^+, 4_{\bar Q}^- )$ & 0 & $1.666666667$ & $10.55774898$ & $23.90612711$ & $-30.33285238$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_Q^-, 4_{\bar Q}^+ )$ & 0 & $1.666666667$ & $10.55774898$ & $15.88466897$ & $-106.4874291$ \\
-      \toprule
-      $\CA^{(2)[N_f^2]}/\CA^\mathrm{(norm)}$	  &   $\epsilon^{-4}$   &   $\epsilon^{-3}$   &   $\epsilon^{-2}$   &   $\epsilon^{-1}$   &   $\epsilon^{0}$   \\
-      \midrule
-      $( 1_g^+, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & 0 & $1.444444444$ \\
-      $( 1_g^-, 2_g^+, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0$ \\
-      $( 1_g^-, 2_g^-, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0.03086419753$ \\
-      $( 1_g^-, 2_g^+, 3_g^-, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0$ \\
-      \midrule
-      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^+ )$ & 0 & 0 & 0 & $0.1212121212$ & $1.189856320$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_g^+, 4_g^- )$ & 0 & 0 & 0 & 0 & $0$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_g^-, 4_g^+ )$ & 0 & 0 & 0 & 0 & $0$ \\
-      \midrule
-      $( 1_q^+, 2_{\bar q}^-, 3_Q^+, 4_{\bar Q}^- )$ & 0 & 0 & $0.4444444444$ & $3.473917619$ & $14.37639897$ \\
-      $( 1_q^+, 2_{\bar q}^-, 3_Q^-, 4_{\bar Q}^+ )$ & 0 & 0 & $0.4444444444$ & $3.473917619$ & $14.37639897$ \\
-      \bottomrule
-    \end{tabular}
-  \end{adjustbox}
-  \caption{The bare two-loop four-parton helicity amplitudes evaluated
-    at the phase space point in \cref{eq:EvalPoint4}. We set the
-    normalization factor $\CA^\mathrm{(norm)}$ to $\CA^{(1)[N_f^0]}(\epsilon=0)$ for the
-    amplitudes with vanishing trees, and to $\CA^{(0)}$ otherwise.} 
-  \label{tab:results4parton}
-\end{table}
-
-In table~\ref{tab:results4parton} we show numerical results for
-the bare two-loop four-parton helicity amplitudes.
-In order to expose the pole structure of the amplitudes (see
-appendix~\ref{sec:IR}) we normalize them to
-the corresponding tree-level amplitude if
-it is nonvanishing, or to the corresponding $\CA^{(1)[N_f^0]}(\epsilon=0)$ amplitude otherwise.
-The results have been obtained with exact values for the 
-integral coefficients and with the master integrals 
-evaluated to a precision that allows to show 10
-significant digits.
-
-
-
-
-\subsection{Five-Parton}
-\label{sec:fivepartonRes}
-We present results for the five-parton amplitudes evaluated at
-the phase-space point
-\begin{equation}
-  \begin{aligned}[c]
-    p_1 &= \left( \frac{1}{2}, \frac{45}{272}, \frac{45 i}{272}, \frac{1}{2} \right), \\
-    p_2 &= \left( -\frac{1}{2}, 0, 0, \frac{1}{2} \right), \\
-    p_3 &= \left( \frac{21}{26}, -\frac{21}{26}, -\frac{5 i}{26}, -\frac{5}{26} \right),
-  \end{aligned}
-  \qquad
-  \begin{aligned}[c]
-    p_4 &= \left( -\frac{1169}{2652}, \frac{2165}{10608}, -\frac{13459 i}{38896}, -\frac{5075}{9724} \right),\\[3ex]
-    p_5 &= \left( -\frac{973}{2652}, \frac{581}{1326}, \frac{1813 i}{4862}, -\frac{2779}{9724} \right),
-  \end{aligned}
-  \label{eq:EvalPoint5}
-\end{equation}
-with corresponding invariants
-\begin{align}
-  \label{eq:Invs5pt}
-  \begin{split}
-    s_{12} =& -1, \quad s_{23} = -8/13, \quad s_{34} = -1094/2431,\\
-    &s_{45} = -7/17, \quad s_{51} = -749/7293\ .
-  \end{split}
-\end{align}
-We set the regularization scale~$\mu$ to 1 and the normalization
-of the results is fixed by the expansion in 
-\cref{eq:partials,eq:nfdecomposition}. All results have been computed in the 
-HV scheme. Given that our integral coefficients are computed as 
-exact rational numbers, the final precision of our results is 
-determined by how many digits we require from 
-GiNaC~\cite{Vollinga:2004sn}
-in the evaluation of the polylogarithms in the master integrals
-we use \cite{Papadopoulos:2015jft,Gehrmann:2000zt}. In
-table~\ref{tab:results5parton} we present results with 10
-significant digits.
-
 \begin{table}[!htbp]
   \centering
   \begin{adjustbox}{width=1\textwidth}
@@ -1086,14 +1245,52 @@ significant digits.
   \label{tab:results5parton}
 \end{table}
 
-All results in table~\ref{tab:results5parton} have been 
-checked to satisfy the pole structure of two-loop
-amplitudes~\cite{Catani:1998bh}. 
-The one-loop amplitudes required for these checks
-have been obtained from our own setup,
-and cross-checked up to order $\epsilon^0$ 
-with \BlackHat{}~\cite{Berger:2008sj}. We present their 
-numerical values in appendix \ref{sec:IR}.
+\section{Validation}
+\label{sec:Validation-5parton}
+
+We have carried out an extensive set of checks on our computational setup and results for the amplitudes.
+
+\subsubsection{Computational setup}
+\begin{itemize}
+  \item We checked that all surface terms integrate to zero by IBP-reducing them with \texttt{FIRE}
+\cite{Smirnov:2008iw,Smirnov:2014hma,Smirnov:2019qkx} on a fixed numerical kinematic
+point.
+\item
+After the cut equations \cref{eq:cut_equations} are solved for the coefficients, we evaluate
+the left-hand side on a new point, and compare it to the results obtained using the known values of coefficients on the right-hand side.
+This is known as ``$N=N$ test''.
+\item The whole computation of coefficients is performed either with floating point, or with finite fields (recombined into rational numbers).
+  The results agree.
+\item Two different sets of master integrals are employed to obtain the values for the amplitudes. The results agree.
+\end{itemize}
+The first two checks combined together are very powerful, since they validate that the expected
+integrand parametrization for each topology is indeed the complete and non-redundant description of the whole amplitude.
+This is non-trivial, since we never deal with the integrand of the amplitude at once, and evaluate 
+each cut diagram through a product of tree amplitudes.
+
+For all four-parton and five-parton amplitudes we verified,
+that they satisfy the
+expected infrared pole structure (see \cref{sec:IR}).
+
+\subsubsection{Results from other sources}
+
+The one-loop amplitudes, shown in \cref{tab:results4parton1L,tab:results5parton1L} which we obtained from our own setup,
+are cross-checked up to order $\epsilon^0$ with \BlackHat{}~\cite{Berger:2008sj}
+
+We have carried out a systematic
+validation of the $\epsilon^0$ contributions of all four-parton amplitudes against their known analytic
+expressions from refs.~\cite{Bern:2002tk,Bern:2003ck,DeFreitas:2004kmi,Glover:2004si}. 
+For the four-gluon amplitudes we have compared directly the
+$\epsilon^0$ pieces of our results with the analytic expressions of~\cite{Bern:2002tk}.
+For the two-quark two-gluon and four-quark amplitudes we have used the one-loop results given in \cref{tab:results4parton1L}
+to compute the corresponding finite remainders $\CF^{(2)}$ as
+defined in \cref{eq:remainderDef}. 
+After accounting for the different choices of 
+normalization for the $\mathbf{H}_{[n]}(\epsilon)$ operators 
+(see \cref{sec:IR})
+made in refs.~\cite{Bern:2003ck} and \cite{Glover:2004si},
+we have found perfect agreement.
+
 The $N_f^0$ piece of the all-plus five-gluon amplitude have been
 checked to reproduce the analytic result
 of \cite{Gehrmann:2015bfy}, and for the other helicity 
@@ -1103,111 +1300,173 @@ We also find agreement with the numerical results of the $N_f^0$ terms
 of the two-quark three-gluon and four-quark one-gluon two-loop
 amplitudes which have been presented in the revised version of
 ref.~\cite{Badger:2018gip}.
-Finally, we also cross-checked the pole structures of other 
-helicity configurations, not explicitly shown. As our setup is a
-numerical one, this amounts to internal consistency checks of 
-our computational framework.
 
 
-\section{Analytic Form}
+\section{Reconstruction of Analytic Form}
 \label{sec:AnalyticForm}
-In this section we describe how we obtain analytic expressions
-for finite remainders from numerical evaluations over finite fields.
+In this section we explain how we obtain analytic expressions for the amplitudes from samples of their numerical evaluations over finite fields.
 
-We apply three methods to reduce the complexity of the remainder
-functions and facilitate their reconstruction from numerical samples.
-%
-First, we introduce a particular ansatz for the coefficients $r_i$ of
-\cref{eq:remainderPentagon} which simplifies the reconstruction procedure by
-decreasing the required number of sample points. 
-%
-Next, we comment on how to remove redundancies
-in the large number of rational functions in a scattering amplitude. 
-
-\todo{Structure here is not yet finalized}
-
-\subsection{Pentagon Functions}
-\label{sec:pentagon}
-The MPLs are a class of special functions with 
-only logarithmic singularities that can be equipped with algebraic
-structures that allow one to algorithmically find relations between
-them~\cite{Goncharov:2010jf,Duhr:2011zq,Duhr:2012fh}. One can then
-construct a basis for the space of MPLs relevant for five-parton
-scattering amplitudes, and this was achieved in~\cite{Gehrmann:2018yef}
-where the so-called pentagon functions were introduced.
-Further, MPLs are equipped with a notion of weight, which can
-be used to organize the pentagon functions. Indeed, there are
-no relations between pentagon functions of different weight so we can
-separate the space of pentagon functions into subspaces of different 
-weights. For two-loop amplitudes, we need functions of at most weight 4.
-In the following, we denote the pentagon functions by $\{h_i\}_{i\in B}$ 
-and the associated set of labels $B$. 
-
-After expansion in epsilon, the amplitude can thus be expressed in terms
-of pentagon functions
+The coefficients of master integrals $c_{\Gamma,i}$ in \cref{eq:ampl_master_integrals} are rational
+functions of external kinematics $\vb*{x}$ (and $D$), 
+and we have set up an algorithm for their exact numerical evaluation.
+Therefore, given a large enough ansatz for the coefficients\footnote{
+  here the vector-exponent notation for monomials is as in \cref{chap:stdtech,chap:numunitarity}
+}
 \begin{equation}
-  \mathcal{A}^{(2)}=
-    \sum_{i\in B}\sum_{k=-4}^0\epsilon^{k}
-    d_{k,i}h_i\,,
+  c_{\Gamma,i}(\mathbf{x}) = \frac{\sum_{\va{j}} n_{\Gamma,i;\,\va{j}}~\mathbf{x}^{\va{j}}}{\sum_{\va{j}}d_{\Gamma,i;\,\va{j}} ~ \mathbf{x}^{\va{j}}},
 \end{equation}
-where we use the fact that the poles in $\epsilon$
-of two-loop amplitudes are at most $\mathcal{O}(\epsilon^{-4})$ and
-the $d_{k,i}$ are rational functions of the external data.
- The motivation for this decomposition is
-that order by order in epsilon the master integrals satisfy more
-relations than integration-by-parts relations and these are manifested by the pentagon
-function decomposition.
-The same basis $B$ can be used to express the terms
-$\mathbf{I}_{[n]}^{(1)}\mathcal{A}_R^{(1)}$
-and $\mathbf{I}_{[n]}^{(2)}\mathcal{A}_R^{(0)}$ in \cref{eq:remaindeDef}, and we can thus decompose the remainder
-in terms of pentagon functions:
+in principle, we can evaluate $c_{\Gamma,i}(\vb*{x})$ enough times to generate and solve the systems of linear equations
+for rational numbers $n_{\Gamma,i;\,\va{j}}$ and  $d_{\Gamma,i;\,\va{j}}$. Here we ignore the $D$-dependence, since
+we already know it analytically (see \cref{sec:dimensional_reconstruction} for details).
+However, due to $\order{N^3} $ scaling of the algorithms for solving $N\times N$ linear systems, this is not practical.
+This topic has received a lot of attention recently and more advanced 
+algorithms for reconstruction of generic rational functions have been developed \cite{Peraro:2019svx,Peraro:2016wsq,Klappert:2019emp},
+which allow to minimize the computational cost of the reconstruction algorithm itself.
+In any case, the reduction of amplitudes to obtain the coefficients $c_{\Gamma,i}(\vb*{x})$ is computationally expensive,
+and the minimal number of evaluations scales as $\left(\substack{n+R \\ n }\right)$ with the number of variables $n$ and the
+polynomial degree $R$.
+For the reconstruction of the master-integral coefficients of five-parton amplitudes the complexity is prohibitive.
+
+
+Fortunately, the full physical information about the scattering is contained in finite remainders, defined in \cref{eq:remainderDef}.
+Hence, instead of reconstructing the coefficients of master integrals, we can write the finite remainders in terms of pentagon functions,
 \begin{equation}
-  \mathcal{R}^{(2)} = \sum_{i \in B} r_i h_i\,.
+  \mathcal{F}^{(2)} = \sum_{i \in B} r_i(\vb*{x}) h_i\,.
   \label{eq:remainderPentagon}
 \end{equation}
-Again, we suppress the dependence of the 
-algebraic coefficient functions $r_i$ and the pentagon functions $h_i$ on
-the external data.
-The remainders, and consequently the coefficient 
-functions $r_i$, depend on particle types and helicities as well as
-the number of flavors $\NF$.
+and reconstruct the coefficients $r_i(\vb*{x})$. 
+To obtain this decomposition we use the same basis $B$ of pentagon functions as in \cref{eq:pentagon_function_decomposition} 
+for $\mathbf{I}_{[n]}^{(1)}\mathcal{A}_R^{(1)}$ and $\mathbf{I}_{[n]}^{(2)}\mathcal{A}_R^{(0)}$ from \cref{eq:remainderDef}.
+We checked, that indeed the coefficients $r_i(\vb*{x})$ have lower total degree, compared to the coefficients of master integrals, as expected.
 
-For convenience we use the convention that the set of pentagon functions $\{h_i\}_{i\in B}$
-not only includes genuine functions, such as $\log(-s_{12})$, but also
-constants with weight, such as $\pi^2$, that correspond to the pentagon 
-functions evaluated at specific points. These are boundary conditions that
-are specific to the kinematic region where the amplitude is evaluated. In
-this paper we specialize our discussion to the Euclidean region.
-In  ref.~\cite{Gehrmann:2018yef}, the pentagon functions have been continued
-to all relevant physical regions, and it is thus rather  straightforward
-to extend our results to any physical region.
+In the following, we will further exploit the physical constraints on the amplitudes to simplify
+the reconstruction. We will see, that we will not, in fact, need to reconstruct multivariate \emph{rational} functions at all,
+and it is sufficient to perform a univariate rational-function reconstruction, and a reconstruction of a
+multivariate \emph{polynomial}.
 
-\subsection{Analytic Reconstruction}
+\subsection{Choice of Variables}
 
-The coefficient functions $\{r_i\}_{i\in B}$ introduced in
-\cref{eq:remainderPentagon}  have a universal pole 
-structure~\cite{Abreu:2018zmy} which we find to be expressible in terms of
-the so-called planar alphabet $A$ of the pentagon functions \cite{Gehrmann:2018yef}.
-The planar alphabet $A$ is given in terms
-of 26 letters $\{W_i\}_{i\in A}$ which in turn are rational functions of the independent 
-Mandelstam variables $s_{ij}=(p_{i}+p_j)^2$, 
+The complexity of reconstruction, clearly, depends on the choice of variables, in which 
+the reconstruction is performed. In this section we discuss our choice for the reconstruction of remainders.
+
+So far we have been mostly indifferent as to how we parametrize the external kinematics $\vb*{x}$.
+The only condition, in order to be able to carry out exact evaluation, was that the components of external momenta
+are rational numbers, which is directly implemented by the \emph{momentum-twistor} variables \cite{Hodges:2009hk}.
+It then seems natural to try to reconstruct the coefficients $r_i$ in these variables.
+It turns out, however, that this is not the optimal choice.
+In the following we argue, that the reconstruction of $r_i$ in terms of Mandelstam variables $s_{ij}=(p_{i}+p_j)^2$, 
 \begin{equation}\label{eq:mandelstams}
-\vec s=\{s_{12},s_{23},s_{34},s_{45},s_{51}\}\,,
+\vec s \coloneqq \{s_{12},s_{23},s_{34},s_{45},s_{51}\}\,,
 \end{equation}
 and the parity-odd contraction of four 
 momenta 
 \begin{equation}\label{eq:tr5Def}
-\trFive= 4 i \varepsilon^{\mu\nu\rho\sigma}
+\trFive \coloneqq  4 i \varepsilon^{\mu\nu\rho\sigma}
 p_{1\mu} p_{2\nu} p_{3\rho} p_{4\sigma}\, ,
 \end{equation}
-with the Levi-Civita symbol $\varepsilon_{\mu\nu\rho\sigma}$ and the convention $\varepsilon_{0123}=1$. 
-The square of $\trFive$ gives the 
-five-point Gram determinant $\Delta_5=\trFive^2$.
+with the Levi-Civita symbol $\varepsilon_{\mu\nu\rho\sigma}$, achieves lower total degree.
+The reason why we have to introduce the variable $\trFive$, is that 
+it is not rationally-parametrizable in terms of the Mandelstam variables.
+It's square, however, is, since it is equal to the five-point Gram determinant.
+The Mandelstam variables 
+make manifest the dependence on
+the external momenta, and therefore also any possible symmetries related to 
+exchanges of external legs.
+
+To be able to reconstruct in these variables, first we need to find a rational 
+parametrization of the external kinematics.
+We keep four of the Mandelstam invariants
+$\{ s_{12}, s_{23}, s_{45}, s_{51} \}$ and introduce an auxiliary variable $x$.
+More explicitly, we consider the Mandelstam invariants as functions of
+this new set of variables,
+\begin{equation}
+  \vec s\equiv \vec s\,(s_{12}, s_{23}, s_{45}, s_{51},x)\,,
+\end{equation}
+and, rescaling the momenta such that $s_{12}=1$, $s_{34}$ is defined in terms of
+$x$ as
+\begin{align}
+\begin{split}
+  s_{34}\equiv
+    s_{34}(s_{23}, s_{45} , s_{51}, x) =& \frac{ (s_{45} - 1) s_{51} x -
+	s_{23} (s_{23} -  s_{45} - s_{51} - x)}{(s_{45} - s_{23} + x)\,x}\,.
+    \label{eq:s34Definition}
+\end{split}
+\end{align}
+This parametrization follows from the one given in \cref{sec:twistors}.
+For any (generic) fixed value of the invariants $\vec s$
+there are two corresponding values of $\{x,\bar x\}$, corresponding to the 
+two solutions to the quadratic equation in \eqref{eq:s34Definition}.
+These two different points in phase space are parity conjugates, 
+and correspond to opposite signs of $\trFive$ . 
+Under this transformation,
+\begin{align} 
+  \label{eq:parity}
+  \trFive\to-\trFive\,,\qquad
+  x\to\bar x=
+  \frac{s_{23}(s_{23}-s_{45}-s_{51})}{s_{34}(s_{12}, s_{23}, s_{45}, s_{51},x)\,x}\,.
+\end{align}
+
+Next, we discuss our ansatz for the rational coefficients $r_i$ and the sampling procedure.
+To this end, we decompose each function $r_i$ into parity odd and even parts\footnote{
+  As $\trFive{}^2$ is manifestly polynomial in the invariants, it is clear that
+  no higher powers in $\trFive$ are required. 
+},
+\begin{equation}
+    \label{eq:ripmdef}
+		 r_i(\vec s, \trFive ) = r_i^+(\vec s\,)  + \trFive \, r_i^-(\vec s\,)\,. 
+\end{equation}
+%
+
+While the functions $r_i^{\pm}$  are rational in the Mandelstam 
+invariants $\vec s$, their
+definition through eq.~\eqref{eq:ripmdef} only allows them to be
+evaluated via the functions $r_i$ which, due to the presence of
+$\trFive$, are not rational in the invariants themselves. 
+For this reason, we first isolate the even and odd parts $r_i^\pm$
+and reconstruct them in terms of the Mandelstam variables $\vec s$.
+As the parity conjugate points $\{s_{23},s_{45},s_{51}, x\}$
+and $\{s_{23},s_{45},s_{51}, \bar x\}$ 
+correspond to  the same  value of the invariants $\vec s$, we can use
+this pair of points to evaluate the $r_i^{\pm}$ on a single point~$\vec s$,
+\begin{eqnarray}
+		r^+_i(\vec s\, ) &=& \frac{1}{2} \big[ r_i(\vec s, x ) + r_i(\vec s,\bar x ) \big]\,,\\
+		r^-_i(\vec s\, ) &=& \frac{1}{2\, \trFive } \big[ r_i(\vec s,x ) - r_i(\vec s,\bar x ) \big]\,.
+\end{eqnarray}
+
+
+
+To illustrate the advantage of the approach outlined above compared with the
+strategy used in \cite{Abreu:2018zmy}, we show in
+figure~\ref{fig:degrees-twXsij}  the polynomial-degree drop for the
+two most complex remainders, separating the different $\NF$ contributions.
+This observation is common to all five-parton remainders at $N_f^0$ and $N_f^1$: 
+we observe a drop of the polynomial degree in the numerators  $n_i^\pm(\vec s)$ by 
+40\%-50\% when written in terms of Mandelstam variables as compared to the twistor 
+variables.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width = 0.7\textwidth]{plots/twistorXsijs_comparison.pdf}
+  \caption{
+    Maximal degrees of numerators of the two most complicated amplitudes in momentum-twistor and $s_{ij}$ variables.
+    Our choice of the twistor parametrization is given in \cref{sec:twistors}.
+  }
+  \label{fig:degrees-twXsij}
+\end{figure}
+
+
+\subsection{Universal Denominators}
+
+The coefficient functions $\{r_i\}_{i\in B}$ introduced in
+\cref{eq:remainderPentagon}  have a universal pole 
+structure~\cite{Abreu:2018zmy,Abreu:2019odu} which we find to be expressible in terms of
+the so-called planar alphabet $A$ of the pentagon functions \cite{Gehrmann:2018yef}.
+The planar alphabet $A$ is given in terms
+of 26 letters $\{W_i\}_{i\in A}$ which are rational functions of $\{\vec{s},\trFive\}$.
 The letters can be further grouped into parity even and odd letters, 
-$A^+$ and $A^-$ respectively, with $A=A^+\cup A^-$. (Parity here refers to  
-the transformation properties of the letters under a parity transformation in 
-momentum space.)
-While $\trFive$ is parity odd, all Mandelstam variables $\vec s$ are parity even. 
+$A^+$ and $A^-$ respectively, with $A=A^+\cup A^-$.\footnote{Parity here refers to  
+  the transformation properties of the letters under a parity transformation in 
+momentum space.}
 The functions $r_i$ are rational functions in the variables ${\vec s}$ and $\trFive$,  
 whose denominators are monomials in the letters,
 \begin{equation}
@@ -1218,26 +1477,61 @@ The vector of exponents $\vec q_i=\{q_{i,1}, ... q_{i,26}\}$
 differs between the coefficient functions, and for a given
 coefficient function $r_i$ not all letters contribute. The pattern of
 contributing letters is linked to the pentagon functions and helicity
-dependent~\cite{Abreu:2018zmy}. 
-We will often refer to the set of 
+dependent~\cite{Abreu:2018zmy,Abreu:2019odu}. 
+We will refer to the set of 
 independent factors in a monomial such as $W^{\vec\alpha}$ as $A_\alpha$,
 \begin{equation}\label{eq:A_alp}
 		A_\alpha = \{ i\,|\, i \in A \quad \mbox{with} \quad \alpha_i\neq 0 \} \,.
 \end{equation}
 
-We define a monomial order for $W^{\vec\alpha}$ through,
+A further simplification to the reconstruction procedure 
+is achieved from realizing that the
+denominators of $r_i^{\pm}$ can be written as in eq.~\eqref{eq:letterDecomposition},
+with the extra requirement that no odd letters appear,
 \begin{equation}
-  \label{eq:orderingNotation}
-  W^{\vec\alpha} < W^{\vec\beta}  \quad \Leftrightarrow \quad \vec\alpha < \vec\beta \,
+    r^\pm_i(\vec s\,)  = \frac{n_i^\pm(\vec s\,) }{W^{\vec q_i}(\vec s\,) }\,,
+   \label{eq:DenominatorAnsatz}
 \end{equation}
-with lexicographic ordering of the exponent vectors $\vec\alpha < \vec\beta$.
+where the $n_i^\pm(\vec s\,)$ are polynomials in the invariants and
+the contributing $W_j(\vec s\,)$ are polynomials in the $\vec s$ only (and not $\trFive$). 
+To test this
+ansatz and determine the exponent vector $\vec q_i$, we consider the functions
+$r_i^{\pm}$ on a `univariate slice' where the variables depend on a single parameter 
+$t$, $\{s_{23}(t),s_{45}(t),s_{51}(t), x(t)\}$. 
+We then reconstruct the univariate functions $r_i^{\pm}(t)$ using Thiele's formula (see \cref{sec:thiele}) and match the denominators 
+with a monomial in the letters $W_i(\vec s\,[t])$ in order to obtain the exponent vector $\vec q_i$.
+For this to work, we must choose a curve on which all 
+letters $W_i(\vec s\,[t])$ are distinct functions of $t$.
+Furthermore, if we require that all invariants are linear in $t$, this 
+procedure will also tell us the total degree of the numerator polynomials  
+$n_i^\pm(\vec s\,)$ in the Mandelstam variables. Such a curve is given by, e.g., 
+\begin{equation}
+  \begin{aligned}
+    x(t) &= c_0, \\
+    s_{45}(t) &= c_2 + d_2 t,
+  \end{aligned}
+  \qquad
+  \begin{aligned}
+    s_{23}(t) &= c_1 + d_1 t,  \\ 
+    s_{51}(t) &= c_3 \big(x(t) - s_{23}(t) + s_{45}(t) \big)\,,
+  \end{aligned}
+\end{equation}
+where the variables $c_i$ and $d_i$ take fixed, arbitrary values.
+With this procedure, we confirmed the ansatz of eq.~\eqref{eq:DenominatorAnsatz}
+and thus determined all the denominators of the rational functions $r_i^{\pm}$.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width = 0.7\textwidth]{plots/twistorXsijs_comparison.pdf}
-  \caption{Maximal degrees of numerators of the two most complicated amplitudes in twistor and $s_{ij}$ variables.}
-  \label{fig:degrees-twXsij}
-\end{figure}
+The problem of reconstructing the $r_i^{\pm}$ is now reduced to the
+reconstruction of the polynomials $n^\pm_i$. We perform the reconstruction
+of $n_i^\pm(\vec s)$ directly in terms of the Mandelstam variables
+employing the modified form of the recursive Newton method (see \cref{sec:newton_rec}).
+Note, that we already determined the maximal total degree of these polynomials from the univariate slice.
+
+In this way, we have managed to reconstruct the remainders of all five-parton amplitudes.
+As an indication for the final complexity of the reconstruction we show the
+numerator degrees for the $N_f^0$ contribution of all the planar five-parton
+remainders in figure~\ref{fig:degrees-all}.
+The most demanding remainder was of the $\mathcal{A}^{(2)[N_f^1]}(g^-,g^+,g^-,g^+,g^+)$ partial amplitude.
+In total, 94,696 phase-space points  (coming in parity conjugate pairs) were necessary for its reconstruction.
 
 \begin{figure}[ht]
   \centering
@@ -1247,8 +1541,11 @@ with lexicographic ordering of the exponent vectors $\vec\alpha < \vec\beta$.
 \end{figure}
 
 
-\subsection{Simplification}
+
+\subsection{Processing of Reconstructed Expressions}
 %
+So far everything was done in a finite field.
+
 With the aim to simplify the rational reconstruction of finite-fields coefficients, we
 introduce an algorithm to uniquely obtain a multivariate partial-fraction decomposition of the analytic expressions.
 
@@ -1264,7 +1561,7 @@ simpler analytic expressions.
 These linear dependencies between the rational functions allow us to express the 
 remainder of each amplitude as
 \begin{equation}
-		\mathcal{R}^{(2)} = 
+		\mathcal{F}^{(2)} = 
 		\sum_{i\in K ,\, j\in \hat B} r_i M_{ij} h_j,
 \label{eq:remainderDecomposition}
 \end{equation}
@@ -1286,17 +1583,17 @@ require one finite field of cardinality $\mathcal{O}(2^{31})$, apart from two
 cases where we combine information from two finite fields (see more details in 
 section~\ref{sec:results}).
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width = 1.0\textwidth]{plots/function_space_dimensions.pdf}
-  \caption{
-    The number of linearly-independent coefficient functions $r_i^\pm$ for the five-parton amplitudes.
-    The three stacked bars display the case when the three different $N_f$ contributions are considered separately,
-    while the bar labeled $N_f^0\cup N_f^1\cup N_f^2$ displays the number of independent functions
-    when all $N_f$ contributions are combined.
-  }
-  \label{fig:remainderStructure}
-\end{figure}
+%\begin{figure}[ht]
+  %\centering
+  %\includegraphics[width = 1.0\textwidth]{plots/function_space_dimensions.pdf}
+  %\caption{
+    %The number of linearly-independent coefficient functions $r_i^\pm$ for the five-parton amplitudes.
+    %The three stacked bars display the case when the three different $N_f$ contributions are considered separately,
+    %while the bar labeled $N_f^0\cup N_f^1\cup N_f^2$ displays the number of independent functions
+    %when all $N_f$ contributions are combined.
+  %}
+  %\label{fig:remainderStructure}
+%\end{figure}
 
 
 \subsubsection{Partial Fractions}
@@ -1468,6 +1765,13 @@ $1$, which is the term with the lowest possible degree (in any monomial ordering
 all possible cancellations between numerator and denominator will occur, as that they
 will result in the lowest polynomial degree for the remainder.
 
+We define a monomial order for $W^{\vec\alpha}$ through,
+\begin{equation}
+  \label{eq:orderingNotation}
+  W^{\vec\alpha} < W^{\vec\beta}  \quad \Leftrightarrow \quad \vec\alpha < \vec\beta \,
+\end{equation}
+with lexicographic ordering of the exponent vectors $\vec\alpha < \vec\beta$.
+
 
 Another important question is how this division results in a set of denominator
 structures with no algebraic dependencies, see eq.~\eqref{eq:algDep}, and 
@@ -1545,5 +1849,32 @@ more likely to be small. As discussed at the beginning of this section,
 this makes the result in a single finite field of cardinality $\mathcal{O}(2^{31})$ 
 sufficient to determine them.
 
-\todo{Consider including an explicit formula for an amplitude as an example (will require working on it of course\ldots{})}
+
+
+\subsection{Results}
+
+\todo{validation is just evaluation numerically} 
+
+We present our results in the form of ancillary files which can be downloaded
+from the source files of this work on the \texttt{arXiv} server. We include the
+following files, in \texttt{Mathematica}-readable format:
+\begin{itemize}
+    \item Analytic expressions for the basis set of one-loop five-parton amplitudes
+      expressed in terms of one-loop master integrals, valid to all orders in $\epsilon$;
+    \item Expressions for all one-loop master integrals written in terms of pentagon functions through order $\epsilon^2$;
+    \item The basis set of two-loop five-parton finite remainders, which are the main result
+of this work. For each remainder and at each power of $N_f$, we give a list of independent 
+coefficient functions $r_i$, a matrix $M_{ij}$ and a list of pentagon functions $h_j$, consistent with the decomposition of eq.~\eqref{eq:remainderDecomposition};
+    \item Scripts that assemble two-loop amplitudes from the remainders. 
+      In particular, the \texttt{Mathematica} script \texttt{TwoLoopAmplitudesNumerical.m} uses the 
+    analytic expressions to reproduce the numeric values of 
+    refs.~\cite{Abreu:2018jgq,Badger:2018gip}, as detailed in the included
+    \texttt{README.md} file.
+\end{itemize}
+
+Our expressions can be easily adapted to perform numerical integration over
+phase space. Indeed, they are very compact (with a compressed size of 1.6 Mb),
+and ready for automated algorithms for optimized
+evaluation like those included in
+FORM~\cite{Kuipers:2012rf,Ruijl:2014spa}.
 

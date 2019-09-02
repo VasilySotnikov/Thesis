@@ -173,7 +173,7 @@ we find that the numerators are now polynomials in ISPs only:
 \end{equation}
 and all topologies with $N_p > 4L +\frac{1}{2}L(L+1)$ are eliminated.
 In practice, this can be non-trivial and systematically performed with Gröbner basis techniques \cite{Zhang:2012ce,Mastrolia:2012wf,Mastrolia:2012an,Mastrolia:2016dhn}.
-In unitarity-based approaches, this step is taken into an account by construction,
+In unitarity-based approaches, this step is taken into account by construction,
 and need not be carried out explicitly. We discuss this in more detail in \cref{sec:ansatz_integrand}
 
 For $L=1$, the only irreducible scalar products are of the transverse type $\sp(\ell_i, \tau_j)$, which vanish upon integration due to Lorentz symmetry either directly,
@@ -307,6 +307,18 @@ This determines the coefficients of master integrals
 in \cref{eq:amplitude_integrated}.
 
 \todo{choice of masters: uniform weight, finite, unitarity compatible} 
+Given the parameterization of the integrand with surface terms, any
+linearly-independent tensor insertion can be used as a master
+integral. As such, it is trivial for us to change basis of master integrals,
+by filling the master space of each topology with any set of integrals
+independent under the IBP relations. This freedom was
+especially useful
+during testing, where we could for instance make use of finite
+integrals to control
+the $\epsilon$ structure when these could be easily
+constructed (e.g., some five-point master integrals can be
+made finite by simply shifting them to 6 dimensions).
+
 
 A variety of methods have been developed for the evaluation of the master integrals.
 Broadly speaking, they can be classified into analytic and numerical methods.

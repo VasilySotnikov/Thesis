@@ -245,208 +245,6 @@ The algorithm works for any dimension $D$ and metric signature.%
 It also works over arbitrary field as long as we don't require the transverse vectors to be normalized.
 
 
-\chapter{Numerical Algorithms}
-
-\section{Finite Fields and Floating Point Arithmetics}
-
-Definition of finite fields.
-
-Brief comparisong of finite fields vs floating point.
-
-usage of finite fields in \cite{Klappert:2019emp,Peraro:2016wsq,Peraro:2019svx}
-
-\subsection{Rational Reconstruction}
-\begin{figure}[ht]
-  \begin{center}
-    \begin{tikzpicture}[auto, node distance = 3cm,shorten >= 2pt]
-      \node [rectangle, draw, text centered] (x) {$\mathbf{x}$};
-
-      \node [above right = 0.3cm and 0.7cm of x] (xmod1) {$\mathbf{x}\mod p_1$};
-      \node [right  of=xmod1] (cmod1) {$c\mod p_1$};
-
-      \node [below right = 0.3cm and 0.7cm of x] (xmodn) {$\mathbf{x}\mod p_n$};
-      \node [right  of=xmodn] (cmodn) {$c\mod p_n$};
-
-
-      \node [below = 0cm of xmod1] () {$\vdots$};
-      \node [below = 0cm of cmod1] () {$\vdots$};
-      \node [below right = 0cm and 0.1cm of xmod1] () {$\vdots$};
-
-      \node [ellipse, draw, text centered, right =6cm of x, node distance = 3cm, text width = 1.5cm, inner sep = 1pt] (crt) {\baselineskip=-10pt \tiny Chinese Remainder Theorem \par};
-      \node [right = 0.5cm of crt] (cmodP) {\minibox{ $c\mod P$  \\ \footnotesize $\left(P\coloneqq\prod_i p_i\right)$} };
-
-      \node [rectangle, draw, text centered, right of=cmodP, node distance = 3cm] (c) {$c$};
-
-
-      \path [line,->] (x) -- (xmod1.west);
-      \path [line,->] (x) -- (xmodn.west);
-
-      \path [line,->] (xmod1.east) -- node [above]{$f$} (cmod1.west);
-      \path [line,->] (xmodn.east) -- node [above]{$f$} (cmodn.west);
-
-      \path [line,->] (cmod1.east) -- (crt);
-      \path [line,->] (cmodn.east) -- (crt);
-
-      \path [line,->] (crt) -- (cmodP);
-
-      \path [line,->] (cmodP) -- node [above]{\small $n,d < \sqrt{P}$} (c);
-    \end{tikzpicture}
-  \end{center}
-  \caption{The diagram representing rational reconstruction.}
-  \label{fig:RatReconstr}
-\end{figure}
-
-\section{Solving Linear Systems of Equations}
-For floating numerical stability is important.
-
-For finite fields only field operations. PLU decomposition algorithm.
-
-Put the one-loop cases here? Fourier transform and hard-coded solutions for inversions?
-
-\section{On-Shell Loop Momenta and Finite Fields}
-\label{sec:muij_square_roots}
-The extension of unitarity approaches to employ only operations
-defined in an algebraic field was proposed 
-in ref.~\cite{Peraro:2016wsq}.
-A finite-field based calculation allows to compute exact values
-for the integral coefficients $c_{\Gamma,i}$ of eq.~\eqref{eq:A}
-in a numerical framework.
-This idea
-was applied recently in \cite{Badger:2017jhb,Abreu:2017hqn} for
-pure gluon-scattering amplitudes, and here we discuss our
-implementation for amplitude computations with fermions.
-
-\subsubsection{Generic Algebraic Extension}
-
-From here on we denote by $\mathbb{F}$ an arbitrary 
-number field. In practice, we will be interested in
-$\mathbb{F}$ being the field of rational numbers $\mathbb{Q}$
-or the finite field $\mathbb{Z}_p$
-of all integers modulo a prime number $p$.
-In general, polynomial equations do not have solutions in 
-$\mathbb{F}$. This is at odds with the fact that
-in a unitarity-based approach one needs 
-to generate loop momenta which satisfy a set of quadratic
-conditions corresponding to setting propagators to zero.
-%
-In the presence of fermions, the situation becomes more 
-complicated due to the extension of the Clifford algebra beyond 
-four dimensions. More specifically, terms such as $\ell^\mu
-\gamma_{[D_s]\mu}$ exhibit the $(D-4)$-dimensional
-components of the loop momenta,
-which are in general not 
-$\mathbb{F}$-valued for on-shell momenta
-(more concretely, if we work on the field of rational numbers
-these components are in general irrational),
-leading to terms in the sub-currents of the
-Berends-Giele recursion that are not $\mathbb{F}$-valued. 
-%
-To address this issue,
-we start with a parametrization of the on-shell spaces as in 
-ref.~\cite{Abreu:2017hqn} but always use normalized basis
-vectors. We write the two-loop momenta as
-\begin{equation}
-    \ell_1 = (\ell_{1,[4]}, \vec{\mu}_1)\,,\quad \quad \quad
-    \ell_2 = (\ell_{2,[4]}, \vec{\mu}_2)\,, 
-    \label{eq:loopmomenta}
-\end{equation}
-where we denote their $(D-4)$-dimensional components as 
-$\vec{\mu}_1$ and $\vec{\mu}_2$. Next, we choose an orthonormal
-basis $\vec{n}_i$ of the $(D-4)$-dimensional space with
-$n_1$ in the direction of $\vec{\mu}_1$ and write
-\begin{equation}
-\vec{\mu}_1 = r_1 \vec{n}_1, \quad  \vec{\mu}_2 = \frac{\mu_{12}}{\mu_{11}} r_1 \vec{n}_1 + r_2 \vec{n}_2
-  \quad \mathrm{where} \quad r_1 = \sqrt{\mu_{11}}, \quad r_2 = 
-  \sqrt{\mu_{22} - \mu_{12}^2/\mu_{11}},
-\end{equation}
-with $\mu_{ij}=\vec{\mu}_i\cdot\vec{\mu}_j$.
-In a theory containing only vector particles we only ever need 
-the values $r_i^2$, which are $\mathbb{F}$-valued both on- and
-off-shell \cite{Abreu:2017hqn}. In contrast, in a theory with
-fermions, components of Berends-Giele currents will take the
-generic form
-\begin{equation}
-  \label{eq:ExtendedAlgebra}
-  a_{00} + a_{10} r_1 + a_{01} r_2 + a_{11} r_1 r_2, 
-\end{equation}
-which is not $\mathbb{F}$-valued.
-In order to nevertheless be able to
-work in the field $\mathbb{F}$,
-we consider 
-the algebra $\mathbb{V}$ over the field $\mathbb{F}$, with 
-$\mathbb{V}$ the vector space spanned by the basis 
-$\{r_0=1,r_1,r_2,r_1r_2\}$ and equipped with the standard
-addition and multiplication.
-All components of the Berends-Giele are elements 
-in the algebra, and can thus be written as a linear combination
-of the $r_i$ with $\mathbb{F}$-valued coefficients. More
-concretely, this means we only need to determine the $a_{ij}$ 
-in eq.~\eqref{eq:ExtendedAlgebra} which are $\mathbb{F}$-valued
-by construction.
-
-An important observation is that, although the coefficients 
-$a_{10}$, $a_{01}$ and $a_{11}$ in 
-eq.~\eqref{eq:ExtendedAlgebra} are non-zero in
-intermediate stages of the calculations, they vanish
-for the integrands of helicity amplitudes as defined in 
-eq.~\eqref{eq:tensorDecomposition}. This cancellation of the
-$r_i$ terms holds in the HV scheme and
-is due to the projection onto the invariant tensors 
-$v_n$ of eq.~\eqref{eq:tensorDecomposition}, 
-which yields polynomials in the Lorentz invariants 
-$\mu_{ij}$ at the integrand level
-(see the discussion in section \ref{sec:ParamIntegrands}).
-
-
-\subsubsection{Only Vector Particles}
-%
-In ref.~\cite{Abreu:2017hqn}, this was resolved
-by making sure that all scalar products
-between the momenta in the problem were $\mathbb{F}$-valued.
-
-
-\subsubsection{Special Metric Signature}
-
-Any Lorentz-invariant quantity such as helicity amplitudes (normalized by an appropriate spinor weight)
-depends on the space-time metric tensor only through contractions with momenta and states of external particles.
-Thus  without loss of generality we can choose to use an alternating metric signature $(+,-,+,-,\ldots)$
-and modify external momenta such that all Lorentz invariants remain unchanged.
-
-We then can parametrize the two-dimensional loop-momentum components
-$\vec{\mu}_1$ and $\vec{\mu}_2$ as follows:
-\begin{equation}
-  \vec{\mu}_1(t)  = \frac{1}{2}\begin{pmatrix}
-    t+\dfrac{\mu_{11}}{t} \\
-    t-\dfrac{\mu_{11}}{t} \\
-  \end{pmatrix}, \quad
-  \vec{\mu}_2(t)  = \frac{\mu_{12}}{\mu_{11}}\vec{\mu}_1(t) - \frac{r}{\mu_{11}}~\frac{1}{2}\begin{pmatrix}
-    t-\dfrac{\mu_{11}}{t} \\
-    t+\dfrac{\mu_{11}}{t} \\
-  \end{pmatrix},
-  \label{eq:muparam}
-\end{equation}
-where $t$ is a free dimensionful parameter that leaves the scalar products
-$r = \sqrt{\mu_{12}^2-\mu_{11} \mu_{22}}$ and 
-$\mu_{ij} = \mu_i^1 \mu_j^1 - \mu_i^2 \mu_j^2$ invariant. %
-
-This parametrization allows to reduce the size of the algebraic extension $\mathbb{V}$ generated by \cref{eq:ExtendedAlgebra},
-which is a significant optimization of numerical evaluations.
-
-
-\todo{Note on other possibilities to avoid solving on-shell conditions.}
-
-
-\section{Exact Interpolation of Functions over Finite Fields}
-\label{sec:func_reconstruction}
-
-\subsection{Univariate Polynomials}
-
-\subsection{Univariate Rational Function}
-
-\subsection{Multivariate Polynomials}
-
-
-
 \chapter{Spinor-Helicity}
 \label{chap:4dspinhel}
 
@@ -817,6 +615,249 @@ Inserting this into the previous equation we see that only on the invariants $\m
 
 
 
-\chapter{Twistor Parametrization}
-\todo{twistor parametrization} 
-see e.g.\ Bobadilla thesis
+\chapter{Momentum Twistor Variables}
+\label{sec:twistors}
+
+Here we explicitly specify the twistor parametrization~\cite{Hodges:2009hk}, which
+we employed to rationalize the external on-shell momenta $\{p_i\}_{i=1,5}$ with
+$p_i^2=0$. This parametrization yields a momentum point with the
+kinematic invariants $(s_{12}, s_{23}, s_{34}, s_{45}, s_{51})$ from the
+input variables $\{ s_{23}, s_{45}, s_{51}, x \}$ and $s_{12}=1$ 
+as given in the main text in eq.~\eqref{eq:s34Definition}.
+
+Using the notation from \cref{chap:4dspinhel}, the momenta $p_i$ are written in terms of spinors as
+\begin{equation}
+  p^\mu_i = \frac{1}{2}\sbraket(i,\gamma^\mu,i) = \frac{1}{2}\brasket(i,\gamma^\mu,i)
+\end{equation}
+
+We introduce an auxiliary spinors $\sket{\mu_i}$,
+such that the spinors $\ket{i}$, $\sket{\mu_i}$ are parametrized by the matrix,
+\begin{equation}
+  \begin{pmatrix}
+    \ket{1} &  \ket{2} &   \ket{3} &   \ket{4} &  
+    \ket{5} \\   
+    \sket{\mu_1} &  
+    \sket{\mu_2} &  
+    \sket{\mu_3} &  
+    \sket{\mu_4} &  
+    \sket{\mu_5} 
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    1 & 0 & 1 & 1 \!+\! \frac{1}{x}  &  1 \!+\! \frac{1}{x} \!+\! \frac{x-s_{23}+s_{45}}{x s_{51}}\\
+    0 & 1 & 1 & 1                    &  1\\
+    0 & 0 & 0 & \frac{s_{23}}{x}     &  1\\
+    0 & 0 & 1 & 1                    & 1 \!-\! \frac{s_{45}}{s_{23}}
+  \end{pmatrix}
+  \label{eq:TwistorParametrization}
+\end{equation}
+%
+The spinors $\sbra{i}$ are then obtained as
+\begin{equation}
+\sbra{i} = \frac{\langle i, i+1 \rangle \sbra{\mu_{i-1}} + \langle i+1, i-1\rangle \sbra{\mu_{i}} + \langle i-1, i \rangle\sbra{\mu_{i+1}}}{\langle i, i+1\rangle \langle i-1, i\rangle}\, .
+\end{equation}
+
+
+
+
+
+\chapter{Numerical Algorithms}
+
+\section{Finite Fields and Floating Point Arithmetics}
+\label{sec:ff_fp}
+
+Definition of finite fields.
+
+Brief comparisong of finite fields vs floating point.
+
+usage of finite fields in \cite{Klappert:2019emp,Peraro:2016wsq,Peraro:2019svx}
+
+\subsection{Rational Reconstruction}
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}[auto, node distance = 3cm,shorten >= 2pt]
+      \node [rectangle, draw, text centered] (x) {$\mathbf{x}$};
+
+      \node [above right = 0.3cm and 0.7cm of x] (xmod1) {$\mathbf{x}\mod p_1$};
+      \node [right  of=xmod1] (cmod1) {$c\mod p_1$};
+
+      \node [below right = 0.3cm and 0.7cm of x] (xmodn) {$\mathbf{x}\mod p_n$};
+      \node [right  of=xmodn] (cmodn) {$c\mod p_n$};
+
+
+      \node [below = 0cm of xmod1] () {$\vdots$};
+      \node [below = 0cm of cmod1] () {$\vdots$};
+      \node [below right = 0cm and 0.1cm of xmod1] () {$\vdots$};
+
+      \node [ellipse, draw, text centered, right =6cm of x, node distance = 3cm, text width = 1.5cm, inner sep = 1pt] (crt) {\baselineskip=-10pt \tiny Chinese Remainder Theorem \par};
+      \node [right = 0.5cm of crt] (cmodP) {\minibox{ $c\mod P$  \\ \footnotesize $\left(P\coloneqq\prod_i p_i\right)$} };
+
+      \node [rectangle, draw, text centered, right of=cmodP, node distance = 3cm] (c) {$c$};
+
+
+      \path [line,->] (x) -- (xmod1.west);
+      \path [line,->] (x) -- (xmodn.west);
+
+      \path [line,->] (xmod1.east) -- node [above]{$f$} (cmod1.west);
+      \path [line,->] (xmodn.east) -- node [above]{$f$} (cmodn.west);
+
+      \path [line,->] (cmod1.east) -- (crt);
+      \path [line,->] (cmodn.east) -- (crt);
+
+      \path [line,->] (crt) -- (cmodP);
+
+      \path [line,->] (cmodP) -- node [above]{\small $n,d < \sqrt{P}$} (c);
+    \end{tikzpicture}
+  \end{center}
+  \caption{The diagram representing rational reconstruction.}
+  \label{fig:RatReconstr}
+\end{figure}
+
+
+\section{On-Shell Loop Momenta and Finite Fields}
+\label{sec:muij_square_roots}
+The extension of unitarity approaches to employ only operations
+defined in an algebraic field was proposed 
+in ref.~\cite{Peraro:2016wsq}.
+A finite-field based calculation allows to compute exact values
+for the integral coefficients $c_{\Gamma,i}$ of eq.~\eqref{eq:A}
+in a numerical framework.
+This idea
+was applied recently in \cite{Badger:2017jhb,Abreu:2017hqn} for
+pure gluon-scattering amplitudes, and here we discuss our
+implementation for amplitude computations with fermions.
+
+\subsubsection{Generic Algebraic Extension}
+
+From here on we denote by $\mathbb{F}$ an arbitrary 
+number field. In practice, we will be interested in
+$\mathbb{F}$ being the field of rational numbers $\mathbb{Q}$
+or the finite field $\mathbb{Z}_p$
+of all integers modulo a prime number $p$.
+In general, polynomial equations do not have solutions in 
+$\mathbb{F}$. This is at odds with the fact that
+in a unitarity-based approach one needs 
+to generate loop momenta which satisfy a set of quadratic
+conditions corresponding to setting propagators to zero.
+%
+In the presence of fermions, the situation becomes more 
+complicated due to the extension of the Clifford algebra beyond 
+four dimensions. More specifically, terms such as $\ell^\mu
+\gamma_{[D_s]\mu}$ exhibit the $(D-4)$-dimensional
+components of the loop momenta,
+which are in general not 
+$\mathbb{F}$-valued for on-shell momenta
+(more concretely, if we work on the field of rational numbers
+these components are in general irrational),
+leading to terms in the sub-currents of the
+Berends-Giele recursion that are not $\mathbb{F}$-valued. 
+%
+To address this issue,
+we start with a parametrization of the on-shell spaces as in 
+ref.~\cite{Abreu:2017hqn} but always use normalized basis
+vectors. We write the two-loop momenta as
+\begin{equation}
+    \ell_1 = (\ell_{1,[4]}, \vec{\mu}_1)\,,\quad \quad \quad
+    \ell_2 = (\ell_{2,[4]}, \vec{\mu}_2)\,, 
+    \label{eq:loopmomenta}
+\end{equation}
+where we denote their $(D-4)$-dimensional components as 
+$\vec{\mu}_1$ and $\vec{\mu}_2$. Next, we choose an orthonormal
+basis $\vec{n}_i$ of the $(D-4)$-dimensional space with
+$n_1$ in the direction of $\vec{\mu}_1$ and write
+\begin{equation}
+\vec{\mu}_1 = r_1 \vec{n}_1, \quad  \vec{\mu}_2 = \frac{\mu_{12}}{\mu_{11}} r_1 \vec{n}_1 + r_2 \vec{n}_2
+  \quad \mathrm{where} \quad r_1 = \sqrt{\mu_{11}}, \quad r_2 = 
+  \sqrt{\mu_{22} - \mu_{12}^2/\mu_{11}},
+\end{equation}
+with $\mu_{ij}=\vec{\mu}_i\cdot\vec{\mu}_j$.
+In a theory containing only vector particles we only ever need 
+the values $r_i^2$, which are $\mathbb{F}$-valued both on- and
+off-shell \cite{Abreu:2017hqn}. In contrast, in a theory with
+fermions, components of Berends-Giele currents will take the
+generic form
+\begin{equation}
+  \label{eq:ExtendedAlgebra}
+  a_{00} + a_{10} r_1 + a_{01} r_2 + a_{11} r_1 r_2, 
+\end{equation}
+which is not $\mathbb{F}$-valued.
+In order to nevertheless be able to
+work in the field $\mathbb{F}$,
+we consider 
+the algebra $\mathbb{V}$ over the field $\mathbb{F}$, with 
+$\mathbb{V}$ the vector space spanned by the basis 
+$\{r_0=1,r_1,r_2,r_1r_2\}$ and equipped with the standard
+addition and multiplication.
+All components of the Berends-Giele are elements 
+in the algebra, and can thus be written as a linear combination
+of the $r_i$ with $\mathbb{F}$-valued coefficients. More
+concretely, this means we only need to determine the $a_{ij}$ 
+in eq.~\eqref{eq:ExtendedAlgebra} which are $\mathbb{F}$-valued
+by construction.
+
+An important observation is that, although the coefficients 
+$a_{10}$, $a_{01}$ and $a_{11}$ in 
+eq.~\eqref{eq:ExtendedAlgebra} are non-zero in
+intermediate stages of the calculations, they vanish
+for the integrands of helicity amplitudes as defined in 
+eq.~\eqref{eq:tensorDecomposition}. This cancellation of the
+$r_i$ terms holds in the HV scheme and
+is due to the projection onto the invariant tensors 
+$v_n$ of eq.~\eqref{eq:tensorDecomposition}, 
+which yields polynomials in the Lorentz invariants 
+$\mu_{ij}$ at the integrand level
+(see the discussion in section \ref{sec:ParamIntegrands}).
+
+
+\subsubsection{Only Vector Particles}
+%
+In ref.~\cite{Abreu:2017hqn}, this was resolved
+by making sure that all scalar products
+between the momenta in the problem were $\mathbb{F}$-valued.
+
+
+\subsubsection{Special Metric Signature}
+
+Any Lorentz-invariant quantity such as helicity amplitudes (normalized by an appropriate spinor weight)
+depends on the space-time metric tensor only through contractions with momenta and states of external particles.
+Thus  without loss of generality we can choose to use an alternating metric signature $(+,-,+,-,\ldots)$
+and modify external momenta such that all Lorentz invariants remain unchanged.
+
+We then can parametrize the two-dimensional loop-momentum components
+$\vec{\mu}_1$ and $\vec{\mu}_2$ as follows:
+\begin{equation}
+  \vec{\mu}_1(t)  = \frac{1}{2}\begin{pmatrix}
+    t+\dfrac{\mu_{11}}{t} \\
+    t-\dfrac{\mu_{11}}{t} \\
+  \end{pmatrix}, \quad
+  \vec{\mu}_2(t)  = \frac{\mu_{12}}{\mu_{11}}\vec{\mu}_1(t) - \frac{r}{\mu_{11}}~\frac{1}{2}\begin{pmatrix}
+    t-\dfrac{\mu_{11}}{t} \\
+    t+\dfrac{\mu_{11}}{t} \\
+  \end{pmatrix},
+  \label{eq:muparam}
+\end{equation}
+where $t$ is a free dimensionful parameter that leaves the scalar products
+$r = \sqrt{\mu_{12}^2-\mu_{11} \mu_{22}}$ and 
+$\mu_{ij} = \mu_i^1 \mu_j^1 - \mu_i^2 \mu_j^2$ invariant. %
+
+This parametrization allows to reduce the size of the algebraic extension $\mathbb{V}$ generated by \cref{eq:ExtendedAlgebra},
+which is a significant optimization of numerical evaluations.
+
+
+\todo{Note on other possibilities to avoid solving on-shell conditions.}
+
+
+\section{Exact Interpolation of Functions over Finite Fields}
+\label{sec:func_reconstruction}
+
+\subsection{Univariate Polynomials}
+\label{sec:newton}
+
+\subsection{Univariate Rational Function}
+\label{sec:thiele}
+
+\subsection{Multivariate Polynomials}
+\label{sec:newton_rec}
+
+
+
