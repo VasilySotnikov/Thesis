@@ -12,9 +12,8 @@ The subject of this chapter have been published in \cite{Abreu:2018jgq,Abreu:201
 and our presentation here is based on those papers.
 This chapter is organized as follows.
 In \cref{5parton:sec:intro} we give our motivation, and review the state-of-the-art of the related two-loop computations.
-In \cref{5parton:sec:amplitudes} we provide a precise definition  of the objects we compute.
-In \cref{5parton:sec:tech} we consider some technical details of our implementation, including
-the construction of cut equations \eqref{eq:cut_equations}.
+In \cref{5parton:sec:amplitudes} we provide a precise definition  of the objects we compute,
+and some technical details of our implementation, including the construction of cut equations \eqref{eq:cut_equations}.
 We present the high-precision benchmark values for the amplitudes in \cref{sec:5parton:numerics},
 and discuss their validation in \cref{sec:Validation-5parton}.
 Finally, in \cref{sec:AnalyticForm} we explain how we obtain the analytic expressions from numerical samples,
@@ -23,96 +22,70 @@ and analyze their structure.
 \section{Introduction}
 \label{5parton:sec:intro}
 
-Two-loop amplitudes are ingredients in the NNLO cross-section.
-The computation of two-loop amplitudes is much more challenging than one-loop,
-Another challenging component is the handling of IR divergences, which we don't discuss.
+One of the leading factors, limiting the precision of theoretical predictions for hadron collider phenomenology,
+is the truncation of higher-order contributions in fixed-order perturbative computations of hard-scattering partonic cross-sections.
+For a wide range of observables, the LO results provide only an order-of-magnitude estimates,
+and cannot be used for precise measurements.
+The NLO corrections normally supply the first reliable theoretical predictions.
+The technology for the computation of NLO QCD and EW corrections has seen an explosive development
+in the recent decade, and became the standard of the field with many automated public tools available.
+However, with the abundance of data coming from the Large Hadron Collider at CERN,
+the experimental uncertainties for many observables will reach as low as few percent.
+In order to extract the full physics potential from these measurements, 
+the theoretical understanding of the associated processes should aim to reach the same impressive level of precision.
+In general, this requires the computation of (at least) NNLO QCD corrections.
 
-Are obtain via numerical Monte-Carlo integration. 
+As we discussed in \cref{sec:fixed_order}, the full NNLO cross-section 
+is obtained from a combination of multiple contributions, each of them
+representing a significant challenge for the current computational technology.
+The main bottlenecks are
+the handling of infrared subtraction terms,
+the computation of two-loop master integrals, 
+and the reduction of two-loop amplitudes to master integrals.
+As a result of impressive recent advances, the (semi-)automated NNLO QCD predictions for
+many $2\to2$ processes have been computed.
+The $2\to3$ processes are being actively explored, but no predictions for cross-sections have been produced to date.
 
-The NLO has been success.
-We would like to ideally have the same story for NNLO
-
-Our results are an important step towards the automation of
-the calculation of two-loop partonic amplitudes, which
-are in turn an important ingredient towards obtaining
-theory predictions to three-jet production at hadron colliders
-at next-to-next-to-leading order (NNLO) in QCD.
-
-Experience at one loop has shown that the direct numerical computation of
-scattering amplitudes can avoid difficulties encountered in analytic
-approaches. However, while numerical evaluation is sufficient for
-phenomenological applications, compact analytic results are still very useful.  
-Indeed, the numerical evaluation of analytic expressions is
-generally straightforward to set up and oftentimes more stable and efficient
-than the purely numerical approach.  Furthermore, explicit formulae allow for a
-detailed analysis of the analytic properties of amplitudes in order to learn
-about  higher-order perturbation theory.
-
-Recently, significant
-progress has been made regarding the computation of two-loop multi-particle
-amplitudes.  In the case of five-point QCD amplitudes, the first one to be studied
+Here we focus on the evaluation of two-loop multi-particle amplitude.
+Significant progress has been made recently in this regard.
+In the case of five-point QCD amplitudes, the first one to be studied
 was the leading-color five-gluon amplitude with all helicities positive, initially
 evaluated numerically~\cite{Badger:2013gxa} and  
 afterwards presented analytically~\cite{Gehrmann:2015bfy,Dunbar:2016aux}.
 Building on this result, the all-plus two-loop six- and seven-gluon amplitudes were
-obtained~\cite{Dunbar:2016gjb,Dunbar:2017nfy}.  By now all leading-color
+obtained~\cite{Dunbar:2016gjb,Dunbar:2017nfy}.
+By now all leading-color
 two-loop five-parton amplitudes (i.e., with external gluons and/or
 massless quarks) have been computed
-numerically~\cite{Badger:2017jhb, Abreu:2017hqn, Badger:2018gip,
-Abreu:2018jgq}. 
-Very recently, numerical algorithms were combined with
-functional reconstruction techniques~\cite{Peraro:2016wsq} resulting in
+numerically~\cite{Badger:2017jhb, Abreu:2017hqn, Badger:2018gip, Abreu:2018jgq},
+The numerical algorithms have later been combined with
+function-interpolation techniques~\cite{Peraro:2019svx,Peraro:2016wsq,Klappert:2019emp} to obtain
 analytic expressions for the planar two-loop five-gluon single-minus helicity
-amplitude~\cite{Badger:2018enw} and for all two-loop five-gluon helicity
-amplitudes~\cite{Abreu:2018zmy}. These calculations rely on the availability
-of the planar two-loop five-point master
-integrals, which have been given in refs.~\cite{Papadopoulos:2015jft,Gehrmann:2018yef}. 
-Progress with full-color five-gluon amplitudes~\cite{Badger:2015lda} is 
-gaining momentum with recent results towards the computation of non-planar master
-integrals~\cite{Abreu:2018aqd,Chicherin:2018old}.
-In more conventional approaches, integration-by-parts relations were
-obtained~\cite{Boels:2018nrr,Chawdhry:2018awn} which can be, in principle, used to compute the
+amplitude~\cite{Badger:2018enw} and for all two-loop five-parton helicity
+amplitudes~\cite{Abreu:2018zmy,Abreu:2019odu}.
+We present the latter in this thesis.
+All these calculations rely on the availability of the planar two-loop five-point master
+integrals, which have been given in \cite{Papadopoulos:2015jft,Gehrmann:2018yef}. 
+Finally, the IBP reduction tables were obtained in \cite{Boels:2018nrr,Chawdhry:2018awn}, which can be, in principle, used to compute the
 same type of two-loop five-point amplitudes.
 
-finite-field arithmetic~\cite{vonManteuffel:2014ixa,Peraro:2016wsq} in order to
-functionally reconstruct~\cite{Peraro:2019svx,Peraro:2016wsq,Klappert:2019emp} the multivariate rational
-coefficients of a basis of special functions~\cite{Gehrmann:2018yef}. We have
-already shown that this strategy can be employed to compute amplitudes of
-relevance to LHC phenomenology, by providing the analytic expressions of all
-planar two-loop five-gluon amplitudes~\cite{Abreu:2018zmy}. In this article we
-further improve on the latter work by producing compact analytic results for
-all leading-color two-loop five-parton amplitudes in QCD.  
+The non-planar five-point master integrals, required for the subleading-color contributions,
+have been evaluated in \cite{Abreu:2018aqd,Chicherin:2018old}.
+The first five-point amplitudes with non-planar integrals in $N=4$ super-Yang-Mills theory \cite{Chicherin:2018yne,Abreu:2018aqd},
+and $N=8$ super-gravity \cite{Chicherin:2019xeg,Abreu:2019rpt}
+were obtained at the same time.
+Shortly afterwards, the analytic result for the full-color five-gluon all-positive helicity amplitude
+followed \cite{Badger:2019djh}.
 
-Second, we modify the multivariate reconstruction algorithm that we employed
-in ref.~\cite{Abreu:2018zmy} in order to use an ansatz in terms of Mandelstam variables
-instead of twistor variables~\cite{Hodges:2009hk}. This is achieved by
-exploiting the analytic structure of amplitudes with five external massless
-partons in order to obtain target functions which are rational functions of
-Mandelstam variables. This has a dramatic impact in reducing the degree of the
-multivariate polynomials that we reconstruct, allowing us to obtain all
-analytic expressions with a modest computational effort.
+Going beyond pure QCD, the first numerical benchmark evaluation of the leading color helicity amplitudes for the production of $W$-boson and two jets 
+have been performed very recently \cite{Hartanto:2019uvl}, where some of the required master integral were evaluated numerically.
 
-Removing the bottleneck of dimensional reconstruction with the methods described in \cref{chap:dshel} 
-was the key ingredient to be able to evaluate amplitudes with fermions efficiently.
-
-
-Finally, in order to employ a single finite field for rational
-reconstruction, we perform a systematic analysis of the analytic structure of
-the reconstructed functions which takes advantage of two major simplification
-procedures. As a by-product, the procedure results in rather compact expressions
-for all helicity amplitudes, which we provide as ancillary files. 
-We first analyze the dimension of the function
-space spanned by all the pentagon-function coefficients on each amplitude. It
-turns out that this dimension is an order of magnitude smaller (on average)
-than the number of pentagon functions. Then we simplify each member of the
-basis of this space with a multivariate partial-fraction decomposition.  All
-taken into account, the final expressions we present are reduced in byte size
-by up to two orders of magnitude, with final results that can easily be handled
-for future analytic and numerical evaluations.
-
-Do not forget \todo{reference Wjj benchmark}
-
-\todo{Also susy stuff and all-plus full color} 
+In this work, we contribute to the extreme challenge of $2\to 3$ NNLO QCD phenomenology by
+making an important step towards the automation of the calculation of two-loop five-point amplitudes.
+In particular, we focus on the two-loop five-parton amplitudes,
+which are required for the production of three jets at hadron colliders.
+We obtain the compact analytic expressions for these amplitudes from their numerical evaluations over finite fields.
+These expression can be employed for stable and efficient numerical evaluation.
 
 \section{Setup}
 \label{5parton:sec:amplitudes}
@@ -1543,45 +1516,45 @@ In total, 94,696 phase-space points  (coming in parity conjugate pairs) were nec
 
 
 \subsection{Processing of Reconstructed Expressions}
-%
-So far everything was done in a finite field.
 
-With the aim to simplify the rational reconstruction of finite-fields coefficients, we
-introduce an algorithm to uniquely obtain a multivariate partial-fraction decomposition of the analytic expressions.
+Following the reconstruction procedure from the previous section, we have obtained the analytic expressions
+for the remainders of all amplitudes in a finite field.
+We then should reconstruct the corresponding rational numbers $q=\frac{n}{d}$ from
+their images $(q \mod P_j)$ in a set of finite fields $\{\mathbb{Z}_{P_j}\}$, 
+with the help of the Chinese remainder theorem (see \cref{sec:rational_reconstruction}).
+This is known as \emph{rational reconstruction}.
+It will succeed if 
+\begin{equation} \label{eq:condition_rat_reconstruct}
+  n,d \lesssim \sqrt{\prod_jP_j}.
+\end{equation}
+Unfortunately, performing the reconstruction in one finite field with the cardinality of $\order{2^{31}}$ 
+seems to be not sufficient to rationally reconstruct all rational numbers in the expressions for the remainders, that we have obtained.
+
+Thus, in principle, we need to repeat the whole reconstruction in a new finite field, until the condition
+\cref{eq:condition_rat_reconstruct} is satisfied.
+We can first, however, try to simplify the expressions (while still working in a finite field),
+such that the target rational numbers are smaller.
+In the following, we employ two simplification steps to achieve this goal.
+As a result, we obtain much more compact expressions,
+and the reconstruction in just one finite field is sufficient. 
 
 \subsubsection{Basis of Rational Coefficients}
 
-It was noted in \cite{Abreu:2018aqd,Chicherin:2018yne,Abreu:2019rpt,Chicherin:2019xeg} 
-that the space of independent rational
-functions appearing in the $\mathcal{N}=4$ super Yang-Mills (SYM) and $\mathcal{N}=8$ super gravity
-two-loop five-point amplitudes is much smaller than the space of possible independent
-pentagon functions. This motivates us to apply the same analysis here, both
-in order to allow performing minimal reconstruction work and as a way to obtain
-simpler analytic expressions.
-These linear dependencies between the rational functions allow us to express the 
-remainder of each amplitude as
-\begin{equation}
-		\mathcal{F}^{(2)} = 
-		\sum_{i\in K ,\, j\in \hat B} r_i M_{ij} h_j,
-\label{eq:remainderDecomposition}
+These rational coefficients $r_i$ are not linearly independent \cite{Abreu:2018aqd,Chicherin:2018yne,Abreu:2019rpt,Chicherin:2019xeg}.
+This allows us to represent the remainder of each amplitude as
+\begin{equation} \label{eq:remainderDecomposition}
+  \mathcal{F}^{(2)} = 
+  \sum_{i=1}^K \sum_{j\in \hat B} r_i M_{ij} h_j,
 \end{equation}
-where $r_i$ is a vector of rational coefficients and $K$ denotes
-the dimension of the space they span.
-The index $j$ runs over a subspace $\hat B$ of the space $B$ of all pentagon functions 
-introduced in \cref{eq:remainderPentagon}, i.e.\  $\hat B\subseteq B$. 
-The constant matrix $M$, the rational functions $r_i$ 
-and the index sets $K$ and $\hat B$ are helicity-amplitude dependent.
-
+were index $j$ runs over a subspace $\hat B$ of the space $B$ of all pentagon functions 
+introduced in \cref{eq:remainderPentagon}, i.e.\  $\hat B\subseteq B$,
+and the \emph{constant} process-dependent matrix $M$.
 
 The basis of rational functions $r_i$ is not unique
 and we choose it by taking the linearly independent subset with
 the lowest total polynomial degree. The associated matrix $M$
-can be computed numerically in the finite field used for the analytic reconstruction,
+can be computed numerically in the finite field used for the reconstruction,
 using as many evaluations as its rank. 
-In order to rationally reconstruct $M$ we only
-require one finite field of cardinality $\mathcal{O}(2^{31})$, apart from two
-cases where we combine information from two finite fields (see more details in 
-section~\ref{sec:results}).
 
 %\begin{figure}[ht]
   %\centering
@@ -1597,284 +1570,91 @@ section~\ref{sec:results}).
 
 
 \subsubsection{Partial Fractions}
-\label{sec:PartialFractions}
 
-Having chosen a basis of rational coefficients, we study the $\{r_i^\pm\}_{i\in K}$
-in a finite field, obtained with the strategy described 
-in \cref{sec:reconstructionInvs}.
-The next step is to lift the finite-field result to the rational numbers, 
-i.e.\  to rationally reconstruct the result. 
-The correctness of the rational reconstruction can
-be verified by comparison against a single evaluation on a
-different finite field. 
-In general, the success of the rational reconstruction is
-guaranteed if the numerator and denominator of the original rational
-number satisfy a bound dependent on the finite-field cardinality
-\cite{Wang:1981:PAU:800206.806398, vonManteuffel:2014ixa, Peraro:2016wsq},
-i.e.\  rational numbers with numerators and denominators with
-smaller absolute values are more easily reconstructed from their finite-field
-images. As such, it is beneficial if we can find a form of the
-$r_i^\pm$ where the rational numbers involved have `simple' numerators and
-denominators. 
-To this end, we will employ a multivariate partial-fraction decomposition
-of the $r_i^\pm$, which will also have the side effect of simplifying their
-analytic form as a whole. 
-Indeed, the partial-fraction decomposition manifests the singularities
-of the coefficients, which are controlled by physical properties such
-as the factorization of the amplitude in specific limits.
+To manifests the singularities
+of the coefficients $r_i^\pm$, which are controlled by physical properties such
+as the factorization of the amplitude in specific limits,
+we employ the partial-fraction decomposition. 
+This has an effect of simplifying their analytic form,
+and, thus, making the rational numbers smaller.
 
-
-We will employ the partial-fraction decomposition introduced by
-Leǐnartas \cite{leinartas1978factorization,raichev2012leinartas}.
-This decomposition has recently been used for bringing differential equations into
-canonical form~\cite{Meyer:2016slj}, as well as for the
-analytic reduction of loop integrands~\cite{Zhang:2012ce, Mastrolia:2012an}.
-A Leǐnartas decomposition of our basis functions is given by
+We apply the Leǐnartas partial-fraction decomposition \cite{leinartas1978factorization,raichev2012leinartas,Smirnov:2005ky}
+to each basis coefficient $r_i$ in \cref{eq:remainderDecomposition}.
+As a result, the coefficients are brought to the form
 \begin{equation}
-    r_i^{\pm} = \sum_{\vec\alpha \in D_i} \frac{n^{\pm}_{i,\vec\alpha}}{ 
-	W^{\vec\alpha} }\,.
+    r_i^{\pm} = \frac{n_i^\pm }{W^{\vec q_i} } = \sum_{\vec\alpha \in A_{i}} \frac{n^{\pm}_{i,\vec\alpha}}{ W^{\vec\alpha} }\,,
     \label{eq:LeinartasDecomposition}
 \end{equation}
-That is, the $r_i^{\pm}$ are written as a linear combination of rational
-functions which we label by the exponents $\alpha$ of the denominators.
-The set of all $\vec\alpha$ for a given $r_i^{\pm}$ is denoted by $D_i$ (we combine
-the exponents for the even and odd coefficients). The 
-$\{n_{i,\vec\alpha}^\pm \}_{\vec\alpha\in D_i}$ are the numerators associated
-with the rational function labelled by $\vec\alpha$,
-which are polynomials in the $\{\vec s\}$ variables.
-We construct the Leǐnartas decomposition 
-\eqref{eq:LeinartasDecomposition} coefficient-by-coefficient, such that the exponents in 
-$\vec\alpha\in D_i$ are non-vanishing only for the letters appearing 
-in the starting denominator $W^{\vec q_i}$, see \cref{eq:DenominatorAnsatz}, 
-which we recall are polynomials in the $\vec s$.
-The particular algorithm which we employ to uniquely specify the 
-Leǐnartas decomposition is related to the techniques 
-of \cite{Smirnov:2005ky}.
+where the set $A_{i}$ consists of exponents which are non-vanishing for the letters appearing 
+in $W^{\vec q_i}$, and the letters from each set $W^{\va{\alpha}}$ are algebraically-independent\footnote{
+ Precisely, this means that no non-zero polynomial of $W^{\va{\alpha}}$ exist.
+}. 
+This means, for instance, that each term on the right-hand side of \cref{eq:LeinartasDecomposition} 
+has no more than $\dim{\vec s}$ letters in the denominator.
 
-A Leǐnartas decomposition given by \cref{eq:LeinartasDecomposition}
-is characterized by exponents of the denominator factors. 
-All denominators $W^{\vec \alpha}$
-in a Leǐnartas decomposition  are `algebraically independent', in that
-there exists no non-zero polynomial  
-$P(w)$, such that it vanishes upon inserting the denominator factors, 
-\begin{equation}\label{eq:algDep}
-P\big(\{ W_i \}_{i\in A_\alpha}\big )=0\,,
-\end{equation}
-where $A_\alpha$ denotes the set of letters in $W^{\vec \alpha}$, see eq.~\eqref{eq:A_alp}.
-Let us make a few comments about such a decomposition.  First, individual terms
-in eq.~\eqref{eq:LeinartasDecomposition} may have factors raised to higher
-degree than when expressed over a common denominator as in 
-eq.~\eqref{eq:DenominatorAnsatz}. Second, no term can have
-more denominator factors than the number of variables $\vec s$ as these factors would
-necessarily be algebraically dependent.  Also, we note that the Leǐnartas
-decomposition is different to an iterated univariate partial-fraction decomposition in that
-it maintains the original denominator structures of the input 
-function, i.e.\  in our case, of eq.~\eqref{eq:DenominatorAnsatz}. Finally, in
-ref.~\cite{raichev2012leinartas} it is noted that such a
-decomposition is in general not unique, due to how the algebraic dependence relations
-\eqref{eq:algDep} are resolved.
-Let us illustrate this point by considering
-\begin{equation} 
-P(w_3,w_4,w_6)=w_3 + w_4 - w_6\,,
-\end{equation} 
-which clearly vanishes upon 
-using the definitions of the letters, 
-$W_3=s_{34}, W_4=s_{45} $ and 
-$W_6 =s_{34} + s_{45}$. 
-The dependence relation implies a relation between multiple terms with different denominator factors,
-\begin{equation}\label{eq:arbitraryLeinartas}
-0= \frac{P(W_3,W_4,W_6)}{W_3 W_4 W_6} 
-= \frac{1}{W_4 W_6} + \frac{1}{W_3 W_6} - \frac{1}{W_3 W_4}\,, 
-\end{equation}
-which can be used to remove either of the three denominator factors on the right-hand side.
-This arbitrariness in the implementation of the Leǐnartas decomposition will
-in general lead to expressions that are not as compact as possible if inconsistent choices
-are made across different terms being decomposed.
-In the following we describe
-an approach that produces a unique Leǐnartas decomposition by providing 
-a global prescription to expand algebraic dependencies of the denominators of a given
-coefficient $r_i^{\pm}$.
+The Leǐnartas decomposition is not unique \cite{raichev2012leinartas},
+which, in general, leads to expressions that are not as compact as possible if inconsistent choices
+are made across different terms.
+To this end, we recast the task of partial functioning into the task of multivariate polynomial division,
+and we solve the latter with Gröbner basis techniques (see e.e.\ \cite{cox2013ideals}).
 
-Our approach makes use of multivariate polynomial division and
-Gröbner basis techniques. In summary, we reinterpret a rational
-function in a polynomial way in order to employ division by a Gröbner basis
-to find a canonical form of a
-polynomial which is subject to a series of constraints. The set of
-constraints among the variables form a generating set of an ideal and
-if one divides a polynomial in these variables by a Gröbner basis of
-the ideal, the remainder is unique and `minimal' with respect to the
-relations. In the rest of this section we describe these steps in more
-detail. We refer the reader to ref.~\cite{cox2013ideals} for a pedagogical
-discussion of all the required concepts in polynomial-division algorithms.
-
-Our starting point is a rational function $r_i^\pm$ 
-of the form \eqref{eq:DenominatorAnsatz}, and 
-we introduce an auxiliary variable for each
-denominator factor $W_j$ for $j\in A_{q_i}$, where we recall $A_{q_i}$ denotes
-the set of labels of letters appearing in the denominator of $r_i^\pm$.
-More precisely we introduce variables $Q_j$ to which we
-associate the constraint polynomial $C_j(Q_j, \vec s\,)$,
-\begin{align}
-    C_j &= W_j (\vec s) \, Q_j - 1\,, 
-	\quad\mbox{for all}\quad  j \in  A_{q_i}\,.
-   \label{eq:PartialFractionConstraints}
+We start by introducing auxiliary variables $Q_j$ for each
+denominator factor $W_j$ with $j\in A_{i}$.
+We then consider the ideal $\langle \{C_j\} \rangle $ generated by the polynomials
+\begin{align} \label{eq:PartialFractionConstraints}
+    C_j &= W_j (\vec s) \, Q_j - 1\,, \quad\mbox{for all}\quad  j \in  A_{i}\,.
 \end{align}
-Setting all $C_j = 0$ (i.e.\  working in the equivalence class of the ideal 
-generated by $\{ C_j \}_{j \in A_{q_i}}$)
-imposes the constraint that multiplication by $Q_j$
-is equivalent to division by $W_j$. 
-As such, subject to this constraint we can
-express eq.~\eqref{eq:DenominatorAnsatz} in a polynomial fashion as
-\begin{equation}
-    r_i^{\pm}(\vec{s}\,) \sim n_i^{\pm}(\vec s)\, Q^{\vec q_{i}}\,,
-    \label{eq:CartialFractionsLifted}
+Working in the equivalence class of $\langle \{C_j\} \rangle $ then imposes 
+the constraint that multiplication by $Q_j$ is equivalent to division by $W_j$. 
+We can then write the \cref{eq:DenominatorAnsatz} as
+\begin{equation} \label{eq:CartialFractionsLifted}
+    r_i^{\pm}(\vec{s}\,) \sim n_i^{\pm}(\vec s)\, Q^{\vec q_{i}} \quad\Leftrightarrow\quad r_i^{\pm}(\vec{s}\,) -  n_i^{\pm}(\vec s)\, Q^{\vec q_{i}} \in \langle \{C_j\} \rangle.
 \end{equation}
-where the notation '$\sim$' emphasises that the relation holds modulo 
-the ideal $\{ C_j \}_{j \in A_{q_i}}$.
-In order to uniquely implement the constraints $C_j = 0$, we first divide
-the right-hand side of eq.~\eqref{eq:CartialFractionsLifted} by a
-Gröbner basis of the constraint polynomials 
-$\{ C_j \}_{j \in A_{q_i}}$.\footnote{It is important to note that Gröbner 
-basis division works over any
-field. Hence, the algorithm can be be applied before or after rational reconstruction.}
-After the division, the original polynomial is rewritten as a linear combination 
-of the $C_j$ and a unique remainder, which is a polynomial in the $Q_j$ and the $\vec s$.
-We then impose
-$C_j=0$, leaving this remainder as the result of the 
-partial-fraction decomposition. Finally, 
-we replace the $Q_j$ by $1/W_j$ and recover an expression of the form 
-of eq.~\eqref{eq:LeinartasDecomposition}. We note that
-the Gröbner basis of the ideal $\{ C_j \}_{j \in A_{q_i}}$ depends on a 
-monomial ordering of the variables $\{ Q_j \}_{j \in A_{q_i}}$ and $\{\vec s\}$, 
-which in turn affects the final expression. Effectively, by choosing different
-orderings one can specify which 
-of the denominator factors $\{ W_j \}_{j \in A_{q_{i}}}$ one 
-prefers in the final expression. Once this choice has been made,
-the result of the procedure is unique.
-
-Let us now comment on why this simple polynomial division technique achieves a
-minimal Leǐnartas decomposition. First, it is important to recall that
-the remainder of the division by a Gröbner basis is minimal in the sense that
-it cannot be written in terms of a member of the ideal and a new remainder
-without that remainder having higher polynomial degree. That is, subject to the
-choice of monomial ordering, the remainder has the lowest possible polynomial
-degree. With this in mind, it is clear why the division by the constraint
-polynomials \eqref{eq:PartialFractionConstraints} will maximally cancel
-numerator and denominator: since the second term of the constraint polynomial is
-$1$, which is the term with the lowest possible degree (in any monomial orderings),
-all possible cancellations between numerator and denominator will occur, as that they
-will result in the lowest polynomial degree for the remainder.
-
-We define a monomial order for $W^{\vec\alpha}$ through,
-\begin{equation}
-  \label{eq:orderingNotation}
-  W^{\vec\alpha} < W^{\vec\beta}  \quad \Leftrightarrow \quad \vec\alpha < \vec\beta \,
-\end{equation}
-with lexicographic ordering of the exponent vectors $\vec\alpha < \vec\beta$.
-
-
-Another important question is how this division results in a set of denominator
-structures with no algebraic dependencies, see eq.~\eqref{eq:algDep}, and 
-how the relations are guaranteed to be resolved in a consistent way,
-see the discussion around eq.~\eqref{eq:arbitraryLeinartas}.
-The fact that algebraic dependencies are implemented follows from a key property of
-division by a Gröbner basis, which is that it will also apply non-trivial
-relations implied by the original set of relations. As already argued in
-\cite{raichev2012leinartas}, algebraic dependencies induce such non-trivial
-relations. Indeed, if the set of denominator factors of a given term 
-\begin{equation}
-\label{eq:den}
-\frac{1}{W^{\vec \alpha}} \sim Q^{\vec\alpha} 
-\end{equation}
-are algebraically dependent, then by
-definition there exists a non-zero polynomial $P(w)$ such that
-$P\big(\{ W_i\}_{i\in A_\alpha}(\vec s)\big) = 0$, which
-is trivially a member of the ideal of constraints. 
-We associate the same monomial ordering to the $w$ variables as we do to
-the $Q_j$ and write the polynomial $P(w)$ in the form
-\begin{equation}
-    P(w) = c_{\vec\beta}\, w^{\vec\beta} + 
-	\sum_{\vec\gamma > \vec\beta} c_{\vec\gamma}\, w^{\vec\gamma}.
-\end{equation}
-That is, we distinguish the term of lowest monomial degree $\vec\beta$ 
-(we refer to the notation introduced in \cref{eq:orderingNotation}). 
-Let us now multiply the $Q^{\vec\alpha}$ in eq.~\eqref{eq:den} by this polynomial and 
-$Q^{\vec\beta}$. We get
-\begin{align}\begin{split}
-    0=P\big(\{ W_i(\vec{s}\,)\}_{i\in A_\alpha}\big) Q^{\vec \alpha} Q^{\vec \beta}&= c_{\vec\beta}\,Q^{\vec\alpha} \,Q^{\vec\beta} \,W^{\vec\beta}    + 
-  \sum_{\vec\gamma > \vec\beta} c_{\vec\gamma} \,
-  Q^{\vec\alpha} Q^{\vec\beta}
-  W^{\vec\gamma}(\vec s) \\
-    &\sim  c_{\vec\beta}\,Q^{\vec\alpha}     + 
-  \sum_{\vec\gamma > \vec\beta} c_{\vec\gamma} \,
-    Q^{\theta(\vec\alpha + \vec\beta - \vec\gamma)} 
-    W^{\theta(\vec\gamma - \vec\alpha - \vec\beta)}(\vec s)\,,
-\end{split}\end{align}
-where we introduced the function
-$\theta(\vec\alpha)$ which yields a vector with the
-negative entries removed. This shows that relations such 
-as that of eq.~\eqref{eq:arbitraryLeinartas} are now also in the ideal, 
-and we do not have to construct them explicitly. Furthermore,
-given that by construction $\vec\gamma > \vec\beta$, we
-have  
-\begin{equation}
-\theta(\vec\alpha + \vec\beta - \vec\gamma) < \vec\alpha\,.
-\end{equation}
-That is, for each term in the sum over $\gamma$, the $Q$-dependent part of the
-monomial is always of lower degree than the original denominator 
-structure $Q^{\vec{\alpha}}$.
-For any monomial ordering where the $Q_j$ are sorted before the $\vec s$, the term  
-$c_{\vec{\beta}}\,Q^{\vec{\alpha}}$ is thus leading and will 
-therefore be reduced by the polynomial 
-division algorithm, which produces remainders of lower degree.
-In summary, the algebraic dependence relations are accounted for in the 
-constraint ideal, and will be removed by Gröbner basis division. 
-If, for instance,
-one chooses 
-a lexicographic order (with the $Q_j$'s sorted before the $\vec s$ variables), 
-this will decrease the power of the $Q_j$ for the lowest $j$, 
-at the price of potentially increasing the power of $Q_j$ for higher $j$.
-This argument can be applied recursively until all algebraic dependencies have been 
-resolved. Because the resolution of the dependencies is based on the polynomial ordering
-and implemented by the Gröbner basis division, it will be
-consistently implemented across all denominator factors of a given $r_i^{\pm}$ and
-give a unique Leǐnartas decomposition.
-
-
-We close by noting that this procedure is both simple to implement as
-well as very efficient, easily handling the complex rational functions
-present in the problem.  Furthermore, an important consequence of this
-decomposition is that the rational numbers in the expression are
-more likely to be small. As discussed at the beginning of this section,
-this makes the result in a single finite field of cardinality $\mathcal{O}(2^{31})$ 
-sufficient to determine them.
-
-
+To achieve the partial-fractions decomposition  we proceed as follows:
+\begin{enumerate}
+  \item Divide the $n_i^{\pm}(\vec s)\, Q^{\vec q_{i}}$ in \cref{eq:CartialFractionsLifted} by a Gröbner basis of the ideal $\langle \{C_j\} \rangle $.
+  \item Set $C_j=0$, or, equivalently, take the remainder.
+  \item Replace $Q_j\to \frac{1}{W_j}$ to recover the expression in the form of the right-hand side of \cref{eq:LeinartasDecomposition}.
+\end{enumerate}
+It can be shown \cite{raichev2012leinartas,Abreu:2019odu}, that given a choice of monomial ordering, this algorithm
+implements a \emph{unique} Leǐnartas decomposition.
 
 \subsection{Results}
 
-\todo{validation is just evaluation numerically} 
+After the simplification steps discussed above, 
+we managed to determine all rational numbers from 
+the result in a single finite field of cardinality $\mathcal{O}(2^{31})$.
+The only exception is the matrices $M$ in \cref{eq:remainderDecomposition} for the $N_f^0$ remainder of the processes
+$( q^+, {\bar q}^-,Q^-, {\bar Q}^+, g^+ )$ and $( q^+, {\bar q}^-,g^+, g^-, g^+ )$,  where
+in order to rationally reconstruct its
+entries, the numerical computation of the remainder over 100 extra phase-space 
+points in a second finite field was required.
+Furthermore, the expressions are very compact, with a compressed size of 1.6 Mb for
+all subprocesses and helicities combined.
 
-We present our results in the form of ancillary files which can be downloaded
-from the source files of this work on the \texttt{arXiv} server. We include the
-following files, in \texttt{Mathematica}-readable format:
-\begin{itemize}
-    \item Analytic expressions for the basis set of one-loop five-parton amplitudes
-      expressed in terms of one-loop master integrals, valid to all orders in $\epsilon$;
-    \item Expressions for all one-loop master integrals written in terms of pentagon functions through order $\epsilon^2$;
-    \item The basis set of two-loop five-parton finite remainders, which are the main result
-of this work. For each remainder and at each power of $N_f$, we give a list of independent 
-coefficient functions $r_i$, a matrix $M_{ij}$ and a list of pentagon functions $h_j$, consistent with the decomposition of eq.~\eqref{eq:remainderDecomposition};
-    \item Scripts that assemble two-loop amplitudes from the remainders. 
-      In particular, the \texttt{Mathematica} script \texttt{TwoLoopAmplitudesNumerical.m} uses the 
-    analytic expressions to reproduce the numeric values of 
-    refs.~\cite{Abreu:2018jgq,Badger:2018gip}, as detailed in the included
-    \texttt{README.md} file.
-\end{itemize}
+%All in all, the total computational resources required to obtain all our results are 
+%relatively modest, and can easily be obtained on a midsize computer cluster. 
 
-Our expressions can be easily adapted to perform numerical integration over
-phase space. Indeed, they are very compact (with a compressed size of 1.6 Mb),
-and ready for automated algorithms for optimized
-evaluation like those included in
-FORM~\cite{Kuipers:2012rf,Ruijl:2014spa}.
+We verified the validity of the rational reconstruction, and of the 
+analytic expressions for all of the remainders, 
+by comparing their numerical evaluation with  the numerical results of \cref{sec:5parton:numerics}.
+
+Our final analytic expressions for the finite remainders of five-parton two-loop helicity amplitudes in the leading color approximation
+are published in a \texttt{Mathematica}-readable format as attachments to the paper \cite{Abreu:2019odu}.
+The expressions are stored according to \cref{eq:remainderDecomposition}.
+
+For the corresponding five-parton one-loop amplitudes, 
+we have directly reconstructed the master-integral coefficients of \cref{eq:ampl_master_integrals}.
+We provide those together with the two-loop remainders, 
+as well as the one-loop master integrals written in terms of pentagon functions through order $\epsilon^2$.
+The two-loop amplitudes can then be assembled according to \cref{eq:remainderDef}.
+
+A more detailed guide on how to use our analytic results is enclosed together with the expressions.
+
+%Our expressions can be easily adapted to perform numerical integration over
+%phase space. Indeed, they are very compact (),
+%and ready for automated algorithms for optimized
+%evaluation like those included in
+%FORM~\cite{Kuipers:2012rf,Ruijl:2014spa}.
+
 
