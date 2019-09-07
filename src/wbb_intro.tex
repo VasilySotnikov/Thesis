@@ -51,7 +51,7 @@ and EW corrections to the LO $\order{\alps^{1+n}\alpf^3}$. The latter were studi
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.8\textwidth]{wbb_channels}
+  \includegraphics[width=0.8\textwidth]{Wbb_channels}
   \caption{
     Different contributions to the $W(\to 2l)b\bar{b}jj$ final state.
     We consider the NLO QCD corrections to the channel with the least power of the EW coupling $\alpha$, which
@@ -226,19 +226,18 @@ in all observables we examine.
 We regularize UV and IR divergences in the FDH scheme in the computation of virtual matrix elements,
 and use the known transition rules to convert our results to the HV scheme.
 
-\todo{fix error in renormalization}
-
 We give all counter-terms required for the renormalization in the FDH scheme, as well as additional finite shifts in \cref{tab:renorm}.
 For the mass and wave-function renormalization we use the on-shell scheme,
 and for the $\overline{\text{MS}}$ scheme for the QCD coupling.
 \begin{table}[h]
   \begin{tabular}{lcll}
-    \textbf{Renormalization} & \textbf{Scheme} & \textbf{Counterterm} \\
     \toprule
+    \textbf{Renormalization} & \textbf{Scheme} & \textbf{Counterterm} \\
+    \midrule
     Heavy quark wave function   & on-shell & $\displaystyle \delta_{2,i} ~=~ \frac{N_c^2-1}{2N_c} \left( \frac{3}{\epsilon} + 5 + 3 \ln{\frac{\mu^2}{m_i^2}} \right)$\\
-    Light quark wave function   & on-shell & 0\qquad(UV+IR cancellation) \\
+    Light quark wave function   & on-shell & 0\quad({\footnotesize due to UV+IR cancellation}) \\
     Quark mass            & on-shell & $\displaystyle \delta_{m_i} ~=~ \delta_{2,i}\quad\text{}$\\
-    Gluon wave function   & on-shell & $\displaystyle \delta_3 ~=~ \frac{3}{\epsilon} + \sum_i \frac{1}{3}\ln{\frac{\mu^2}{m_i^2}}$\\
+    Gluon wave function   & on-shell & $\displaystyle \delta_3 ~=~ \sum_{i=1}^{N_h} \qty(\frac{1}{3\epsilon} + \frac{1}{3}\ln{\frac{\mu^2}{m_i^2}})$\\
     QCD coupling & $\overline{MS}$ & $\displaystyle \delta_{\alps} ~=~ \frac{1}{\epsilon} \left( \frac{11}{3}N_c - \frac{2}{3}(N_f+N_h) \right) - \frac{N_c}{3}$\\
     \midrule
     Decoupling shift & --- & $\displaystyle     \Delta_i ~=~  -\frac{2}{3}\ln{\frac{\mu^2}{m_i^2}} $\\

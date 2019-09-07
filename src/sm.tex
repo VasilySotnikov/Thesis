@@ -309,189 +309,183 @@ such that the matrices $G_f$ are diagonalized,
 \begin{align}\label{eq:diagyuk}
   U^{f_{\rL}}G_{f}\left(U^{{f}_{\rR}}\right)^\dagger = \frac{\sqrt{2}}{v} \pmqty{m_{f_1} &0&0\\0&m_{f_2}&0\\0&0&m_{f_3} }. 
 \end{align}
-
-In other words, only charged-current interactions receive
-modifications by $V$, while neutral currents remain unchanged.
-In the following we adopt the common convention to omit
-the clumsy hats on fermionic fields and assume the use of the
-mass basis.
-
-In the unitary gauge, where the would-be Goldstone fields are absent,
-the Yukawa Lagrangian takes the simple final form
+Inserting the reparametrization of the Higgs field from \cref{eq:Phiparam} in \cref{sm:eq:yuk}, we get
 \begin{equation}
-\L_{\Yuk,\mbox{\scriptsize{U-gauge}}} = -\sum_f m_f \,
+\L_{\Yuk} = -\sum_f m_f \,
 (\overline\psi_{f_\rL}\psi_{f_\rR}+\overline\psi_{f_\rR}\psi_{f_\rL})
 \, \biggl(1+\frac{H}{v}\biggr),
 \end{equation}
-where the sum over $f$ runs over all fermion flavours of all generations.
-This form shows a distinctive footprint of the Higgs mechanism
-in the fermionic sector:
-The Higgs boson couples to each fermion $f$ of mass $m_f$ 
-with the strength $y_f=m_f/v$. Moreover, the coupling is the one of
-a pure scalar, i.e.\ the coupling to fermions does not have any 
-pseudo-scalar admixture proportional to $\gamma_5$.
-Testing these features offers a possibility to empirically tell 
-a potential Higgs candidate from scalar particles predicted by
-other models. Alternative models with non-minimal Higgs sectors 
-often predict new pseudoscalars as well,
-or even scalar particles without definite CP quantum numbers.
-Moreover, the strict proportionality of the Yukawa coupling
-strength to the fermion masses might be broken, as it is
-for instance the case in (type-II) Higgs doublet models, where
-the proportionality factor between $y_f$ and $m_f$ is different
-for up- and down-type fermions.
+and the mass terms are now explicit.
+Another important implication is that the coupling of the Higgs boson
+to fermions is universally proportional to their masses.
 
-\section{Quantization and Gauge Fixing}
+It is easy to see, that the transformations $U^{f_{\rL}}$ and $U^{f_{\rR}}$ have no effect on the couplings of fermions to the 
+neutral gauge bosons. The couplings to the $W^{\pm}$-bosons, however, become off-diagonal.
+For example the coupling of the $W^+$-boson to quarks, takes the form
+\begin{equation}
+  \bar{u}_\rL V \gamma^\mu d_\rL \, W_\mu^+ ~+~ \text{c.c.}, \qquad V = \qty(U^{u_{\rL}})^\dagger U^{d_{\rL}},
+\end{equation}
+where $V$ is the famous Cabibbo-Kobayashi-Maskawa (CKM) matrix.
+After taking into account all symmetries, the CKM matrix has four real degrees of freedom.
+
+If we do not include the right-handed neutrinos, the neutrinos remain massless\footnote{
+  The neutrinos do, in fact, have tiny masses. However, in the context of collider physics,
+  they are impossible to detect.
+},
+and the mass eigenstates of leptons coincide with the flavor eigenstates. Hence,
+the couplings to charged gauge bosons remain diagonal.
+
+
+\section{Quantization}
 \label{sec:quant-gauge-fixing}
-We briefly illustrate the concept of quantization and the associated
-gauge fixing in the case of QCD. For the more involved case of
-\ew~theory, we refer to the literature e.g.\ \cite{Bohm:2001yx}. If we
-perform the quantization by following the path-integral formulation,
-all gauge field configurations are considered
-\begin{align}
-  \int \mathcal{D}A_\mu^a\exp{i\int d^4x \mathcal{L}_{\text{YM}}},
-\end{align}
-including those related by gauge transformations. In order to avoid
-the overcounting of physically identical configurations that are
-gauge-equivalent, we pick out a specific one which is achieved by
-adding a gauge fixing term to the Lagrangian
-\begin{align}
-  \mathcal{L}_{\text{fix}} = \frac{1}{2\xi}(\partial^\mu A_\mu^a)(\partial^\nu A_\nu^a),
-\end{align}
-as well as the Faddeev-Popov term
-\begin{align}
-  \mathcal{L}_{\text{ghost}} = -\bar{c}^\alpha\partial^\mu D_\mu^{\alpha\beta}c^{\beta},
-\end{align}
-with the covariant derivative in the adjoint representation
-$D_\mu^{\alpha\beta}$, $\alpha,\beta=1,\ldots,8$. The ghosts from the
-Faddeev-Popov Lagrangian contribute to loop amplitudes. In an
-application of the unitarity method, where at least one loop momentum
-is forced on the physical mass-shell, unphysical degrees of freedom directly cancel against the ghosts and explicit gauge fixing can be omitted when working with physical polarization states in the loop. Therefore, we omit ghost fields for the rest of this thesis.
 
-\subsection{QCD}
-The theory based on the $SU(3)_C$ part of the SM gauge group is called
-Quantum Chromodynamics (QCD). It describes the strong force that is
-responsible for the binding of quarks into hadronic particles. For the
-purpose of this subsection, we treat QCD interaction independent from \ew~interactions. One can combine \ew~theory and QCD by adding up
-the non-overlapping Lagrangian terms. Quarks transform
-under $SU(3)$ in the three-dimensional fundamental representation
-(\textbf{3}) and are thus represented as color triplets
-\begin{align}
-  q = \pmqty{q_r\\q_g\\q_b},
-\end{align}
-with the customary assignment of the colors red ($r$), green ($g$) and blue ($b$). The QCD Lagrangian
-is build from Eq.~\eqref{eq:diraclag} for the quark field as well as
-Eq.~\eqref{eq:ymlag} and reads
-\begin{align}\label{eq:qcdlag}
-  \mathcal{L}_{\text{QCD}} = -\frac{1}{4}F^a_{\mu\nu}F^{a,\mu\nu} + \sum_f
-  \bar{q}_f (i \slashed{D}  -m_f) q_f ,
-\end{align}
-where the summation runs over all quark flavors $f$ (see Sec.~\ref{sec:mattercont}), the covariant derivative for $SU(3)$ is given in Eq.~\eqref{eq:covderym} and contractions with the four-dimensional
-Dirac matrices are denoted as $\slashed{D} \coloneqq D_\mu \gamma^\mu$. The eight generators of the fundamental
-representation of $SU(3)$ can be written in terms of the Gell-Mann
-matrices $T^a = \frac{\lambda^a}{\sqrt{2}}$ (explicit expressions can e.g.\ be
-found in \cite{Schwartz:2013pla}) and the associated
-self-interacting gauge fields are called gluons. 
+The quantization of non-abelian gauge theories is performed in
+the framework of path-integral formalism \cite{Feynman:1950ir},
+employing the Faddeev-Popov method \cite{Faddeev:1967fc} or 
+BRST symmetry \cite{Becchi:1975nq,Tyutin:1975qk}.
+The procedure is complicated by the fact, that only 
+field configurations non-equivalent under gauge symmetry should be included in the path integral.
+This means that the naive integration with the ``classical'' action is meaningless.
+To eliminate the gauge-equivalent configurations, a gauge-fixing term $\L_\text{fix} $ is added to the original
+``classical'' Lagrangian $\L_\text{cl} $.
+For example, in the case of QCD,
+\begin{equation}
+    \L_\text{cl} \equiv \L_\ferm  -  \frac{1}{4}G^a_{\mu\nu}G^{a,\mu\nu}   \longrightarrow \L_\text{cl}  - \frac{1}{2\xi}(\partial^\mu G_\mu^a)(\partial^\nu G_\nu^a),
+\end{equation}
+where $\xi$ is an arbitrary parameter. This particular choice of gauge fixing has an advantage of being explicitly covariant.
+However, it keeps one unphysical degree of freedom, which is compensated by adding ``ghost'' scalar fields $\omega^a$, $\bar\omega^a$ as
+\begin{equation}
+    \L_\text{cl} \longrightarrow \L_\text{Mod}  = \L_\text{cl}  - \frac{1}{2\xi}(\partial^\mu G_\mu^a)(\partial^\nu G_\nu^a) - \partial^\mu \bar{\omega}^a \partial_\mu \omega^a + g_s f^{abc}\qty(\partial^\mu \bar{\omega}^a) \omega^b G_\mu^c, 
+\end{equation}
+which behave like fermions in that their closed loops are supplied with an extra minus sign.
+It can then be shown, that the correlation functions, computed with $\L_\text{Mod} $, do not depend on the choice of gauge fixing.
 
-\subsubsection{Running coupling}
+With the BRST-symmetry-based methods, the quantization procedure can be generalized to 
+to a class of non-covariant gauge-fixing choices, such as \emph{axial} or \emph{light-cone} gauges.
+The advantage of this class of  gauges is that the ghost terms decouple, and the corresponding contributions can be completely discarded in computations.
+For instance, in this thesis we will employ unitarity-based computational methods, which are  formulated in terms of gauge-invariant building blocks.
+This will allow us to never consider ghost contributions explicitly.
+
+\section{Renormalization}
+\label{Renormalization}
 \label{sec:runcoup}
 
-The QCD $\beta(\alpha_s)$-function captures the dynamical
-behavior of the strong coupling $\alpha_S$ as a function of the energy scale $\mu$. It is given in one-loop approximation
-obtained in the $\MSb$ renormalization scheme by
+
+In the previous section, we introduced a number of parameters in the SM Lagrangian, such as coupling constants, masses, and the vacuum expectation value.
+In an interacting QFT these \emph{bare} parameters of the Lagrangian do not directly correspond to any observable quantities.
+In fact, in the context of perturbation theory, most of these parameters contain explicit divergences,
+associated to the high-energy, or ultra-violet (UV), limit of the theory.
+Thus, the bare parameters need to be reparametrized in terms of measurable quantities,
+even if no divergences are encountered.
+This procedure is known as \emph{renormalization}.
+After the renormalization is carried out, the theory can be predictive.
+
+Broadly speaking, there are two options for how the renormalization of each bare parameter can be carried out.
+First, in some cases it might be possible to connect the bare parameter to an observable quantity by simply multiplying it with a factor, which can be evaluated from perturbation theory.
+For instance, a renormalized mass $m_\text{OS}$ can be chosen to be the position of the pole of the corresponding two-point correlation function,
+such that the bare mass is 
+$
+  m_0 = Z_m m_\text{OS}.
+$
+Another example is the QED coupling constant, which can be defined by the large-distance electric charge.
+This is called \emph{on-shell} renormalization.
+
+In other cases it is not possible to find an observable, to which the bare parameter can be tied.
+Instead, one can simply define the renormalized parameter at an arbitrary \emph{renormalization scale} $\mu$, given a renormalization prescription, such as \MSbar.
+All observable quantities, predicted from the theory, are then evaluated in terms of this renormalized parameter.
+They must not, however, depend on the renormalization scale.
+This fact is expressed in terms of the so-called \emph{renormalization group equations} (RGE).
+The solution of the RGE relates the parameters, defined at two different renormalization scales.
+This freedom turns out to be extremely useful in that it allows to improve the convergence of the perturbation series
+by making a appropriate choose of the renormalization scale.
+This is closely related to the notion of running (or effective) couplings.
+
+A notable example is the QCD coupling constant $\alpha_s$.
+The solution of the one-loop RGE for the $\alpha_s$, defined in the $\MSb$ scheme, is
 \begin{align}
-  \beta(\alpha_S^{\MSb})=\mu^2\dv{\mu^2}\frac{\alpha_S^{\MSb}(\mu)}{\pi}
-  =-\frac{1}{4}\left[\frac{11N_C-2n_f}{3} \right]\left(\frac{\alpha_S^{\MSb}(\mu)}{\pi^2} \right)^2,
+  \alpha_s(\mu^2)=\frac{\alpha_s(\mu_0^2)}{1+\beta_0 \alpha_s(\mu_0^2)\ln(\frac{\mu^2}{\mu_0^2})}, \qquad \beta_0=\frac{11 \NC-2\NF}{3},
 \end{align}
-where $N_C$ denotes the number of colors and $n_f$ the number of massless quark
-flavors. For the SM values of
-$N_C=3$ and $n_f=5$\footnote{Or $n_f=6$ at very high energies} the beta function is negative and the strong coupling decreases with increasing
-energy. Knowing
-the coupling at some scale $\asms[\mu_0]$, the $\beta$-function allows
-to deduce the coupling at another scale by
-\begin{align}
-  \asms[\mu_1]=\frac{\asms[\mu_0]}{1+\frac{\asms[\mu_0]}{\pi}\beta_0\ln(\frac{\mu_1}{\mu_0})},
-\end{align}
-where $\beta_0=\frac{11 N_C-2n_f}{3}$. The consequences of this running
-of the QCD coupling are profound. At high energies
-$\mu$ QCD becomes an almost free theory and perturbative
-calculations of hard scattering cross sections are possible. However, if the coupling approaches unity perturbative
-calculations are not possible anymore. The parameter $\Lambda_{QCD}$ is the scale below which one is surely in the non-perturbative regime\footnote{$\Lambda_{QCD}\approx 210$ MeV
-  assuming $n_f=5$ quark flavors \cite{Patrignani:2016xqp}.} and is defined
-as the scale at which the coupling formally diverges. The
-modeling of LHC collisions thus has to account for confined initial and final hadronic matter detected in the experiment as well as the quasi free
-gluons and quarks at high scales appearing at high momentum transfer
-collisions. There is no
-first-principle understanding of the transition
-between confined and free regime. Quantitative
-calculations require a prescription to identify the partonic hard scattering cross-section in
-hadron collisions, which is the topic of the next subsection.
+given some initial scale $\mu_0$.  
+Here $\NC$ denotes the number of colors and $\NF$ the number of flavors of quarks, which are considered massless.
+We observe, that at large scales the effective strong coupling constant becomes very small, independent of the initial value $\alpha_s(\mu_0^2)$.
+This implies, that at very high energies QCD behaves as a non-interacting theory. This phenomenon is known as \emph{asymptotic freedom}.
+This fact enables the usage of perturbation theory to predict the scattering of strongly-interacting particles at hadron colliders.
+On the other hand, at low energies ($\mu \sim 250~\text{MeV}$) the effective strong coupling becomes large, and the application of perturbation theory is not justifiable.
+This gives a hint towards the explanation of why free gluons and quarks cannot be observed.
+Instead, they form color-neutral bound states called hadrons.
+This phenomenon is known as \emph{confinement}. 
+The perturbation theory has nothing to say about the confinement, which
+complicates the theoretical description of hadron collisions.
+Fortunately, the short-distance and large-distance effects can be disentangled.
+We will this discuss in the next section.
 
 
-
-
-\section{Hadronic Collisions}
+\section{Observable Cross-Sections}
 \label{sec:hadcoll}
 
-\subsection{The $S$-Matrix in Perturbation Theory}
+The scattering cross-section is an observable quantity, which
+can both be predicted theoretically, and measured experimentally.
+In this section we will review how cross-sections are evaluated in the framework of the QFT.
+
+\todo{here define the cross-section with luminosity} 
+
+\subsection{Scattering Matrix}
 \label{sec:s-matr-pert}
-\sma{} elements are transition amplitudes between asymptotic initial and final
-states. The states are approximate momentum
-eigenstates $|i\rangle$ at some early time before or after interaction
-\mbox{$t = \pm\infty$} when the particles were freely moving. 
-One can decompose \sma{} elements and isolate the non-trivial part due to interactions 
-${M}_{i\to f}$ by
-\begin{align} \label{eq:matrix_element}
-  \bra{i}{\mathcal{T}}\ket{f} =  (2\pi)^4 \delta^{(4)}(p_i- p_f) \mathcal{M}_{i\to f},
-\end{align}
-with
-\begin{equation} \label{eq:tmatrix}
-  \mathcal{S} = \mathbb{1}+i \mathcal{T},
+
+As a result of the quantization procedure, the Hilbert space $\mathcal{H}$ of states is constructed,
+in which a basis of on-shell momentum-eigenstates is conveniently chosen.
+From the theoretical perspective, the scattering is formulated as the transition between
+the initial $\ket{i}\in \mathcal{H}$ and final $\ket{f}\in \mathcal{H}$ states, defined
+at asymptotic times $t\to \pm \infty$.
+The transition probability from the initial state to the final state $\dd{P}$ is obtained from the \emph{scattering matrix} $\mathcal{S}$ as
+\todo{here connect with the cross-section} 
+\begin{equation}
+  \dd{P} = \frac{\Abs{\mel{f}{\mathcal{S}}{i}}}{\ip{f}{f}\ip{i}{i}} \dd{\Pi},
 \end{equation}
-where four-momentum conservation between initial and
-final states is ensured by the corresponding delta function. The
-interpretation of the absolute square of \sma{} elements corresponds
-to the probability of scattering between initial and final state.
+where $\dd{\Pi}$ is the volume element of finial-state momenta. 
+In a non-interacting theory $\mathcal{S}=\mathbb{I}$, so we isolate
+the non-trivial part of the scattering matrix with
+\begin{equation} \label{eq:tmatrix}
+  \mathcal{S} = \mathbb{1}+i \mathcal{T}.
+\end{equation}
+The matrix elements of the nontrivial part of the scattering matrix are called \emph{scattering amplitudes} $A_{i\to f}$,
+\begin{align} \label{eq:matrix_element}
+  \bra{f}{\mathcal{T}}\ket{i} =  (2\pi)^4 \delta^{(4)}(p_i- p_f) A_{i\to f},
+\end{align}
+where we factored off explicitly the momentum-conserving $\delta$-function.
 %The
 %corresponding fields to the asymptotic states obey free equations of
 %motion and are related to the interaction field by
 %\begin{align}
-%  \lim_{t\rightarrow -\infty} \phi(x) &= \sqrt{Z_{i}} \phi_{i}(x), &   \lim_{t\rightarrow \infty} \phi(x) &= \sqrt{Z_{f}} \phi_{f}(x),
+  %\lim_{t\rightarrow -\infty} \phi(x) &= \sqrt{Z_{i}} \phi_{i}(x), &   \lim_{t\rightarrow \infty} \phi(x) &= \sqrt{Z_{f}} \phi_{f}(x),
 %\end{align}
 %with field-strength renormalization factors $Z$. 
-The reduction formula due to Lehmann-Symanzik-Zimmermann (LSZ)
-\cite{Lehmann:1954rq} relates the \sma{} elements to the Fourier
-transformed correlation functions $\widetilde{G}(p_1,\cdots,p_n)$ of the theory. For
-scalar fields, we get the following relation for the computation of \sma{} elements
-\begin{align}
- \langle f | S | i \rangle &\simeq 
- % \lim_{\substack{\text{each }\\p_k^2\rightarrow m_k^2}}\left(\prod_{k=1}^n\frac{p_k^2
- %   -m_k^2}{i\sqrt{Z_{\phi_k}}} \right)
-%G^{\phi_1\cdots\phi_n}(p_1,\cdots,p_n)\\
- \left(\prod_{k=1}^n{\sqrt{Z_{\phi_k}}} \right)
-\widetilde{G}(p_1,\cdots,p_n)\rvert_{\text{truncated}}
-\end{align}
-where we used the definition of the field-strength renormalization
-constants $Z_{\phi}$ to obtain the truncated correlation or Green
-function. For
-particles with spin, the corresponding wave functions have to be
-included in the above expression. In the context of the renormalization procedure described in
-Chapter \ref{chap:renorm} the field-strength renormalization constants are accounted for.
-%which are
-%given by
-%\begin{align}
-%  Z = |\langle p,m | \phi(x) | 0 \rangle |^2 = -i (p^2 -m^2) G(p,-p) \rvert_{p^2=m^2}.
-%\end{align}
-In general, the Green function in an interacting theory is only accessible in a perturbative expansion,
-which can be organized diagrammatically in terms of Feynman diagrams. Feynman diagrams consist
-of propagators, vertices and external wave functions. Only
-connected and amputated Feynman diagrams contribute, that is no corrections to external lines are
-computed. The color-ordered Feynman rules
-of QCD are listed in Appendix \ref{sec:cofr}. More details on the LSZ
-formula and perturbation theory as well as the Feynman rules of the
-full SM can
-be found for example in \cite{Bohm:2001yx,Schwartz:2013pla}. 
 
+The amplitudes are evaluated from the $n$-point correlation functions
+with the Lehmann-Symanzik-Zimmermann (LSZ) \cite{Lehmann:1954rq} reduction formula.
+It is based on the fact, that two-point correlation functions, or \emph{propagators}, of a field $\psi_i$ have a simple
+pole at the mass of the one-particle state,
+\begin{equation}
+  \int \dd[4]{x} e^{i \sp(p,x)} ~ \expval{\mathrm{T} \psi_i (x) \bar{\psi}_i(0)}{0} ~\xrightarrow{p^2\to m^2}~ \frac{i Z_i\,\sum_s \xi_s \bar{\xi}_s}{p^2-m^2} ~+~ \text{less singular},
+\end{equation}
+where the sum in the numerator of the right hand side is over the states associated with the field $\psi_i$, and
+$Z_i$ is the \emph{field renormalization} factor.
+$Z_i$ is the probability to create a one-particle state from vacuum,
+\begin{equation}
+  \mel{0}{\psi_i}{p,s} = \sqrt{Z}_i ~ \xi_s(p).
+\end{equation}
+The LSZ reduction formula states, that
+the $n$-particle scattering amplitude $A_{i\to f}$ is obtained by taking $n$-fold residue 
+of the simple poles associated to each on-shell external particle.
+\todo{add formula as residues}
+
+The correlation functions in interacting field theories usually cannot be evaluated exactly,
+and are expanded perturbatively in coupling constants.
+Each term in this expansion is expressed as sums of Feynman diagrams,
+which consist of combinations of propagators and vertices.
+The latter can be directly derived from the Lagrangian.
+
+\todo{Here transition to the parton model, and non-fixed number of particles in the final state.} 
 
 Below a certain energy scale, the strongly interacting quarks and gluons form bound states, so called \textit{hadrons}. This property of
 QCD is known as \textit{confinement}. It is associated to the fact
@@ -522,8 +516,7 @@ perturbation theory and thereby allow for quantitative theoretical predictions. 
 show how the treatment of the partonic cross section in perturbative QCD
 (pQCD) is embedded in the description of hadron collisions.
 
-\subsection{Hadronic Cross Sections}
-\subsubsection{QCD Improved Parton Model}
+\subsection{Parton Model}
 \label{sec:partonmodel}
  At a hadron-hadron collider, such as the LHC, the cross section for a hard scattering process $H_1+H_2\rightarrow
 X$ factorizes in the high-energy limit as
