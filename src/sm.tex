@@ -47,19 +47,13 @@
 
 %In the following, we describe several aspects of the theory background of the
 %SM. In particular, we aim at illustrating the concepts of gauge
-%invariance and spontaneous symmetry breaking. There are many
-%excellent books on the subject, we partly follow the description in \cite{PeskinS,Schwartz:2013pla}.
+%invariance and spontaneous symmetry breaking.
 
-We describe the theoretical context, in which the subject of thesis is embedded.
+In this chapter, we give a very brief overview of the theoretical framework
+for the work presented in this thesis, as well as the basic notions we
+will operate with in the following chapters.
+For any details regarding the content of this chapter we refer to many excellent textbooks, such as \cite{PeskinS,Schwartz:2013pla}.
 
-\subsection{Notation}
-
-We use the standard notation of Lorentz indices, Einstein summation convention.
-Partial derivatives.
-Slashed notation.
-Clifford algebras and gamma matrices.
-
-Refer to a systematic review of conventions \cite{Romao:2012pq}.
 
 \section{The Standard Model}
 
@@ -423,11 +417,17 @@ We will this discuss in the next section.
 \section{Observable Cross-Sections}
 \label{sec:hadcoll}
 
-The scattering cross-section is an observable quantity, which
-can both be predicted theoretically, and measured experimentally.
-In this section we will review how cross-sections are evaluated in the framework of the QFT.
+The \emph{cross-section} $\sigma$ of a scattering event with some particular properties
+is directly connected to the number of times $N$ this event has occurred in a collider experiment as
+\begin{equation}
+\sigma  = \frac{N}{ \int \dd{t} \mathcal{L}(t)},
+\end{equation}
+with the properties of the flux of colliding beams are described by the \emph{luminosity} $\mathcal{L}$.
+The luminosity is proportional to the square of the number of particles passing through a unit area per unit time.
+Evidently, the cross-section is a directly measurable quantity in a scattering experiment.
+It is also one of the limited number of quantities which have a clean theoretical interpretation in the QFT framework.
+In this section, we review how the cross-section can be computed from a given Lagrangian.
 
-\todo{here define the cross-section with luminosity} 
 
 \subsection{Scattering Matrix}
 \label{sec:s-matr-pert}
@@ -437,13 +437,18 @@ in which a basis of on-shell momentum-eigenstates is conveniently chosen.
 From the theoretical perspective, the scattering is formulated as the transition between
 the initial $\ket{i}\in \mathcal{H}$ and final $\ket{f}\in \mathcal{H}$ states, defined
 at asymptotic times $t\to \pm \infty$.
-The transition probability from the initial state to the final state $\dd{P}$ is obtained from the \emph{scattering matrix} $\mathcal{S}$ as
-\todo{here connect with the cross-section} 
+The transition probability $\dd{P}$ from the initial state to the final state is obtained from the \emph{scattering matrix} $\mathcal{S}$ as
 \begin{equation}
   \dd{P} = \frac{\Abs{\mel{f}{\mathcal{S}}{i}}}{\ip{f}{f}\ip{i}{i}} \dd{\Pi},
 \end{equation}
 where $\dd{\Pi}$ is the volume element of finial-state momenta. 
-In a non-interacting theory $\mathcal{S}=\mathbb{I}$, so we isolate
+The cross-section of scattering of two particles with momenta $p_a,\ p_b$ is obtained from $\dd{P}$ by dividing it by a flux factor,
+\begin{equation}
+  \dd{\sigma} = \frac{\dd{P}}{u_{ab}}, \qquad u_{ab} = 4 \sqrt{(\sp(p_a,p_b))^2 - m_a^2 m_b^2} 
+\end{equation}
+
+
+In a non-interacting theory $\mathcal{S}=\mathbb{1}$, so we isolate
 the non-trivial part of the scattering matrix with
 \begin{equation} \label{eq:tmatrix}
   \mathcal{S} = \mathbb{1}+i \mathcal{T}.
@@ -461,11 +466,11 @@ where we factored off explicitly the momentum-conserving $\delta$-function.
 %\end{align}
 %with field-strength renormalization factors $Z$. 
 
-The amplitudes are evaluated from the $n$-point correlation functions
+The scattering amplitudes are evaluated from the $n$-point correlation functions
 with the Lehmann-Symanzik-Zimmermann (LSZ) \cite{Lehmann:1954rq} reduction formula.
 It is based on the fact, that two-point correlation functions, or \emph{propagators}, of a field $\psi_i$ have a simple
 pole at the mass of the one-particle state,
-\begin{equation}
+\begin{equation} \label{eq:propagator_factorization}
   \int \dd[4]{x} e^{i \sp(p,x)} ~ \expval{\mathrm{T} \psi_i (x) \bar{\psi}_i(0)}{0} ~\xrightarrow{p^2\to m^2}~ \frac{i Z_i\,\sum_s \xi_s \bar{\xi}_s}{p^2-m^2} ~+~ \text{less singular},
 \end{equation}
 where the sum in the numerator of the right hand side is over the states associated with the field $\psi_i$, and
@@ -475,133 +480,104 @@ $Z_i$ is the probability to create a one-particle state from vacuum,
   \mel{0}{\psi_i}{p,s} = \sqrt{Z}_i ~ \xi_s(p).
 \end{equation}
 The LSZ reduction formula states, that
-the $n$-particle scattering amplitude $A_{i\to f}$ is obtained by taking $n$-fold residue 
-of the simple poles associated to each on-shell external particle.
-\todo{add formula as residues}
+the $n$-particle scattering amplitude $A_{i\to f}$ is obtained 
+from the corresponding (Fourier transform of) n-point correlation $G(p_1,\ldots{},p_n)$ function
+by taking its $n$-fold residue 
+of the simple poles associated to each on-shell external particle,
+\begin{equation}
+  A_{i\to f} \sim \frac{1}{\prod_i \sqrt{Z_i} }\Res_{p_1^2\to m_1^2,\ldots{},p_n^2-m_n^2}\qty[G(p_1,\ldots{},p_n)].
+\end{equation}
+For particles with spin, the corresponding state is projected out from the state sum in \cref{eq:propagator_factorization}.
+
 
 The correlation functions in interacting field theories usually cannot be evaluated exactly,
 and are expanded perturbatively in coupling constants.
 Each term in this expansion is expressed as sums of Feynman diagrams,
-which consist of combinations of propagators and vertices.
-The latter can be directly derived from the Lagrangian.
+which consist of combinations of propagators, vertices.
+And the latter can be directly derived from the Lagrangian in path-integral formalism.
+The application of the LSZ reduction then amounts to replacing all one-particle-reducible contributions from the corresponding correlation function
+by the on-shell states.
 
-\todo{Here transition to the parton model, and non-fixed number of particles in the final state.} 
+For any choice of initial and final states $\ket{i},\ket{f} \in \mathcal{H}$, the scattering amplitude can be computed in this way.
+However, the corresponding cross-section is not necessarily an observable. 
+There are two general reasons for why this can happen:
+\begin{enumerate}
+  \item The degrees of freedom, associated to the in- and out- fields in perturbation theory, do not describe the propagating
+    degrees of freedom of the full theory correctly. This is, for example, indeed what happens in the QCD due to confinement.
+    It is the hadrons which are found in the initial and final states, not quarks and gluons.
 
-Below a certain energy scale, the strongly interacting quarks and gluons form bound states, so called \textit{hadrons}. This property of
-QCD is known as \textit{confinement}. It is associated to the fact
-that the strength of the coupling
-between colored objects increases if the energy scale $\mu$ of the interaction decreases, the so called running of the
-strong coupling $\alpha_s(\mu)$. Quarks and gluons can thus not be directly detected in scattering
-experiments, which are performed with hadrons in the initial and final
-state configuration. The theoretical description of hadron collisions is elaborate, since
-composite and not fundamental objects are colliding\footnote{Compare this to an $e^+e^-$-collider, where
-  elementary objects are colliding.}. At high energy scales $\mu$
-attained at hadron colliders such as the LHC, the strong
-coupling $\alpha_s(\mu)$ becomes small and the elementary constituents
-of hadrons, quarks and gluons, can be seen as \textit{asymptotically
-  free}. We are in particular interested in studying the interaction
-of these elementary objects as described by the SM.
+  \item If there are massless particles in a model\footnote{or particles with a very small mass, compared to some characteristic scale}, they can be produced with infinitesimal energy.
+    This means that any scattering state with a fixed number of these particles is indistinguishable from the one with additional low-energetic emissions.
+    The SM contains massless particles, such as the gauge bosons of the unbroken gauge groups, gluons and photons.
+    Furthermore, in high-energy scattering most quarks and leptons effectively behave as massless particles.
+\end{enumerate}
 
-
-A full description of high-energetic hadron collisions therefore requires a prescription to embed the interaction
-of the elementary constituents into the scattering reaction
-of the external hadrons. The parton model \cite{Feynman1969} does so
-and decomposes hadrons into point-like constituents, the partons. For
-protons these elementary constituents are quarks ($q$), anti-quarks
-($\bar{q}$) and gluons ($g$). \textit{Hard
-scattering} processes with more then a few GeV typically
-probe distances below the proton radius and therefore can be understood as
-collisions between partons. They can be described in terms of
-perturbation theory and thereby allow for quantitative theoretical predictions. In this section, we will give a brief overview of hadron-hadron collisions and
-show how the treatment of the partonic cross section in perturbative QCD
-(pQCD) is embedded in the description of hadron collisions.
+In the following we describe how both of these issue are addressed.
 
 \subsection{Parton Model}
 \label{sec:partonmodel}
- At a hadron-hadron collider, such as the LHC, the cross section for a hard scattering process $H_1+H_2\rightarrow
-X$ factorizes in the high-energy limit as
+
+In this thesis we are interested in predictions for the scattering of high-energy hadrons,
+which are bound states of \emph{partons}: quarks and gluons.
+The hadron states are in the domain of the strong-coupling regime of QCD, 
+and their description is inaccessible from the perturbation theory.
+
+However, the scattering with large momentum transfers, i.e.\ \emph{hard scattering}, 
+probes the distances smaller than the size of a hadron, and, therefore, resolves individual partons.
+The hard-scattering cross-section then should be approximately described by the scattering of constituent partons, carrying a fraction of
+the parent hadron's momentum.
+This intuitive idea, known as the \emph{parton model} \cite{Feynman1969} was originally formulated independently of the QCD.
+In QCD it can be formulated more rigorously in terms of a factorization theorem,
+which separates the short-distance from long-distance effects.
+Due to asymptotic freedom of QCD, the former are computable in perturbation theory.
+The QCD-improved parton model states, that the cross-section of hard collisions of hadrons $h_1$, $h_2$ with momenta $p_1$ and $p_2$,
+and the center-of-mass energy $s=(p_1+p_2)^2$,
+can be evaluated as the convolution
 \begin{align}
-\label{eq:factorization}
-  \sigma_{H_1 H_2}(P_1,P_2) &= \sum_{i,j}\int_0^1\dd x_1 \int_0^1 \dd
-  x_2f_{i/H_1}(x_1,\mu_F^2)f_{j/H_2}(x_2,\mu_F^2)\hat \sigma_{ij\rightarrow
-    X}\left(x_1 P_1,x_2 P_2,\mu_R^2,{\mu_F^2}\right) \notag \\
-&+\mathcal{O}\left(\frac{\Lambda_{QCD}}{s}\right),
+\label{eq:factorization}\notag
+  \sigma_{h_1 h_2 \to  X} &= \sum_{i,j}\int_0^1\dd x_1 \int_0^1 \dd x_2 ~ f_{i}^{(h_1)}(x_1,\mu_F^2)f_{j}^{(h_2)}(x_2,\mu_F^2) \\ 
+ & \times
+  \hat \sigma_{ij\rightarrow X}\left(x_1 p_1,x_2 p_2,\mu_R^2,{\mu_F^2}\right) 
+  ~+~\mathcal{O}\left(\frac{\Lambda_\text{QCD} }{s}\right),
 \end{align}
-where the two initial hadrons (protons in the case of the LHC) have momenta $P_1$ and $P_2$
-respectively. The sum runs over all contributing initial state
-partons $q$, $\bar{q}$ and $g$, i.e.\ partonic
-sub-processes. The initial state partons involved in the hard
-scattering cross section $\hat \sigma_{ij\rightarrow
-  X}$ carry
-momentum fractions $p_1=x_1P_1$ and $p_2=x_2P_2$, with partonic
-quantities such as $\hat \sigma$ denoted by a hat. The PDF $f_{i/H_1}(x_1,\mu_F)$ gives the probability of parton
-$i$ to carry the momentum fraction $x_1$ of initial hadron $H_1$'s
-momentum $P_1$. The total partonic energy is
-thus given by $\hat s=x_1x_2 s$, i.e.\ a fraction of the total squared hadronic
-center-of-mass energy $s=(P_1+P_2)^2$ for near light-like hadron momenta $P_i$. Truncating the series
-expansion of the partonic cross section in the strong coupling leads to the explicit dependence on renormalization and
-factorization scales $\mu_R^2$ and $\mu_F^2$ in the above expression.
+of the parton-level cross-sections $\hat \sigma_{ij\rightarrow X}$, and the \emph{parton distribution functions} (PDF) $f_i^{(h_{1,2})}$,
+which roughly correspond to the probability of finding a parton $i$ carrying a momentum fraction $x_i$ in the corresponding initial hadron.
+The sum runs over all partons.
+Similar to the renormalization of couplings and masses, the PDFs are renormalized by
+absorbing contributions from soft and collinear emissions of additional partons in the initial state.
+This introduces an additional \emph{factorization scale}  $\mu_F$.
+The evolution of PDFs with the changes in $\mu_F$ can be obtained perturbatively 
+with Dokshitzer-Gribov-Lipatov-Altarelli-Parisi
+\cite{Dokshitzer:1977sg,Gribov:1972ri,Altarelli:1977zs} (DGLAP)
+equations, which resemble the renormalization group equations.
+Very importantly, the PDFs are universal and independent of the hard process being considered.
+This allows to measure them in one process at certain scale, and then evolve to any other scale with DGLAP equations.
 
+Finally, we note that the factorization only holds for $s \gg \Lambda_\text{QCD} $, and
+the non-factorizable contributions, called ``power corrections'', are of $\order{\Lambda_\text{QCD}/s}$.
 
- For the scope of this thesis,
-we assume that the scale $\mu$ associated to the hard process is much
-larger than $\Lambda_{QCD}$. Roughly speaking,
-factorization means that for energies larger then $\Lambda_{QCD}$,
-the internal binding structure of
-the hadron can be neglected and the partonic sub-channels factorize,
-i.e.\ can be treated independently. The factorization scale $\mu_F$
-then describes the scale below which interactions between partons are
-absorbed into the PDFs. The factorization ansatz of Eq.~\eqref{eq:factorization} is
-fundamental in order to obtain quantitative pQCD prediction that can be
-compared to experimental scattering data from LHC. It allows to use a
-power series expansion of the
-partonic cross-section in the coupling $\alpha_S$, denoting the coefficients as leading-order
-(LO), next-to-leading order (NLO), next-to-next-to-leading order
-(NNLO) and so on. The cross-section to NLO accuracy in the strong coupling
-$\alpha_S$ is thus given by
-\begin{align}\label{eq:facnlo}
-\begin{split}
-  \sigma^{\text{NLO}}_{H_1 H_2}(P_1,P_2) =& \sum_{i,j}\int_o^1\dd x_1 \int_0^1 \dd
-  x_2f^{\text{NLO}}_{i/H_1}(x_1,\mu_F^2)f^{\text{NLO}}_{j/H_2}(x_2,\mu_F^2)\\
-&\times \left[ \hat \sigma^0_{ij\rightarrow
-    X}(p_1,p_2,\mu_R^2)+\hat \sigma^{\text{NLO}}_{ij\rightarrow
-    X}(p_1,p_2,\mu_R^2,\mu_F^2)\right],
-\end{split}
-\end{align}
-with the momenta $p_1$ and $p_2$ defined as above. 
+\subsection{Final-State Radiation}
 
-In the hadronic cross-section defined in
-Eq.~\eqref{eq:facnlo}, collinear divergencies from initial-state
-splittings are absorbed into the PDF definition which gives rise to
-the factorization scale $\mu_F$. Only after these parts
-attributed to long-distance physics are removed does the quantity in
-Eq.~\eqref{eq:facnlo} become an IR-safe observable. Comparable to the
-discussion in the previous subsection \ref{sec:runcoup}, the
-requirement that any dependence on $\mu_F$ must drop out when
-considering results to all orders in perturbation theory leads to the
-Dokshitzer-Gribov-Lipatov-Altarelli-Parisi
-\cite{Dokshitzer:1977sg,Gribov:1972ri,Altarelli:1977zs} (DGLAP) PDF
-evolution equation.
-
-\todo{expand on renormalization of PDFs and DGLAP?}
-
-\subsection{Infrared Safety}
-
-An observable cross-section is defined as
-\begin{multline}
+The cross-sections with fixed number of massless particles in the final state are not observable,
+and we must sum cross-sections over all physically-equivalent final states as
+\begin{equation} \label{eq:IRsafeXS}
   \sigma_{2\rightarrow n + X} = %\int \dd\Phi_n \vert A_{2\rightarrow n} \vert^2 J(\Phi_n,0,\ldots,0)  ~+~ \\
-  \sum_{i=0}^{\infty} \int \dd\Phi_{n+i} \vert A_{2\rightarrow n+i} \vert^2 J(\Phi_{n},x_{n+1},\ldots,x_{n+i},0,\ldots,0),
-  \label{eq:IRsafeXS}
-\end{multline}
+  \sum_{i=0}^{\infty} \int \dd\Phi_{n+i} ~ \sigma_{2\rightarrow n+i} ~ J(\Phi_{n},x_{n+1},\ldots,x_{n+i},0,\ldots,0),
+\end{equation}
 where $x_i$ are the variables describing the $\emph{unresolved phase-space}$, and
 a \emph{measurement function} $J(\Phi_n, \{x_i\})$ has to be chosen such that
 \begin{equation}
   \lim_{x_i\to 0}J(\Phi_n, \{x_i\}) = J(\Phi_n).
   \label{eq:IRsafeConditions}
 \end{equation}
-Commonly $J$ describes a \emph{jet algorithm}.
+In this case, the observable defined by the measurement function $J$ is called \emph{infrared safe}.
+One of the commonly used infrared-safe observables, which we will also employ in this thesis,
+is when $J$ is prescribed by a \emph{jet algorithm}. A jet algorithm clusters partons
+into some number of \emph{jets}. This number depends on the details of the algorithm.
+This leads to a notion of the \emph{jet cross-section}. Compared to parton cross-sections, it is infrared by construction.
+The experimental data and the theoretical predictions can only be compared when the same jet algorithm is used consistently between them.
 
-The phase-space measure of $n$ external particles $\dd\Phi_n$ is defined as
+In \cref{eq:IRsafeXS} the Lorentz-invariant phase-space measure of $n$ external particles $\dd\Phi_n$ is defined as
 \begin{equation}
   \dd\Phi_n(p_a,p_b,p_1,\ldots,p_n) = (2\pi)^{4-3n} \left[ \prod_{i=1}^{n}\dd^4 p_i \delta(p_i^2-m_i^2) \Theta(p_i^{0}) \right] \delta^{(4)}\left(p_a+p_b - \sum_{i=1}^{n}p_i\right),
   \label{eq:PS}
@@ -610,30 +586,27 @@ where $p_a,p_b$ are four-momenta of incoming particles and $p_i$ are four-moment
 $\Theta(p_i^{0})$ makes sure all outgoing particles have positive energy.
 
 
-This reflects the fact that the emissions of particles with low energies, as well
-as strongly collimated particles are indistinguishable by detectors.
-
-The remarkable thing is that even if we would not think about this fact beforehand, QFT tells us that
-this had to be done, otherwise there are explicit uncanceled divergences.
-
-
-\subsection{Fixed Order Computations}
+\subsection{Fixed-Order Computations}
 \label{sec:fixed_order}
 
-\todo{Perhaps it doesn't make sense to split this section and the previous one?}
+The fundamental structure of the SM is encoded in the parton cross-sections  in \cref{eq:factorization}.
+We compute the parton cross-section via perturbative expansion in couplings, truncating
+the expansion at some fixed order of each coupling.
+At the energy scales of the collisions at the LHC, the effective QCD coupling $\alpha_s(\mu_R)$ is the largest among
+all couplings of the SM.
+Hence, including the higher orders in  $\alpha_s(\mu_R)$ has the most significant impact on the reduction
+of the uncertainty of theoretical predictions.
+In this thesis, we will consider the expansion up to the next-to-next-to-leading order (NNLO) in $\alpha_s(\mu_R)$,
+and keep only the leading order (LO) term in the expansion in other couplings.
 
-The way to systematically improve precision is going higher in orders of the QCD coupling constant $g_s$
-in partonic cross section. In this thesis we are interested only in QCD correction, so from now on
-we drop the subscript from the QCD coupling constant and denote it as $g$.
-
-Perturbative expansion of amplitudes up to the NNLO is
+From now on we will drop the subscript from the QCD coupling constant and denote it as $g$, whenever there is no danger of confusion.
+The perturbative expansion of amplitudes up to the NNLO is
 \begin{equation}
   \label{eq:amplitudes_expansion}
   A_{2\to n} = g^{n-2} \left( A^{(0)} + g^2 A^{(1)} + g^4 A^{(2)} + \mathcal{O}(g^{6}) \right),
 \end{equation}
 where $A^{(L)}$ is an amplitude with $L$ loops.
-
-The required amplitudes squared are
+The squared amplitudes required for NNLO cross-section are then
 \begin{subequations}
   \begin{align}
     \frac{\Abs{A_{2\to n}}}{g^{2n-4}}  &= \Abs{A^{(0)}_{2\to n}} + g^2~\Ree{A^{(0)}_{2\to n}}{A^{(1)}_{2\to n}} + \\ & \qquad g^4~\left(\Ree{A^{(0)}_{2\to n}}{A^{(2)}_{2\to n}} + \Abs{A^{(1)}_{2\to n}} \right)+ \mathcal{O}(g^{6})  \\
@@ -641,41 +614,42 @@ The required amplitudes squared are
     \frac{\Abs{A_{2\to n+2}}}{g^{2n-4}} &= g^4 \Abs{A^{(0)}_{2\to n+2}} + \mathcal{O}(g^{6})
   \end{align}
 \end{subequations}
-
 Now we insert these expansion into \eqref{eq:IRsafeXS} and obtain:
 \begin{subequations}
   \label{eq:NNLO_xs}
   \begin{align}
     \nonumber
     & \frac{\sigma_{2\rightarrow n + X}}{g^{2n-4}} = \\
-    & \int \dd\Phi_n \Abs{A^{(0)}_{2\to n}} J  ~+ \\
-    & g^{2} \left( \int \dd\Phi_n~\Ree{A^{(0)}_{2\to n}}{A^{(1)}_{2\to n}} J  + \int \dd\Phi_{n+1} \Abs{A^{(0)}_{2\to n+1}} J \right) ~+ \\
-    & g^{4} \left( \int \dd\Phi_n~ \left( \Ree{A^{(0)}_{2\to n}}{A^{(2)}_{2\to n}} + \Abs{A^{(1)}_{2\to n}} \right) J   + \right. \\ 
+    & \int \dd\Phi_n \Abs{A^{(0)}_{2\to n}} \tilde{J}  ~+ \\
+    & g^{2} \left( \int \dd\Phi_n~\Ree{A^{(0)}_{2\to n}}{A^{(1)}_{2\to n}} \tilde{J}  + \int \dd\Phi_{n+1} \Abs{A^{(0)}_{2\to n+1}} \tilde{J} \right) ~+ \\
+    & g^{4} \left( \int \dd\Phi_n~ \left( \Ree{A^{(0)}_{2\to n}}{A^{(2)}_{2\to n}} + \Abs{A^{(1)}_{2\to n}} \right) \tilde{J}   + \right. \\ 
     \label{eq:RR}
-    & \hspace{8ex} \left. \int \dd\Phi_{n+1}~ \Ree{A^{(0)}_{2\to n+1}}{A^{(1)}_{2\to n+1}} J ~+~ \int \dd\Phi_{n+2}~ \Abs{A^{(0)}_{2\to n+2}} J \right),
+    & \hspace{8ex} \left. \int \dd\Phi_{n+1}~ \Ree{A^{(0)}_{2\to n+1}}{A^{(1)}_{2\to n+1}} \tilde{J} ~+~ \int \dd\Phi_{n+2}~ \Abs{A^{(0)}_{2\to n+2}} \tilde{J} \right),
   \end{align}
 \end{subequations}
-where we dropped the arguments of $J$ for clarity. 
+where we absorbed all corresponding flux factors into the measurement function $\tilde{J}$, and dropped  its arguments for clarity. 
 
-Each individual term starting from NLO is infrared (IR) divergent.
+Each individual term in \cref{eq:NNLO_xs}, starting from NLO, is infrared (IR) divergent.
 There are two sources for IR divergences: soft and collinear divergences.
 In virtual contributions, they occur in the loop integration when the loop-momenta are
 either soft or collinear with one of the external momenta.
-They can be studied systematically with the Landau equations \cite{Landau1959}.
-In real corrections they come from the integration over unresolved phase space.
+In real corrections they arise from the integration over the unresolved phase space.
 According to the Kinoshita-Lee-Nauenberg (KLN) theorem \cite{Kinoshita1962,Lee1964},
-these divergences have to cancel if the measurement function is chosen to satisfy the conditions \eqref{eq:IRsafeConditions}.
+these divergences cancel if the measurement function is chosen to satisfy the conditions \eqref{eq:IRsafeConditions}.
+After each contribution is rendered finite the phase space integrals can be performed with numerical Monte-Carlo sampling techniques.
+Arranging for these cancellations to actually occur in practice is a very non-trivial problem.
+In fact, to date there exist no general algorithm capable of handling more than 2 partons in the final state beyond NLO,
+and this is an area of active research (see e.g.\ \cite{Catani:2007vq,Somogyi:2006da,Somogyi:2006cz,GehrmannDeRidder:2005cm,Gaunt:2015pea,Czakon:2010td,Czakon:2011ve,Anastasiou:2003gr}).
 
-Computation of terms in \eqref{eq:RR} is still a very challenging task \todo{many reference for IR subtraction methods here}.
+In this thesis we focus on the computation of one- and two-loop amplitudes $A^{(1,2)}_{2\to n}$, contributing
+to NLO and NNLO QCD cross-section.
 
-After each contribution is rendered finite the phase space integrals are usually performed numerically using Monte-Carlo techniques.
-
-The discussion of integration of both resolved and unresolved phase space is beyond the scope of this thesis.
-Here we focus on the most challenging part:
-computation of loop amplitudes $A^{(1,2)}_{2\to n}$.
 
 \section{Unitarity Cuts and Universal Factorization}
 \label{sec:unitarity}
+
+In this section we review an important fundamental property of the scattering matrix and its consequences,
+which are essential to the computational methods we employ in this work.
 
 Unitarity of the \sma{},
 \begin{equation} \label{eq:unitarity_smatrix}
@@ -691,26 +665,24 @@ From \cref{eq:unitarity_smatrix} we get
 \begin{equation}
   \mathbb{1} = (\mathbb{1}-i\mathcal{T}^\dagger)(\mathbb{1}+i\mathcal{T}) \quad\implies i(\mathcal{T}^\dagger- \mathcal{T}) = \mathcal{T}^\dagger\mathcal{T}.
 \end{equation}
-Then considering a matrix element between some final and initial states
+Then, considering a matrix element between some final and initial states,
 and inserting the completeness relation of the Hilbert space of QFT,
 \begin{equation}
   \mathbb{1} = \sum_n\int \dd{\Phi_n} \ket{\{n\}}\bra{\{n\}},    \qquad \dd{\Phi_n}=\prod_{i=1}^{n}\frac{\dd^4{p_i} }{(2\pi)^3} ~\delta(p_i^2-m_i^2) \Theta(p_i^{0}),
 \end{equation}
 where $\ket{\{n\}}$ is an $n$-particle state, we obtain
 \begin{equation}
-  \mathcal{M}_{i\to f} - \mathcal{M}_{f \to i}^\star = i (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \mathcal{M}_{i \to \{n\}}^{\phantom{\star}} \mathcal{M}^\star_{f \to \{n\}}.
+  A_{i\to f} - A_{f \to i}^\star = i (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ A_{i \to \{n\}}^{\phantom{\star}} A^\star_{f \to \{n\}}.
 \end{equation}
-where the matrix element $\mathcal{M}_{i \to f}$ is defined by \cref{eq:matrix_element}. 
+where the matrix element $A_{i \to f}$ is defined by \cref{eq:matrix_element}. 
 In we choose $\ket{i} = \ket{f}$ we get 
 \begin{equation} \label{eq:optical_theorem}
-  2 \Im\mathcal{M}_{i\to i} = (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \Abs{\mathcal{M}_{i \to \{n\}}^{\phantom{\star}}}.
+  2 \Im{A}_{i\to i} = (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \Abs{A_{i \to \{n\}}^{\phantom{\star}}}.
 \end{equation}
 This result is known as the \emph{optical theorem}. 
 If we expand both sides of \cref{eq:optical_theorem} in coupling constants, we get an important
 consequence: the imaginary part of an $L$-loop amplitude is given by a product of $(L-1)$-loop amplitudes.
 Thus unitarity supplies relations between different orders of perturbation theory.
-
-\todo{mention somewhere around here (or above) what is called on-shell} 
 
 Exploiting the fact the imaginary part of a propagator is given by
 \begin{equation}
@@ -720,7 +692,7 @@ as a generalization of \cref{eq:optical_theorem} it can be shown \cite{Eden:1966
 that imaginary parts of loop amplitudes are always generated when some of intermediate particles go on-shell.
 The \emph{discontinuity} of an amplitude considered as a function of complex momenta,
 \begin{equation}
-  \Disc i\mathcal{M}(s) \coloneqq i\mathcal{M}(s+i\varepsilon)-i\mathcal{M}(s-i\varepsilon) = -2\Im \mathcal{M}(s),
+  \Disc iA(s) \coloneqq iA(s+i\varepsilon)-iA(s-i\varepsilon) = -2\Im A(s),
 \end{equation}
 with $s$ denoting some energy variable,
 then can be obtained \cite{Cutkosky1960} by summing over all possible ways to \emph{cut} propagators in loops,
@@ -745,6 +717,7 @@ an amplitude of $n$ particles $A_n(1,\ldots{},n)$ factorizes as
 where the sum in the numerator is over all physical polarization states of particle $\xi$, 
 and the ``less singular'' part of the amplitude contains no poles $\frac{1}{p_\xi^2-m_\xi^2}$.
 An example of such factorization is illustrated in \cref{fig:factorization}.
+Note, that here we do not have any phase-space integrals, as in \cref{eq:optical_theorem}. 
 
 \begin{figure}[ht]
   \setlength{\figureheight}{0.11\textheight}
@@ -764,8 +737,6 @@ An example of such factorization is illustrated in \cref{fig:factorization}.
   \label{fig:factorization}
 \end{figure}
 
-
-\todo{Note that in \cref{eq:optical_theorem} there is a phase-space integral present on the right-hand side}
 
 The exact singularity as expected cannot be reached in any physical process.
 However if we analytically continue an amplitude to complex external momenta,
@@ -807,8 +778,7 @@ Each integral in \cref{eq:cut_constructable_ampl} has unique discontinuities.
 So the discontinuities of the loop amplitude on the left, 
 evaluated as phase-space integrals over products of on-shell tree amplitudes as follows from unitarity,
 can be matched to those of integrals to obtain equations for the integral coefficients.
-
-However in general \emph{only} unitarity is not enough.
+However, in general, \emph{only} unitarity is not enough to obtain the full amplitude.
 
 It is possible to generalize application of cuts given by \cref{eq:cut} to
 obtain multi-channel discontinuities \cite{Britto:2004nc}.
@@ -839,18 +809,9 @@ instead of integral coefficients \cite{Giele:2008ve,Ellis:2007br,Ellis:2008ir,Be
 This matching procedure is intimately connected to a purely algebraical method of integral reduction known as OPP \cite{Ossola:2006us}.
 This method uses the cut conditions \cref{eq:cut} to set some propagators to zero and triangularize linear systems for determining the basis coefficients.
 It can be applied individually to each Feynman diagram or a sum thereof, thus having very little to do with factorization and unitarity.
-When applied to the full amplitude however, it re
-
-\todo{here unfinished} 
-Somewhat confusingly sometimes generalized unitarity methods also refer 
-
-Its flexibility allows for straightforward automation (see e.g.\ \cite{Berger:2008ag,Berger:2008sj,Cullen:2011ac,Mastrolia:2010nb,Ossola:2007ax}).
+The flexibility and efficiency of the OPP reduction allows a straightforward automation of the computation of generic one-loop amplitudes
+(see e.g.\ \cite{Berger:2008ag,Berger:2008sj,Cullen:2011ac,Mastrolia:2010nb,Ossola:2007ax}).
 
 Most of the ideas mentioned in this section are formulated in the context of one-loop computations.
-These give the first real taste of quantum nature of QFT.
-Unfortunately, going beyond one-loop, many of the ideas do not generalize straightforwardly,
-and require much more sophisticated computational techniques.
-The extension of the ideas to multi-loop level have been actively studied in recent years \cite{Ita:2015tya,Abreu:2017idw,Abreu:2017hqn} 
-
-In this thesis we apply the state-of-the-art developments for 
-
+Going beyond one-loop, many of them do not generalize straightforwardly, and require much more sophisticated computational techniques,
+which we consider in \cref{chap:numunitarity}.

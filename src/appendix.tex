@@ -1,147 +1,46 @@
 \chapter{Color-Ordered Feynman Rules}
 \label{sec:cofr}
-\todo{rewrite copy-paste}
-In this appendix we list the color-truncated QCD Feynman rules, which can
-for example be found in Ref.~\cite{Mangano1991}, in
-Table \ref{tab:frqcd}. They are required for the calculation of
-color-ordered amplitudes. We
-assume all vertices are cyclically ordered and momenta are
-outgoing. We use the light-cone decomposition for massive momenta
-\begin{align}
-p &=  p^\flat + \frac{m^2}{2p\cdot q}q,&  q^2& =0,
-\end{align}
-with an arbitrary $p\cdot q\neq 0$ light-like reference momentum $q$
-and use the spinor-helicity formalism, as for example presented in Ref.~\cite{Dixon:1996wi,DittmaierWeyl}. Furthermore, we list the Feynman rule
-for the \ew~vertex used
-in this thesis in Table \ref{tab:frew}. The full set of SM Feynman rules can for
-example be found in Ref.~\cite{Bohm:2001yx,Schwartz:2013pla}.
 
+For completeness, we provide the QCD color-ordered Feynman rules,
+which are used for the computation of  color-ordered amplitudes.
+All external legs are cyclically-ordered, and all external momenta are outgoing.
+The derivation can be found e.g.\ in \cite{Mangano1991}.
+We do not provide the Feynman rules for ghosts, since we do not need to consider their contributions in out computations.
+
+A nice summary tables of the complete set of SM Feynman rules can be found in\cite{Romao:2012pq}.
 
 
 \begin{table}[]
 \centering
-\caption{Feynman rule for the \ew~vertex used in
-  this work with outgoing momenta, adapted from Ref.~\cite{Bohm:2001yx}. $V_{ij}$ denote entries of the CKM matrix.}
-\label{tab:frew}
-\begin{tabular}{l}
-\begin{tabularx}{\textwidth}{cl}
-    \hline\hline
-    \noalign{\vskip 2.5mm}
-    \textbf{Electroweak Vertex}\\
-    \noalign{\vskip 2mm}
-    \hline
-    \noalign{\vskip 4mm}
-\raisebox{-.4\height}{\includegraphics[clip,width=0.28\textwidth]{figures/qqv}}
-&$\displaystyle = i e \gamma^\mu \left(C_{L}\frac{1-\g5}{2}
-   + C_{R}\frac{1+\g5}{2}\right) $\\
-    \noalign{\vskip 4mm}
-    \hline
-    \noalign{\vskip 8mm}
-\multicolumn{2}{c}{
-\begin{tabular}{ccccccc}
-$V f \bar{f}^\prime$ & $\gamma f_i \bar{f}_j $& $Z f_i \bar{f}_j $&
-$W^+ u_i \bar{d}_j  $& $W^- d_j \bar{u}_i $& $W^+ \nu_i \bar{l}_j $& $W^- l_j \bar{\nu}_i$\\
-    \noalign{\vskip 2mm}
-    \hline
-    \noalign{\vskip 2mm}
-$C_L$  & $\displaystyle -Q_f \delta_{ij}$ & $\displaystyle g_f^-
-\delta_{ij}$ & $\displaystyle\frac{1}{\sqrt{2}{s_w}}V_{ij}$
-& $\displaystyle\frac{1}{\sqrt{2}{s_w}}V_{ji}^*$  &
-$\displaystyle\frac{1}{\sqrt{2}{s_w}}\delta_{ij}$ &$\displaystyle\frac{1}{\sqrt{2}s_w}\delta_{ji}$ \\
-    \noalign{\vskip 2mm}
-$C_R$ & $\displaystyle -Q_f \delta_{ij}$ & $\displaystyle g_f^+ \delta_{ij}$ &$0$ &$0$&$0$&$0$\\
-\end{tabular}}\\
-    \noalign{\vskip 8mm}
-    \hline
-    \noalign{\vskip 8mm}
-\multicolumn{2}{c}{where \hspace{0.8cm}$\displaystyle g_f^+ = -\frac{s_w}{c_w}Q_f,$ \hspace{0.8cm}$\displaystyle g_f^- = \frac{I_{W,f}^3-s_w^2Q_f}{s_wc_w},$\hspace{0.8cm}$s_w=\sin(\theta_W),$\hspace{0.8cm}$c_w=\cos(\theta_W)$.}\\
-    \noalign{\vskip 4mm}    
-\hline\hline
-\end{tabularx}
-\end{tabular}
-\end{table}
-
-
-
-\begin{table}[]
-\centering
-\caption{Color-truncated QCD Feynman rules in Feynman gauge.}
+\caption{Color-ordered QCD Feynman rules }
 \label{tab:frqcd}
 \begin{tabular}{l}
 \begin{tabularx}{\textwidth}{ll}
-    \hline\hline
-    \noalign{\vskip 2.5mm}
-    \textbf{Propagators}\\
-    \noalign{\vskip 2mm}
     \hline
     \noalign{\vskip 4mm}
 \includegraphics[clip,width=0.2\textwidth]{figures/gp2}
-&$\displaystyle = \frac{-ig^{\mu\nu}}{p^2}$\\
+&$\displaystyle ~ \frac{-ig^{\mu\nu}}{p^2}$ \qquad {\footnotesize (Feynman gauge)}\\
     \noalign{\vskip 2mm}
 \includegraphics[clip,width=0.15\textwidth]{figures/qp2} &
-$\displaystyle  = \frac{i(\slashed{p}+m)}{p^2-m^2}$\\
-    \noalign{\vskip 2.5mm}
-    \hline
-    \noalign{\vskip 2.5mm}
-    \textbf{Vertices}\\
-    \noalign{\vskip 2mm}
-    \hline
+$\displaystyle  ~ \frac{i(\slashed{p}+m)}{p^2-m^2}$\\
     \noalign{\vskip 4mm}
 \raisebox{-.4\height}{\includegraphics[clip,width=0.2\textwidth]{figures/gggv}}
-& $\displaystyle = \frac{i}{\sqrt{2}} \left[
+& $\displaystyle ~ \frac{i}{\sqrt{2}} \left[
         g^{\mu\nu}(p_1-p_2)^\rho+g^{\nu\rho}(p_2-p_3)^\mu+g^{\rho\mu}(p_3-p_1)^\nu\right]$\\
 \raisebox{-.4\height}{\includegraphics[clip,width=0.2\textwidth]{figures/gggg}}
-&  $\displaystyle= i \left[ g^{\mu\rho}g^{\nu
+&  $\displaystyle~ i \left[ g^{\mu\rho}g^{\nu
         \sigma}-\frac{1}{2}(g^{\mu\nu}g^{\rho\sigma}+g^{\mu\sigma}g^{\nu\rho})\right]$ 
 \end{tabularx}\\
     \noalign{\vskip 2mm}
 \begin{tabularx}{\textwidth}{lp{4.5cm}ll}
 \raisebox{-.4\height}{\includegraphics[clip,width=0.15\textwidth]{figures/qqg}}
 &
-$\displaystyle= \frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$&
+$\displaystyle~ \frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$&
 \raisebox{-.4\height}{\includegraphics[clip,width=0.15\textwidth]{figures/qqg2}}
 &
- $ \displaystyle=  -\frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$\\
+ $ \displaystyle~  -\frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$\\
 \end{tabularx}\\
-\begin{tabularx}{\textwidth}{p{2cm}lp{2cm}l}
-    \noalign{\vskip 2.5mm}
-    \hline
-    \noalign{\vskip 2.5mm}
-    \multicolumn{2}{l}{\textbf{Outgoing Fields}}\\
-    \noalign{\vskip 2mm}
-    \hline
-    \noalign{\vskip 4mm}
-%ubar
-{\includegraphics[clip,width=0.15\textwidth]{figures/wfq}}
-&
-\begin{tabular}{ll}
-\ldelim\{{3}{4mm}&$\displaystyle \bar{u}_+ =  [ p^\flat|+
-\frac{m}{\langle q p^\flat\rangle} \langle q|$\\
-    \noalign{\vskip 2mm}
-&$\displaystyle  \bar{u}_-=\langle p^\flat|+\frac{m}{[q p^\flat]} [q|$
-\end{tabular}&
-%epsilon*
-{\includegraphics[clip,width=0.15\textwidth]{figures/wfqb}}
-& 
-\begin{tabular}{ll}
-\ldelim\{{3}{4mm}&$\displaystyle v_+ =
-|p^\flat]-\frac{m}{\langle{p^\flat} q\rangle}\ket{q}$\\
-    \noalign{\vskip 2mm}
-&$\displaystyle  v_-= |p^\flat\rangle-\frac{m}{[p^\flat q]}|q]$
-\end{tabular}\\
-    \noalign{\vskip 4mm}   
-%v
-{\includegraphics[clip,width=0.20\textwidth]{figures/wfg}}
-& 
-\begin{tabular}{ll}
-\ldelim\{{3}{4mm}&$\displaystyle \epsilon^*_+ =\frac{[q |\gamma^\mu|p\rangle}{\sqrt{2}[pq]} $\\
-    \noalign{\vskip 2mm}
-&$\displaystyle  \epsilon^*_-=\frac{\langle q |\gamma^\mu|p]}{\sqrt{2}\langle q
-  p \rangle}$
-\end{tabular}\\
-    \noalign{\vskip 2mm}    
-\hline\hline
-\end{tabularx}
+
 \end{tabular}
 \end{table}
 
