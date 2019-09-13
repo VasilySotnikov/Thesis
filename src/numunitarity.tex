@@ -93,10 +93,11 @@ where we allow coefficients $c_{i}$ to depend on $\vb*{\rho}$.
 %such that all monomials  stay irreducible.
 The basis of the linear vector space of all monomials from $\mathbb{Q}_{\vb*{x},D}[\vb*{\alpha}]$ is, of course, infinite,
 but the maximal degree $\mathsf{P}$ we need to consider in practice is always limited from above by UV behavior of the particular model under consideration.
-The number of basis elements is thus 
+The number of basis elements is thus
 \begin{equation} \label{eq:number_of_monomials}
   \dim{\spn{\vb*{\alpha}^{\va{i}} : \abs{\va{i}} \leq  \mathsf{P}}} =  \frac{(N_\text{ISP} + \mathsf{P})!}{N_\text{ISP}! \mathsf{P}!}.
 \end{equation}
+Furthermore, additional constraints can be imposed on the monomials from the maximal possible power of each loop momentum.
 
 Recall that, some of the scalar products from $\vb*{\alpha}$ have a form $\sp(\ell_i,\tau_j)$ with $\tau_j$ transverse to all external momenta $p_i$.
 We will denote these as $\vb*{\alpha}^\tau$.
@@ -151,6 +152,7 @@ As an example, we list all traceless completions sufficient for the computation 
 \end{align}
 
 To summarize, all transverse ISPs are either trivially surface terms or can be turned into surface terms with the replacements of \cref{eq:traceless_completion_replacements}.
+Note, that the exponents of propagators are irrelevant for this construction.
 After this is done, we are left to consider monomials from the ring $\mathbb{Q}[\vb*{\alpha}\setminus\vb*{\alpha}^\tau]$ only.
 
 
@@ -160,8 +162,6 @@ First, at one loop, the master/surface decomposition is hereby complete since al
 }
 Second, the traceless completions of transverse ISPs, alternatively,
 can be obtained through a specially constructed IBP identities \cite{Ita:2015tya}.
-
-\todo{Note that propagator exponents are irrelevant for traceless completion} 
 
 %vectors of the form
 %\begin{equation}
@@ -262,8 +262,8 @@ This is the price paid for requiring to have the least amount of master integral
 From an efficiency perspective this is probably not a good idea for NLO computations
 since the terms of $\mathcal{O}(\epsilon)$ can be dropped
 and extra master integrals can be arranged to be trivial, generating a so-called rational part.
-For NNLO computations and beyond, where higher orders in the $\epsilon$-expansion are required, 
-this might be not unreasonable to think of.
+For NNLO computations and beyond, one-loop amplitudes expanded to higher orders in $\epsilon$ are required, 
+so keeping the $D$-dependence in the numerators might be not unreasonable to think of.
 
 For $L=1$ the total number of scalar products is $\dim{\vb*{sp}} = 4\cdot 1+ 1 = 5$.
 Hence topologies with the number of propagators $N_p>5$ are reducible.
@@ -606,8 +606,6 @@ We observe that at least for two-loop
 amplitudes a slight increase of ranks for some of the cut equations does not
 pose any significant problem.
 
-\todo{reference how to solve the equations} 
-
 \begin{figure}[ht] 
   \centering
   \begin{tikzpicture}[scale=3,line width=1pt]
@@ -824,7 +822,6 @@ Note that beyond two loops it is not always possible to span the whole cut with 
 
 We now have everything required to obtain the coefficients of master integrals 
 $c_{\Gamma\gamma_\Gamma,i}$ from  \cref{eq:cut_equations}.  
-\todo{equation solving?} 
 The coefficients are functions of external kinematics $\vb*{x}$, and the dimensional regularization parameters $D$ and $D_s$.
 In the spirit of our goal of constructing a fully numerically-capable framework, 
 we can obtain the master coefficients
