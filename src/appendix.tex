@@ -10,7 +10,7 @@ We do not provide the Feynman rules for ghosts, since we do not need to consider
 A nice summary tables of the complete set of SM Feynman rules can be found in\cite{Romao:2012pq}.
 
 
-\begin{table}[]
+\begin{table}[ht]
 \centering
 \caption{Color-ordered QCD Feynman rules }
 \label{tab:frqcd}
@@ -38,79 +38,11 @@ $\displaystyle  ~ \frac{i(\slashed{p}+m)}{p^2-m^2}$\\
 $\displaystyle~ \frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$&
 \raisebox{-.4\height}{\includegraphics[clip,width=0.15\textwidth]{figures/qqg2}}
 &
- $ \displaystyle~  -\frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$\\
-\end{tabularx}\\
-
+$ \displaystyle~  -\frac{i}{\sqrt{2}} g_{s} \gamma^{\mu}$\\[1ex]
+    \hline
+\end{tabularx}
 \end{tabular}
 \end{table}
-
-
-
-
-
-%\chapter{Results for Selected Scalar Integrals}
-%\label{sec:massivebasisint}
-%Among the additional scalar integrals appearing in the master
-%integral decomposition in Section \ref{sec:scmi} for processes involving massive quarks are the
-%tadpole integral $I_1(m^2)$ and the bubble integral with a single massive leg in
-%one corner $I_2(m^2;0,m^2)$. For vanishing masses, both
-%integrals are scaleless and vanish in dimensional regularization. They
-%are given in dimensional regularization with $D=4-2\epsilon$ by
-%\begin{align}\label{eq:tadint}
-%I_1(m^2) \coloneqq I_{1}=\frac{\mu_R^{2\epsilon}}{ic_{\Gamma}}\int
-  %\frac{\dd[D]{\ell}}{(2\pi)^D}\frac{1}{(\ell^2-m^2)} =
-   %m^2\left(\frac{1}{\epsilon}+\log(\frac{\mu_R^2}{m^2})+1 \right)+\mathcal{O}(\epsilon),
-%\end{align}
-%and
-%\begin{align}\label{eq:olbmint}
-%I_2(m^2;0,m^2) \coloneqq
-%I_{2,m^2}=\frac{\mu_R^{2\epsilon}}{ic_{\Gamma}} \int
-  %\frac{\dd[D]{\ell}}{(2\pi)^D}\frac{1}{\ell^2((\ell-p)^2-m^2)} =
-  %\left(\frac{1}{\epsilon}+\log(\frac{\mu_R^2}{m^2})+2 \right)+\mathcal{O}(\epsilon),
-%\end{align}
-%where the small imaginary part $i\epsilon$ in the inverse propagators
-%is understood implicitly as $D_i=(\ell_i^2-m_i^2+i\epsilon)$ and $c_\Gamma=(4\pi)^{-(2-\epsilon)}\Gamma^2(1-\epsilon)\Gamma(1+\epsilon)/\Gamma(1-2\epsilon)$. The integrals are taken from Ref.~\cite{Ellis:2007qk}.
-
-
-
-
-
-%\chapter{Tadpole Coefficients From UV matching}
-%\label{sec:uvmatch}
-%In an application of numerical unitarity to processes with a single mass circulating in
-%the loop, one can avoid the computation of single cuts in order to extract the
-%tadpole coefficient.\footnote{For more complex processes with different masses
-%in the loop one has several tadpole coefficients.} Instead, as
-%proposed in Ref.~\cite{Bern:1995db,Badger2008}, one can match the known $UV$
-%singularity structure of the mass-renormalized amplitude \cite{Catani:2000ef} to the $UV$ poles of tadpole, bubble and renormalization contributions. The
-%$UV$-divergent part of the tadpole integral and bubble integrals are
-%given in Eq.~\eqref{eq:tadint} and Eq.~\eqref{eq:olbmint} of Appendix \ref{sec:massivebasisint} by
-%\begin{align}
- %I_{1\rvert_{\frac{1}{\epsilon}}} &= \tilde{I}_1 = m^2 &
- %I_{2,i\rvert_{\frac{1}{\epsilon}}} &= \tilde{I}_{2,i} = 1  
-%\end{align}
-%for all $i$ and are in particular independent of other kinematical
-%invariants. Since tadpole and bubble integrals as well as mass renormalization counterterms are the only sources of $UV$ divergencies for
-%mass-renormalized one-loop
-%amplitudes, one can deduce the tadpole coefficient by matching the known
-%$UV$-pole structure of each primitive amplitude \cite{Catani:2000ef} to the $UV$-poles of the
-%combined bubble, tadpole and renormalization contributions
-%\begin{align}
-  %\begin{split}
-  %\mathcal{A}_{\rvert_\text{UV}}^{\text{mass ren.}} & =  \sum_i b^0_i
-  %\tilde{I}_{2,i}+a^0 \tilde{I}_1 + \alpha_{\text{mass ren.}}\\
-%&\Rightarrow   a^0 =  \frac{1}{m^2}\left(\mathcal{A}_{\rvert_\text{UV}}^{\text{mass ren.}} -  \sum_i
-%b^0_i  -\alpha_{\text{mass ren.}}\right) ,
-  %\end{split}
-%\end{align}
-%with the mass renormalization contribution $\alpha_{\text{mass ren.}}$. In practice, this implies extracting the $UV$ pole structure
-%of primitive amplitudes from that of the full amplitude
-%\cite{Catani:2000ef} as laid
-%out in Ref.~\cite{Ellis:2011cr}. In the work presented in this thesis we do
-%not apply this technique but follow the straightforward application of numerical unitarity
-%and compute single cuts explicitely. In particular since this is
-%independent of the number of masses in the loop.
-
 
 
 
@@ -270,8 +202,6 @@ And the little group scaling is
 \chapter{Clifford Algebras in $D_s$ Dimensions}
 \label{sec:clifford_algebra_ds}
 
-\todo{clean-up this significantly} 
-
 \section{Representations}
 The defining property of the Clifford algebra is
 \begin{equation} \label{eqn:defClifford}
@@ -312,80 +242,26 @@ Note that $\gamma^\mu_{[D_s-4]}$ represent a $(D_s-4)$-dimensional Clifford alge
 \section{Basis}
 \label{sec:identities}
 
-In the following we derive the values of the contraction of the
-tensors $w_0$ and $v_n$ which are used in 
-eqs.~\eqref{eq:decompqqbar} and \eqref{eqn:4qampltensor}.
-%
-In this appendix we take $d$ to be an even integer denoting the
-dimension of the space for which the Clifford algebra is defined
-and we denote the dimension of the $\gamma$-matrix
-representation by
-$d_t=\Tr(\mathbb{1}_{[d]})=2^{d/2}$.
-In the main text, we are interested in the case
-%
-\begin{eqnarray}
-  d = (D_s-4)\,.
-\end{eqnarray}
-%
-Since amplitude computations are homogeneous in the
-factor $d_t$, it can be factored out and replaced by 
-a suitable value in order to suit the four-dimensional 
-limit. In this appendix, we keep the parameter $d_t$ in analytic
-form in order to maintain a consistent finite-dimensional
-algebra and for clarity of the equations. 
-In the main text we use formulas with the replacement
-$d_t\rightarrow 1$ imposed, which is the value consistent with a
-calculation in dimensional regularization \cite{Collins:1984xc}.
-
-We start with the trivial case of $w_0$ which appears in 
-eq.~\eqref{eq:decompqqbar}. It is easy to find that
-%
-\begin{eqnarray}
-  w_0=\delta_\kappa^\lambda\,,\qquad 
-  w^0=\delta^\kappa_\lambda/d_t\,,\qquad 
-  w_0\cdot w^0=\delta_\kappa^\lambda  \delta^\kappa_\lambda/d_t=1\,.
-\end{eqnarray}
-
-For the tensors $v_n$ of eq.~\eqref{eqn:4qampltensor} we
-must first consider traces of $\gamma$-matrix chains of
-the form
-%
+We derive the coefficients $c_n(D_s-4)$ from \cref{eq:dsm_4_projectors} for
+the case of two external non-identical fermion lines.
+For convenience, in this \namecref{sec:identities} we denote
+\begin{equation}
+  d \coloneqq D_s-4, \qquad  d_t \coloneqq \Tr(\mathbb{1}_{[d]})=2^{d/2}.
+\end{equation}
+The factor $d_t$ is always factorized from the amplitude, so it is usually set to $1$ in dimensional regularization \cite{Collins:1984xc}.
+Here we will keep it for clarity, since we are considering a finite-dimensional Clifford algebra.
+We choose the basis of the Clifford algebra as
 \begin{align}\label{eq:basisGammaChainII}
 \gamma_{[d]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in
 S_n} \sgn(\sigma) \gamma_{[d]}^{\mu_{\sigma(1)}} \ldots
 \gamma_{[d]}^{\mu_{\sigma_n}}\,,
 \end{align}
-with $S_n$ denoting the set of permutations of $n$
-integers and $\sgn(\sigma)$ the signature of the permutation $\sigma\in S_n$.
-%
-Given a unitary
-representation of the $\gamma_{[d]}^\mu$ matrices, hermitian
-conjugation reverses the $\gamma$-matrix chains and flips the
-Lorentz index position.
-%
-This can be seen from the definition of the Clifford algebra
-(\cref{eqn:defClifford}) which implies 
-$\gamma_{[d]}^\mu \gamma^{}_{[d]\mu} = \mathbb{1}_{[d]}$ for 
-any fixed~$\mu$.
-Assuming that the $\gamma_{[d]}^\mu$ are unitary, i.e.\ 
-$(\gamma_{[d]}^\mu)^\dagger = (\gamma_{[d]}^\mu)^{-1}$,
-then implies
-$(\gamma_{[d]}^\mu)^\dagger=\gamma_{[d]\mu}$. 
-For the above product of $\gamma$ matrices this in turn leads to
-%
+From the properties of $\gamma$-matrices we have
 \begin{eqnarray}
   (\gamma_{[d]}^{\mu_1 \ldots \mu_n} )^\dagger =\,
-  \gamma_{[d]\mu_n \ldots \mu_1}^{\phantom{\mu}} \,.
+  \gamma_{[d]\mu_n \ldots \mu_1}^{\phantom{\mu}} \,,
 \end{eqnarray}
-%
-%
-Unitary representations for the Clifford algebra can always be
-found as explained for example in 
-ref.~\cite{Kreuzer:susylectures}.
-%
-We will require the following traces of antisymmetric
-$\gamma$-matrix chains,
-%
+and the following result for the traces can be derived (see e.g.\ \cite{Veltman:1988au}):
 \begin{eqnarray}
   \label{eq:traceChain}
   \Tr(\gamma_{[d]}^{\mu_1 \ldots \mu_n} \gamma^{
@@ -400,9 +276,7 @@ $\gamma$-matrix chains,
   \end{eqnarray}
 %
 where the summation runs over all permutations $S_n$ of $n$ elements.
-The traces are computed in fixed integer dimensions where the dimensions of the
-$\gamma$-matrix representation is taken to be $d_t$ dimensional.
-For contracted Lorentz indices we will also use that
+We will also need the following identity for contracted Lorentz indices:
 \begin{eqnarray}
   \label{eqn:simpletrace}
   \sum_{\mu_1,\ldots,\mu_n} 
@@ -416,15 +290,12 @@ rank $n$ in $d$ dimensions, which is the number of ways to
 choose an ordered subset of $n$ elements from a fixed set of $d$
 elements.
 %
-With these preparatory equations we can
-compute the inner products of the $v_n$ tensors of 
-\cref{eqn:4qtensors}
-which yield the normalisation factors $c_n$
-of \cref{eqn:vnproducts}:
+We now compute the diagonal projections of $v_n$ tensors from \cref{eqn:4qtensors}
+which yield the normalisation factors $c_n$ in \cref{eq:dsm_4_projectors}:
 \begin{align}
   \begin{split}
     \label{eq:cnCalc}
-    c_n=v_n^\dagger\cdot v_n =&\,
+    c_n=\mathcal{P}_n [v_n] =&\,
 %
     \Tr(\gamma_{[d]\,\mu_n \ldots \mu_1} \gamma_{[d]}^
     {\nu_1 \ldots \nu_n}) \,
@@ -461,22 +332,10 @@ of \cref{eqn:vnproducts}:
     =&\, d_t^2 \frac{d!\,n!}{(d-n)!}\,.
   \end{split}
 \end{align}
-In the above formulas the summation over the indices $\nu_i$ is 
-trivially performed. In the next step, we isolate a contribution
-of the form that we computed in eq.~\eqref{eqn:simpletrace},
-which gives the same result for each permutation $\sigma$ but
-multiplied by $\sgn(\sigma)$. The final results follows
-trivially.
 As expected, for each $n$ the result has zeros in the dimensions
-$d$ for which there are insufficient distinct labels 
+$d$, for which there are insufficient distinct labels 
 $\mu_i$ and $\nu_i$ available to form antisymmetric index 
 configurations of $n$ indices.
-We recall that in the main text we set $d_t=1$ and $d=D_s-4$.
-
-
-\section{Spinors}
-
-\todo{construction of spinor states} 
 
 
 
@@ -562,17 +421,32 @@ The spinors $\sbra{i}$ are then obtained as
 
 \chapter{Numerical Algorithms}
 
-\section{Finite Fields and Floating Point Arithmetics}
+Here we provide a brief summary of the numerical algorithms, which we employed in out computations.
+
+
+\section{Finite Fields}
 \label{sec:ff_fp}
 
-Definition of finite fields.
+The numerical unitarity method, which we presented in \cref{chap:numunitarity}, is suitable 
+for evaluations in any number field.\footnote{
+  With a caveat discussed in \cref{sec:muij_square_roots}
+}
+One particularly useful choice is that of finite fields $\mathbb{Z}_p$, with the prime cardinality $p$,
+which  can be chosen such that all elements of the field fit into the standard machine integer.
+This allows to carry out arithmetics efficiently.
 
-Brief comparisong of finite fields vs floating point.
+A rational number $x=\frac{n}{d}$ is mapped into $\mathbb{Z}_p$ as
+\begin{equation}
+  x \to \frac{n\mod{p}}{d\mod{p}},
+\end{equation}
+and the division in $\mathbb{Z}_p$ is implemented with the extended Euclidean algorithm.
 
-usage of finite fields in \cite{Klappert:2019emp,Peraro:2016wsq,Peraro:2019svx}
+The inverse map exists \cite{Wang:1981:PAU:800206.806398} only if $\abs{n},\abs{d} < \sqrt{\frac{p}{2}}$.
+However, with the help of the Chinese Remainder Theorem, the images of $x$ in multiple finite fields $\mathbb{Z}_{p_i}$
+can be combined to get an image in $\mathbb{Z}_{\prod_i p_i}$.
+This procedure is called \emph{rational reconstruction}. 
+We refer to further details elsewhere \cite{Klappert:2019emp,Peraro:2016wsq}
 
-\subsection{Rational Reconstruction}
-\label{sec:rational_reconstruction}
 \begin{figure}[ht]
   \begin{center}
     \begin{tikzpicture}[auto, node distance = 3cm,shorten >= 2pt]
@@ -606,123 +480,100 @@ usage of finite fields in \cite{Klappert:2019emp,Peraro:2016wsq,Peraro:2019svx}
 
       \path [line,->] (crt) -- (cmodP);
 
-      \path [line,->] (cmodP) -- node [above]{\small $n,d < \sqrt{P}$} (c);
+      \path [line,->] (cmodP) -- node [above]{\small $n,d < \sqrt{\frac{P}{2}}$} (c);
     \end{tikzpicture}
   \end{center}
-  \caption{The diagram representing rational reconstruction.}
+  \caption{The diagram, representing the evaluation of any rational function from a sample of finite fields.}
   \label{fig:RatReconstr}
 \end{figure}
 
 
+Any rational function $f: \mathbb{Q} \longrightarrow \mathbb{Q}$ can be reinterpreted
+to be a function $f: \mathbb{Z}_p \longrightarrow \mathbb{Z}_p$.
+We can then use the rational reconstruction algorithm to obtain the value $c = f(\vb*{x}) = \frac{d}{n}$
+from its finite-field images. This is illustrated in \cref{fig:RatReconstr}.
+A finite-field based calculation allows to compute exact values
+for the coefficients $c_{\Gamma,i}$ in \eqref{eq:cut_equations}.
+
+
 \section{On-Shell Loop Momenta and Finite Fields}
 \label{sec:muij_square_roots}
-The extension of unitarity approaches to employ only operations
-defined in an algebraic field was proposed 
-in ref.~\cite{Peraro:2016wsq}.
-A finite-field based calculation allows to compute exact values
-for the integral coefficients $c_{\Gamma,i}$ of eq.~\eqref{eq:A}
-in a numerical framework.
-This idea
-was applied recently in \cite{Badger:2017jhb,Abreu:2017hqn} for
-pure gluon-scattering amplitudes, and here we discuss our
-implementation for amplitude computations with fermions.
 
-\subsubsection{Generic Algebraic Extension}
-
-From here on we denote by $\mathbb{F}$ an arbitrary 
-number field. In practice, we will be interested in
-$\mathbb{F}$ being the field of rational numbers $\mathbb{Q}$
-or the finite field $\mathbb{Z}_p$
-of all integers modulo a prime number $p$.
-In general, polynomial equations do not have solutions in 
-$\mathbb{F}$. This is at odds with the fact that
-in a unitarity-based approach one needs 
-to generate loop momenta which satisfy a set of quadratic
-conditions corresponding to setting propagators to zero.
-%
-In the presence of fermions, the situation becomes more 
-complicated due to the extension of the Clifford algebra beyond 
-four dimensions. More specifically, terms such as $\ell^\mu
-\gamma_{[D_s]\mu}$ exhibit the $(D-4)$-dimensional
-components of the loop momenta,
-which are in general not 
-$\mathbb{F}$-valued for on-shell momenta
-(more concretely, if we work on the field of rational numbers
-these components are in general irrational),
-leading to terms in the sub-currents of the
-Berends-Giele recursion that are not $\mathbb{F}$-valued. 
-%
-To address this issue,
-we start with a parametrization of the on-shell spaces as in 
-ref.~\cite{Abreu:2017hqn} but always use normalized basis
-vectors. We write the two-loop momenta as
-\begin{equation}
-    \ell_1 = (\ell_{1,[4]}, \vec{\mu}_1)\,,\quad \quad \quad
-    \ell_2 = (\ell_{2,[4]}, \vec{\mu}_2)\,, 
-    \label{eq:loopmomenta}
+In \cref{sec:osm} we discussed the algorithm for
+finding on-shell loop momenta for generic topologies.
+Our parametrization trivializes on-shell conditions for the components
+of loop momenta $\ell^{\mu}_{l[4]}$, and provides
+the \emph{quadratic} constraints for the components $\vec{\mu}_l \coloneqq \ell^{\mu}_{l[D-4]}  $,
+\begin{equation} \label{eq:vecmu_conditions}
+  \va{\mu}_i \cdot \va{\mu}_j  \equiv  \mu_{ij} (\vb*{\rho},\vb*{\alpha}) = \ell_i\cdot \ell_j - \ell_{i[4]}\cdot \ell_{j[4]},
 \end{equation}
-where we denote their $(D-4)$-dimensional components as 
-$\vec{\mu}_1$ and $\vec{\mu}_2$. Next, we choose an orthonormal
-basis $\vec{n}_i$ of the $(D-4)$-dimensional space with
-$n_1$ in the direction of $\vec{\mu}_1$ and write
+In general, quadratic equations do not have solutions in an arbitrary field $\mathbb{F}$.
+To address this issue, we will consider an algebraic extension of the field $\mathbb{F}$.
+We choose an orthonormal
+basis $\{\vec{n}_i\}$ in $\mathsf{S}_{[D-4]}$ such that
 \begin{equation}
 \vec{\mu}_1 = r_1 \vec{n}_1, \quad  \vec{\mu}_2 = \frac{\mu_{12}}{\mu_{11}} r_1 \vec{n}_1 + r_2 \vec{n}_2
-  \quad \mathrm{where} \quad r_1 = \sqrt{\mu_{11}}, \quad r_2 = 
-  \sqrt{\mu_{22} - \mu_{12}^2/\mu_{11}},
+  \quad \mathrm{with} \quad r_1 = \sqrt{\mu_{11}}, \quad r_2 = 
+  \sqrt{\mu_{22} - \frac{\mu_{12}^2}{\mu_{11}}},
 \end{equation}
-with $\mu_{ij}=\vec{\mu}_i\cdot\vec{\mu}_j$.
-In a theory containing only vector particles we only ever need 
-the values $r_i^2$, which are $\mathbb{F}$-valued both on- and
-off-shell \cite{Abreu:2017hqn}. In contrast, in a theory with
-fermions, components of Berends-Giele currents will take the
-generic form
+Then conditions \cref{eq:vecmu_conditions} are satisfied by construction.
+The components of off-shell currents will take the generic form
 \begin{equation}
   \label{eq:ExtendedAlgebra}
   a_{00} + a_{10} r_1 + a_{01} r_2 + a_{11} r_1 r_2, 
 \end{equation}
 which is not $\mathbb{F}$-valued.
-In order to nevertheless be able to
-work in the field $\mathbb{F}$,
-we consider 
+Then, in order to nevertheless be able to
+work in the field $\mathbb{F}$, we consider 
 the algebra $\mathbb{V}$ over the field $\mathbb{F}$, with 
-$\mathbb{V}$ the vector space spanned by the basis 
+the vector space $\mathbb{V}$ spanned by the basis 
 $\{r_0=1,r_1,r_2,r_1r_2\}$ and equipped with the standard
 addition and multiplication.
-All components of the Berends-Giele are elements 
-in the algebra, and can thus be written as a linear combination
-of the $r_i$ with $\mathbb{F}$-valued coefficients. More
+All components of the off-shell currents are elements 
+of the algebra $\mathbb{V}$, and can thus be written as linear combinations
+of $r_i$ with $\mathbb{F}$-valued coefficients. More
 concretely, this means we only need to determine the $a_{ij}$ 
-in eq.~\eqref{eq:ExtendedAlgebra} which are $\mathbb{F}$-valued
+in \cref{eq:ExtendedAlgebra} which are $\mathbb{F}$-valued
 by construction.
 
 An important observation is that, although the coefficients 
 $a_{10}$, $a_{01}$ and $a_{11}$ in 
-eq.~\eqref{eq:ExtendedAlgebra} are non-zero in
-intermediate stages of the calculations, they vanish
+\cref{eq:ExtendedAlgebra} are non-zero in
+intermediate stages of the calculations of cuts, they vanish
 for the integrands of helicity amplitudes as defined in 
-eq.~\eqref{eq:tensorDecomposition}. This cancellation of the
+\cref{eq:tensorDecomposition}. This cancellation of the
 $r_i$ terms holds in the HV scheme and
 is due to the projection onto the invariant tensors 
-$v_n$ of eq.~\eqref{eq:tensorDecomposition}, 
+$v_n$ of \cref{eq:tensorDecomposition}, 
 which yields polynomials in the Lorentz invariants 
-$\mu_{ij}$ at the integrand level
-(see the discussion in section \ref{sec:ParamIntegrands}).
+$\mu_{ij}$ at the integrand level.
 
 
-\subsubsection{Only Vector Particles}
+\subsubsection{The Case of Only Vector Particles}
 %
-In ref.~\cite{Abreu:2017hqn}, this was resolved
-by making sure that all scalar products
-between the momenta in the problem were $\mathbb{F}$-valued.
+It was shown in \cite{Abreu:2017hqn}, that,
+if only vector particles are encountered in the computation of cuts,
+the off-shell recursion can be modified to work directly with scalar products $\mu_{ij}$.
+Hence, the square roots $r_i$ do not appear explicitly.
+More precisely, this corresponds to choosing to work with orthogonal, but not normalized basis $\{\tilde{\vec{n}}_j\}$ in
+$\mathsf{S}_{[D-4]}$,
+\begin{equation}
+  \tilde{\vec{n}}_1 = r_1 \begin{pmatrix} 1 \\ 0\end{pmatrix}, \qquad \tilde{\vec{n}}_2 = r_2 \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+\end{equation}
 
 
 \subsubsection{Special Metric Signature}
+In the presence of fermions, the situation becomes more 
+complicated, due to the extension of the Clifford algebra beyond 
+four dimensions. More specifically, terms such as $\slashed{\ell}_{[D_s]}$
+exhibit the $(D-4)$-dimensional components of the loop momenta.
+Thus, we need to use the algebraic extension in \cref{eq:ExtendedAlgebra}.
+We can however reduce the number of square roots by a trivial reparametrization, taking advantage of a particular choice
+of metric signature.
 
-Any Lorentz-invariant quantity such as helicity amplitudes (normalized by an appropriate spinor weight)
-depends on the space-time metric tensor only through contractions with momenta and states of external particles.
-Thus  without loss of generality we can choose to use an alternating metric signature $(+,-,+,-,\ldots)$
+Any Lorentz-invariant quantity depends on the space-time metric tensor only through contractions with momenta and states of external particles.
+Thus  without loss of generality we can choose to use an alternating metric signature $(+,-,+,-,\ldots)$,
 and modify external momenta such that all Lorentz invariants remain unchanged.
-
 We then can parametrize the two-dimensional loop-momentum components
 $\vec{\mu}_1$ and $\vec{\mu}_2$ as follows:
 \begin{equation}
@@ -740,24 +591,82 @@ where $t$ is a free dimensionful parameter that leaves the scalar products
 $r = \sqrt{\mu_{12}^2-\mu_{11} \mu_{22}}$ and 
 $\mu_{ij} = \mu_i^1 \mu_j^1 - \mu_i^2 \mu_j^2$ invariant. %
 
-This parametrization allows to reduce the size of the algebraic extension $\mathbb{V}$ generated by \cref{eq:ExtendedAlgebra},
-which is a significant optimization of numerical evaluations.
-
-
-\todo{Note on other possibilities to avoid solving on-shell conditions.}
-
 
 \section{Exact Interpolation of Functions over Finite Fields}
 \label{sec:func_reconstruction}
+{
+\newcommand{\nn}{\\}
+We give a brief overview of the function interpolation (or analytic reconstruction) techniques, that we used to obtain the analytic expressions in \cref{sec:AnalyticForm} from exact numerical evaluations over finite fields.
+We stress, that the analytic reconstruction reproduces the sampled function exactly.
+This means, that the subsequent numerical evaluations will always agree exactly with the reconstructed function.
+We refer for details to \cite{Klappert:2019emp,Peraro:2016wsq,Peraro:2019svx}.
 
 \subsection{Univariate Polynomials}
 \label{sec:newton}
 
-\subsection{Univariate Rational Function}
-\label{sec:thiele}
+The analytic reconstruction of a dense univariate polynomial $f(x) \in \mathbb{Z}_p[x]$ of unknown degree can be done with the Newton interpolating polynomials.
+The polynomial is represented in the form
+\begin{align*}
+  f(x)    &= \sum_{r=0}^Ra_r\prod_{i=0}^{r-1}(x-y_i) \\
+  &= a_0 + (x-y_0) 
+  \Bigg( 
+  a_1 + (x-y_1) 
+  \Big( 
+  a_2 + (x-y_2) (\dots + (x-y_{R-1})a_R)
+  \Big)
+  \Bigg)
+\end{align*}
+where $y_{j} \in \mathbb{Z}_p$ are the sample points.
+The coefficients $a_k$ are then determined recursively as 
+\begin{align*} %\label{eq:newtonsystem}
+  a_0 ={}& f(y_0) \nn
+  a_1 = {} & \frac{f(y_1)-a_0}{y_1-y_0} \nn
+  & \vdots  \\
+  a_i = {} & \Bigg(\Big(\big(f(y_i)-a_0\big) \frac{1}{y_i-y_0}-a_1\Big) \frac{1}{y_i-y_1}-\cdots - a_{i-1} \Bigg) \frac{1}{y_i-y_{i-1}}.
+\end{align*}
+Note, that the degree $R$ of the polynomial is uncovered with this procedure.
 
 \subsection{Multivariate Polynomials}
 \label{sec:newton_rec}
 
+The analytic reconstruction of a dense multivariate polynomial $f(\vb*{x})$ of unknown degree can be done with the recursive application of the univariate Newton formula.
+In the first step we put all, but the first variable to some values and perform a univariate reconstruction in $x_1$,
+\begin{equation} %\label{eq:mnewtonrep}
+  f(\vb*{x}) ={} \sum_{i=0}^R a_i(x_2,\ldots,x_n) \prod_{j=0}^{i-1} (z_1-y_j).
+\end{equation}
+We then apply the same argument to $a_i(x_2,\ldots,x_n)$, ans so on.
 
+\subsection{Univariate Rational Function}
+\label{sec:thiele}
 
+Analogous to the case of univariate polynomials,
+the analytic reconstruction of a dense univariate rational function 
+\begin{equation} \label{eq:defuratfun}
+  f(x) = \frac{\sum_{i=0}^{R_n} n_i\, x^i}{\sum_{i=0}^{R_d} d_{i}\, x^{i}},
+\end{equation}
+of unknown degree can be done with the Thiele's formula  \cite{Abramowitz1964}.
+The function is represented in the form
+\begin{align} \label{eq:thielerep}
+  f(x) = {} & a_0 + \dfrac{x-y_0}{a_1 + \dfrac{x-y_1}{a_2 + \dfrac{x-y_3}{\cdots + \dfrac{x-y_{N-1}}{a_N}}}} \nn
+       = {} & a_0 + (x-y_0)\left(a_1 + (x-y_1)\left( a_2 + (x-y_2) \left(\cdots+ \frac{x-y_{N-1}}{a_N}\right)^{-1} \right)^{-1} \right)^{-1},
+\end{align}
+with $N = 2\max(R_n,R_d)$.
+This is due to the fact, that the numerator's and denominator's degrees differ at most by $1$ in the Thiele's formula.
+The coefficients $a_i$ are obtained as
+\begin{align*} %\label{eq:thielesolve}
+  a_0 ={}& f(y_0) \nn
+  a_1 = {} & \frac{y_1-y_0}{f(y_1)-a_0} \nn
+  & \vdots{} \\
+  a_i = {} & \left(\left(\left(f(y_i)-a_0\right)^{-1}(y_i-y_0)-a_1\right)^{-1} (y_i-y_1)-\cdots -a_{i-1}\right)^{-1} (y_i-y_{i-1}).
+\end{align*}
+As for Newton polynomials, the degrees $R_n$ and $R_d$ of the rational function are uncovered with this procedure.
+
+%We  observethat  Thiele’s  formula  withN+ 1  terms  represents  a  rational
+%function  with  degreeRandR′for the numerator the denominator respectively,
+%whereR=R′=N/2 ifNis even, andR=R′+ 1 = (N+ 1)/2 ifNis odd.  In other words,
+%either the degree of the numerator andthe denominator of the reconstructed
+%function are equal, or they differ by one unity at most.This implies that the
+%highest degree coefficientsnrordr′, obtained by converting the resultinto its
+%canonical form, might be vanishing, in which case they are discarded. 
+
+}
