@@ -414,19 +414,19 @@ Fortunately, the short-distance and large-distance effects can be disentangled.
 We will this discuss in the next section.
 
 
-\section{Observable Cross-Sections}
+\section{Observable Cross Sections}
 \label{sec:hadcoll}
 
-The \emph{cross-section} $\sigma$ of a scattering event with some particular properties
+The \emph{cross section} $\sigma$ of a scattering event with some particular properties
 is directly connected to the number of times $N$ this event has occurred in a collider experiment as
 \begin{equation}
 \sigma  = \frac{N}{ \int \dd{t} \mathcal{L}(t)},
 \end{equation}
 with the properties of the flux of colliding beams are described by the \emph{luminosity} $\mathcal{L}$.
 The luminosity is proportional to the square of the number of particles passing through a unit area per unit time.
-Evidently, the cross-section is a directly measurable quantity in a scattering experiment.
+Evidently, the cross section is a directly measurable quantity in a scattering experiment.
 It is also one of the limited number of quantities which have a clean theoretical interpretation in the QFT framework.
-In this section, we review how the cross-section can be computed from a given Lagrangian.
+In this section, we review how the cross section can be computed from a given Lagrangian.
 
 
 \subsection{Scattering Matrix}
@@ -442,7 +442,7 @@ The transition probability $\dd{P}$ from the initial state to the final state is
   \dd{P} = \frac{\Abs{\mel{f}{\mathcal{S}}{i}}}{\ip{f}{f}\ip{i}{i}} \dd{\Pi},
 \end{equation}
 where $\dd{\Pi}$ is the volume element of finial-state momenta. 
-The cross-section of scattering of two particles with momenta $p_a,\ p_b$ is obtained from $\dd{P}$ by dividing it by a flux factor,
+The cross section of scattering of two particles with momenta $p_a,\ p_b$ is obtained from $\dd{P}$ by dividing it by a flux factor,
 \begin{equation}
   \dd{\sigma} = \frac{\dd{P}}{u_{ab}}, \qquad u_{ab} = 4 \sqrt{(\sp(p_a,p_b))^2 - m_a^2 m_b^2} 
 \end{equation}
@@ -499,7 +499,7 @@ The application of the LSZ reduction then amounts to replacing all one-particle-
 by the on-shell states.
 
 For any choice of initial and final states $\ket{i},\ket{f} \in \mathcal{H}$, the scattering amplitude can be computed in this way.
-However, the corresponding cross-section is not necessarily an observable. 
+However, the corresponding cross section is not necessarily an observable. 
 There are two general reasons for why this can happen:
 \begin{enumerate}
   \item The degrees of freedom, associated to the in- and out- fields in perturbation theory, do not describe the propagating
@@ -524,13 +524,13 @@ and their description is inaccessible from the perturbation theory.
 
 However, the scattering with large momentum transfers, i.e.\ \emph{hard scattering}, 
 probes the distances smaller than the size of a hadron, and, therefore, resolves individual partons.
-The hard-scattering cross-section then should be approximately described by the scattering of constituent partons, carrying a fraction of
+The hard-scattering cross section then should be approximately described by the scattering of constituent partons, carrying a fraction of
 the parent hadron's momentum.
 This intuitive idea, known as the \emph{parton model} \cite{Feynman1969} was originally formulated independently of the QCD.
 In QCD it can be formulated more rigorously in terms of a factorization theorem,
 which separates the short-distance from long-distance effects.
 Due to asymptotic freedom of QCD, the former are computable in perturbation theory.
-The QCD-improved parton model states, that the cross-section of hard collisions of hadrons $h_1$, $h_2$ with momenta $p_1$ and $p_2$,
+The QCD-improved parton model states, that the cross section of hard collisions of hadrons $h_1$, $h_2$ with momenta $p_1$ and $p_2$,
 and the center-of-mass energy $s=(p_1+p_2)^2$,
 can be evaluated as the convolution
 \begin{align}
@@ -540,7 +540,7 @@ can be evaluated as the convolution
   \hat \sigma_{ij\rightarrow X}\left(x_1 p_1,x_2 p_2,\mu_R^2,{\mu_F^2}\right) 
   ~+~\mathcal{O}\left(\frac{\Lambda_\text{QCD} }{s}\right),
 \end{align}
-of the parton-level cross-sections $\hat \sigma_{ij\rightarrow X}$, and the \emph{parton distribution functions} (PDF) $f_i^{(h_{1,2})}$,
+of the parton-level cross sections $\hat \sigma_{ij\rightarrow X}$, and the \emph{parton distribution functions} (PDF) $f_i^{(h_{1,2})}$,
 which roughly correspond to the probability of finding a parton $i$ carrying a momentum fraction $x_i$ in the corresponding initial hadron.
 The sum runs over all partons.
 Similar to the renormalization of couplings and masses, the PDFs are renormalized by
@@ -558,8 +558,8 @@ the non-factorizable contributions, called ``power corrections'', are of $\order
 
 \subsection{Final-State Radiation}
 
-The cross-sections with fixed number of massless particles in the final state are not observable,
-and we must sum cross-sections over all physically-equivalent final states as
+The cross sections with fixed number of massless particles in the final state are not observable,
+and we must sum cross sections over all physically-equivalent final states as
 \begin{equation} \label{eq:IRsafeXS}
   \sigma_{2\rightarrow n + X} = %\int \dd\Phi_n \vert A_{2\rightarrow n} \vert^2 J(\Phi_n,0,\ldots,0)  ~+~ \\
   \sum_{i=0}^{\infty} \int \dd\Phi_{n+i} ~ \sigma_{2\rightarrow n+i} ~ J(\Phi_{n},x_{n+1},\ldots,x_{n+i},0,\ldots,0),
@@ -574,7 +574,7 @@ In this case, the observable defined by the measurement function $J$ is called \
 One of the commonly used infrared-safe observables, which we will also employ in this thesis,
 is when $J$ is prescribed by a \emph{jet algorithm}. A jet algorithm clusters partons
 into some number of \emph{jets}. This number depends on the details of the algorithm.
-This leads to a notion of the \emph{jet cross-section}. Compared to parton cross-sections, it is infrared by construction.
+This leads to a notion of the \emph{jet cross section}. Compared to parton cross sections, it is infrared by construction.
 The experimental data and the theoretical predictions can only be compared when the same jet algorithm is used consistently between them.
 
 In \cref{eq:IRsafeXS} the Lorentz-invariant phase-space measure of $n$ external particles $\dd\Phi_n$ is defined as
@@ -589,8 +589,8 @@ $\Theta(p_i^{0})$ makes sure all outgoing particles have positive energy.
 \subsection{Fixed-Order Computations}
 \label{sec:fixed_order}
 
-The fundamental structure of the SM is encoded in the parton cross-sections  in \cref{eq:factorization}.
-We compute the parton cross-section via perturbative expansion in couplings, truncating
+The fundamental structure of the SM is encoded in the parton cross sections  in \cref{eq:factorization}.
+We compute the parton cross section via perturbative expansion in couplings, truncating
 the expansion at some fixed order of each coupling.
 At the energy scales of the collisions at the LHC, the effective QCD coupling $\alpha_s(\mu_R)$ is the largest among
 all couplings of the SM.
@@ -606,7 +606,7 @@ The perturbative expansion of amplitudes up to the NNLO is
   A_{2\to n} = g^{n-2} \left( A^{(0)} + g^2 A^{(1)} + g^4 A^{(2)} + \mathcal{O}(g^{6}) \right),
 \end{equation}
 where $A^{(L)}$ is an amplitude with $L$ loops.
-The squared amplitudes required for NNLO cross-section are then
+The squared amplitudes required for NNLO cross section are then
 \begin{subequations}
   \begin{align}
     \frac{\Abs{A_{2\to n}}}{g^{2n-4}}  &= \Abs{A^{(0)}_{2\to n}} + g^2~\Ree{A^{(0)}_{2\to n}}{A^{(1)}_{2\to n}} + \\ & \qquad g^4~\left(\Ree{A^{(0)}_{2\to n}}{A^{(2)}_{2\to n}} + \Abs{A^{(1)}_{2\to n}} \right)+ \mathcal{O}(g^{6})  \\
@@ -642,7 +642,7 @@ In fact, to date there exist no general algorithm capable of handling more than 
 and this is an area of active research (see e.g.\ \cite{Catani:2007vq,Somogyi:2006da,Somogyi:2006cz,GehrmannDeRidder:2005cm,Gaunt:2015pea,Czakon:2010td,Czakon:2011ve,Anastasiou:2003gr}).
 
 In this thesis we focus on the computation of one- and two-loop amplitudes $A^{(1,2)}_{2\to n}$, contributing
-to NLO and NNLO QCD cross-section.
+to NLO and NNLO QCD cross section.
 
 
 \section{Unitarity Cuts and Universal Factorization}
