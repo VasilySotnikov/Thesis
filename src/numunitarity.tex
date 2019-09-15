@@ -719,23 +719,20 @@ which can be easily solved once and for all.
 It is also possible to work around the square roots appearing from these equations (see \cref{sec:muij_square_roots} for details),
 so the parametrization can be employed for computations with finite fields.
 
-We conclude this section with two remarks.
-\todo{
-  In $D$ dimensions we don't have to worry about branches of solutions, 
-  and also loop momenta can be real
-}
-Although in principle the parametrization described in this
-section is amenable for both floating-point and exact evaluations,
-the former requires the issues of numerical stability to be considered.
-And in principle better-suited parametrizations can be derived (see e.g.\ \cite{Kilgore:2007qr,Berger:2008sj} for one-loop examples),
-which can be rather tedious already at one loop.
+We conclude this section with a remark.
+In principle, the parametrization described in this
+section is amenable for both floating-point and exact evaluations.
+However, the former requires the issues of numerical stability to be considered,
+and potentially better-suited parametrizations can be derived (see e.g.\ \cite{Kilgore:2007qr,Berger:2008sj} for one-loop examples).
+This can be rather tedious already at one loop.
 
 \subsection{Evaluation of Tree Amplitudes}
 \label{sec:evaluation_of_tree_amplitudes}
 
 With the on-shell loop-momenta components available
 we can evaluate the cuts in \cref{eq:cut_amplitude} as products
-of tree amplitudes.
+of tree amplitudes. It is worth noting, that the gauge invariance here is explicit, so 
+there is no need to worry about ghosts.
 
 In \cref{eq:unitarity_ansatz} we have constructed  the basis of numerator insertions using Lorentz-invariants, and
 the only explicit trace of the dimensional regularization was the presence of rational functions in $D$.
@@ -811,7 +808,6 @@ Note that beyond two loops it is not always possible to span the whole cut with 
   \label{fig:topo_cut}
 \end{figure}
 
-\todo{Gauge invariance is explicit in on-shell quantities, so no need to include ghosts.} 
 
 \subsection{Dimensional Reconstruction}
 \label{sec:dimensional_reconstruction}

@@ -80,7 +80,7 @@ It also works over arbitrary field as long as we don't require the transverse ve
 \label{chap:4dspinhel}
 
 The spinor-helicity methods are well known are covered 
-in great detail in numerous sources \todo{references}.
+in great detail in numerous sources (e.g.\ \cite{Maitre:2007jq,Kuczmarski:2014ara,Weinzierl:2016bus,DittmaierWeyl,Cohen:2010mi}).
 We provide only a brief summary.
 
 Helicity of a particle is the projection of it's spin $\va{S}$ on the direction of it's
@@ -145,8 +145,8 @@ which satisfies the properties
 We will use a convenient notation of angle and square brackets,
 \begin{equation}
   \begin{aligned}
-    \ket{p} &\coloneqq \lambda_A(p), \quad \bra{p} &\coloneqq \lambda^A(p),  \\
-    \sket{p} &\coloneqq \lambda^{\dot{A}}(p), \quad \sbra{p} &\coloneqq \lambda_{\dot{A}}(p),
+    \ket{p} &\coloneqq \lambda_A(p) = u_+(p) = v_-(p) , \qquad &\bra{p} \coloneqq \lambda^A(p) = \bar{u}_-(p) = \bar{v}_+(p),  \\
+    \sket{p} &\coloneqq \lambda^{\dot{A}}(p) = u_-(p) = v_+(p), \qquad &\sbra{p} \coloneqq \lambda_{\dot{A}}(p)= \bar{u}_+(p) = \bar{v}_-(p),
   \end{aligned}
 \end{equation}
 to write compactly the spinor products,
@@ -160,9 +160,23 @@ to write compactly the spinor products,
   \end{equation}
 \end{subequations}
 
-\todo{explicit form} 
+Explicitely, the components of spinors are given as
+\begin{equation}
+  \lambda_A = t \frac{1}{\sqrt{p_+}}\begin{pmatrix} p_+ \\ p^\perp_+ \end{pmatrix}, \quad \lambda_{\dot{A}} = \frac{1}{t}\frac{1}{\sqrt{p_+}}\begin{pmatrix} p_+ \\ p^\perp_- \end{pmatrix},
+\end{equation}
+where 
+\begin{equation}
+  p_{\pm} \coloneqq p_0 \pm p_3, \qquad p^\perp_{\pm} \coloneqq p_1 \pm i\,p_2,
+\end{equation}
+and $t$ is an arbitrary little-group scaling factor, and for real $p$, $\abs{t}=1$.
+As long as we are considering Lorentz-invariant quantities (e.g.\ helicity amplitudes normalized by their spinor weight),
+we can get the same results by operating with \emph{denormalized} spinors instead
+\begin{equation}
+  \tilde\lambda_A \coloneqq  \begin{pmatrix} p_+ \\ p^\perp_+ \end{pmatrix}, \quad \tilde\lambda_{\dot{A}} \coloneqq  \frac{1}{p_+}\begin{pmatrix} p_+ \\ p^\perp_- \end{pmatrix}.
+\end{equation}
+This can be exploited to not evaluate the squre root in computations over finite fields.
 
-\todo{denormalized spinors for finite fields}
+
 
 
 \subsubsection{Massless Spin 1}
@@ -192,11 +206,27 @@ And the little group scaling is
 
 \subsubsection{Massive Spin 1/2}
 
+Given any time-like momentum $p$ with $p^2 = m^2$, and a light-like reference vector $q$, we can perform a light-cone decomposition of $p$ 
+into a sum of two light-like vectors,
+\begin{equation}
+  p = p^q + \frac{m^2}{2 \sp(p,q)} q, \qquad (p^q)^2 = q^2 = 0, \qquad \sp(p,q) = \sp(p^q,q).
+\end{equation}
+The spinors associated to $p_q$ are found as
+\begin{equation}
+  \ket{p^q} = t_q \frac{1}{\sqrt{2\sp(p,q)}} \; \slashed{p} \ket{q},  \qquad \sket{p^q} = \frac{1}{t_q} \frac{1}{\sqrt{2\sp(p,q)}} \; \slashed{p} \sket{q},
+\end{equation}
+with the corresponding little-group scaling $t_q$.
 
-\todo{q-helicity little group}
+Dirac spinors with momentum $p$ (in the Weyl representation) are then given by
+\begin{equation} \label{eq:massive-spinors}
+  \begin{aligned}
+    \bar{u}_{+}(p) &= \sbra{p^q} + \frac{m}{\spaa(q,p^q)} \bra{q},  &\qquad  v_{+}(p) &= \sket{p^q} - \frac{m}{\spaa(p^q,q)} \ket{q}, \\
+    \bar{u}_{-}(p) &= \bra{p^q} + \frac{m}{\spbb(q,p^q)} \sbra{q},   & v_{-}(p) &= \ket{p^q} - \frac{m}{\spbb(p^q,q)} \sket{q}.
+  \end{aligned}
+\end{equation}
+In the limit $m\to 0$, by construction $p \to p^q$, and the above spinors become independent of the reference vector $q$ and reduce to the corresponding massless spinors.
+Evidently, the helicity amplitudes evaluated with the states from \cref{eq:massive-spinors} scale under the little group as their reference spinors.
 
-
-\todo{Stefan's paper on spinors\cite{DittmaierWeyl}} 
 
 
 \chapter{Clifford Algebras in $D_s$ Dimensions}
