@@ -291,8 +291,6 @@ In this thesis, we will take advantage of generalized unitarity-based methods (s
 which do not require solving IBP systems and thus,
 avoid some of the problems discussed above.
 
-\todo{potentially mention that the tables are once and for all} 
-
 \section{Master Integrals}
 
 Once the set of master integrals is found, the IBP reduction relations can be applied 
@@ -303,20 +301,6 @@ This determines the coefficients of master integrals
     \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}}.
 \end{equation}
 in \cref{eq:amplitude_integrated}.
-
-\todo{choice of masters: uniform weight, finite, unitarity compatible} 
-Given the parametization of the integrand with surface terms, any
-linearly-independent tensor insertion can be used as a master
-integral. As such, it is trivial for us to change basis of master integrals,
-by filling the master space of each topology with any set of integrals
-independent under the IBP relations. This freedom was
-especially useful
-during testing, where we could for instance make use of finite
-integrals to control
-the $\epsilon$ structure when these could be easily
-constructed (e.g., some five-point master integrals can be
-made finite by simply shifting them to 6 dimensions).
-
 
 A variety of methods have been developed for the evaluation of the master integrals.
 Broadly speaking, they can be classified into analytic and numerical methods.
@@ -340,7 +324,18 @@ and numerical integration in Mellin-Barnes representation \cite{Czakon:2005rk,An
 Usually, the knowledge of analytical expressions is preferable since it allows for better control over
 precision and performance required for Monte-Carlo integration over external phase space. However,
 some notable NNLO QCD computations have been carried out with at least one of the integrals evaluated through numerical
-methods \todo{references}.
+methods \cite{Jones:2018hbb,Grazzini:2018bsd,Baglio:2018lrj}.
+
+There are no constraints on the choice of basis of master integrals, apart from the linear-independence under IBP relations. 
+This freedom can be exploited to facilitate particular aspects of the computation.
+The basis of uniformly transcendental (UT) or pure integrals \cite{ArkaniHamed:2010gh} has a simple form of the
+associated differential equations \cite{Henn:2013pwa}, which allows to straightforwardly solve them in terms of iterated integrals.
+For numerical evaluations, as well as for exploring the structure of divergences of amplitudes,
+it might be beneficial to make as many master integrals as possible finite by constructing the so-called local integrands \cite{ArkaniHamed:2010kv,ArkaniHamed:2010gh,Badger:2016ozq,Badger:2016egz}.
+Another numerically-oriented choice is the quasi-finite basis \cite{vonManteuffel:2014qoa,Panzer:2014gra}.
+Finally, in the numerical unitarity method, which we discuss in \cref{chap:numunitarity}, the master integrands are required to have no doubled propagators.
+The conversion between different master-integral bases can be performed with the standard IBP reduction techniques.
+
 
 In this thesis, we will not consider the evaluation of master integrals.
 For the class of process we are interested in, the analytic results are available in the literature.
