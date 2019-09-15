@@ -57,9 +57,9 @@ For any details regarding the content of this chapter we refer to many excellent
 
 \section{The Standard Model}
 
-The \emph{Standard Model} of particle physics (SM) is the best known unified description of three of the
+The \emph{Standard Model} of particle physics (SM) is the best known description of three of the
 four known fundamental forces: electromagnetism, weak, and strong.
-Together with the General Relativity as a theory of gravity,
+Together with General Relativity as a theory of gravity,
 they describe the majority of observed phenomena of nature.
 
 The SM is a local quantum field theory (QFT) formulated on a flat background Minkowski space-time in $3+1$ dimensions.
@@ -67,7 +67,7 @@ As such, it's properties are described by the \emph{action}
 \[
   S = \int \dd[4]{x}~\L(x),
 \]
-with the \emph{Lagrangian} $\L$. 
+where $\L$ is the corresponding \emph{Lagrangian density}. 
 In the context of quantum theory, the correlation functions
 are obtained as integrals over all field configurations, to which the action assigns phases.
 The invariance under translations and rotations in space-time is built in the theory as the
@@ -91,7 +91,7 @@ In particular, the gauge group of the SM is
 \begin{align}\label{eq:SMgauge}
   SU(3)_C\otimes SU(2)_W \otimes U(1)_Y,
 \end{align}
-where $SU(2)_W \otimes U(1)_Y$ describes theory of \emph{electroweak} (EW)
+where $SU(2)_W \otimes U(1)_Y$ describes the theory of \emph{electroweak} (EW)
 interaction also known as the Glashow-Weinberg-Salam theory \cite{Glashow1961a,Weinberg1967a,Salam1968,Glashow1970},
 and $SU(3)_C$ describes the strong force, or \emph{Quantum Chromodynamics} (QCD).
 
@@ -125,7 +125,7 @@ We will denote the coupling of the abelian group $U(1)_Y$ as $g^\prime$.
 \subsection{Matter}
 
 All particles with spin $\frac{1}{2}$, i.e.\ \emph{fermions}, are referred to as ``matter'' in the context of particle physics.
-There are two non-equivalent spinor representations (representations with spin $\frac{1}{2}$) of the Lorentz group $\mathrm{SO}(1,3)$, hence
+There are two non-equivalent irreducible spinor representations (representations with spin $\frac{1}{2}$) of the Lorentz group $\mathrm{SO}(1,3)$, hence
 each fermion comes in two different kinds. 
 We will distinguish them by their \emph{chirality}, and for its two possible values we adopt the common choice of labels: ``left'' (L) and ``right'' (R).
 The corresponding fermions are sometimes called ``left-'' and ``right-'' handed accordingly.
@@ -141,8 +141,10 @@ which means that the gauge bosons of this group couple to fermions depending on 
 Only the left-handed fermions are not singlets with respect to this subgroup,
 and form doublets.
 
-Finally, for some unknown reason, all fermions in the SM come in three \emph{generations}, which 
-are distinguished by flavors. The matter counters is summarized in \cref{tab:smmatter}.
+Finally, all fermions in the SM come in three ``copies'', \emph{generations}, which 
+are distinguished by \emph{flavors}. The existence of three generations is a well verified experimental fact,
+however this is still puzzling from a theoretical perspective.
+The matter contents is summarized in \cref{tab:smmatter}.
 
 The matter sector of the SM Lagrangian contains the kinematic and interaction
 terms of all it's fermions,
@@ -202,9 +204,9 @@ the $SU(2)$ and $SU(3)$ groups respectively. The quantum number $Y_W$ is the wea
 \subsection{Spontaneous Symmetry Breaking}
 \label{sec:gws}
 
-The mass terms for gauge bosons and fermions are ruled out by the gauge invariance.
-One way to allow particle masses, while still maintaining the gauge-invariance of the action, is through 
-the \emph{spontaneous symmetry breaking} or Higgs mechanism \cite{Higgs1964b,Higgs1964,Englert1964,Higgs1966}, in which
+Mass terms for gauge bosons and fermions are ruled out by gauge invariance.
+One way to allow particle masses, while still maintaining the action gauge-invariant, is through 
+\emph{spontaneous symmetry breaking} or the Higgs mechanism \cite{Higgs1964b,Higgs1964,Englert1964,Higgs1966}, in which
 the symmetry group of the vacuum state of the theory is a subgroup of the full gauge group. 
 
 In the SM, the EW subgroup  $SU(2)_W \otimes U(1)_Y$ is spontaneously broken
@@ -274,7 +276,7 @@ For the Lagrangian of the  Higgs sector we then obtain
   ~-~ \frac{\lambda}{16} (v+H)^2,
 \end{multline}
 where we used the covariant derivative \refeq{eq:D}.
-After expanding, we obtain the mass terms for the EW vector bosons $W^\pm$, $Z$ and the Higgs field $H$.
+After expanding, we obtain the mass terms for the EW vector bosons $W^\pm$, $Z$ and the Higgs field $H$:
 \begin{equation}
   M_W = \frac{gv}{2}, \qquad M_Z = \frac{M_W}{\cw}, \qquad M_H = \sqrt{2\mu^2},
 \end{equation}
@@ -286,7 +288,7 @@ We also identify the self-interactions of the Higgs field, as well as its coupli
 \label{sec:fermmass}
 
 The matter of the SM model acquires masses through the Higgs mechanism as well. 
-Fermions couple to the Higgs field $\Phi$ with the so-called Yukawa couplings as
+Fermions couple to the Higgs field $\Phi$ through Yukawa couplings as
 \begin{equation} \label{sm:eq:yuk}
 \L_\Yuk = -\overline\Psi_L G_\Pl \psi_{\Pl_\rR}\Phi
 -\overline\Psi_Q G_u \psi_{u_\rR}\tilde\Phi
@@ -323,8 +325,8 @@ where $V$ is the famous Cabibbo-Kobayashi-Maskawa (CKM) matrix.
 After taking into account all symmetries, the CKM matrix has four real degrees of freedom.
 
 If we do not include the right-handed neutrinos, the neutrinos remain massless\footnote{
-  The neutrinos do, in fact, have tiny masses. However, in the context of collider physics,
-  they are impossible to detect.
+  It is an experimental fact, that neutrinos do, in fact, have tiny masses.
+  However, the effects due to their masses are negligible in the context of collider physics.
 },
 and the mass eigenstates of leptons coincide with the flavor eigenstates. Hence,
 the couplings to charged gauge bosons remain diagonal.
@@ -334,7 +336,7 @@ the couplings to charged gauge bosons remain diagonal.
 \label{sec:quant-gauge-fixing}
 
 The quantization of non-abelian gauge theories is performed in
-the framework of path-integral formalism \cite{Feynman:1950ir},
+the framework of path-integral formalism,
 employing the Faddeev-Popov method \cite{Faddeev:1967fc} or 
 BRST symmetry \cite{Becchi:1975nq,Tyutin:1975qk}.
 The procedure is complicated by the fact, that only 
@@ -351,13 +353,13 @@ However, it keeps one unphysical degree of freedom, which is compensated by addi
 \begin{equation}
     \L_\text{cl} \longrightarrow \L_\text{Mod}  = \L_\text{cl}  - \frac{1}{2\xi}(\partial^\mu G_\mu^a)(\partial^\nu G_\nu^a) - \partial^\mu \bar{\omega}^a \partial_\mu \omega^a + g_s f^{abc}\qty(\partial^\mu \bar{\omega}^a) \omega^b G_\mu^c, 
 \end{equation}
-which behave like fermions in that their closed loops are supplied with an extra minus sign.
+which behave like fermions, in that they are represented by Grassmann (anti-commuting) numbers in the path integral.
 It can then be shown, that the correlation functions, computed with $\L_\text{Mod} $, do not depend on the choice of gauge fixing.
 
-With the BRST-symmetry-based methods, the quantization procedure can be generalized to 
+With the BRST-symmetry-based methods, the quantization procedure can be generalized 
 to a class of non-covariant gauge-fixing choices, such as \emph{axial} or \emph{light-cone} gauges.
 The advantage of this class of  gauges is that the ghost terms decouple, and the corresponding contributions can be completely discarded in computations.
-For instance, in this thesis we will employ unitarity-based computational methods, which are  formulated in terms of gauge-invariant building blocks.
+In this thesis we will employ unitarity-based computational methods, which are  formulated in terms of gauge-invariant building blocks.
 This will allow us to never consider ghost contributions explicitly.
 
 \section{Renormalization and Running Couplings}
@@ -368,7 +370,7 @@ This will allow us to never consider ghost contributions explicitly.
 In the previous section, we introduced a number of parameters in the SM Lagrangian, such as coupling constants, masses, and the vacuum expectation value.
 In an interacting QFT these \emph{bare} parameters of the Lagrangian do not directly correspond to any observable quantities.
 In fact, in the context of perturbation theory, most of these parameters contain explicit divergences,
-associated to the high-energy, or ultra-violet (UV), limit of the theory.
+associated to the high-energy or ultra-violet (UV) limit of the theory.
 Thus, the bare parameters need to be reparametrized in terms of measurable quantities,
 even if no divergences are encountered.
 This procedure is known as \emph{renormalization}.
@@ -390,8 +392,8 @@ All observable quantities, predicted from the theory, are then evaluated in term
 They must not, however, depend on the renormalization scale.
 This fact is expressed in terms of the so-called \emph{renormalization group equations} (RGE).
 The solution of the RGE relates the parameters, defined at two different renormalization scales.
-This freedom turns out to be extremely useful in that it allows to improve the convergence of the perturbation series
-by making a appropriate choose of the renormalization scale.
+This freedom can be useful in that it allows to improve the convergence of the perturbation series
+by making an appropriate choose of the renormalization scale.
 This is closely related to the notion of running (or effective) couplings.
 
 A notable example is the QCD coupling constant $\alpha_s$.
@@ -402,16 +404,16 @@ The solution of the one-loop RGE for the $\alpha_s$, defined in the $\MSb$ schem
 given some initial scale $\mu_0$.  
 Here $\NC$ denotes the number of colors and $\NF$ the number of flavors of quarks, which are considered massless.
 We observe, that at large scales the effective strong coupling constant becomes very small, independent of the initial value $\alpha_s(\mu_0^2)$.
-This implies, that at very high energies QCD behaves as a non-interacting theory. This phenomenon is known as \emph{asymptotic freedom}.
+This implies, that at very high energies QCD behaves as a weakly-interacting theory. This phenomenon is known as \emph{asymptotic freedom}.
 This fact enables the usage of perturbation theory to predict the scattering of strongly-interacting particles at hadron colliders.
 On the other hand, at low energies ($\mu \sim 250~\text{MeV}$) the effective strong coupling becomes large, and the application of perturbation theory is not justifiable.
 This gives a hint towards the explanation of why free gluons and quarks cannot be observed.
 Instead, they form color-neutral bound states called hadrons.
 This phenomenon is known as \emph{confinement}. 
-The perturbation theory has nothing to say about the confinement, which
+Perturbation theory has nothing to say about confinement, which
 complicates the theoretical description of hadron collisions.
 Fortunately, the short-distance and large-distance effects can be disentangled.
-We will this discuss in the next section.
+We will discuss this in the next section.
 
 
 \section{Observable Cross Sections}
@@ -681,7 +683,7 @@ In we choose $\ket{i} = \ket{f}$ we get
 \end{equation}
 This result is known as the \emph{optical theorem}. 
 If we expand both sides of \cref{eq:optical_theorem} in coupling constants, we get an important
-consequence: the imaginary part of an $L$-loop amplitude is given by a product of $(L-1)$-loop amplitudes.
+consequence: the imaginary part of an $L$-loop amplitude is given by a product of amplitudes with $< L$ loops.
 Thus unitarity supplies relations between different orders of perturbation theory.
 
 Exploiting the fact the imaginary part of a propagator is given by
@@ -690,7 +692,7 @@ Exploiting the fact the imaginary part of a propagator is given by
 \end{equation}
 as a generalization of \cref{eq:optical_theorem} it can be shown \cite{Eden:1966dnq,Cutkosky1960}
 that imaginary parts of loop amplitudes are always generated when some of intermediate particles go on-shell.
-The \emph{discontinuity} of an amplitude considered as a function of complex momenta,
+The \emph{discontinuity} of an amplitude considered as a function of complex invariants,
 \begin{equation}
   \Disc iA(s) \coloneqq iA(s+i\varepsilon)-iA(s-i\varepsilon) = -2\Im A(s),
 \end{equation}
