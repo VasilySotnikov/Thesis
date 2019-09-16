@@ -79,9 +79,8 @@ It also works over arbitrary field as long as we don't require the transverse ve
 \chapter{Spinor-Helicity}
 \label{chap:4dspinhel}
 
-The spinor-helicity methods are well known are covered 
-in great detail in numerous sources (e.g.\ \cite{Maitre:2007jq,Kuczmarski:2014ara,Weinzierl:2016bus,DittmaierWeyl,Cohen:2010mi}).
-We provide only a brief summary.
+The spinor-helicity methods are covered in great details in numerous sources (e.g.\ \cite{Maitre:2007jq,Kuczmarski:2014ara,Weinzierl:2016bus,DittmaierWeyl,Cohen:2010mi}).
+Here we provide only a brief summary.
 
 Helicity of a particle is the projection of it's spin $\va{S}$ on the direction of it's
 three-momentum $\va{p}$, and the states $\psi_{\pm s}$ with helicity $\pm s$ are defined as
@@ -160,7 +159,7 @@ to write compactly the spinor products,
   \end{equation}
 \end{subequations}
 
-Explicitely, the components of spinors are given as
+Explicitly, the components of spinors are given as
 \begin{equation}
   \lambda_A = t \frac{1}{\sqrt{p_+}}\begin{pmatrix} p_+ \\ p^\perp_+ \end{pmatrix}, \quad \lambda_{\dot{A}} = \frac{1}{t}\frac{1}{\sqrt{p_+}}\begin{pmatrix} p_+ \\ p^\perp_- \end{pmatrix},
 \end{equation}
@@ -181,8 +180,8 @@ This can be exploited to not evaluate the squre root in computations over finite
 
 \subsubsection{Massless Spin 1}
 
-It is easy to see that the spinor chains of the form of \cref{eq:vectors_from_spinors} are mass Lorentz vectors, and
-the helicity eigenstates of vector particles can be constructed as
+It is easy to see, that the spinor chains of the form of \cref{eq:vectors_from_spinors} are light-like Lorentz vectors.
+The helicity eigenstates of vector particles can be constructed as
 \begin{equation}
   \varepsilon_+^\mu(p,\eta) = -\frac{\sbraket(p,\gamma^\mu,\eta)}{\sqrt{2} \spaa(p,\eta)}, \qquad \varepsilon_-^\mu(p,\eta) = \frac{\brasket(p,\gamma^\mu,\eta)}{\sqrt{2} \spbb(p,\eta)},
 \end{equation}
@@ -198,10 +197,11 @@ are satisfied by construction, and the polarization sum is
 \begin{equation}
   \varepsilon^{\mu}_{+}(p,\eta)\varepsilon^{\nu}_{-}(p,\eta) + \varepsilon^{\mu}_{-}(p,\eta)\varepsilon^{\nu}_{+}(p,\eta) = -g^{\mu\nu} + \frac{\ell^\mu \eta^\nu + \ell^\nu \eta^\mu}{\sp(\ell,\eta)}.
 \end{equation}
-And the little group scaling is
+The little group scaling is
 \begin{equation}
-  \varepsilon_{\pm} \longrightarrow t^{(\mp 2)} \varepsilon_{\pm}
+  \varepsilon_{\pm} \longrightarrow t^{(\mp 2)} \varepsilon_{\pm},
 \end{equation}
+as it should be.
 
 
 \subsubsection{Massive Spin 1/2}
@@ -662,7 +662,7 @@ Note, that the degree $R$ of the polynomial is uncovered with this procedure.
 The analytic reconstruction of a dense multivariate polynomial $f(\vb*{x})$ of unknown degree can be done with the recursive application of the univariate Newton formula.
 In the first step we put all, but the first variable to some values and perform a univariate reconstruction in $x_1$,
 \begin{equation} %\label{eq:mnewtonrep}
-  f(\vb*{x}) ={} \sum_{i=0}^R a_i(x_2,\ldots,x_n) \prod_{j=0}^{i-1} (z_1-y_j).
+  f(\vb*{x}) ={} \sum_{i=0}^R a_i(x_2,\ldots,x_n) \prod_{j=0}^{i-1} (x_1-y_j).
 \end{equation}
 We then apply the same argument to $a_i(x_2,\ldots,x_n)$, ans so on.
 
