@@ -36,7 +36,6 @@ The SM fails to address a wide variety of both theoretical concerns and (mostly 
 The SM is, thus, understood to be a low-energy approximation to a more fundamental theory.
 It is, therefore, of central importance to exactly determine the domain of its validity,
 and establish stringent constraints on potential beyond-the-standard-model extensions.
-We give a brief overview of the SM in \cref{chap:sm}.
 
 A key ingredient in this quest is the ability to interpret the measurements extracted from the collider experiments, such as the LHC, as precisely as possible.
 These have to be compared to precise predictions of the SM and possibly, new physics models.
@@ -84,39 +83,45 @@ The central result of this thesis, the first computation of all two-loop five-po
 of three jets at the hadron colliders, addresses this long-standing bottleneck. We present this computation in  \cref{chap:5parton}.
 
 This bottleneck is caused by the fact,
-that the standard techniques developed for evaluation of multi-loop amplitudes require too much computational resources,
+that the standard techniques of evaluation of multi-loop amplitudes require too much computational resources,
 when applied to five-point two-loop amplitudes in QCD.
-Therefore, the development and implementation of new algorithms was required.
+Therefore, development and implementation of new algorithms was required.
 In this thesis we employ the \emph{numerical unitarity} method, which
-was originally developed in the context of one-loop computations,
+was originally formulated in the context of one-loop computations,
 and has been recently extended for multi-loop applications.
-We discuss the numerical unitarity method in \cref{chap:numunitarity}.
-One of its important components is a numerical treatment of dimensional regularization, which regulates the divergences of loop integrals.
-This is, perhaps, the main contribution by the author of this thesis.
-In particular, it was essential for evaluation of amplitudes with external fermions.
+We describe the numerical unitarity method in \cref{chap:numunitarity}.
+One of its important components is a numerical treatment of dimensional regularization, which we use to regulate the divergences of loop integrals.
+This is, perhaps, the main contribution to the development of the numerical unitarity method by the author of this thesis.
+In particular, it is essential for evaluation of amplitudes with external fermions.
 We discuss this in detail in \cref{chap:dshel}.
 
-The computational algorithms we employ of this thesis are \emph{numerical}.
-The main result of the thesis is, however the \emph{analytic expressions} for five
+The computational algorithms, which we use in this thesis, are designed with primarily \emph{numerical} applications in mind.
+The main result of the thesis, however, is the \emph{analytic expressions}.
+We reconstruct them from samples of exact numerical evaluations of amplitudes over finite fields,
+employing the functional interpolation techniques.
+The application of these techniques in the field of perturbative computations in QFT is a rather new idea.
+We, for the first time, systematically applied it to obtain a large number of phenomenologically-relevant amplitudes in an automated fashion. 
+Exploiting the constraints on the analytic structure of the amplitudes, originating
+from physical properties of the underlying theory, was essential to reduce the complexity of the reconstruction.
 
+\subsubsection{Structure of this Thesis}
 
-Other highlight is the first systematic application of novel functional reconstruction techniques to obtain analytic results from numerical evaluation
-for a large number of physically significant processes.
+In \cref{chap:sm}, we provide some theoretical preliminaries required to understand the remaining 
+content of the thesis.
+We review the SM as a QFT, and  the definition of observables we are interested in.
 
-Role of understanding of structure of the theory to the computations
+The \cref{chap:stdtech} contains a summary of the standard techniques for computation of multi-loop amplitudes.
+We also introduce some notation, which we use in the following chapters.
 
+In \cref{chap:numunitarity}, we discuss in some detail the numerical unitarity method, which we employ for computation
+of one- and two-loop amplitudes in this thesis.
 
+in \cref{chap:dshel}, we describe our solution to the problem of numerical evaluation of multi-loop helicity amplitudes in dimensional regularization.
 
+In \cref{chap:wbb_pheno}, we present the NLO QCD predictions for the \Wbbn{} production at the LHC.
+We also provide an overview of the new automated implementation of the one-loop numerical unitarity method with massive particles in the one-loop matrix-element generator \BlackHat{}.
 
-
-
-Structure of the thesis
-
-
-
-
-1) Content of thesis, extend of thesis
-2) scientific relevance of results
-3) evaluation of independent scientific contribution of candidate
-
-
+Finally, in \cref{chap:5parton} we present the main result of the thesis: the analytic form of all two-loop five-point amplitudes in QCD.
+We provide some details of our implementation of the numerical unitarity method.
+We give numerical benchmark evaluations of the amplitudes, 
+and then describe the reconstruction of analytic expressions from numerical evaluations.
