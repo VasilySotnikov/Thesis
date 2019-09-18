@@ -257,17 +257,17 @@ calculation of the
 vacuum polarization. We use the $\MSb$ scheme, where the
 renormalization constant for the coupling computed in FDH is given by
 \begin{align}
- Z_g^{\MSb}=1+\delta_g=1-g_s^2c_\Gamma\frac{1}{2}\left(\frac{11N_c-2(N_f+N_{hf})}{3\epsilon}-\frac{N_c}{3}\right)
+ Z_g^{\MSb}=1+\delta_g=1-g_s^2c_\Gamma\frac{1}{2}\left(\frac{11\NC-2(\NF+N_{hf})}{3\epsilon}-\frac{\NC}{3}\right)
  + \mathcal{O}(\epsilon,g_s^4),
 \end{align}
-with $N_f$ denoting the number of light and $N_{hf}$ the
-number of heavy-quark flavors. The finite shift $\frac{N_c}{3}$ stems
+with $\NF$ denoting the number of light and $N_{hf}$ the
+number of heavy-quark flavors. The finite shift $\frac{\NC}{3}$ stems
 from the translation of the gauge coupling from standard $\MSb$ to the
 FDH variant. As we saw in Eq.~\eqref{eq:shiftfd}, each power $N_{g_s}$ of the strong coupling $g_s$ contributes to the renormalization shift
 \begin{align}
 \begin{split}
  \text{R}_{\text{coupling}} &= -g_s^{2}c_\Gamma \frac{N_{g_s}}{2}
- \left(\frac{11N_c-2(N_f+N_{hf})}{3\epsilon}-\frac{N_c}{3}\right)\Ampt(1,\dots,n)\\
+ \left(\frac{11\NC-2(\NF+N_{hf})}{3\epsilon}-\frac{\NC}{3}\right)\Ampt(1,\dots,n)\\
  &= -g_s^{2}c_\Gamma N_{\alps} \Delta_{\alps}\Ampt(1,\dots,n).
 \end{split}
 \end{align}
@@ -471,8 +471,8 @@ gluons and $N_{\alps}$ the power of $\alps$ (at Born level) . The
 renormalization constants in the FDH scheme are summarized in Table \ref{tab:renorm}.
 \begin{table}[h]
   \caption{Renormalization constants used in this thesis. Here $\mu$ is the renormalization
-  scale, $m_{i}$ are the masses for heavy quarks, $N_f$ is the number of light flavors,
-  $N_{hf}$ the number of heavy flavors, and $N_c$ the number of colors.
+  scale, $m_{i}$ are the masses for heavy quarks, $\NF$ is the number of light flavors,
+  $N_{hf}$ the number of heavy flavors, and $\NC$ the number of colors.
   A common factor of $-g_s^2 c_\Gamma$ has been factored out.}
       \vskip 4mm
   \centering
@@ -487,7 +487,7 @@ renormalization constants in the FDH scheme are summarized in Table \ref{tab:ren
     %\small
       %\toprule
       Heavy-quark wave function   & on-shell & $\displaystyle
-      \Delta_{2,i} ~=~ \frac{N_c^2-1}{2N_c} \left( \frac{3}{\epsilon}
+      \Delta_{2,i} ~=~ \frac{\NC^2-1}{2\NC} \left( \frac{3}{\epsilon}
         + 3 \log{\frac{\mu^2}{m_i^2} + 5} \right)$\\
       \noalign{\vskip 1mm}
       Light-quark wave function   & on-shell & 0\qquad(UV+IR
@@ -499,7 +499,7 @@ renormalization constants in the FDH scheme are summarized in Table \ref{tab:ren
       Gluon wave function   & on-shell & $\displaystyle \Delta_3 ~=~ \sum_{i=1}^{N_{hf}}\left(\frac{1}{3 \epsilon} +
       \frac{1}{3}\log{\frac{\mu^2}{m_i^2}}\right)$\\
       \noalign{\vskip 1mm}
-      QCD coupling & $\MSb$ & $\displaystyle \Delta_{\alps} ~=~  \frac{1}{\epsilon} \left( \frac{11}{3}N_c - \frac{2}{3}(N_f+N_{hf}) \right) - \frac{N_c}{3}$\\
+      QCD coupling & $\MSb$ & $\displaystyle \Delta_{\alps} ~=~  \frac{1}{\epsilon} \left( \frac{11}{3}\NC - \frac{2}{3}(\NF+N_{hf}) \right) - \frac{\NC}{3}$\\
       \noalign{\vskip 2mm}
       \hline
       \noalign{\vskip 2mm}
@@ -519,7 +519,7 @@ amplitude to the HV scheme~\cite{tHooft:1972tcz} which is often more convenient 
 e.g.\ \cite{Signer:2008va}
 \begin{align}
   \mathcal{A}_{(ren)}^{\text{1-loop,HV}} =
-  \mathcal{A}_{(ren)}^{\text{1-loop,FDH}} - g_s^{2}c_\Gamma\left(N_g\frac{N_c}{6}+N_q\frac{N_c^2-1}{4N_c}\right)\Ampt,
+  \mathcal{A}_{(ren)}^{\text{1-loop,FDH}} - g_s^{2}c_\Gamma\left(N_g\frac{\NC}{6}+N_q\frac{\NC^2-1}{4\NC}\right)\Ampt,
 \end{align}
 where $N_g$ denotes the number of gluons and $N_q$ the number of light
 quarks in the respective amplitude.
