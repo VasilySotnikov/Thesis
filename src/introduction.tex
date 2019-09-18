@@ -36,6 +36,7 @@ The SM fails to address a wide variety of both theoretical concerns and (mostly 
 The SM is, thus, understood to be a low-energy approximation to a more fundamental theory.
 It is, therefore, of central importance to exactly determine the domain of its validity,
 and establish stringent constraints on potential beyond-the-standard-model extensions.
+We give a brief overview of the SM in \cref{chap:sm}.
 
 A key ingredient in this quest is the ability to interpret the measurements extracted from the collider experiments, such as the LHC, as precisely as possible.
 These have to be compared to precise predictions of the SM and possibly, new physics models.
@@ -48,69 +49,65 @@ The theoretical description of hadron collisions requires contributions from div
 Broadly speaking, they can be classified into the long-distance (or low-energy) effects from 
 the strong-coupling regime of the quantum chromo-dynamics (QCD), the short-distance hard scattering, and
 the cross-over from one to another.
-Each of them reaches into a particular corner of the vast subject of quantum filed theory and represents a variety of challenges.
-In this thesis we focus on the predictions for the \emph{hard scattering} process, which is where the fundamental structure of the SM is encoded to.
-We obtain these predictions from the first principles through the perturbative expansion in the coupling constants of the SM,
-thus, directly linking the SM to the measurements.
+Each of them reaches into a particular corner of QFT and represents unique challenges.
+In this thesis we focus on the predictions for the \emph{hard scattering} process (we give a more precise definition of objects we are targeting in \cref{sec:hadcoll}),
+which is where the fundamental structure of the SM is encoded to.
+We obtain these predictions from the first principles through the perturbative expansion in the coupling constants of the SM, thus, directly linking the SM to measurements.
 Naturally, the main source of theoretical uncertainties is then the truncation
 of the perturbation series at some fixed order in the coupling constants.
 And the systematic way to reduce this uncertainty is to include the higher orders of the expansion.
 
-At the characteristic energy scales $t$ of the hard scattering at the LHC, the effective strong coupling constant $\alpha_s(t)$
+At the characteristic energy scales $\mu$ of the hard scattering at the LHC, the effective strong coupling constant $\alpha_s(\mu)$
 is in the perturbative domain, but still is relatively large, compared to the couplings of the electro-weak (EW) interactions.
-Therefore, the first most important corrections are generally expected to be from including the higher orders in $\alpha_s(t)$.
-For a considerable number of observables,
-the leading order (LO) results provide only an order-of-magnitude estimates, and cannot be used for precise measurements.
-Furthermore, the LO computations, in essence, correspond to the classical limit of QFT, and do not reach into the quantum features of the SM.
+Therefore, the first most important corrections are generally expected to be from including higher orders in $\alpha_s(\mu)$.
+In fact, for a considerable number of observables,
+the leading order (LO) results provide only an order-of-magnitude estimates, and are not useful in precision phenomenology.
+Furthermore, the LO computations, in essence, correspond to the classical limit of QFT, and do not reach into the quantum properties of the SM.
 
-Computations beyond LO involve evaluation of loop amplitudes, and, in general, are extremely challenging.
-The former is the subject investigated in this thesis.
-The complexity of higher order corrections grows very rapidly with number of kinematical scales and loop integrations involved.
-With the current technology, at NLO order in $\alpha_s$ the processes with at most seven particles in the final state
+Computations beyond LO involve evaluation of loop amplitudes, and, in general,
+%The former is the subject investigated in this thesis.
+their complexity grows very rapidly with number of kinematical scales (such as Mandelstam invariants and masses)  and loop integrations involved.
+With the current computational technology, at NLO order in $\alpha_s(\mu)$ the processes with at most seven particles in the final state
 can be considered. One of the main results of this thesis is an example of one such computation:
 the NLO QCD corrections to the production of the $W$-boson, decaying into a pair of leptons, in association with 
-two bottom quarks and up to three light jets. We present this computation in \cref{chap:wbb_pheno}.
+two bottom quarks and up to three additional light jets. We present this computation in \cref{chap:wbb_pheno},
+where we also explain our motivation to consider it.
 
-The NLO QCD corrections usually provide the first reliable theoretical predictions.
+
 The technology for the computation of NLO QCD and EW corrections has seen an explosive development
 in the recent decade, and became the standard of the field with many automated public tools available.
+Usually, NLO QCD corrections provide first reliable theoretical predictions.
 However, reaching the percent level accuracy of theoretical predictions requires (at least) NNLO QCD corrections.
-Here, the state of the art is the processes with up to two particles in the final state.
-The central result of this thesis is the first computation of all two-loop five-point amplitudes, required for the production
-of three jets at the hadron colliders. We present this computation in  \cref{chap:5parton}.
+Here, the state of the art is processes with only two particles in the final state.
+One of the main bottlenecks of NNLO corrections with three particles in the final state is evaluation of two-loop five-point amplitudes.
+The central result of this thesis, the first computation of all two-loop five-point amplitudes required for the production
+of three jets at the hadron colliders, addresses this long-standing bottleneck. We present this computation in  \cref{chap:5parton}.
 
-These computations required development and implementation of new computational algorithms.
+This bottleneck is caused by the fact,
+that the standard techniques developed for evaluation of multi-loop amplitudes require too much computational resources,
+when applied to five-point two-loop amplitudes in QCD.
+Therefore, the development and implementation of new algorithms was required.
+In this thesis we employ the \emph{numerical unitarity} method, which
+was originally developed in the context of one-loop computations,
+and has been recently extended for multi-loop applications.
+We discuss the numerical unitarity method in \cref{chap:numunitarity}.
+One of its important components is a numerical treatment of dimensional regularization, which regulates the divergences of loop integrals.
+This is, perhaps, the main contribution by the author of this thesis.
+In particular, it was essential for evaluation of amplitudes with external fermions.
+We discuss this in detail in \cref{chap:dshel}.
+
+The computational algorithms we employ of this thesis are \emph{numerical}.
+The main result of the thesis is, however the \emph{analytic expressions} for five
+
 
 Other highlight is the first systematic application of novel functional reconstruction techniques to obtain analytic results from numerical evaluation
 for a large number of physically significant processes.
 
-Modern computational algorithms.
-
-Analytical vs numerical algorithms: scaling of complexity
-
 Role of understanding of structure of the theory to the computations
 
-\cref{chap:dshel} is, perhaps, one of the most important formal developments by the author of this thesis
 
 
 
-%I have contributed to this progress
-%with the major upgrade of the \BH{} library, which is now capable of computing 
-%one-loop QCD matrix elements with massive fermions for high-multiplicity processes.
-
-
-
-
-%To a good approximation such scattering processes factorize into the long-distance dynamics of quarks
-%and gluons within protons, short distance hard interactions between these partons and, finally, the formation
-%of hadrons and observable jets from the emerging partonic states and remaining proton fragments. The hard
-%scattering process is a central stage in the simulation of proton collisions. The description of the hard scattering
-%process through first principle computations in QCD is the central part of the proposed research.
-
-
-%To successfully uncover the full physics potential provided by the LHC data,
-%systematic comparison between experimental measurements and precise theoretical predictions
-%is essential.
 
 
 Structure of the thesis
