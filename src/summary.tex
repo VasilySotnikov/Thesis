@@ -1,11 +1,10 @@
 In this thesis, we have demonstrated the cutting-edge applications of the numerical unitarity method \cite{Abreu:2017hqn,Abreu:2017idw,Abreu:2017xsl,Ita:2015tya,Ellis:2008ir,Ellis:2007br,Giele:2008ve}
 that advance the state-of-the-art computations of loop amplitudes.
 Compared to more canonical approaches, the bottleneck of inversion of IBP systems is avoided in this method.
-With the help of a targeted set of IBP relations \citep{Gluza:2010ws,Abreu:2017hqn}
-a complete parametrization of the integrand in terms of master and surface insertions can be obtained.
+With the help of targeted sets of IBP relations \citep{Gluza:2010ws,Abreu:2017hqn}
+the parametrization of integrands in terms of master and surface insertions is obtained.
 The unitarity cuts are then matched to this parametrization, therefore achieving the reduction to master integrals.
 The approach is formulated in a numerical context, thus mitigating increase of complexity with the addition of scales.
-
 
 We have formulated a framework for efficient numerical evaluation of helicity amplitudes with external fermions in dimensional regularization.
 This framework was an essential ingredient required to obtain our results for the two-loop 
@@ -19,8 +18,8 @@ in \cite{Abreu:2017xsl,Abreu:2017hqn,Badger:2018gip,Abreu:2018jgq}.
 This framework has been also useful to clarify some issues with the computation of one-loop helicity amplitudes
 with massive external fermions \cite{Anger:2018ove}.
 
-We have presented the first NLO QCD predictions for \Wbbjj{} and \Wbbjjj{} production in \cref{chap:wbb_pheno}.
-The computation was done in the four-flavor-number scheme, thus including effects due to the non-vanishing bottom-quark mass.
+We have presented the first NLO QCD predictions for \Wbbjj{} and \Wbbjjj{} production.
+The computation has been done in the four-flavor-number scheme, thus including effects due to the non-vanishing bottom-quark mass.
 To obtain the one-loop matrix elements with massive fermions for high-multiplicity processes,
 we have carried out a major upgrade of the \BlackHat{} library, following the developments of \cite{Ellis:2008ir}.
 We have looked into multiple differential distributions depending on the number of additional light jets.
@@ -30,65 +29,57 @@ In contrast to this, NLO QCD corrections to inclusive $Wb\bar{b}$ production dis
 Based on this observation, we employed exclusive sums to improve predictions for observables associated to $WH(\rightarrow b{\bar b})$
 production, such as $p_T^{b\bar b}$, $p_T^W$, and $M_{b\bar b}$.
 
+We have presented the first high-precision benchmark values and compact analytic expressions
+for all leading-color two-loop five-parton helicity amplitudes in QCD. This includes
+five-gluon amplitudes as well as amplitudes with two and four
+external quarks, including the contributions with closed light-quark loops in all cases.
+These amplitudes have been one of the long-standing bottlenecks for the NNLO-precise predictions for the production of three jets at hadron colliders.
+We have employed the functional interpolation techniques to obtain the analytic expressions from exact numerical evaluations over finite fields
+with the numerical unitarity method.
+By these means we demonstrated for the first time that these techniques are effective in large-scale phenomenologically-relevant applications.
 
-%Our approach is based . We take advantage of the ideas of dimensional reduction
-%to precomute the full $D_s$ dependence by contracting all kinematically-independent indices.
-%Thus the whole numerical computation  of two-loop amplitudes can be performed in six dimensions.
-%This leads to
-%significant efficiency improvements as compared to a numerical dimensional-reconstruction
-%approach~\cite{Giele:2008ve,Ellis:2008ir, Boughezal:2011br} as applied earlier
-%in refs.~\cite{Abreu:2017xsl,Abreu:2017hqn,Badger:2018gip,Abreu:2018jgq}.
-%Enhancing the dimensional reconstruction by dimensional reduction 
-%is not a new idea and has been applied to gluon amplitudes in
-%the original work~\cite{Giele:2008ve}.
-%Here we apply this improvement~\cite{Anger:2018ove}
-%starting from the five-point amplitudes including external fermions~\cite{Abreu:2018jgq}.  
+It is worth mentioning,
+that although we have managed to overcome the major technical difficulties in calculation of the five-point two-loop amplitudes,
+the phenomenological application will still require certain amount of effort. In particular,
+the analytic expressions that we have published in \cite{Abreu:2019odu} are valid in an unphysical region with all Mandelstam invariants negative, whereas
+the physical scattering region requires some of them to be positive.
+This is due to the fact, that we have reconstructed the analytic form of the coefficients of pentagon functions \cite{Gehrmann:2018yef}, and not of the master integrals.
+The latter are, of course, unconcerned with the signs of invariants.
+The former, however, do depend on the region, since they are obtained by integrating the differential equations.
+This is not a conceptual problem, nor this is a big obstacle.
+Since the computational resources that we have spent to obtain our analytic expressions were modest, we
+could, in principle, simply repeat the reconstruction in the physical region.
+There might be, however, more efficient ways to exploit the results we have already acquired.
+Furthermore, the numerical evaluation of our analytic expressions over phase space is fast and stable,
+but the numerical evaluation of pentagon functions is not yet fully under control, and some improvements might be required to 
+achieve the accuracy goal. 
 
+The methods for handling IR divergences and real radiation contributions, which we did not discuss in this thesis,
+are the second major bottleneck in getting to NNLO phenomenological studies for processes beyond
+two particles in the final state. No complete results in this regard have been published yet.
+However, some approaches (such as \cite{GehrmannDeRidder:2005cm,Czakon:2010td,Currie:2013vh}) that are currently in use for the $2\to 2$
+NNLO QCD predictions have demonstrated their viability for the extension to $2\to 3$ processes.
+We hope that in the near future this extension will be carried out, and can be combined with our results for the five-point amplitudes
+to provide the first NNLO QCD predictions for processes with three particles in the final state.
 
-%The apply method for the computation of two-loop amplitudes with external fermions,
-%an extension 
+The computational method that we have used in this thesis is robust, flexible,
+and much less sensitive to the addition of scales, than the standard multi-loop techniques.
+We, therefore, expect that a number of important scattering amplitudes
+in the Standard Model, such as the ones with $W/Z$ bosons, photons and $H$ in the final state, are within reach.
+The experience from extending the one-loop numerical unitarity method to massive particles indicates that
+the computation of amplitudes with top quarks should also be feasible in the foreseeable future.
+In all mentioned cases, however, evaluation of master integrals is a very challenging task that have not yet been accomplished.
+And it very well might turn out to be the next bottleneck for some of these processes.
+Some improvements might also be required to manage the complexity of the master/surface decomposition.
 
+One of the key features of the numerical unitarity method, is that the knowledge of analytic integrand (e.g.\ obtained from Feynman diagrams) is not required.
+Thus, it should be able to tackle the amplitudes in models with extremely complicated Feynman rules, such as quantum gravity,
+which would be unimaginable with standard techniques.
 
-We have carries out extensive validation of our computational framework.
+Finally, we would like to mention that application of the techniques discussed in this thesis for computations of three-loop amplitudes seems to
+be also plausible. Conceptually no new significant complications should appear, but ideas for more efficient implementation might be required.
 
-We have presented high presicion benchmark values for helicity amplitudes.
+%explore floating point computations
 
- we give compact
-analytic expressions for five-gluon amplitudes as well as amplitudes with two and four
-external quarks, including in all cases the contributions of closed light-quark loops.
-These
-results have been obtained employing a functional-reconstruction approach to promote
-numerical unitarity  finite-field evaluations of the amplitude to analytical expressions.
-
-With these methods, a sample with a size comparable to that required for
-numerical Monte-Carlo integration
-can be used to produce analytic expressions.
-
- Given our results, the complete set of two-
- loop amplitudes required for a NNLO QCD calculation of three-jet production at hadron
- colliders in the leading-color approximation are now available.
- Fast and efficient evaluation of coefficients.
-
-
- The techniques developed in this paper show the potential for the automation of two-
- loop multi-particle amplitude calculations in the Standard Model. Our numerical approach
- is relatively insensitive to the addition of scales. Having already implemented vector and
- spinor fields, we are now ready to explore processes of phenomenological relevance that
- include jets, (massive) gauge bosons and leptons in the final state. While techniques for
- computing two-loop master integrals progress and new methods appear for handling infrared
- divergent terms in real-real and real-virtual contributions, we expect to provide a program
- that can deliver one- and two-loop matrix elements necessary for computing precise QCD
- predictions for the LHC.
-
-
-
-Outlook
-\begin{itemize}
-  \item potential extension to other processes
-  \item analytic continuation
-  \item in a framework for handling subtractions of IR divergences and real radiation contributions,
-    and combined with a Monte-Carlo integration program.
-  \item explore floating point computations
-\end{itemize}
 
 
