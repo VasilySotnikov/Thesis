@@ -21,14 +21,6 @@
 \date{\today}
 \maketitle
 
-\textbf{\Large General issues:}
-\begin{enumerate}
-  \item Unify spaces notation and introduce it eraly on. So far decided to use $\mathsf{S}_{[D}$, but already $M_{[D]}$ was used in text.
-  \item List of publications? In terms detalization of contributions (like in proposal for cumulative thesis). Put it in front or leave it for the introduction in each chapter?
-  \item Abstract
-\end{enumerate}
-
-
 \listoftodos
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,7 +37,11 @@
 %\clearpage
 %%% Platz für Veröffentlichungen und Konferenz-Beiträge
 
-%\section*{List of Publications}
+\section*{Declarations}
+
+The results presented in this thesis have been published in the following works.
+
+\todo{Do I need to declare this here? Or a just publication list?} 
 %Partial results of the presented work have been published/submitted prior to
 %submission of this thesis. The results presented in Chapter \ref{chap:fdf} are based on the
 %following manuscript:
@@ -110,6 +106,16 @@
 %%        	Poster, TOP Workshop, Ischia, 25.09.2015
 %%\end{itemize}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Kurzfassung aus der Datei "src/kurzfass"
+\cleardoublepage
+\chapter*{Abstract\markboth{Abstract}{}}
+%\addcontentsline{toc}{chapter}{Abstract}
+\input{src/short_version}
+\cleardoublepage
+%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 %
@@ -118,14 +124,6 @@
 \tableofcontents
 %
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Kurzfassung aus der Datei "src/kurzfass"
-\cleardoublepage
-\chapter*{Abstract\markboth{Abstract}{}}
-\addcontentsline{toc}{chapter}{Abstract}
-\input{src/short_version}
-\cleardoublepage
-%
 %%% Umsteigen auf Arabische Seitenzahlen
 \pagenumbering{arabic}
 %%
