@@ -76,10 +76,10 @@ The algorithm works for any dimension $D$ and metric signature.%
 It also works over arbitrary field as long as we don't require the transverse vectors to be normalized.
 
 
-\chapter{Spinor-Helicity}
+\chapter{Spinor Helicity}
 \label{chap:4dspinhel}
 
-The spinor-helicity methods are covered in great details in numerous sources (e.g.\ \cite{Maitre:2007jq,Kuczmarski:2014ara,Weinzierl:2016bus,DittmaierWeyl,Cohen:2010mi}).
+The spinor helicity methods are covered in great details in numerous sources (e.g.\ \cite{Maitre:2007jq,Kuczmarski:2014ara,Weinzierl:2016bus,DittmaierWeyl,Cohen:2010mi}).
 Here we provide only a brief summary.
 
 Helicity of a particle is the projection of it's spin $\va{S}$ on the direction of it's
@@ -256,13 +256,13 @@ where $\{\sigma_1,\sigma_2,\sigma_3\}$ are Pauli matrices, and
 \end{equation}
 We can thus write the Clifford algebra in $D_s$ dimensions in a factorized way,
 \begin{equation}\label{eqn:cliffordrecursion}
-  \qty(\gamma_{[D_s]}^\mu)_{a\kappa}^{\,b\lambda}  =
+  \qty(\gamma_{[D_s]}^\mu)_{\bar{\alpha}\hat{\alpha}}^{\,\bar{\beta}\hat{\beta}}  =
   \begin{dcases}
-    \qty(\gamma_{[4]}^\mu)_a^{\;b} \, \delta_\kappa^\lambda\,, &  0\le\mu \le 3 \,,\\
-    \qty(\gamma^{\star}_{[4]})_a^{\;b} \qty(\gamma_{[D_s-4]}^{(\mu-4)})_\kappa^{\;\lambda}\,, & \mu>3 \,,
+    \qty(\gamma_{[4]}^\mu)_{\bar{\alpha}}^{\;\bar{\beta}} \, \delta_{\hat{\alpha}}^{\hat{\beta}}\,, &  0\le\mu \le 3 \,,\\
+    \qty(\gamma^{\star}_{[4]})_{\bar{\alpha}}^{\;\bar{\beta}} \qty(\gamma_{[D_s-4]}^{(\mu-4)})_{\hat{\alpha}}^{\;\hat{\beta}}\,, & \mu>3 \,,
   \end{dcases}
 \end{equation}
-where the indices $a,b$ denote the spinor indices in $\mathsf{S}_{[4]}$ and $\kappa,\lambda$ the ones in $\mathsf{S}_{[D_s - 4]}$.
+where the indices $\bar{\alpha},\bar{\beta}$ denote the spinor indices in $\mathsf{S}_{[4]}$ and $\hat{\alpha},\hat{\beta}$ the ones in $\mathsf{S}_{[D_s - 4]}$.
 Note that $\gamma^\mu_{[D_s-4]}$ represent a $(D_s-4)$-dimensional Clifford algebra.
 
 %The spinor states for a particle with momentum $p$ satisfy the Dirac equation

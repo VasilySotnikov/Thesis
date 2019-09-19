@@ -566,12 +566,12 @@ demands some additional booking-keeping.
 
 Let us now mention how do we handle
 the cases when the set of choices of propagators' exponents for some topology $\Gamma$
-contains more than one element, that is, there are propagators raised to powers greater than 1 \cite{Abreu:2017idw}.
+contains more than one element, that is, there are propagators raised to powers greater than 1.
 As we mentioned above, the \cref{eq:cut_equations} directly isolates coefficients of 
 the propagator structure with maximal total degree $\gleading$. For this propagator structure
 also the factorization of \cref{eq:cut_amplitude} applies.
 The coefficients of all the remaining propagator structures can be obtained together with the (leading) coefficients  of a topology one level below
-$\Gamma$ in the hierarchy by ``undoing'' the block-triangularization.
+$\Gamma$ in the hierarchy by ``undoing'' the block-triangularization \cite{Abreu:2017idw}.
 Consider an example in \cref{fig:example_subleading_pole}.
 The two-loop bubble-hexagon topology $\Gamma_1$ is given by a list of propagators $\{\rho_1,\ldots{},\rho_6\}$ and there are two
 possible sets of exponents,
@@ -592,7 +592,7 @@ The only cost is that of solving the equations for a larger number of coefficien
 Another possibility is to realize that the only cases when propagators can be raised to higher powers 
 are from self-energy insertions on internal lines, which are associated with renormalization.
 It turns out \cite{Baumeister:2019rmh} that
-it is possible to cook up \emph{integrand-level} UV counter-terms such that
+it is possible to arrange \emph{integrand-level} UV counter-terms such that
 the integrand of the amplitude gets renormalized,
 and all subleading poles vanish as a consequence.
 
@@ -657,7 +657,7 @@ Furthermore, to be able to use it for both floating-point and exact (finite fiel
 we would like to avoid non-rational operations as much as possible.
 The latter is in general non-trivial since the cut conditions are quadratic, and
 define an algebraic variety in a $(D\cdot L)$-dimensional space.
-To this end, we closely follow the construction of ``natural'' coordinates described in \cite{Ita:2015tya, Abreu:2017xsl}.
+To this end, we closely follow the construction of ``natural'' coordinates described in \cite{Ita:2015tya, Abreu:2017xsl, Abreu:2017hqn}.
 
 \begin{figure}[ht]
   \centering
@@ -669,7 +669,7 @@ To this end, we closely follow the construction of ``natural'' coordinates descr
 We begin by considering each strand (see \cref{fig:topo_kinematics}) of the topology $\Gamma$ independently.
 First, we separate four-dimensional part and $(D-4)$-dimensional parts as
 \begin{equation}
-  \ell^l = \ell_{[4]}^l + \sum_{i\in \tilde{B}} \tilde{n}_j~\mu^l_{j}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0, 
+  \ell^l = \ell_{[4]}^l + \sum_{i\in \tilde{B}} \tilde{n}_i~\mu^l_{i}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0, 
 \end{equation}
 where $\tilde{n}_i$ is some basis in $\mathsf{S}_{[D-4]}$.
 For each strand $l$ we construct a van Neerven-Vermaseren basis (see \cref{sec:vNV_basis})
@@ -691,7 +691,7 @@ Then for $\ell^l_{[4]}$ we get
     \alpha_j^\tau &=  \sp(\ell^l, \tau_j),
   \end{align}
 \end{subequations}
-where $v^l_j$ are dual vectors to $p_j$, and $\tau_j$ are transverse to all external momenta of the topology.
+where $v^l_j$ are dual vectors to $p_j$, and $\tau_j$ (with $j \in B_{\tau}$) are transverse to all external momenta of the topology (see \cref{sec:vNV_basis} for details).
 We choose the propagators on the strand $l$, $\vb*{\rho}^l \in P_\Gamma^l \subset P_\Gamma$
 as the first set of coordinates for our loop momenta. By construction $\cup_l P_\Gamma^l = P_\Gamma$,
 so this trivially matches the choice of variables in \cref{chap:stdtech}.
@@ -706,12 +706,10 @@ to be able to reproduce the required number of the scalar products,
 \begin{equation}
   D^{(L)}  >  4 +\frac{1}{2}(L+1).
 \end{equation}
-The equality here cannot be taken except for the case of $L=1$ since we need additional degrees of freedom
-(\todo{ask Harald how this can be explained properly from geometry})
-for rotations.
+The equality here cannot be taken except for the case of $L=1$ since we need additional degrees of freedom for rotations.
 
 What we achieved is that the on-shell conditions are trivialized,
-and the only remaining constraints are for the components of $\va{\mu}_j$,
+and the only remaining constraints are for the components of $\va{\mu}_l \coloneqq \sum_{i\in \tilde{B}} \tilde{n}_i~\mu^l_{i}$,
 \begin{equation}
   \va{\mu}_i \cdot \va{\mu}_j  \equiv  \mu_{ij} (\vb*{\rho},\vb*{\alpha}) = \ell_i\cdot \ell_j - \ell_{i[4]}\cdot \ell_{j[4]},
 \end{equation}
@@ -746,7 +744,7 @@ and only after all master coefficients are determined will we set $D_s\to D\to 4
 In \cref{chap:dshel} we examine closely how to deal with the $D_s$-dependence efficiently.
 In any case we need to be able to evaluate the tree amplitudes in arbitrary $D_s$ dimensions.
 
-To this end, we choose to utilize the off-shell Berends-Giele recursion \cite{Berends:1987me}
+To this end, we employ the off-shell Berends-Giele recursion \cite{Berends:1987me}
 as a very flexible and efficient way to organize tree-level calculations
 which admits a seamless generalization to $D_s$ dimensions.
 The Berends-Giele recursion is formulated in terms of
@@ -760,14 +758,14 @@ momenta $\{p_1,\ldots{},p_n\}$ into an open index of type $\bar{\alpha}$.
 Here the indices $\alpha$ are understood to refer to tensor or spinor indices, as well as all other relevant quantum numbers such as
 charge, flavor, color, etc.
 Then starting from the first-level currents, which are simply the external states of particles, one
-can recursively (see \cref{fig:BG_recution}) build up the final current
+can recursively  build up the final current
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{BG_recursion}
   \caption{A step of the off-shell recursion for a model with 3- and 4-point vertices. All possible permutations of $\{1,\ldots{},n\}$ are considered on the right.}
   \label{fig:BG_recution}
 \end{figure}
-containing all but one external particle.
+containing all but one external particle (see \cref{fig:BG_recution}).
 The tree amplitude is then obtained by contracting this current with the last remaining external state.
 This topic is very well covered in the literature (see e.g.\ \cite{Ellis:2011cr,Weinzierl:2016bus}), so we will refrain from further details.
 
@@ -789,6 +787,7 @@ for each tree amplitude we build its final current,
 but instead of contracting it with the external state, we feed it through
 the corresponding cut propagator as an input to the next tree amplitude.
 Only at the end of the path do we contract the final current with a state from a polarization sum.
+The corresponding conjugated state is still treated as an external state in one of the tree amplitudes along the path.
 Note that beyond two loops it is not always possible to span the whole cut with just one continuous path.
 
 \begin{figure}[ht]
@@ -802,7 +801,7 @@ Note that beyond two loops it is not always possible to span the whole cut with 
   }
   \caption{A generic cut of a two-loop amplitude as a sequence of ``closed'' off-shell currents, shown as blobs.
     The red line in \cref{fig:topo_cut:path} demonstrates a path, which is ``unrolled'' in \cref{fig:topo_cut:unrolled}.
-    The dashed lines in \cref{fig:topo_cut:unrolled} indicate the only two cut propagators
+    The dotted lines in \cref{fig:topo_cut:unrolled} indicate the only two cut propagators
     decomposed into pairs of polarization states and used as an explicit input to the off-shell recursion.
   }
   \label{fig:topo_cut}
@@ -826,7 +825,7 @@ for any numerical value of $D$\footnote{
 and any  \emph{integer} value of $D_s$ large enough to embed the loop momenta components.
 The internal self-consistency of dimensional regularization guarantees
 that these evaluations reproduce correctly the corresponding limits from the formally infinite-dimensional spaces.\footnote{
-  Beware of models with chiral couplings! A naive ``continuation'' of chirality to $D_s$ dimensions
+  Some care required for models with chiral couplings. A naive ``continuation'' of chirality to $D_s$ dimensions
   can make all coefficients to behave non-smoothly as functions of $D_s$ at all integer values.
 }
 
@@ -845,7 +844,7 @@ have important implications for numerical efficiency of the dimensional reconstr
   \item Since the master integral coefficients depend both on $D$ and  $D_s$ at a first glance we would
     need to evaluate everything $n_D \cdot n_{D_s}$ times, where $n_D$ and $n_{D_s}$ are the sizes of the respective samples.
     However since the $D$-dependence comes solely from the right hand side of \cref{eq:unitarity_ansatz}
-   and the $D_s$-dependence from the left hand side, we can sample each side independently only $n_D$ and $n_{D_s}$ times
+   and the $D_s$ dependence from the left hand side, we can sample each side independently only $n_D$ and $n_{D_s}$ times
    accordingly.
  \item Although we do need to determine the surface-term coefficients from \cref{eq:cut_equations} to use them for subtractions,
    we \textit{do not} need to reconstruct their dependence on $D$ analytically. 
@@ -855,11 +854,11 @@ have important implications for numerical efficiency of the dimensional reconstr
    %but the analytic result is obtained in still.
  \item The reconstruction algorithms normally work with exact numerical evaluations only.
    However even if we aim for example for Monte-Carlo integration over external phase space using floating point numbers,
-   the rational functions of $D$ can be reconstructed for each process from just one exact ``warm-up'' evaluation over finite fields.
+   the rational functions of $D$ can be reconstructed for each process from one ``warm-up'' evaluation with exact kinematics.
 \end{itemize}
 
 \section{Discussion}
-In this chapter we laid out the central concepts of the multi-loop $D$-dimensional numerical unitarity approach.
+In this chapter we laid out the central concepts of the multi-loop $D$-dimensional numerical unitarity method.
 We formulated it in a way directly amenable for automation.
 And indeed we implemented the presented algorithms to obtain the results of \cref{chap:5parton}.
 
