@@ -1,20 +1,52 @@
-In this thesis, we have used the extension of numerical unitarity method  
+In this thesis, we have demonstrated the cutting-edge applications of the numerical unitarity method \cite{Abreu:2017hqn,Abreu:2017idw,Abreu:2017xsl,Ita:2015tya,Ellis:2008ir,Ellis:2007br,Giele:2008ve}
+that advance the state-of-the-art computations of loop amplitudes.
+Compared to more canonical approaches, the bottleneck of inversion of IBP systems is avoided in this method.
+With the help of a targeted set of IBP relations \citep{Gluza:2010ws,Abreu:2017hqn}
+a complete parametrization of the integrand in terms of master and surface insertions can be obtained.
+The unitarity cuts are then matched to this parametrization, therefore achieving the reduction to master integrals.
+The approach is formulated in a numerical context, thus mitigating increase of complexity with the addition of scales.
 
 
+We have formulated a framework for efficient numerical evaluation of helicity amplitudes with external fermions in dimensional regularization.
+This framework was an essential ingredient required to obtain our results for the two-loop 
+two-quark three-gluon and four-quark one-gluon helicity amplitudes.
+It is based on the dimensional reconstruction, but dimensionally
+reduces the kinematically-independent degrees of freedom.
+In this way, computations of two-loop amplitudes can be performed in six dimensions.
+This substantially improves the efficiency of the extraction of the analytic dependence on the
+number of dimensions $D_s$, compared to the numerical dimensional-reconstruction approach \cite{Giele:2008ve,Ellis:2008ir, Boughezal:2011br}, as applied
+in \cite{Abreu:2017xsl,Abreu:2017hqn,Badger:2018gip,Abreu:2018jgq}.
+This framework has been also useful to clarify some issues with the computation of one-loop helicity amplitudes
+with massive external fermions \cite{Anger:2018ove}.
 
-We formulated a systematic way of handling helicity amplitudes in dimensional regularization in a fully numerical framework.
-Our approach is based on the dimensional reconstruction. We take advantage of the ideas of dimensional reduction
-to precomute the full $D_s$ dependence by contracting all kinematically-indenpendent indices.
-Thus the whole numerical copmutation  of two-loop amplitudes can be performed in six dimensions.
-This leads to
-significant efficiency improvements as compared to a numerical dimensional-reconstruction
-approach~\cite{Giele:2008ve,Ellis:2008ir, Boughezal:2011br} as applied earlier
-in refs.~\cite{Abreu:2017xsl,Abreu:2017hqn,Badger:2018gip,Abreu:2018jgq}.
-Enhancing the dimensional reconstruction by dimensional reduction 
-is not a new idea and has been applied to gluon amplitudes in
-the original work~\cite{Giele:2008ve}.
-Here we apply this improvement~\cite{Anger:2018ove}
-starting from the five-point amplitudes including external fermions~\cite{Abreu:2018jgq}.  
+We have presented the first NLO QCD predictions for \Wbbjj{} and \Wbbjjj{} production in \cref{chap:wbb_pheno}.
+The computation was done in the four-flavor-number scheme, thus including effects due to the non-vanishing bottom-quark mass.
+To obtain the one-loop matrix elements with massive fermions for high-multiplicity processes,
+we have carried out a major upgrade of the \BlackHat{} library, following the developments of \cite{Ellis:2008ir}.
+We have looked into multiple differential distributions depending on the number of additional light jets.
+We found that observables constructed to include $\geq2$ additional light jets at LO
+show excellent convergence of NLO QCD corrections.
+In contrast to this, NLO QCD corrections to inclusive $Wb\bar{b}$ production display large K factors and shape distortions.
+Based on this observation, we employed exclusive sums to improve predictions for observables associated to $WH(\rightarrow b{\bar b})$
+production, such as $p_T^{b\bar b}$, $p_T^W$, and $M_{b\bar b}$.
+
+
+%Our approach is based . We take advantage of the ideas of dimensional reduction
+%to precomute the full $D_s$ dependence by contracting all kinematically-independent indices.
+%Thus the whole numerical computation  of two-loop amplitudes can be performed in six dimensions.
+%This leads to
+%significant efficiency improvements as compared to a numerical dimensional-reconstruction
+%approach~\cite{Giele:2008ve,Ellis:2008ir, Boughezal:2011br} as applied earlier
+%in refs.~\cite{Abreu:2017xsl,Abreu:2017hqn,Badger:2018gip,Abreu:2018jgq}.
+%Enhancing the dimensional reconstruction by dimensional reduction 
+%is not a new idea and has been applied to gluon amplitudes in
+%the original work~\cite{Giele:2008ve}.
+%Here we apply this improvement~\cite{Anger:2018ove}
+%starting from the five-point amplitudes including external fermions~\cite{Abreu:2018jgq}.  
+
+
+%The apply method for the computation of two-loop amplitudes with external fermions,
+%an extension 
 
 
 We have carries out extensive validation of our computational framework.
@@ -36,99 +68,6 @@ can be used to produce analytic expressions.
  loop amplitudes required for a NNLO QCD calculation of three-jet production at hadron
  colliders in the leading-color approximation are now available.
  Fast and efficient evaluation of coefficients.
-
-
-%The processes of electroweak-gauge-boson production in association
-%with many light- and $b$-jets have diverse final states and are abundantly produced at the LHC. They therefore constitute a
-%natural testing ground for perturbative QCD and more generally the Standard Model
-%over several orders of magnitude. The study of these processes at the
-%LHC thus helps to improve the understanding of both theoretical and experimental
-%techniques, e.g.\ our understanding of heavy-jet production. Furthermore, these processes are background to many interesting signatures, for example $HW$ associated production with a subsequent decay of the Higgs into a
-%bottom-quark pair as well as many searches for new physics with
-%multi-particle final states. 
-
-%The theoretical description of these
-%high-multiplicity processes represents a
-%challenging task. In particular, the computation of the required QCD
-%$\mathcal{O}(\alps)$ corrections represents a difficult task due to the
-%many scales that are present such as the bottom mass. We used the numerical unitarity approach \cite{Bern:1994zx,Bern:1995db,Ossola:2006us,Ellis:2007br,Giele:2008ve,Ellis:2008ir} to compute virtual matrix elements, which required several extensions of the method, and which allowed us to make a first computation for massive final states in association with many jets and multiple quark lines. In general, NLO QCD corrections help to considerably reduce the spurious dependence on unphysical renormalization and factorization scales. Associated to it is the question which scale to use in a fixed-order calculation. New ideas for scale setting such as the parton-shower-inspired \MINLO{} method \cite{MINLO} are an interesting alternative to traditional approaches to scale setting. The application and comparison of different functional forms of dynamical scales for high-multiplicity processes helps to improve the understanding of uncertainties associated to NLO QCD calculations. 
-
-
-%In this thesis, we presented NLO QCD predictions for \Wbb~production
-%in association with two and three light jets \cite{wbbpaper}, and we also included results with zero or
-%one extra light jet for completeness. We find that the NLO QCD
-%corrections for the high-multiplicity processes of \Wbbnj[2]{}
-%and \Wbbnj[3]{} production are mild and the remaining renormalization and factorization scale 
-%dependence reduces from LO to NLO. In contrast, the $K$-factor for NLO QCD corrections is large in inclusive
-%\Wbb{}
-%production~\cite{Ellis:1998fv,FebresCordero:2006sj,Cordero:2009kv},
-%which led us to explore possible
-%improvements to observables for the \Wbb{} process by using exclusive
-%sums~\cite{ESums}. We focused on the context of this process being background to $H(\rightarrow b\bar b)W$ associated production and showed that exclusive-sum predictions for key observables give reduced uncertainties
-%associated to missing higher-order corrections. We
-%found that uncertainties associated to PDFs are subleading in the generic kinematical regimes we studied. We provide \ntuple{}
-%sets for the predictions obtained by a new \BlackHat{} version in
-%combination with \SHERPA{} \cite{Sherpa}, which can be used in future analyses of the 
-%$Wb\bar b\,\!+\!\,n$-jet
-%signatures.
-
-
-%To achieve these state-of-the-art NLO QCD results for \Wbbn~production, we needed to extend
-%previous applications of the numerical unitarity method to the case of
-%multiple massive fermion lines. For that we presented all relevant
-%ingredients that we used and developed. In particular, the previous application of the numerical unitarity method with massive quarks by Melnikov et al \cite{Ellis:2008ir} did not reach this level of complexity and we provide a complete set of methods for the first time. In order to deal with explicitly
-%divergent double cuts, we used the prescription of
-%Ref.~\cite{Ellis:2008ir}. In the application of single cuts we also encountered divergent contributions associated to tadpole Feynman diagrams. We extended the
-%prescription of Ref.~\cite{Ellis:2008ir} to this case and removed the divergent expressions by adjusting the Berends-Giele tree
-%generation. 
-
-
-%Furthermore, we efficiently evaluated $D$-dimensional unitarity cuts
-%by reducing the $D_s$-dimensional Dirac algebra and states to lower
-%dimensions \cite{angerds}. In order to do so, we found a correct numerical implementation of the HV/FDH scheme for massive external fermions, which builds on a consistent embedding of the external fermion states. The resulting decomposition of one-loop helicity amplitudes by particle content allowed us to avoid the overhead of computing in
-%higher-dimensional representations of the Dirac algebra. We have implemented the above in a new version of the \BlackHat{} library.
-
-
-%Moreover, we have performed a dedicated study of weak-vector-boson production in
-%association with light jets at the $\sqrt{s} = 13$ TeV
-%LHC~\cite{Anger:2017nkq} that we presented in this thesis. We have provided NLO QCD predictions for
-%$W^\pm+n$-jet and $Z+m$-jet production in association with $n\leq 5$
-%and $m\leq 4$ light jets. We used available matrix elements from \BlackHat{} \cite{Berger:2008sj} in combination with \SHERPA{} and extended previous predictions~\cite{BH:W5j,BH:Z4j} to the energy configuration of LHC Run-II. We provided a study of uncertainties associated to renormalization
-%and factorization scales by employing several functional forms of
-%dynamical scales and by conventional variations of
-%the central scale. To this end, we used the fixed-order scale $\HTpartonicp/2$ and compared the results with the more
-%physically motivated \MINLOp{} reweighting procedure (adaption of the original formulation in \cite{MINLO}). This is the first
-%time such a comparison is carried out in the context of processes with
-%the high jet multiplicity of four and five jets. We find that NLO results obtained with $\HTpartonicp/2$
-%and \MINLOp{} are largely consistent in both shapes and normalization for total cross
-%sections and differential distributions. We also computed several observable ratios and found that jet production ratios have an increased stability compared to the
-%results at $\sqrt{s} = 7$ TeV. In general,
-%the good agreement between the two scale choices confirms that NLO
-%QCD predictions in high multiplicity processes give the first reliable
-%predictions. It will be interesting to see more comparisons of our results with LHC data such as the ones recently shown in Ref.~\cite{Aaboud:2017hbk}.
-
-
-
-%Finally, we discuss possible extensions of the general approach of numerical unitarity with massive quarks presented in this thesis. We have matrix elements for several interesting phenomenological processes available in our new version of the
-%\BlackHat{} library. They allow for the computation of NLO QCD corrections to challenging processes such as on-shell
-%$t\bar{t}+b\bar{b}+$jet production, on-shell $t\bar{t}$
-%production in association with up to four light jets, inclusive $Wb$+jets production and other applications with massive quarks
-%and vector bosons in the future. Also $Zb\bar{b}$ production in association with two
-%light jets should be accessible with some minor modifications of our new
-%matrix elements. In this thesis, we presented a comparison of 4FNS and 5FNS for \Wbb~and \Wbbnj[1]~production. This comparison could easily be extended to the
-%higher-multiplicity cases of \Wbbnj[2]~and \Wbbnj[3]~production. In
-%particular, $b$-initiated subprocesses start to play a more
-%dominant role for these high-multiplicity cases. It would be interesting to see how this affects the comparison of 4FNS and 5FNS and whether we can confirm our conclusions for the comparison in the higher-multiplicity cases. 
-
-%On the conceptual side, the correct numerical implementation of the HV/FDH scheme for massive quarks and our resulting algorithm for a decomposition of QCD
-%one-loop amplitudes by particle content \cite{angerds} can be beneficial for the computational
-%efficiency of one- and two-loop amplitudes in the future. In particular, an
-%application in the numerical unitarity approach at two-loops seems to
-%be feasible and well in line with the ongoing research activities here
-%in Freiburg. This might open the route to two-loop amplitudes with massive external quarks. More generally, in order to verify both theory predictions and experimental
-%techniques at the LHC, it will be interesting to
-%study and compare data with predictions for high-multiplicity processes
-%including $b$ jets, like the ones presented in this work. For example, the results based on exclusive sums for \Wbb{} production presented in this thesis might help to further constrain the coupling of the Higgs to bottom quarks.
 
 
  The techniques developed in this paper show the potential for the automation of two-
