@@ -124,8 +124,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Kurzfassung aus der Datei "src/kurzfass"
 \cleardoublepage
-\phantomsection
-\section*{Abstract\markboth{Abstract}{}}
+\chapter*{Abstract\markboth{Abstract}{}}
 \addcontentsline{toc}{chapter}{Abstract}
 \input{src/short_version}
 \cleardoublepage
@@ -194,10 +193,9 @@
 \input{src/5parton}
 
 
-\chapter{Summary and Outlook}
-\label{chap:so}
-\todo{conclusions}
-%\input{src/summary}
+\chapter{Conlclusions and Outlook}
+%\addcontentsline{toc}{chapter}{Conclusions and Outlook}
+\input{src/summary}
 
 %%-------------------------------------------------
 
@@ -210,16 +208,16 @@
 \input{src/appendix}
 %
 %%% Literaturverzeichnis aus Datei "literatur"
-\phantomsection
+%\phantomsection
 %\nocite{apsrev41Control}
 %\bibliography{zitationen,revtex-custom}
 \bibliography{zitationen}
 
 %
 %%% Danksagungen aus Datei "src/danksag"
-%\chapter*{Acknowledgments\markboth{Acknowledgments}{}}
-%\addcontentsline{toc}{chapter}{Acknowledgments}
-%\input{src/danksag}
+\chapter*{Acknowledgments\markboth{Acknowledgments}{}}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\input{src/danksag}
 %
 
 
