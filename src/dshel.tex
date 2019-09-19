@@ -8,7 +8,7 @@ polarized or not, can be decomposed into a minimal basis of Lorentz-invariant ob
 
 It is well known that the full physical information about any scattering process is contained in a complete set of \textit{helicity amplitudes} ---
 the amplitudes with all external particles' states chosen to have a definite helicity (see the definition in \cref{chap:4dspinhel}).
-Being non-redundant and complete representation of physical information, the helicity amplitudes 
+Being non-redundant and a complete representation of physical information, the helicity amplitudes 
 enjoy a number of nice properties such as gauge invariance and manifestation of Poincaré symmetry.
 On a technical side, the consequence is that the helicity amplitudes are expected to have the most compact representation,
 given that they do not suffer from proliferation of unphysical information.
@@ -18,7 +18,7 @@ And indeed this has been shown to be the case in numerous practical applications
 The computation of tree-level helicity amplitudes is a very straight-forward task,
 which, from the perspective of Feynman diagrams,
 amounts to simply inserting the corresponding states with definite helicities for each external particle.
-The spinor-helicity techniques can be employed to further enhance the computations.
+Spinor-helicity techniques can be employed to further enhance the computations.
 Moving forward to amplitudes with loops,
 we are forced to make the dimensionality of space-time formally infinite \cite{Collins:1984xc} 
 to regularize divergences.%
@@ -38,14 +38,14 @@ amenable for numerical applications.
 In \cref{sec:helampl_projectors} we briefly review a somewhat standard 
 method of obtaining helicity amplitudes through $D$-dimensional projectors,
 which can be found in the literature\footnote{
-  see also related work in \cite{Chen:2019wyb,Boels:2018nrr} 
+  See also related work in \cite{Chen:2019wyb,Boels:2018nrr}. 
 } \cite{Garland:2002ak, Moch:2002hm, Glover:2003cm, Glover:2004si,Gehrmann:2009vu,Gehrmann:2011aa}.
 In \cref{sec:helampl_embeding}, 
 taking advantage of some insights from \cref{chap:numunitarity},
 we show how the tree-level approach of ``simply inserting appropriate external states'' can
 be extended to loop amplitudes in the 't Hooft-Veltman (HV) flavor of dimensional regularization.
-This allows to dispose of construction of complicated projectors, which
-become vary hard to handle for large $(> 4)$ number of particles with spin \cite{Peraro:2019cjj}. 
+This allows to dispose of the construction of complicated projectors, which
+becomes very hard to handle for large $(> 4)$ number of particles with spin \cite{Peraro:2019cjj}. 
 Another convenient feature of our approach is that it can be applied in a numerical context, such
 as evaluation of cuts through off-shell recursion as discussed in \cref{sec:evaluation_of_cuts}.
 In \cref{sec:ds_reduction} we discuss how
@@ -79,11 +79,11 @@ the number of of independent analytic expressions can be further reduced by taki
 The transformation of helicity amplitudes under Lorentz boosts is completely specified by their 
 external states, and is given by the \emph{little group scaling},
 \begin{equation}
-  \ket{p_i} \to t_i \ket{p_i}, \quad  \sket{p_i} \to \frac{1}{t_i} \ket{p_i} \implies \helampl \to  \qty(\prod_i t_i^{-2\lambda_i}) \helampl,
+  \ket{p_i} \to t_i \ket{p_i}, \quad  \sket{p_i} \to \frac{1}{t_i} \sket{p_i} \implies \helampl \to  \qty(\prod_i t_i^{-2\lambda_i}) \helampl,
 \end{equation}
 where $t_i$ are complex phases.
 As expected the squared matrix element $\Abs{\helampl{}}$ is Lorentz-invariant.
-With the help of spinor helicity formalism we can also make any helicity amplitude itself into a scalar
+With the help of the spinor helicity formalism we can also make any helicity amplitude itself into a scalar
 by removing it's \emph{spinor weight} --- a factor which has the same little group scaling
 as the helicity amplitude.
 Hence the scalar objects we were operating on in \cref{chap:stdtech,chap:dshel} can be the normalized helicity amplitudes.
@@ -115,7 +115,7 @@ with symmetries and gauge invariance,
 \begin{equation}
   \mathcal{A}  = \sum_{i} \mathcal{T}_i\;A_i.
 \end{equation}
-For example $\mathcal{T}_i$ can contain object like $\sp(\varepsilon(p_i),p_j)$, $\bar{v}(p_i) \slashed{p}_j u(p_k) $, $\bar{u}(p_i) \slashed{\varepsilon}(p_j) u(p_k)$, etc.
+For example $\mathcal{T}_i$ can contain objects like $\sp(\varepsilon(p_i),p_j)$, $\bar{v}(p_i) \slashed{p}_j u(p_k) $, $\bar{u}(p_i) \slashed{\varepsilon}(p_j) u(p_k)$, etc.
 Here $A_i$ are the Lorentz-invariant form factors.
 Then one finds projectors $\mathcal{P}_i$ on $A_i$ from linear combinations of $\mathcal{T}_i$ by solving the equations
 \begin{equation} \label{eq:cdr_projectors}
@@ -149,7 +149,7 @@ This somewhat mitigates the first issue, but the projectors have to be still app
 In this section we explain how multi-loop helicity amplitudes
 with vector and spinor external particles can be obtained in dimensional regularization
 from appropriate embedding of helicity states into spaces of higher dimensionality $\mathsf{S}_{[D_s]}$.
-As in \cref{sec:evaluation_of_cuts}, in this \namecref{chap:dshel} we will denote the dimensionality of particles'
+As in \cref{sec:evaluation_of_cuts}, in this \namecref{chap:dshel} we will denote the dimensionality of the particles'
 representations as $D_s$.
 Our approach is built up independently from the one described in the previous chapter, but we establish
 the connection in the end.
@@ -198,9 +198,9 @@ Comparing this to \cref{eq:4d_completeness_relations} we see that we can embed t
       0, & \mu\in \mathsf{S}_{[D_s-4]},\\
     \end{dcases}
     &&
-  \varepsilon_{j}^\mu = \delta^{(j+2)}_\mu, \qfor j\geq 3,
+  \varepsilon_{j}^\mu = \delta^\mu_{(j+1)}, \qfor j\geq 3,
 \end{align}
-Thus the amplitudes in $D_s$ dimensions with $\varepsilon_{1,2}^\mu$ as external states satisfy the correct little-group scaling trivially.
+Thus, the amplitudes in $D_s$ dimensions with $\varepsilon_{1,2}^\mu$ as external states satisfy the correct little-group scaling trivially.
 If we now also take into account the orthogonality relations 
 \begin{align}
   g_{[D_s]}^{\mu\nu} = g^{\mu\nu}_{[4]}+g^{\mu\nu}_{[D_s-4]}, && (g_{[4]})^{\mu\rho}(g_{[D_s-4]})_{\rho\nu} = 0,
@@ -273,7 +273,7 @@ This is the consequence of the following facts:
       &&
       a \in \{p_i,\varepsilon_{1,2}(p_i)\}
     \end{align}
-    This has an effect that no kinematics-dependence can enter $v_n$.
+    This has an effect that no kinematic-dependence can enter $v_n$.
   \item Any Lorentz indices inside the same spinor chain can be contracted yielding  
     \begin{equation} \label{eq:trivialTens2}
       \left(\gamma_{[D_s]}^\mu\right)_{\bar{\alpha}\hat{\alpha}}^{\bar{\kappa}\hat{\kappa}}
@@ -389,7 +389,7 @@ contribute to higher orders in $\eps$ when we set $D_s\to 4-2\eps$,
   c_i=\order{\eps}, \qfor i\geq 1,
 \end{equation}
 and we can drop all $\order{\eps}$ terms in \cref{eq:Fsq}.
-Thus we conclude that all we need to know is the coefficient of $v_0$.
+Thus, we conclude that all we need to know is the coefficient of $v_0$.
 
 
 \subsubsection{Identical Fermions}
@@ -450,7 +450,7 @@ It is well known, that dimensional regularization fails to regularize chiral the
 (see e.g.\ \cite{Larin:1993tq,Boughezal:2019xpp,Jegerlehner:2000dz,Bonneau:1980yb,Bruque:2018bmy,Baikov:1991qz,Kreimer:1989ke}).
 More colloquially this problem is known as ``the $\gamma_5$ problem'', because it is its analytic
 continuation to $D$ dimensions which causes contradictions explicitly.
-The dimensional regularization can still be employed in these models, 
+Dimensional regularization can still be employed in these models, 
 but some additional manual interference is required in some cases. 
 
 In this thesis we only consider two-loop amplitudes in pure QCD, so we do not have to explore the issue. 
@@ -483,7 +483,7 @@ a (numerical if desired) computation of helicity amplitudes in the HV scheme of 
 \begin{enumerate}[label={\arabic*.}]
   \item Evaluate amplitudes with all particles placed in generic $D_s \geq D^{(L)}$ dimensions (which can be finite integers for instance), 
     and the external gauge bosons and fermions embedded as given by \cref{eq:embedding_vectors,eq:fermionicStates}.
-  \item Per each pair of external fermions take a trace over their indices $\{\hat{\alpha}_i,\hat{\beta}_i\} \in \mathsf{S}_{[D_s-4]}$ 
+  \item Per pair of external fermions take a trace over their indices $\{\hat{\alpha}_i,\hat{\beta}_i\} \in \mathsf{S}_{[D_s-4]}$ 
     to project onto the coefficient $\mathcal{A}_0^{(L)}$ of $\delta^{\hat{\alpha}_1}_{\hat{\beta}_1}\cdots \delta^{\hat{\alpha}_{n_s}}_{\hat{\beta}_{n_s}}$.
   \stepcounter{enumi}\item[(\arabic{enumi})]  If $D_s$ is set to a particular integer value (e.g.\ in a numerical computation),
     repeat with a sample of different $D_s$ values to reconstruct the polynomial dependence of $\mathcal{A}_0^{(L)}$ (see \cref{sec:dimensional_reconstruction}).
@@ -496,7 +496,7 @@ with our algorithm are exactly the same as the ones
 obtained following the prescription explained in \cref{sec:helampl_projectors}, 
 as well as the result of the ``'t Hooft-Veltman algebra'' implemented in a \texttt{FORM} library ``Spinney'' \cite{Cullen2010}.
 The difference is that our approach admits a direct numerical implementation, since it
-operates on explicitly-represented finite objects.
+operates on objects with explicit finite-dimensional representations.
 
 We have implemented our algorithm in a \texttt{C++} framework for $D$-dimensional numerical unitarity computations 
 of one- and two-loop helicity amplitudes to obtain the results presented in \cref{chap:wbb_pheno,chap:5parton}.
@@ -637,7 +637,7 @@ $\tilde{\mathcal{G}} = \{ \mu_i \in \mathcal{G} ~:~ \mu_i \geq D_0 \}$, and the 
       \star, & \mu \geq D_0\,.
     \end{cases}
 \end{equation}
-The traces in $\mathsf{S}_{[\mathcal{D}]}$ are evaluated with usual Clifford algebra to yield
+The traces in $\mathsf{S}_{[\mathcal{D}]}$ are evaluated with the usual Clifford algebra to yield
 \begin{equation} \label{eq:trace_d0}
   \Tr\qty(\prod_{i=1} \gamma_{[\mathcal{D}]}^{\tilde{\mu}_i}) =  \sum_\sigma \qty( c_\sigma \prod_{i,j} g_{[\mathcal{D}]}^{\tilde{\mu}_{\sigma_i}\tilde{\mu}_{\sigma_j}}),
 \end{equation}
@@ -665,7 +665,7 @@ be constructed systematically with an example of color-ordered QCD.
 
 We apply the relations \labelcref{eq:ds-split-metric,eq:ds-gamma}
 to the original Feynman rules  of the theory (see \cref{sec:cofr}) to obtain their dimensionally-reduced version
-showed in \cref{tab:Ds-FeynRules}. 
+shown in \cref{tab:Ds-FeynRules}. 
 Slightly abusing the terminology, we refer to the $\mathcal{D}$-dimensional gluon as the ``scalar'' 
 both before and after the corresponding indices in $\mathsf{S}_{\mathcal{D}}$ are contracted.
 \begin{table}[h]
@@ -750,7 +750,7 @@ described in the previous section, was formulated
 in terms of operating on individual Feynman diagrams.
 In this regard, one might wonder if it can be employed together with
 the numerical unitarity methods, where we evaluate
-the products of tree amplitudes through the off-shell recursion, 
+the products of tree amplitudes through off-shell recursion, 
 as discussed in \cref{sec:evaluation_of_tree_amplitudes}.
 Here we explain how this can be done.
 
