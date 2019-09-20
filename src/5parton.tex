@@ -94,7 +94,7 @@ quarks and one gluon,
 and we include the contributions with one or two closed fermion loops.
 Some representative diagrams are given in \cref{fig_parents5g,fig_parents2q3g,fig_parents4q1g}.
 For the $\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q},g)$ amplitude, we explicitly provide results for the case 
-of different flavours. And the case of identical flavours can be obtain through anti-symmetrization.
+of different flavors. The case of identical flavors can be obtained through anti-symmetrization over flavors.
 
 For each process we consider a full set of helicity amplitudes, which we 
 define as described in \cref{chap:dshel}.
@@ -320,9 +320,8 @@ to the bare amplitudes $\mathcal{A}^{(i)}$ as follows:
 \subsubsection{Infrared Behavior}
 
 The poles of renormalized amplitudes are of infrared origin and
-can be predicted from the previous orders in the perturbative 
-expansion 
-\cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi}:
+can be predicted \cite{Catani:1998bh,Sterman:2002qn,Becher:2009cu,Gardi:2009qi} from the previous orders in the perturbative 
+expansion (c.f.\ \cref{eq:F1,eq:F2}):
 \begin{align}
   \begin{split}\label{eq:catani}
     \mathcal{A}_R^{(1)}&=\mathbf{I}^{(1)}_{[n]}(\epsilon)
@@ -426,7 +425,7 @@ eqs.~\eqref{eq:twoLoopUnRenorm}.
 %If one is concerned only about removing the divergences a definition of the remainder is not unique, so we now discuss our conventions.
 
 We use the divergent structure of amplitudes, given by  \cref{eq:twoLoopUnRenorm,eq:catani},
-to define a finite remainder $\mathcal{F}^{(2)}$ as
+to obtain a finite remainder $\mathcal{F}^{(2)}$, which we defined in \cref{sec:relevant_tensors}, as
 \begin{equation}\label{eq:remainderDef}
   \mathcal{F}^{(2)}=\mathcal{A}_R^{(2)}
   -\mathbf{I}_{[n]}^{(1)}\mathcal{A}_R^{(1)}
@@ -473,7 +472,7 @@ and find the corresponding unitarity-compatible IBP vectors.
 Some technical details of our setup can be found in \cite{Abreu:2017hqn}.
 We then use these vectors to generate an overcomplete set of surface terms by multiplying
 them with all monomials in ISPs, and inserting them into \cref{eq:ibps}.
-Finally, we identify the spanning set with imposed on-shell conditions, on a randomly chosen numerical 
+Finally, we identify a spanning set with imposed on-shell conditions, on a randomly chosen numerical 
 point.
 
 
@@ -643,7 +642,7 @@ and request the one-particle-irreducible diagrams only.
 
 We then process these diagrams with a custom  \texttt{Mathematica} code, which performs three steps:
 \begin{enumerate}
-  \item Organize the cut diagrams into the hierarchy (see \cref{eq:topology_order,eq:topology_sequence}) 
+  \item Organize the cut diagrams into the hierarchy (see \cref{eq:topology_order,eq:topology_sequence}).
     This amounts to constructing a layered tree graph with vertices as nodes,
     and the relation of adding/removing propagators as edges.
   \item Color decomposition into partial amplitudes.
@@ -656,7 +655,7 @@ Our color decomposition is based on \cite{Ochirov:2016ewn,Ochirov:2019mtf},
 and is accomplished in the same ``unitarity-compatible'' spirit of the algorithm discussed in \cref{dshel:sec:unitarity-compatible}.
 We process each cut diagram separately in the following way:
 \begin{enumerate}
-  \item Decompose each of it's vertices (i.e.\ tree amplitudes) into linear combinations of color-ordered tree amplitudes multiplied by color factors.
+  \item Decompose each of its vertices (i.e.\ tree amplitudes) into linear combinations of color-ordered tree amplitudes multiplied by color factors.
   \item Insert the decompositions from the previous step into the diagram and expand.
   \item Contract all internal color indices through the cut propagators, and perform the color algebra
   \item Collect the terms with the same color factor, $\NC$, and $N_ f$ powers. 
@@ -667,9 +666,9 @@ and, by construction, the tree amplitudes in the corners of all cut diagrams are
 
 \subsubsection{Color-Stripped Cuts}
 The products of tree amplitudes in cut diagrams contributing to the partial amplitudes are evaluated
-numerically with the custom \texttt{C++} implementation of the off-shell recursion, as described in \cref{sec:evaluation_of_cuts}.
-We have implemented evaluations both in multi-precision floating-point arithmetic, and over finite fields with cardinalities of the order $2^{31}$.
-For the former we use the QD \cite{QD} library. And for the latter we use \texttt{Givaro} \cite{Givaro} with 
+numerically with a custom implementation of the off-shell recursion (as described in \cref{sec:evaluation_of_cuts}) in the \texttt{C++} library \texttt{Caravel}.
+Our templated implementation admits evaluations both in multi-precision floating-point arithmetic, and over finite fields with cardinalities of the order $2^{31}$.
+For the former we use the QD \cite{QD} library. For the latter we use \texttt{Givaro} \cite{Givaro} with 
 custom optimizations of multiplications through Barrett reduction \cite{Barrett1987a,Hoeven2014}.
 The finite-filed evaluations are crucial for the reconstruction of the analytic expressions.
 
@@ -677,7 +676,7 @@ In the off-shell recursion we use explicit components of six-dimensional loop mo
 satisfying the cut conditions (see \cref{sec:osm} for details). 
 This has an important implication for the evaluations over finite fields, where
 we cannot take square roots originating from the quadratic equations.
-We workaround this complication by allowing the off-shell currents to
+We work around this complication by allowing the off-shell currents to
 take values in an algebraic extension of the finite field.
 We consider this in more detail in \cref{sec:muij_square_roots}.
 However, since the cuts of properly defined (normalized) helicity amplitudes are Lorentz scalars,
@@ -707,7 +706,7 @@ The partial two-loop helicity amplitudes are represented in terms of master inte
   \mathcal{I}_{\Gamma,i}\,,
   \quad
     \qquad I_{\Gamma,i} =
-      \qty(\int \prod_{i=1}^{L} \tilde{\dd{\ell_i}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}},
+      \qty(\int \prod_{l=1}^{L} \tilde{\dd{\ell_l}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}},
 \end{equation}
 and we obtain the master coefficients as explained in detail above.
 The master integrals are computed as a Laurent series in $\eps$, 
@@ -803,7 +802,7 @@ tuned to the desired precision.
 The MPLs are a class of special functions with 
 only logarithmic singularities that can be equipped with algebraic
 structures that allow one to algorithmically find relations between
-them~\cite{Goncharov:2010jf,Duhr:2011zq,Duhr:2012fh}. One can then
+them~\cite{Goncharov:2010jf,Duhr:2011zq,Duhr:2012fh,Duhr:2019tlz}. One can then
 construct a basis for the space of MPLs relevant for five-parton
 scattering amplitudes, and this was achieved in~\cite{Gehrmann:2018yef}
 where the so-called pentagon functions were introduced.
@@ -843,16 +842,14 @@ can be performed.
 In order to expose the pole structure of the two-loop amplitudes (see \cref{sec:IR}) we normalize them to
 the corresponding tree-level amplitude if
 it is non-vanishing, or to the corresponding $\CA^{(1)[\NF^0]}(\epsilon=0)$ amplitude otherwise.
+The amplitudes presented in the tables \cref{tab:results4parton,tab:results4parton1L,tab:results5parton1L,tab:results5parton} are normalized to be dimensionless.
 The constant factors are fixed by the expansion in \cref{eq:partials,eq:nfdecomposition}
 
 \subsection{Four-Parton Amplitudes}
 
 We evaluate the four-gluon, two-quark two-gluon and four-quark
 amplitudes at the phase-space point%
-\footnote{Units of energy are chosen arbitrarily.
-  The amplitudes presented in the tables \cref{tab:results4parton,tab:results4parton1L}
-  are normalized to be dimensionless.
-}
+\footnote{Units of energy are chosen arbitrarily.}
 %
 \begin{equation}
   s_{12}=-\frac{3}{4}, \; s_{23}=-\frac{1}{4},
@@ -1009,10 +1006,7 @@ significant digits.
 \subsection{Five-Parton Amplitudes}
 \label{sec:fivepartonRes}
 We evaluate the five-parton amplitudes at the phase-space point%
-\footnote{Units of energy are chosen arbitrarily.
-  The amplitudes presented in \cref{tab:results5parton,tab:results5parton1L}
-  are normalized to be dimensionless.
-}
+
 \begin{equation}
   \begin{aligned}[c]
     p_1 &= \left( \frac{1}{2}, \frac{45}{272}, \frac{45 i}{272}, \frac{1}{2} \right), \\
@@ -1041,10 +1035,7 @@ is explicit.
 In \cref{tab:results5parton1L,tab:results5parton} we show numerical results for
 the bare one-loop and two-loop four-parton helicity amplitudes.
 The results have been obtained with exact values for the 
-integral coefficients\footnote{
-  The exact rational values are obtained via finite-field evaluations and rational reconstruction (see \cref{sec:ff_fp}).
-} 
-and with the master integrals 
+integral coefficients and with the master integrals 
 evaluated to a precision that allows to show 10
 significant digits.
 
@@ -1270,13 +1261,13 @@ The coefficients of master integrals $c_{\Gamma,i}$ in \cref{eq:ampl_master_inte
 functions of external kinematics $\vb*{x}$ (and $D$), 
 and we have set up an algorithm for their exact numerical evaluation.
 Therefore, given a large enough ansatz for the coefficients\footnote{
-  here the vector-exponent notation for monomials is as in \cref{chap:stdtech,chap:numunitarity}
+  Here the vector-exponent notation for monomials is as in \cref{chap:stdtech,chap:numunitarity}.
 }
 \begin{equation}
   c_{\Gamma,i}(\mathbf{x}) = \frac{\sum_{\va{j}} n_{\Gamma,i;\,\va{j}}~\mathbf{x}^{\va{j}}}{\sum_{\va{j}}d_{\Gamma,i;\,\va{j}} ~ \mathbf{x}^{\va{j}}},
 \end{equation}
 in principle, we can evaluate $c_{\Gamma,i}(\vb*{x})$ enough times to generate and solve the systems of linear equations
-for rational numbers $n_{\Gamma,i;\,\va{j}}$ and  $d_{\Gamma,i;\,\va{j}}$. Here we ignore the $D$-dependence, since
+for rational numbers $n_{\Gamma,i;\,\va{j}}$ and  $d_{\Gamma,i;\,\va{j}}$. Here we ignore $D$ dependence, since
 we already know it analytically (see \cref{sec:dimensional_reconstruction} for details).
 However, due to $\order{N^3} $ scaling of the algorithms for solving $N\times N$ linear systems, this is not practical.
 This topic has received a lot of attention recently and more advanced 
@@ -1285,7 +1276,7 @@ which allow to minimize the computational cost of the reconstruction algorithm i
 In any case, the reduction of amplitudes to obtain the coefficients $c_{\Gamma,i}(\vb*{x})$ is computationally expensive,
 and the minimal number of evaluations scales as $\left(\substack{n+R \\ n }\right)$ with the number of variables $n$ and the
 polynomial degree $R$.
-For the reconstruction of the master-integral coefficients of five-parton amplitudes the complexity is prohibitive.
+For the reconstruction of the master-integral coefficients of five-parton amplitudes the complexity is very high.
 
 
 Fortunately, the full physical information about the scattering is contained in finite remainders, defined in \cref{eq:remainderDef}.
@@ -1560,7 +1551,7 @@ using as many evaluations as its rank.
 To manifests the singularities
 of the coefficients $r_i^\pm$, which are controlled by physical properties such
 as the factorization of the amplitude in specific limits,
-we employ the partial-fraction decomposition. 
+we perform a partial-fraction decomposition. 
 This has an effect of simplifying their analytic form,
 and, thus, making the rational numbers smaller.
 
@@ -1581,7 +1572,7 @@ has no more than $\dim{\vec s}$ letters in the denominator.
 The Leǐnartas decomposition is not unique \cite{raichev2012leinartas},
 which, in general, leads to expressions that are not as compact as possible if inconsistent choices
 are made across different terms.
-To this end, we recast the task of partial functioning into the task of multivariate polynomial division,
+To this end, we recast the task of partial fractioning into the task of multivariate polynomial division,
 and we solve the latter with Gröbner basis techniques (see e.g.\ \cite{cox2013ideals}).
 
 We start by introducing auxiliary variables $Q_j$ for each
@@ -1612,7 +1603,7 @@ we have determined all rational numbers from
 the result in a single finite field of cardinality $\mathcal{O}(2^{31})$.
 The only exception is the matrices $M$ in \cref{eq:remainderDecomposition} for the $\NF^0$ remainder of the processes
 $( q^+, {\bar q}^-,Q^-, {\bar Q}^+, g^+ )$ and $( q^+, {\bar q}^-,g^+, g^-, g^+ )$,  where
-in order to rationally reconstruct its
+in order to rationally-reconstruct its
 entries, the numerical computation of the remainder over 100 extra phase-space 
 points in a second finite field was required.
 Furthermore, the expressions are very compact, with a compressed size of 1.6 Mb for
