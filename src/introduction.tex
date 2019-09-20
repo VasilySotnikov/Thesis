@@ -35,9 +35,9 @@ The SM fails to address a wide variety of both theoretical concerns and (mostly 
 \end{itemize}
 The SM is, thus, understood to be a low-energy approximation to a more fundamental theory.
 It is, therefore, of central importance to exactly determine the domain of its validity,
-and establish stringent constraints on potential beyond-the-standard-model extensions.
+and establish stringent constraints on potential beyond-the-standard-model (BSM) extensions.
 
-A key ingredient in this quest is the ability to interpret the measurements extracted from the collider experiments, such as the LHC, as precisely as possible.
+A key ingredient in this quest is the ability to interpret measurements performed in collider experiments, such as the LHC, as precisely as possible.
 These have to be compared to precise predictions of the SM and possibly, new physics models.
 In the absence of such theory predictions, new physics may remain undetected, or the SM backgrounds may be falsely identified as such.
 
@@ -60,13 +60,13 @@ At the characteristic energy scales $\mu$ of the hard scattering at the LHC, the
 is in the perturbative domain, but still is relatively large, compared to the couplings of the electro-weak (EW) interactions.
 Therefore, the first most important corrections are generally expected to be from including higher orders in $\alpha_s(\mu)$.
 In fact, for a considerable number of observables,
-the leading order (LO) results provide only an order-of-magnitude estimates, and are not useful in precision phenomenology.
+the leading order (LO) results provide only order-of-magnitude estimates, and are not useful in precision phenomenology.
 Furthermore, the LO computations, in essence, correspond to the classical limit of QFT, and do not reach into the quantum properties of the SM.
 
 Computations beyond LO involve evaluation of loop amplitudes, and, in general,
 %The former is the subject investigated in this thesis.
 their complexity grows very rapidly with number of kinematical scales (such as Mandelstam invariants and masses)  and loop integrations involved.
-With the current computational technology, at NLO order in $\alpha_s(\mu)$ the processes with at most seven particles in the final state
+With the current computational technology, at NLO order in $\alpha_s(\mu)$ processes with at most seven particles in the final state
 can be considered. One of the main results of this thesis is an example of one such computation:
 the NLO QCD corrections to the production of the $W$ boson, decaying into a pair of leptons, in association with 
 two bottom quarks and up to three additional light jets. We present this computation in \cref{chap:wbb_pheno},
@@ -75,7 +75,7 @@ where we also explain our motivation to consider it.
 
 The technology for the computation of NLO QCD and EW corrections has seen an explosive development
 in the recent decade, and became the standard of the field with many automated public tools available.
-Typically, NLO QCD corrections provide first reliable theoretical predictions.
+Typically, NLO QCD corrections provide first quantitatively-reliable theoretical predictions.
 However, reaching the percent level accuracy of theoretical predictions requires (at least) NNLO QCD corrections.
 Here, the state of the art is processes with only two particles in the final state.
 One of the main bottlenecks of NNLO corrections with three particles in the final state is evaluation of two-loop five-point amplitudes.
@@ -96,9 +96,9 @@ In particular, it is essential for evaluation of amplitudes with external fermio
 We discuss this in detail in \cref{chap:dshel}.
 
 The computational algorithms, which we use in this thesis, are designed with primarily \emph{numerical} applications in mind.
-The main result of the thesis, however, is the \emph{analytic expressions}.
+The main result of the thesis, however, are \emph{analytic expressions}.
 We reconstruct them from samples of exact numerical evaluations of amplitudes over finite fields,
-employing the functional interpolation techniques.
+employing functional interpolation techniques.
 The application of these techniques in the field of perturbative computations in QFT is a rather new idea.
 We, for the first time, systematically applied it to obtain a large number of phenomenologically-relevant amplitudes in an automated fashion. 
 Exploiting the constraints on the analytic structure of the amplitudes, originating
@@ -109,19 +109,14 @@ from physical properties of the underlying theory, was essential to reduce the c
 In \cref{chap:sm}, we provide some theoretical preliminaries required to understand the remaining 
 content of the thesis.
 We review the SM as a QFT, and  the definition of observables we are interested in.
-
 The \cref{chap:stdtech} contains a summary of the standard techniques for computation of multi-loop amplitudes.
 We also introduce some notation, which we use in the following chapters.
-
 In \cref{chap:numunitarity}, we discuss in some detail the numerical unitarity method, which we employ for computation
 of one- and two-loop amplitudes in this thesis.
-
 in \cref{chap:dshel}, we describe our solution to the problem of numerical evaluation of multi-loop helicity amplitudes in dimensional regularization.
-
 In \cref{chap:wbb_pheno}, we present the NLO QCD predictions for the \Wbbn{} production at the LHC.
 We also provide an overview of the new automated implementation of the one-loop numerical unitarity method with massive particles in the one-loop matrix-element generator \BlackHat{}.
-
-Finally, in \cref{chap:5parton} we present the main result of the thesis: the analytic form of all two-loop five-point amplitudes in QCD.
+Finally, in \cref{chap:5parton} we present the main result of the thesis: the analytic form of all two-loop five-point amplitudes in QCD in the leading-color approximation.
 We provide some details of our implementation of the numerical unitarity method.
 We give numerical benchmark evaluations of the amplitudes, 
 and then describe the reconstruction of analytic expressions from numerical evaluations.
