@@ -21,7 +21,7 @@
 \date{\today}
 \maketitle
 
-\listoftodos
+%\listoftodos
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
@@ -37,11 +37,49 @@
 %\clearpage
 %%% Platz für Veröffentlichungen und Konferenz-Beiträge
 
-\section*{Declarations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Kurzfassung aus der Datei "src/kurzfass"
+\cleardoublepage
+    %\thispagestyle{plain}
+\pdfbookmark[0]{Abstract}{Abstract}
+\chapter*{Abstract\markboth{Abstract}{}}
+\vspace{4ex}
+%\addcontentsline{toc}{chapter}{Abstract}
+\input{src/abstract}
+\cleardoublepage
+%
 
-The results presented in this thesis have been published in the following works.
 
-\todo{Do I need to declare this here? Or a just publication list?} 
+\chapter*{List of Publications}
+\vspace{2ex}
+
+The results presented in this thesis are based on the following articles:
+
+\begin{enumerate}
+  \item 
+    F.R.~Anger, F.~Febres Cordero, H.~Ita and V.~Sotnikov, 
+    \textit{``NLO QCD Predictions for $Wb\bar b$ Production in Association with up to Three Light Jets at the LHC''},
+    \href{https://dx.doi.org/10.1103/PhysRevD.97.036018}{Phys.~Rev.~\textbf{D97}, 036018 (2018)},
+    \texttt{\href{https://arxiv.org/abs/1712.05721}{arXiv:1712.05721 [hep-ph]}}.
+
+  \item
+    F.R.~Anger and V.~Sotnikov, \textit{``On the Dimensional Regularization of QCD Helicity Amplitudes With Quarks''},
+    \texttt{\href{https://arxiv.org/abs/1803.11127}{arXiv:1803.11127 [hep-ph]}}.
+
+  \item 
+  S.~Abreu, F.~Febres Cordero, H.~Ita, B.~Page and V.~Sotnikov,
+    \textit{``Planar Two-Loop Five-Parton Amplitudes from Numerical Unitarity,''}
+    \href{https://doi.org/10.1007/JHEP11(2018)116}{JHEP \textbf{1811}, 116 (2018)},
+    \texttt{\href{http://arxiv.org/abs/arXiv:1809.09067}{arXiv:1809.09067 [hep-ph]}}.
+
+  \item 
+    S.~Abreu, J.~Dormans, F.~Febres Cordero, H.~Ita, B.~Page and V.~Sotnikov,
+    \textit{``Analytic Form of the Planar Two-Loop Five-Parton Scattering Amplitudes in QCD,''}
+    \href{https://doi.org/10.1007/JHEP05(2019)084}{JHEP \textbf{1905}, 084 (2019)},
+    \texttt{\href{http://arxiv.org/abs/arXiv:1904.00945}{arXiv:1904.00945 [hep-ph]}}.
+\end{enumerate}
+
+
 %Partial results of the presented work have been published/submitted prior to
 %submission of this thesis. The results presented in Chapter \ref{chap:fdf} are based on the
 %following manuscript:
@@ -107,14 +145,6 @@ The results presented in this thesis have been published in the following works.
 %%\end{itemize}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Kurzfassung aus der Datei "src/kurzfass"
-\cleardoublepage
-\chapter*{Abstract\markboth{Abstract}{}}
-%\addcontentsline{toc}{chapter}{Abstract}
-\input{src/short_version}
-\cleardoublepage
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
@@ -122,6 +152,7 @@ The results presented in this thesis have been published in the following works.
 %%% Inhaltsverzeichnis
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents
+\cleardoublepage
 %
 
 %%% Umsteigen auf Arabische Seitenzahlen
@@ -212,7 +243,7 @@ The results presented in this thesis have been published in the following works.
 %%% Danksagungen aus Datei "src/danksag"
 \chapter*{Acknowledgments\markboth{Acknowledgments}{}}
 \addcontentsline{toc}{chapter}{Acknowledgments}
-\input{src/danksag}
+\input{src/acknowledgments}
 %
 
 
