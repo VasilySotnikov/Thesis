@@ -1,13 +1,13 @@
 Understanding the fundamental principles of nature has been one of the most
-longstanding and remarkable adventures of the human civilization.
+longstanding and remarkable adventures of human civilization.
 Our perception of nature has undoubtedly advanced to an incredible height,
 nevertheless, it seems there is still a lot to be done regarding the most fundamental questions.
 It is the foremost objective of this thesis, to
 make a tiny contribution in this direction, in a hope that together these contributions add up to eventually make a bigger step forward.
 
-In the beginning of the 21\textsuperscript{st} century, our best description of all combined experimental data fits into the picture of elementary particles and their local interactions.
+At the beginning of the 21\textsuperscript{st} century, our best description of all combined experimental data fits into the picture of elementary particles and their local interactions.
 Elementary particles, in turn, are excitations of the underlying quantum fields, which occupy the entirety of a background four-dimensional space-time.
-\emph{Quantum field theory} (QFT) is the formal framework that allows to formulate this picture quantitatively.
+\emph{Quantum field theory} (QFT) is the formal framework that allows formulating this picture quantitatively.
 QFT provides solid ground to a very intuitive idea,
 that, to probe the most elementary structures, one needs to observe the properties of very high-energetic interactions of particles.
 The shorter the length scale of phenomena in interest, the higher the energy required.\footnote{
@@ -19,7 +19,7 @@ The Standard Model of particle physics (SM) is the most successful QFT to date.
 It has been scrutinized experimentally in the last decades, and the
 last missing piece required for its consistency, the Higgs particle, has been discovered recently by the most
 powerful laboratory for studying  the high-energy collisions to date, the \emph{Large Hadron Collider} (LHC) at CERN.
-We therefore, for the first time in the history, have a model which can be, at least in principle, extrapolated to the energy scales many orders of magnitude higher than
+We, therefore, for the first time in history, have a model which can be, at least in principle, extrapolated to the energy scales many orders of magnitude higher than
 any characteristic scales of the model itself.
 On the other hand, it is also clear, that the SM is not a complete theory.
 The SM fails to address a wide variety of both theoretical concerns and (mostly astrophysical) observations, such as
@@ -46,7 +46,7 @@ Broadly speaking, they can be classified into the long-distance (or low-energy) 
 the strong-coupling regime of quantum chromodynamics (QCD), the short-distance hard scattering, and
 the cross-over from one to another.
 Each of them reaches into a particular corner of QFT and represents unique challenges.
-In this thesis we focus on the predictions for the \emph{hard scattering} process (we give a more precise definition of objects we are targeting in \cref{sec:hadcoll}).
+In this thesis, we focus on the predictions for the \emph{hard scattering} process (we give a more precise definition of objects we are targeting in \cref{sec:hadcoll}).
 %which is where the fundamental structure of the SM is encoded to.
 We obtain these predictions from the first principles through the perturbative expansion in the coupling constants of the SM, thus, directly linking the SM to measurements.
 Naturally, the main source of theoretical uncertainties is then the truncation
@@ -57,8 +57,8 @@ At the characteristic energy scales $\mu$ of the hard scattering at the LHC, the
 is in the perturbative domain, but still is relatively large, compared to the couplings of the electroweak (EW) interactions.
 Therefore, the most important corrections are generally expected from higher-order terms in $\alpha_s(\mu)$.
 In fact, for a considerable number of observables,
-the leading order (LO) results provide only order-of-magnitude estimates, and are not useful in precision phenomenology.
-Furthermore, the LO computations, in essence, correspond to the classical limit of QFT, and do not take into account
+the leading order (LO) results provide only order-of-magnitude estimates and are not useful in precision phenomenology.
+Furthermore, the LO computations, in essence, correspond to the classical limit of QFT and do not take into account
 genuine quantum effects that arise from loops in perturbation theory.
 
 Including corrections beyond LO requires the computation of loop amplitudes, and, in general,
@@ -71,29 +71,29 @@ two bottom quarks and up to three additional light jets.
 This process is one of the main irreducible backgrounds to the associated 
 production of the $W$ boson and the Higgs boson, decaying into a pair of bottom quarks.
 The latter is the most common decay channel of the Higgs boson, which is, however, drown in the QCD background.
-The associated production with the $W$ boson is be used to identify the Higgs's decay better.
-To carry out the computation of the required matrix elements, we have implemented handling of massive final states in the numerical unitarity approach.
+The associated production with the $W$ boson is used to identify the Higgs's decay better.
+To carry out the computation of the required matrix elements, we have implemented the handling of massive final states in the numerical unitarity approach.
 We present this computation in \cref{chap:wbb_pheno}.
 
 The technology for the computation of NLO QCD and EW corrections has seen an accelerated development
 in the recent decade, and became the standard of the field with many automated public tools available.
 Typically, NLO QCD corrections provide first quantitatively-reliable theoretical predictions.
-However, reaching percent level accuracy of theoretical predictions requires (at least) NNLO QCD corrections.
+However, reaching the percent level accuracy of theoretical predictions requires (at least) NNLO QCD corrections.
 Here, the state of the art are processes with two particles in the final state.
-One of the main bottlenecks of NNLO corrections with three particles in the final state is evaluation of two-loop five-point amplitudes.
+One of the main bottlenecks of NNLO corrections with three particles in the final state is the evaluation of two-loop five-point amplitudes.
 The central result of this thesis is the first computation of all two-loop five-point amplitudes required for the production
 of three jets at hadron colliders, which opens the way to precision multi-particle physics at the LHC.
 In particular, the ratio of jet cross sections can be used in a precise measurement of the strong coupling constant.
 We present this computation in  \cref{chap:5parton}.
 
-The standard techniques of evaluation of multi-loop amplitudes require too much computational resources,
+The standard techniques of evaluation of multi-loop amplitudes require too many computational resources,
 when applied to five-point two-loop amplitudes in QCD.
-Therefore, development and implementation of new algorithms were required.
-In this thesis we employ the \emph{numerical unitarity} method, which
+Therefore, the development and implementation of new algorithms were required.
+In this thesis, we employ the \emph{numerical unitarity} method, which
 was originally formulated in the context of one-loop computations,
 and has been recently extended for multi-loop applications.
 It converts the consistency properties of the scattering amplitudes into a computational tool.
-Furthermore, it is straightforwardly formulated as a numerical algorithms, which allows to avoid
+Furthermore, it is straightforwardly formulated as a numerical algorithm, which allows avoiding
 the problem of large intermediate expressions in analytic computations.
 We describe the numerical unitarity method in \cref{chap:numunitarity}.
 
@@ -109,13 +109,13 @@ This is, perhaps, the main contribution to the numerical unitarity method by the
 We discuss this in detail in \cref{chap:dshel}.
 
 The computational algorithms, which we use in this thesis, are designed with primarily \emph{numerical} applications in mind.
-The main result of the thesis, however, are \emph{analytic expressions} for scattering amplitudes.
+The main results of the thesis, however, are \emph{analytic expressions} for scattering amplitudes.
 We reconstruct them from samples of exact numerical evaluations of amplitudes,
 employing functional interpolation techniques.
 The application of these techniques in the field of perturbative computations in QFT is a rather new idea.
 We, for the first time, systematically applied it to obtain a large number of phenomenologically-relevant amplitudes in an automated fashion. 
 Exploiting the constraints on the analytic structure of the amplitudes, originating
-from physical properties of the underlying theory, was essential to reduce the complexity of the reconstruction.
+from the physical properties of the underlying theory, was essential to reduce the complexity of the reconstruction.
 
 \subsubsection{Structure of Thesis}
 
