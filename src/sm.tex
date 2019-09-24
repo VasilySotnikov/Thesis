@@ -49,8 +49,8 @@
 %SM. In particular, we aim at illustrating the concepts of gauge
 %invariance and spontaneous symmetry breaking.
 
-In this chapter, we give a very brief overview of the theoretical framework
-for the work presented in this thesis, as well as the basic notions we
+In this chapter, we give a brief overview of the theoretical framework
+for the work presented in this thesis, as well as the basic notions that we
 will operate with in the following chapters.
 For any details regarding the content of this chapter we refer to many excellent textbooks, such as \cite{PeskinS,Schwartz:2013pla}.
 
@@ -58,12 +58,12 @@ For any details regarding the content of this chapter we refer to many excellent
 \section{The Standard Model}
 
 The \emph{Standard Model} of particle physics (SM) is the best known description of three of the
-four known fundamental forces: electromagnetism, weak, and strong.
+four known fundamental forces: the electromagnetic, weak, and strong force.
 Together with General Relativity as a theory of gravity,
-they describe the majority of observed phenomena of nature.
+they describe the majority of observed phenomena in particle physics and astronomy.
 
-The SM is a local quantum field theory (QFT) formulated on a flat background Minkowski space-time in $3+1$ dimensions.
-As such, it's properties are described by the \emph{action}
+The SM is a local quantum field theory formulated in a background Minkowski space-time.
+The field theory's properties are described by the \emph{action}
 \[
   S = \int \dd[4]{x}~\L(x),
 \]
@@ -77,7 +77,7 @@ The fields are classified according to irreducible representations of the Poinca
 which determine their kinematical properties, such as spin and statistics.
 
 
-Schematically, the Lagrangian of the SM can split into four sectors,
+The Lagrangian of the SM can split into four sectors,
 \begin{equation}
   \L_\SM = \L_\YM + \L_\ferm + \L_\PH + \L_\Yuk,
 \end{equation}
@@ -86,14 +86,14 @@ and we will briefly discuss each of them in this section.
 \subsection{Gauge Structure}
 \label{sec:giym}
 
-The interactions of particles are realized as local gauge symmetries of the action (or the Lagrangian).
+The interactions of particles are associated to local gauge symmetries of the action (or the Lagrangian).
 In particular, the gauge group of the SM is
 \begin{align}\label{eq:SMgauge}
   SU(3)_C\otimes SU(2)_W \otimes U(1)_Y,
 \end{align}
-where $SU(2)_W \otimes U(1)_Y$ describes the theory of \emph{electroweak} (EW)
+where $SU(2)_W \otimes U(1)_Y$ is linked to the theory of \emph{electroweak} (EW)
 interaction also known as the Glashow-Weinberg-Salam theory \cite{Glashow1961a,Weinberg1967a,Salam1968,Glashow1970},
-and $SU(3)_C$ describes the strong force, or \emph{Quantum Chromodynamics} (QCD).
+and $SU(3)_C$ is linked to the strong force, or \emph{Quantum Chromodynamics} (QCD).
 
 One of the consequences of the gauges symmetry is the existence of the \emph{gauge fields}, which
 are associated to massless vector particles, \emph{gauge bosons}, placed in the adjoint representation of the corresponding gauge group.
@@ -118,9 +118,10 @@ with the field-strength tensors
   \end{align}
 \end{subequations}
 corresponding to the gauge groups $SU(3)_C$, $ SU(2)_W$,  and $ U(1)_Y$ accordingly.
-Here $f^{abc}$ and $g_s$ are the structure constants and the coupling of $SU(3)_C$,
-and $\varepsilon^{i,j,k}$ are those of $ SU(2)_W$. 
-We will denote the coupling of the abelian group $U(1)_Y$ as $g^\prime$.
+Here $f^{abc}$ and $g_s$ are the structure constants and the coupling of $SU(3)_C$ respectively.
+Similarly $\varepsilon^{i,j,k}$ and $g$ are those of $ SU(2)_W$ gauge group. 
+We will denote the coupling of the abelian group $U(1)_Y$ as $g^\prime$,
+which does not show up here because of the absence of self-interactions.
 
 \subsection{Matter}
 
@@ -147,15 +148,17 @@ however this is still puzzling from a theoretical perspective.
 The matter contents is summarized in \cref{tab:smmatter}.
 
 The matter sector of the SM Lagrangian contains the kinematic and interaction
-terms of all it's fermions,
+terms of all its fermions,
 \begin{equation}
   \L_\ferm = i\overline\Psi_L\slashed{D}\Psi_L 
   + i\overline\psi_{\Pl_\rR}\slashed{D}\psi_{\Pl_\rR}
   + i\overline\Psi_Q\slashed{D}\Psi_Q
   + i\overline\psi_{u_\rR}\slashed{D}\psi_{u_\rR}
-  + i\overline\psi_{d_\rR}\slashed{D}\psi_{d_\rR},
+  + i\overline\psi_{d_\rR}\slashed{D}\psi_{d_\rR}.
 \end{equation}
-where the interactions are described by the \emph{covariant derivative} $\slashed{D}\coloneqq D_{\mu}\gamma^\mu$, which is given by
+The cubic interaction terms arise from the \emph{covariant derivative} 
+$$\slashed{D}\coloneqq D_{\mu}\gamma^\mu,$$
+where $\gamma^{\mu}$ are Dirac gamma matrices, and $D_{\mu}$ is given by
 \begin{equation}
   D_\mu = \partial_\mu
   +i\gs T^a G^a_\mu
@@ -168,7 +171,7 @@ Here $L=(\nu_{\Pl_\rL},\Pl_{\rL})$ are the left-handed doublets of leptons $\Pl=
 $Q=(u_\rL,d_\rL)$ are the left-handed doublets of quarks $u={u,c,t}$ and $d={d,s,b}$.
 The singlets of $SU(2)_W$ $\Pl_\rR$, $u_\rR$, $d_\rR$ are their right-handed partners.
 The Pauli matrices $I^i_W \coloneqq \frac{\sigma_i}{2}$ and the Gell-Mann matrices $T^a \coloneqq \frac{\lambda^a}{2}$ are the fundamental generators of
-the $SU(2)$ and $SU(3)$ groups respectively. The quantum number $Y_W$ is the weak hypercharge.
+$SU(2)$ and $SU(3)$ respectively. The quantum number $Y_W$ is the weak hypercharge.
 
 
 
@@ -205,9 +208,9 @@ the $SU(2)$ and $SU(3)$ groups respectively. The quantum number $Y_W$ is the wea
 \label{sec:gws}
 
 Mass terms for gauge bosons and fermions are ruled out by gauge invariance.
-One way to allow particle masses, while still maintaining the action gauge-invariant, is through 
-\emph{spontaneous symmetry breaking} or the Higgs mechanism \cite{Higgs1964b,Higgs1964,Englert1964,Higgs1966}, in which
-the symmetry group of the vacuum state of the theory is a subgroup of the full gauge group. 
+One way to generate particle masses, while still maintaining the gauge invariance of the action, is through 
+\emph{spontaneous symmetry breaking} via the Higgs mechanism \cite{Higgs1964b,Higgs1964,Englert1964,Higgs1966}, in which
+the symmetry group of the vacuum state is a subgroup of the full gauge group. 
 
 In the SM, the EW subgroup  $SU(2)_W \otimes U(1)_Y$ is spontaneously broken
 to $U(1)_\QED$ by the vacuum expectation value $\expval{\Phi}$ of a complex scalar field
@@ -243,7 +246,7 @@ with the weak mixing angle $\theta_W$ and the unit electric charge $e$ given by
 \end{equation}
 The fields for charged weak bosons $W^{\pm}$ are the given by
 \begin{equation}
-  W^\pm_\mu = (W^1_\mu\mp i W^2_\mu)/\sqrt{2}
+  W^\pm_\mu = (W^1_\mu\mp i W^2_\mu)/\sqrt{2}.
 \end{equation}
 
 
@@ -256,17 +259,16 @@ The positive value of $\mu^2$ generates a non-vanishing vacuum expectation value
 \begin{align}
 \expval{\Phi}= \frac{1}{\sqrt{2}}\pmqty{0\\v}, \qquad v \coloneqq  2\sqrt{\frac{\mu^2}{\lambda}}.
 \end{align}
-We then expand the field $\Phi$ around it's vacuum state, and reparametrize $\phi_0$ in terms
-of a real scalar field $H$, and a Goldstone boson field $\chi$,
+We then expand the field $\Phi$ around its vacuum configuration, and reparametrize $\phi_0$ in terms
+of real scalar fields $H$ and $\chi$,
 \begin{align} \label{eq:Phiparam}
 \Phi=\pmqty{\phi^+\\\frac{1}{\sqrt{2}}\left(v+H+i\chi\right)},
 \end{align}
-The four degrees of freedom of the Higgs field are, thus, distributed as follows:
+The four degrees of freedom of the Higgs field are distributed as follows:
 three are absorbed into the longitudinal polarizations of the $W^{\pm}$ and $Z$ bosons,
 which allows them to become massive,
 and the remaining one degree of freedom $H$ is the scalar Higgs boson.
-
-For the Lagrangian of the  Higgs sector we then obtain
+In fact, for the Lagrangian of the  Higgs sector we then obtain
 \begin{multline}
   \L_{\PH} 
   = \frac{1}{2}(\partial H)^2 
@@ -297,10 +299,9 @@ Fermions couple to the Higgs field $\Phi$ through Yukawa couplings as
 \end{equation}
 where $\tilde\Phi= i~\sigma^2\Phi^*=((\phi^0)^*,-\phi^-)^\rT$,
 and the matrices $G_f$ ($f=\Pl,u,d$) are unconstrained.
-The \cref{sm:eq:yuk}, evidently, contains bilinear terms, but they cannot be identifies as masses yet,
-since they contain mixing.
-To identify the mass eigenstates of the fermion fields, we 
-rotate them with unitary matrices $U^{f_{\rL}}$ and $U^{f_{\rR}}$,
+Once the Higgs field is expanded around its vacuum expectation value the \cref{sm:eq:yuk}, evidently, contains non-diagonal bilinear terms.
+To identify the mass eigenstates of the quarks fields, we 
+rotate the left- and right-handed fields with unitary matrices $U^{f_{\rL}}$ and $U^{f_{\rR}}$ respectively,
 such that the matrices $G_f$ are diagonalized,
 \begin{align}\label{eq:diagyuk}
   U^{f_{\rL}}G_{f}\left(U^{{f}_{\rR}}\right)^\dagger = \frac{\sqrt{2}}{v} \pmqty{m_{f_1} &0&0\\0&m_{f_2}&0\\0&0&m_{f_3} }. 
@@ -321,7 +322,7 @@ For example the coupling of the $W^+$-boson to quarks, takes the form
 \begin{equation}
   \bar{u}_\rL V \gamma^\mu d_\rL \, W_\mu^+ ~+~ \text{c.c.}, \qquad V = \qty(U^{u_{\rL}})^\dagger U^{d_{\rL}},
 \end{equation}
-where $V$ is the famous Cabibbo-Kobayashi-Maskawa (CKM) matrix.
+where $V$ is the Cabibbo-Kobayashi-Maskawa (CKM) matrix.
 After taking into account all symmetries, the CKM matrix has four real degrees of freedom.
 
 If we do not include the right-handed neutrinos, the neutrinos remain massless\footnote{
@@ -341,7 +342,7 @@ employing the Faddeev-Popov method \cite{Faddeev:1967fc} or
 BRST symmetry \cite{Becchi:1975nq,Tyutin:1975qk}.
 The procedure is complicated by the fact, that only 
 field configurations non-equivalent under gauge symmetry should be included in the path integral.
-This means that the naive integration with the ``classical'' action is meaningless.
+This means that the naive integration with the ``classical'' action is ill-defined.
 To eliminate the gauge-equivalent configurations, a gauge-fixing term $\L_\text{fix} $ is added to the original
 ``classical'' Lagrangian $\L_\text{cl} $.
 For example, in the case of QCD,
@@ -353,14 +354,14 @@ However, it keeps one unphysical degree of freedom, which is compensated by addi
 \begin{equation}
     \L_\text{cl} \longrightarrow \L_\text{Mod}  = \L_\text{cl}  - \frac{1}{2\xi}(\partial^\mu G_\mu^a)(\partial^\nu G_\nu^a) - \partial^\mu \bar{\omega}^a \partial_\mu \omega^a + g_s f^{abc}\qty(\partial^\mu \bar{\omega}^a) \omega^b G_\mu^c, 
 \end{equation}
-which behave like fermions, in that they are represented by Grassmann (anti-commuting) numbers in the path integral.
-It can then be shown, that the correlation functions, computed with $\L_\text{Mod} $, do not depend on the choice of gauge fixing.
+which behave like fermions, in that they are represented by Grassmann (anti-commuting) fields in the path integral.
+It can then be shown using the BRST symmetry that the correlation functions, computed with $\L_\text{Mod} $, do not depend on the choice of gauge fixing.
 
 With the BRST-symmetry-based methods, the quantization procedure can be generalized 
 to a class of non-covariant gauge-fixing choices, such as \emph{axial} or \emph{light-cone} gauges.
 The advantage of this class of  gauges is that the ghost terms decouple, and the corresponding contributions can be completely discarded in computations.
 In this thesis we will employ unitarity-based computational methods, which are  formulated in terms of gauge-invariant building blocks.
-This will allow us to never consider ghost contributions explicitly.
+This will allow us to discard ghost contributions explicitly.
 
 \section{Renormalization and Running Couplings}
 \label{Renormalization}
@@ -387,7 +388,7 @@ Another example is the QED coupling constant, which can be defined by the large-
 This is called \emph{on-shell} renormalization.
 
 In other cases it is not possible to find an observable, to which the bare parameter can be tied.
-Instead, one can simply define the renormalized parameter at an arbitrary \emph{renormalization scale} $\mu$, given a renormalization prescription, such as \MSbar.
+Instead, one can conveniently define the renormalized parameter at an arbitrary \emph{renormalization scale} $\mu$, given a renormalization prescription, such as \emph{modified minimal subtractions} (\MSbar).
 All observable quantities, predicted from the theory, are then evaluated in terms of this renormalized parameter.
 They must not, however, depend on the renormalization scale.
 This fact is expressed in terms of the so-called \emph{renormalization group equations} (RGE).
@@ -404,7 +405,7 @@ The solution of the one-loop RGE for the $\alpha_s$, defined in the $\MSb$ schem
 given some initial scale $\mu_0$.  
 Here $\NC$ denotes the number of colors and $\NF$ the number of flavors of quarks, which are considered massless.
 We observe, that at large scales the effective strong coupling constant becomes very small, independent of the initial value $\alpha_s(\mu_0^2)$.
-This implies, that at very high energies QCD behaves as a weakly-interacting theory. This phenomenon is known as \emph{asymptotic freedom}.
+This implies, that at high energies QCD behaves as a weakly-interacting theory. This phenomenon is known as \emph{asymptotic freedom}.
 This fact enables the usage of perturbation theory to predict the scattering of strongly-interacting particles at hadron colliders.
 On the other hand, at low energies ($\mu \sim 250~\text{MeV}$) the effective strong coupling becomes large, and the application of perturbation theory is not justifiable.
 This gives a hint towards the explanation of why free gluons and quarks cannot be observed.
@@ -427,7 +428,7 @@ is directly connected to the number of times $N$ this event has occurred in a co
 with the properties of the flux of colliding beams are described by the \emph{luminosity} $\mathcal{L}$.
 The luminosity is proportional to the square of the number of particles passing through a unit area per unit time.
 Evidently, the cross section is a directly measurable quantity in a scattering experiment.
-It is also one of the limited number of quantities which have a clean theoretical interpretation in the QFT framework.
+It is also one of the quantities which have a clean theoretical interpretation in the QFT framework.
 In this section, we review how the cross section can be computed from a given Lagrangian.
 
 
@@ -459,7 +460,7 @@ The matrix elements of the nontrivial part of the scattering matrix are called \
 \begin{align} \label{eq:matrix_element}
   \bra{f}{\mathcal{T}}\ket{i} =  (2\pi)^4 \delta^{(4)}(p_i- p_f) A_{i\to f},
 \end{align}
-where we factored off explicitly the momentum-conserving $\delta$-function.
+where $p_i$ and $p_f$ are the sums of momenta of the initial and final states correspondingly, and we factored off explicitly the momentum-conserving $\delta$-function.
 %The
 %corresponding fields to the asymptotic states obey free equations of
 %motion and are related to the interaction field by
@@ -495,17 +496,17 @@ For particles with spin, the corresponding state is projected out from the state
 The correlation functions in interacting field theories usually cannot be evaluated exactly,
 and are expanded perturbatively in coupling constants.
 Each term in this expansion is expressed as sums of Feynman diagrams,
-which consist of combinations of propagators, vertices.
+which consist of combinations of propagators and vertices.
 And the latter can be directly derived from the Lagrangian in path-integral formalism.
 The application of the LSZ reduction then amounts to replacing all one-particle-reducible contributions from the corresponding correlation function
-by the on-shell states.
+by the on-shell states, and dividing by suitable field renormalization factors.
 
 For any choice of initial and final states $\ket{i},\ket{f} \in \mathcal{H}$, the scattering amplitude can be computed in this way.
 However, the corresponding cross section is not necessarily an observable. 
 There are two general reasons for why this can happen:
 \begin{enumerate}
   \item The degrees of freedom, associated to the in- and out- fields in perturbation theory, do not describe the propagating
-    degrees of freedom of the full theory correctly. This is, for example, indeed what happens in the QCD due to confinement.
+    degrees of freedom of the full theory correctly. This is what happens in the QCD due to confinement.
     It is the hadrons which are found in the initial and final states, not quarks and gluons.
 
   \item If there are massless particles in a model\footnote{or particles with a very small mass, compared to some characteristic scale}, they can be produced with infinitesimal energy.
@@ -576,7 +577,7 @@ In this case, the observable defined by the measurement function $J$ is called \
 One of the commonly used infrared-safe observables, which we will also employ in this thesis,
 is when $J$ is prescribed by a \emph{jet algorithm}. A jet algorithm clusters partons
 into some number of \emph{jets}. This number depends on the details of the algorithm.
-This leads to a notion of the \emph{jet cross section}. Compared to parton cross sections, it is infrared by construction.
+This leads to a notion of the \emph{jet cross section}. Compared to parton cross sections, it is infrared safe by construction.
 The experimental data and the theoretical predictions can only be compared when the same jet algorithm is used consistently between them.
 
 In \cref{eq:IRsafeXS} the Lorentz-invariant phase-space measure of $n$ external particles $\dd\Phi_n$ is defined as
@@ -677,18 +678,18 @@ where $\ket{\{n\}}$ is an $n$-particle state, we obtain
   A_{i\to f} - A_{f \to i}^\star = i (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ A_{i \to \{n\}}^{\phantom{\star}} A^\star_{f \to \{n\}}.
 \end{equation}
 where the matrix element $A_{i \to f}$ is defined by \cref{eq:matrix_element}. 
-In we choose $\ket{i} = \ket{f}$ we get 
+If we choose $\ket{i} = \ket{f}$ we get 
 \begin{equation} \label{eq:optical_theorem}
   2 \Im{A}_{i\to i} = (2\pi)^4 \sum_n \int \dd{\Phi_n} \delta^{(4)} (p_i - p_{\{n\}}) ~ \Abs{A_{i \to \{n\}}^{\phantom{\star}}}.
 \end{equation}
 This result is known as the \emph{optical theorem}. 
 If we expand both sides of \cref{eq:optical_theorem} in coupling constants, we get an important
 consequence: the imaginary part of an $L$-loop amplitude is given by a product of amplitudes with $< L$ loops.
-Thus unitarity supplies relations between different orders of perturbation theory.
+Thus unitarity implies relations between different orders of perturbation theory.
 
 Exploiting the fact the imaginary part of a propagator is given by
 \begin{equation}
-  \Im\frac{1}{p^2-m^2+i(\varepsilon \to 0)} = -\pi\delta(p^2-m^2),
+  \Im\frac{1}{p^2-m^2+i \varepsilon} \xrightarrow{\varepsilon \to 0} -\pi\delta(p^2-m^2),
 \end{equation}
 as a generalization of \cref{eq:optical_theorem} it can be shown \cite{Eden:1966dnq,Cutkosky1960}
 that imaginary parts of loop amplitudes are always generated when some of intermediate particles go on-shell.
@@ -704,10 +705,7 @@ then can be obtained \cite{Cutkosky1960} by summing over all possible ways to \e
 
 The optical theorem is closely related to
 a more universal factorization property of amplitudes \cite{Weinberg:1995mt}:
-\begin{mdframed}
-  \centering
-  \emph{All} amplitudes have poles when intermediate particles can go on-shell.
-\end{mdframed}
+\emph{all} amplitudes have poles when intermediate particles can go on-shell.
 If the model contains a one-particle state with the mass $m_\xi$ (which can be zero),
 and for some combination of momenta $p_\xi \coloneqq  \sum_{k=1}^{n} p_k$, $p_\xi^2 \to m_\xi^2$,
 an amplitude of $n$ particles $A_n(1,\ldots{},n)$ factorizes as
@@ -740,18 +738,17 @@ Note, that here we do not have any phase-space integrals, as in \cref{eq:optical
 \end{figure}
 
 
-The exact singularity as expected cannot be reached in any physical process.
-However if we analytically continue an amplitude to complex external momenta,
-it is possible to choose them to hit the pole explicitly
-while still satisfying on-shell conditions for external states.
+The exact singularity, as expected, does not appear in any physical process.
+However, in perturbation theory we can analytically continue amplitudes to complex external momenta,
+which we can always arrange to hit the poles explicitly while still satisfying on-shell conditions for external states.
 
 
 \subsection{On-Shell Recursion}
 \label{sec:BCFW}
 
 The universal factorization  property expressed by \cref{eq:factorization_pole} is independent of perturbation theory. 
-For tree-level amplitudes however the factorization can be discovered rather straightforwardly by inspection,
-although it might be obscured in the expressions found within the standard Feynman-diagrammatic approach.
+For tree-level amplitudes however the factorization can be discovered rather straightforwardly by inspection.
+%although it might be obscured in the expressions found within the standard Feynman-diagrammatic approach.
 
 The factorization of tree amplitudes can be converted into an algorithm to evaluate them.
 This is done through the systematic exploration of the amplitude's factorization limits such that
@@ -780,11 +777,11 @@ Each integral in \cref{eq:cut_constructable_ampl} has unique discontinuities.
 So the discontinuities of the loop amplitude on the left, 
 evaluated as phase-space integrals over products of on-shell tree amplitudes as follows from unitarity,
 can be matched to those of integrals to obtain equations for the integral coefficients.
-However, in general, \emph{only} unitarity is not enough to obtain the full amplitude.
+%However, in general, \emph{only} unitarity is not enough to obtain the full amplitude.
 
-It is possible to generalize application of cuts given by \cref{eq:cut} to
+In perturbation theory it is possible to generalize the application of cuts given by \cref{eq:cut} to
 obtain multi-channel discontinuities \cite{Britto:2004nc}.
-For example see \cref{fig:quad_cut}.
+For an example see \cref{fig:quad_cut}.
 Note that this kind of cuts are not direct consequences of unitarity of the $\mathcal{S}$-matrix (\cref{eq:unitarity_smatrix}), hence the name \emph{generalized} cuts.
 
 \begin{figure}[ht]
@@ -809,7 +806,7 @@ As a next step one can use the factorization of amplitudes on the cuts at the \e
 it to a basis of loop-momentum polynomials in numerators (see \cref{fig:quad_cut}),
 instead of integral coefficients \cite{Giele:2008ve,Ellis:2007br,Ellis:2008ir,Berger:2008sj}.
 This matching procedure is intimately connected to a purely algebraical method of integral reduction known as OPP \cite{Ossola:2006us}.
-This method uses the cut conditions \cref{eq:cut} to set some propagators to zero and triangularize linear systems for determining the basis coefficients.
+This method uses the cut conditions \cref{eq:cut} to set some propagators on-shell and triangularize linear systems for determining the basis coefficients.
 It can be applied individually to each Feynman diagram or a sum thereof, thus having very little to do with factorization and unitarity.
 The flexibility and efficiency of the OPP reduction allows a straightforward automation of the computation of generic one-loop amplitudes
 (see e.g.\ \cite{Berger:2008ag,Berger:2008sj,Cullen:2011ac,Mastrolia:2010nb,Ossola:2007ax}).

@@ -1,4 +1,4 @@
-The aim of this chapter is to give a brief overview of standard computational methods for 
+The aim of this chapter is to give a brief overview of standard computational methods for the
 evaluation of multi-loop scattering amplitudes, and establish notation at the same time.
 
 \section{Dimensional Regularization}
@@ -7,27 +7,31 @@ evaluation of multi-loop scattering amplitudes, and establish notation at the sa
 
 As we discussed in \cref{sec:hadcoll}, loop amplitudes exhibit UV and IR divergences,
 which must cancel in computations of any observable quantity.
-However, we have to regularize divergences in intermediate stages.
-In principle, any self-consistent regularization prescription should suffice.
+Thus, we regularize divergences in intermediate stages and leave the cancellations to the end. 
+In principle, any consistent regularization prescription should suffice.
 However, certain features of a regularization method such as breaking of Poincaré invariance or gauge symmetries
-can impact dramatically it's computational efficiency.
+can impact dramatically its computational efficiency.
 For this reason, many different regularization schemes have been studied (for a recent review see \cite{Gnendiger:2017pys}).
 
 In this thesis, we regularize divergences by analytically continuing the dimensionality of space-time from four to $D = 4 - 2\eps$ dimensions.
-Divergences manifest themselves in the no-regularization limit $D\to4$ (or $\eps\to0$) as poles in $\eps$.
-This idea, known as \emph{dimensional regularization} (DR) \cite{tHooft:1972tcz}.
-Dimensional regularization has several advantages.
-It explicitly preserves both Poincaré and non-chiral gauge symmetries.\footnote{\emph{chiral} gauge symmetries are in general violated by DR and require special treatment.}
+Divergences manifest themselves in the limit $D\to4$ (or $\eps\to0$) as poles in $\eps$.
+This idea is known as \emph{dimensional regularization} (DR) \cite{tHooft:1972tcz}.
+Dimensional regularization has several advantages over other regularization schemes.
+It explicitly preserves both Poincaré and non-chiral gauge symmetries.\footnote{Chiral gauge symmetries are in general violated by DR and require special treatment.}
 Furthermore, it can be used as IR and UV regulator at the same time.
 This makes it by far the most practical regularization scheme.
 
 
 DR regularizes $L$-loop integrals by carrying out the integrations in $D$ dimensions, i.e.\ the integration measure is replaced as
 \begin{equation}
-  \int \prod_{i=1}^{L} \frac{\dd[4]{\ell_i}}{(2\pi)^{4}} ~\longrightarrow~ \quantity(\mu^{4-D})^{L}~\int \prod_{i=1}^{L} \frac{\dd[D]{\ell_i}}{(2\pi)^{D}}, \qquad \pdv{\ell^\mu_i}{\ell_{j\,\mu}} = \delta_{i j} D,
+  \int \prod_{i=1}^{L} \frac{\dd[4]{\ell_i}}{(2\pi)^{4}} ~\longrightarrow~ \quantity(\mu^{4-D})^{L}~\int \prod_{i=1}^{L} \frac{\dd[D]{\ell_i}}{(2\pi)^{D}},
   \label{eq:dimregmeasure}
 \end{equation}
 where $\mu$ is an arbitrary mass scale introduced to preserve the dimensionality of the coupling constants.
+Accordingly the algebra of the kinematic variables is extended to $D$ dimensions, implying for instance
+\begin{equation}
+   \pdv{\ell^\mu_i}{\ell_{j\,\mu}} = \delta_{i j} D.
+\end{equation}
 
 The fields and states transform as representations of Poincaré group,
 implying that all Lorentz tensor and spinor structures (such as the metric tensor, momenta, external states, etc.\@) have
@@ -37,8 +41,8 @@ There are different flavors of DR making particular choices on how this generali
 The conceptually simplest variant of DR, the \emph{conventional dimensional regularization} (CDR)
 treats all Lorentz structures uniformly in $D$ dimensions, effectively replacing the $\mathrm{SO}(1,3)$ Lorentz symmetry by $\mathrm{SO}(1,D-1)$.
 CDR has been successfully employed in many analytic computations.
-In this thesis, however, we are concerned with numerical methods, for which CDR is not very practical due to the
-formally infinite number of external states.
+In this thesis, however, we are concerned with numerical methods, for which CDR is not practical due to
+(formally infinite) number of additional external states.
 Instead, we use the 't Hooft -- Veltman (HV) scheme which keeps all external states and momenta in four dimensions.
 %and extends the space-time symmetry group to $\mathrm{SO}(1,3)\otimes \mathrm{SO}(D-4)$.
 
@@ -58,7 +62,7 @@ For the purpose of this chapter, we assume that the amplitudes $A^{L}_N$ are Lor
 This can be achieved for example through decomposition into form factors (see \cref{chap:dshel}),
 and details of this procedure are of no importance here.
 
-The most general form for any $L$-loop amplitude with $N$ external particles with momenta $p_1,\ldots,p_N$ and polarization states $\varepsilon_1,\ldots,\varepsilon_N$ is
+The most general form for any $L$-loop amplitude with $N$ external particles with momenta $p_1,\ldots,p_N$ is
 \begin{equation}
   \sum_{\Gamma \in \Delta} \sum_{\gamma_\Gamma} \qty(\int \prod_{l=1}^{L} \tilde{\dd{\ell_l}}) ~ 
   \frac{\mathcal{N}_{\Gamma,\gamma_\Gamma}%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
@@ -75,17 +79,18 @@ The external sum runs over a set of all distinct topologies $\Delta$ contributin
 The numerators $\mathcal{N}_{\Gamma,\gamma_\Gamma}$
 are functions of all possible scalar products of loop momenta, external momenta and polarization states.
 
-Carrying out loop integrations in \cref{eq:general_amplitude} is an extremely challenging task in general.
+Carrying out loop integrations in \cref{eq:general_amplitude} is a challenging task in general.
 Fortunately, there are many relations between integrals in \cref{eq:general_amplitude},
 and it is thus sufficient to consider a significantly smaller set of integrals $\Delta_M \subset \Delta$, commonly referred to
-as \emph{master integrals}. Then, the amplitude can be written in the form
+as \emph{master integrals}.
+Taking the integral relations into account the amplitude can be written in the form
 \begin{equation}
   \sum_{\Gamma \in \Delta_M} \sum_{i\in M_\Gamma} ~ c_{\Gamma,i} ~ I_{\Gamma,i}, 
     \qquad I_{\Gamma,i} \coloneqq 
       \qty(\int \prod_{l=1}^{L} \tilde{\dd{\ell_l}}) \frac{m_{\Gamma,i}}{\prod_{j\in P_\Gamma} \rho_j^{\gamma_{\Gamma i,j}}},
   \label{eq:amplitude_integrated}
 \end{equation}
-where $M_{\Gamma}$ is a set of particular choices of numerator insertions $m_{\Gamma,i}$ and exponents $\gamma_{\Gamma i}$.
+where $M_{\Gamma}$ is a set of numerator insertions $m_{\Gamma,i}$ and exponents $\gamma_{\Gamma i}$.
 Despite the fact that the numerator functions $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ in \cref{eq:general_amplitude} depend on the types of external particles and a particular model,
 the master integrals $I_{\Gamma,i}$ are universal and determined only by kinematics.
 
@@ -96,7 +101,7 @@ Evaluation of amplitudes can thus be separated into two different problems:
   \item Reducing all terms in \cref{eq:general_amplitude} to the form of \cref{eq:amplitude_integrated}, thus
     determining the coefficients $c_{\Gamma,i}$.
 \end{enumerate}
-All process- and model-dependent information is contained in the master-integral coefficients $c_{\Gamma,i}$,
+The process- and model-dependent information is contained in the master-integral coefficients $c_{\Gamma,i}$,
 so the master integrals can be recycled for all kinematically-equivalent amplitudes.
 
 In this thesis, we focus on the reduction to master-integral coefficients.
@@ -134,7 +139,10 @@ In the HV scheme, $D_{\text{ext}}=4$ and the number of corresponding scalar prod
 
 The numerators $\mathcal{N}_{\Gamma,\gamma_\Gamma}$ can be thus represented as elements of a polynomial ring
 $\mathbb{Q}_{\vb*{x},D}[\vb*{sp}]$ 
-with coefficients $c_{\va{i}}(\vb*{x},D)$ from a field of rational functions $\mathbb{Q}_{\vb*{x},D}$ of external kinematics $\vb*{x}$ and $D$:
+with coefficients $c_{\va{i}}(\vb*{x},D)$ take values int the field of rational functions $\mathbb{Q}_{\vb*{x},D}$ of external kinematics $\vb*{x}$
+and $D$:~\footnote{
+  $\vb*{x}$ is understood to be a list of variables corresponding to some parametrization of external kinematics, which we will not need to specify explicitly here.
+}
 \begin{equation}
   \mathcal{N}_{\Gamma,\gamma_\Gamma}(\vb*{x}, \vb*{sp}, D) = \sum_{\va{i} : \abs{\va{i}} < H_{\Gamma}} c_{\va{i}} (\vb*{x},D)~ m^{\va{i}}(\vb*{sp}),
   %m^{\va{i}}(\vb*{sp}) = (\sp(\ell_1,\ell_1))^{i_1} ~\cdots~ (\sp(\ell_1,p_1))^{i_{\min\qty(4,N-1)L}} ~\cdots~,
@@ -147,17 +155,17 @@ some maximal value $ H_{\Gamma} $ determined by the UV structure of the model in
 
 For a given topology $\Gamma$ in \cref{eq:general_amplitude} we chose $N_p$ denominators $\vb*{\rho}\coloneqq\{\rho_1,\ldots,\rho_{N_p}\} \in P_\Gamma$ as
 independent variables. Then $N_p$ scalar products from the set $\vb*{sp}$
-can be expressed as functions of the denominators $\vb*{\rho}$.
-This implies
-that whenever these scalar products are encountered in $\mathcal{N}_{\Gamma,\gamma_\Gamma}\qty(\vb*{sp})$, they can be cancelled with
-one of the denominators and attributed to a topology with less propagators.
+can be expressed as linear functions of denominators $\vb*{\rho}$.
+This implies that whenever these scalar products are encountered in $\mathcal{N}_{\Gamma,\gamma_\Gamma}\qty(\vb*{sp})$,
+they can be canceled with one of the denominators and attributed to a topology with fewer propagators,
+leaving only a scalar remainder (i.e.\ independent of loop-momenta) in the numerator of $\Gamma$.
 For this reason, these scalar products are commonly called \emph{reducible scalar products} (RSP).
 We choose the remaining scalar products
 \begin{equation}
   \vb*{\alpha} \coloneqq \vb*{sp} \setminus \{\text{RSPs}\} , \qquad N_\text{ISP} \coloneqq \dim{\vb*{\alpha}}   =  \dim{\vb*{sp}}-N_p,
 \end{equation}
 which are called
-\emph{irreducible scalar products} (ISP) to be the rest of our independent variables.
+\emph{irreducible scalar products} (ISP) to be the remaining independent variables.
 
 An important observation which becomes evident from our choice of variables is that all topologies with $N_p> 4 L +\frac{1}{2}L(L+1)$ are reducible.
 Indeed, in this case we have $\dim\vb*{sp} < N_p$ so there are no irreducible scalar products, and only $(\dim\vb*{sp})$ denominators can be independent.
@@ -231,7 +239,7 @@ form of
 \end{equation}
 where the components of \emph{IBP vectors} $v_k^\mu(\vb*{x},\vb*{\rho},\vb*{\alpha},D)$ are arbitrary rational functions
 of all variables. The monomials $m^{\va{i}}(\vb*{\alpha})$ can be absorbed in $v_k^\mu$, but
-it's convenient to keep them separate.
+it is convenient to keep them separate.
 
 It is useful to organize all topologies $\Delta$ in \cref{eq:rsp_reduced_amplitude}
 hierarchically by defining a partial ordering
@@ -243,10 +251,10 @@ We then slice $\Delta$ into strictly ordered (overlapping) subsets $\Delta_i$ su
 \begin{subequations} \label{eq:topology_sequence}
     \begin{gather}
          \Delta = \bigcup_i \Delta_i,  \\
-         \Delta_i  = \{\Gamma \in \Delta : \forall (\Gamma_1, \Gamma_2) \in\Delta \qif\qty( \Gamma_1 \in \Delta_i \qand \Gamma_2 < \Gamma_1) \qthen \Gamma_2 \in \Delta_i \}.
+         \Delta_i  = \{\Gamma \in \Delta : \forall \, \Gamma_1, \Gamma_2 \in\Delta \qif\qty( \Gamma_1 \in \Delta_i \qand \Gamma_2 < \Gamma_1) \qthen \Gamma_2 \in \Delta_i \}.
     \end{gather}
 \end{subequations}
-A subset $\Delta_i$ can thus be identified by it's ``greatest'' topology $\Gamma_{\Delta_i}$ ---
+A subset $\Delta_i$ can thus be identified by its ``greatest'' topology $\Gamma_{\Delta_i}$ ---
 the topology with the maximal number of propagators, which we will call a \emph{parent} topology (or diagram).
 
 If we allow exponents $\gamma_{\Gamma j}$ in \cref{eq:rsp_reduced_amplitude} to also be $\leq0$,
@@ -257,7 +265,9 @@ all integrals in \cref{eq:rsp_reduced_amplitude} can be cast into \emph{families
   \frac{m^{\va{i}}_{\Gamma_{\Delta_i}}(\vb*{\alpha})%(\ell_1,\ldots,\ell_L,p_1,\ldots,p_{N-1})
     }{\prod_{j\in P_{\Gamma_{\Delta_i}}} \rho_j^{\gamma_{j}}}.
 \end{equation}
-IBP identities of \cref{eq:ibps} generate an under-determined system of homogeneous linear equations between integrals inside a family.
+IBP identities of \cref{eq:ibps} generate an under-determined system of homogeneous linear equations between integrals inside a family.\footnote{
+  In some exceptional cases IBP identities can relate integrals between different families, but we will not need to consider them in this thesis. 
+}
 The integrals which cannot be determined from the system are chosen to be master integrals.
 The remaining integrals are then expressed as linear combinations of master integrals.
 A systematic approach of generating and solving a complete system of IBP identities was formulated by Laporta \cite{Laporta:2001dd}.
@@ -272,8 +282,8 @@ This is due to a large number of relations produced by \cref{eq:ibps},
 which is in turn due to the number of choices of IBP vectors, as well as the fact that IBP identities,
 in general, include the relations for integrals with raised denominator powers, even
 though these integrals are mostly not found from Feynman rules.
-In the end, the bottleneck is coming from the requirement to solve huge systems of linear equations.
-Many great improvements to the IBP-reduction technology has been suggested
+In the end, the bottleneck is coming from the requirement to solve large systems of linear equations.
+Many great improvements to the IBP-reduction technology have been suggested
 \cite{Gluza:2010ws,Schabinger:2011dz,Larsen:2015ped,Bern:2017gdk,Chawdhry:2018awn,Kosower:2018obg,Mastrolia:2018uzb,Frellesvig:2019kgj,Frellesvig:2019uqt,Bendle2019}
 since the Laporta algorithm became widespread.
 It was also proposed to reconstruct the reduction tables from
@@ -282,7 +292,7 @@ However, there is still a problem
 that even when the analytic reduction tables can be obtained,
 it might be challenging to use them for the reduction of amplitudes due
 to the prohibitive size of expressions (see e.g.\ \cite{Chawdhry:2018awn,Bendle2019}).
-To this end, it seems beneficial to carry out IBP reduction numerically and reconstruct
+Because of these complications it seems beneficial to carry out IBP reduction numerically and reconstruct
 analytic expressions for amplitudes instead \cite{Badger:2018enw,Chicherin:2018yne,Badger:2019djh}.
 
 In this thesis, we will take advantage of generalized unitarity-based methods (see \cref{chap:numunitarity}),
@@ -304,8 +314,8 @@ A variety of methods have been developed for the evaluation of the master integr
 Broadly speaking, they can be classified into analytic and numerical methods.
 
 Direct integration using a convenient choice of integration variables is the most straightforward option.
-All one-loop integrals can be obtained this way \cite{vanHameren:2010cp,Ellis:2007qk,tHooft:1978jhc,Denner:2010tr}.
-But for multi-scale multi-loop integrals this becomes  cumbersome   very quickly.
+Most one-loop integrals have been obtained this way \cite{vanHameren:2010cp,Ellis:2007qk,tHooft:1978jhc,Denner:2010tr}.
+However, for multi-scale multi-loop integrals this becomes  cumbersome   very quickly.
 Another method is the integration in the Mellin-Barnes  representation  \cite{Smirnov:1999gc,Tausk:1999vh,Dubovyk:2017cqw}, which
 has been used to solve some two-loop integrals.
 However, the most commonly used and successful method is to obtain analytic results via
@@ -314,8 +324,7 @@ brought into their canonical form \cite{Henn:2013pwa}.
 These equations are obtained by noticing that
 derivatives of master integrals with respect to
 external invariants or masses can be IBP-reduced to the linear vector space of master integrals from the same family.
-Thus the whole family of integrals can be obtained from solving the system of linear differential equations,
-given that the boundary conditions are known.
+Thus the whole family of integrals can be obtained from solving the system of linear differential equations.
 
 On the numerical side (see e.g.\ \cite{Freitas:2016sty} for a comprehensive review),
 the commonly used general methods are sector decomposition \cite{Binoth:2000ps,Binoth:2003ak}
@@ -328,13 +337,13 @@ methods \cite{Jones:2018hbb,Grazzini:2018bsd,Baglio:2018lrj}.
 There are no constraints on the choice of basis of master integrals, apart from the linear-independence under IBP relations. 
 This freedom can be exploited to facilitate particular aspects of the computation.
 The basis of uniformly transcendental (UT) or pure integrals \cite{ArkaniHamed:2010gh} has a simple form of the
-associated differential equations \cite{Henn:2013pwa}, which allows to straightforwardly solve them in terms of iterated integrals.
+associated differential equations \cite{Henn:2013pwa}, which allows to solve them in terms of iterated integrals.
 For numerical evaluations, as well as for exploring the structure of divergences of amplitudes,
-it might be beneficial to make as many master integrals as possible finite by constructing the so-called local integrands \cite{ArkaniHamed:2010kv,ArkaniHamed:2010gh,Badger:2016ozq,Badger:2016egz}.
+it is often beneficial to make master integrals finite by constructing the so-called local integrands \cite{ArkaniHamed:2010kv,ArkaniHamed:2010gh,Badger:2016ozq,Badger:2016egz}.
 Another numerically-oriented choice is the quasi-finite basis \cite{vonManteuffel:2014qoa,Panzer:2014gra}.
 Finally, in the numerical unitarity method, which we discuss in \cref{chap:numunitarity}, the master integrands are required to have no doubled propagators.
-The conversion between different master-integral bases can be performed with the standard IBP reduction techniques.
-
+The conversion between different master-integral bases is often simpler than obtaining the relations for high-degree numerator insertions,
+and can be performed with the standard IBP reduction techniques.
 
 In this thesis, we will not consider the evaluation of master integrals.
 For the class of process we are interested in, the analytic results are available in the literature \cite{Gehrmann:2018yef,Papadopoulos:2015jft,Gehrmann:2000zt}.
