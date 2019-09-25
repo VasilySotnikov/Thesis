@@ -6,7 +6,7 @@ the parametrization of integrands in terms of master and surface insertions is o
 The unitarity cuts are then matched to this parametrization, therefore achieving the reduction to master integrals.
 The approach is formulated in a numerical context, thus mitigating the increase of complexity with the addition of scales.
 
-We have formulated a framework for efficient numerical evaluation of helicity amplitudes with external fermions in dimensional regularization.
+We have formulated a framework for efficient numerical evaluation of helicity amplitudes with external fermions in dimensional regularization \cite{Abreu:2019odu,Abreu:2018jgq,Anger:2018ove}.
 This framework was an essential ingredient required to obtain our results for the two-loop 
 two-quark three-gluon and four-quark one-gluon helicity amplitudes.
 It is based on dimensional reconstruction, but dimensionally
@@ -18,7 +18,7 @@ in \cite{Abreu:2017xsl,Abreu:2017hqn,Badger:2018gip,Abreu:2018jgq}.
 This framework has been also useful to clarify some issues with the computation of one-loop helicity amplitudes
 with massive external fermions \cite{Anger:2018ove}.
 
-We have presented the first NLO QCD predictions for \Wbbjj{} and \Wbbjjj{} production.
+We have presented the first NLO QCD predictions for \Wbbjj{} and \Wbbjjj{} production \cite{Anger:2017glm}.
 The computation has been done in the four-flavor-number scheme, thus including effects due to the non-vanishing bottom-quark mass.
 To obtain the one-loop matrix elements with massive fermions for high-multiplicity processes,
 we have carried out a major upgrade of the \BlackHat{} library, following the developments of \cite{Ellis:2008ir}.
@@ -29,13 +29,13 @@ In contrast to this, NLO QCD corrections to inclusive $Wb\bar{b}$ production dis
 Based on this observation, we employed exclusive sums to improve predictions for observables associated to $WH(\rightarrow b{\bar b})$
 production, such as $p_T^{b\bar b}$, $p_T^W$, and $M_{b\bar b}$.
 
-We have presented the first high-precision benchmark values and compact analytic expressions
+We have presented the first high-precision benchmark values \cite{Abreu:2018jgq} 
 for all leading-color two-loop five-parton helicity amplitudes in QCD. This includes
 five-gluon amplitudes as well as amplitudes with two and four
 external quarks, including the contributions with closed light-quark loops in all cases.
 These amplitudes have been one of the long-standing bottlenecks for the NNLO-precise predictions for the production of three jets at hadron colliders.
-We have employed functional interpolation techniques to obtain the analytic expressions from exact numerical evaluations over finite fields
-with the numerical unitarity method.
+We have employed functional interpolation techniques to obtain \cite{Abreu:2019odu} compact analytic expressions for these amplitudes
+from their exact numerical evaluations over finite fields with the numerical unitarity method.
 By these means, we demonstrated for the first time that these techniques are effective in large-scale phenomenologically-relevant applications.
 
 It is worth mentioning,
@@ -45,10 +45,10 @@ the analytic expressions that we have published in \cite{Abreu:2019odu} are vali
 the physical scattering region requires some of them to be positive.
 This is due to the fact, that we have reconstructed the analytic form of the coefficients of pentagon functions \cite{Gehrmann:2018yef}, and not of the master integrals.
 The latter are, of course, unconcerned with the signs of invariants.
-The former, however, do depend on the region, since they are obtained by integrating the differential equations.
+The former, however, do depend on the region.
 This is not a conceptual problem, nor this is a big obstacle.
 Since the computational resources that we have spent to obtain our analytic expressions were modest, we
-could, in principle, simply repeat the reconstruction in the physical region.
+could, in principle, repeat the reconstruction in all physical regions.
 There might be, however, more efficient ways to exploit the results we have already acquired.
 Furthermore, the numerical evaluation of our analytic expressions over phase space is fast and stable,
 but the numerical evaluation of pentagon functions is not yet fully under control, and some improvements might be required to 
@@ -68,16 +68,18 @@ We, therefore, expect that a number of important scattering amplitudes
 in the Standard Model, such as the ones with $W/Z$ bosons, photons and $H$ in the final state, are within reach.
 The experience from extending the one-loop numerical unitarity method to massive particles indicates that
 the computation of amplitudes with top quarks should also be feasible in the foreseeable future.
-In all mentioned cases, however, the evaluation of master integrals is a very challenging task that has not yet been accomplished.
-And it very well might turn out to be the next bottleneck for some of these processes.
+In all mentioned cases, however, the evaluation of master integrals is a very challenging task that has not yet been solved in the field.
+Currently this is the next bottleneck for some of these processes.
 Some improvements might also be required to manage the complexity of the master/surface decomposition.
 
-One of the key features of the numerical unitarity method is that the knowledge of analytic integrand (e.g.\ obtained from Feynman diagrams) is not required.
+One of the key features of the numerical unitarity method is that the knowledge of the analytic integrand (e.g.\ obtained from Feynman diagrams) is not required.
 Thus, it should be able to tackle the amplitudes in models with extremely complicated Feynman rules, such as quantum gravity,
-which would be unimaginable with standard techniques.
+which is very challenging with standard techniques.
+And indeed, we have managed to obtain some partial results, which, however, have not been discussed in this thesis.
 
 Finally, we would like to mention that the application of the techniques discussed in this thesis for computations of three-loop amplitudes seems to
-be also plausible. Conceptually no new significant complications should appear, but ideas for more efficient implementation might be required.
+be also plausible. Conceptually no new significant complications should appear.
+We are looking forward to tackling these challenges in the near future.
 
 %explore floating point computations
 
