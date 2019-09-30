@@ -31,7 +31,7 @@ to regularize divergences.%
   Other regularization methods are out of the scope of this thesis.
 }
 This fact makes both definition and evaluation of helicity amplitudes rather delicate.
-It is the purpose of this chapter to present a concise and efficient method of
+It is the purpose of this chapter to present a concise and efficient method for
 evaluating multi-loop helicity amplitudes in dimensional regularization,
 amenable for numerical applications.
 
@@ -47,12 +47,12 @@ be extended to loop amplitudes in the 't Hooft-Veltman (HV) flavor of dimensiona
 This allows to dispose of the construction of complicated projectors, which
 becomes very hard to handle for large $(> 4)$ number of particles with spin \cite{Peraro:2019cjj}. 
 Another convenient feature of our approach is that it can be applied in a numerical context, such
-as evaluation of cuts through off-shell recursion as discussed in \cref{sec:evaluation_of_cuts}.
+as the evaluation of cuts through off-shell recursion as discussed in \cref{sec:evaluation_of_cuts}.
 In \cref{sec:ds_reduction} we discuss how
-the efficiency of extraction of the full $D_s$ dependence can be substantially improved
+the efficiency of the extraction of the full $D_s$ dependence can be substantially improved
 by dimensionally reducing kinematically-independent degrees of freedom in higher dimensions.
 
-The content of this chapter is based on the parts of \cite{Anger:2018ove,Abreu:2018jgq,Abreu:2019odu}.
+The content of this chapter is partially based on the articles \cite{Anger:2018ove,Abreu:2018jgq,Abreu:2019odu}.
 
 \section{Helicity Amplitudes}
 \label{sec:HV_helicity_amplitudes}
@@ -68,11 +68,12 @@ Helicity states satisfy the completeness relations
 \begin{subequations}
   \label{eq:4d_completeness_relations}
   \begin{align}
-    \sum_{\lambda=\{+1,-1\}} \varepsilon^\mu_\lambda(p){\varepsilon^\nu_\lambda}^{\star{}}(p)  &= -g^{\mu\nu} + \frac{p^\mu \eta^\nu + p^\nu \eta^\mu}{\sp(p,\eta)}, \\
+    \sum_{\lambda=\{+1,-1\}} \varepsilon^\mu_\lambda(p){\varepsilon^\nu_\lambda}^{\star{}}(p)  &= -g^{\mu\nu} + \frac{p^\mu \eta^\nu + p^\nu \eta^\mu}{\sp(p,\eta)}, \\ \label{eq:4d_fermion_completeness_relations}
     \sum_{\lambda=\{+\frac{1}{2},-\frac{1}{2}\}} u^\alpha_\lambda(p){\overline{u}_\lambda^\beta}(p)  &= \qty(\slashed{p}  \pm m\,\mathbb{1})^{\alpha\beta},
   \end{align}
 \end{subequations}
-for gauge bosons and fermions correspondingly.
+for gauge bosons and fermions correspondingly. The sign on the right hand side of \cref{eq:4d_fermion_completeness_relations} is taken to be ``$+$'' for
+particles and ``$-$'' for antiparticles.
 The number of $N$-particle helicity amplitudes is thus $2^N$, but
 the number of of independent analytic expressions can be further reduced by taking into account charge and parity transformations.
 
@@ -83,8 +84,8 @@ external states, and is given by the \emph{little group scaling},
 \end{equation}
 where $t_i$ are complex phases.
 As expected the squared matrix element $\Abs{\helampl{}}$ is Lorentz-invariant.
-With the help of the spinor helicity formalism we can also make any helicity amplitude itself into a scalar
-by removing it's \emph{spinor weight} --- a factor which has the same little group scaling
+With the help of the spinor-helicity formalism we can also make any helicity amplitude itself into a scalar
+by removing its \emph{spinor weight} --- a factor which has the same little group scaling
 as the helicity amplitude.
 Hence the scalar objects we were operating on in \cref{chap:stdtech,chap:dshel} can be the normalized helicity amplitudes.
 
@@ -294,7 +295,7 @@ Some examples of possible $v_n$ are
   \end{aligned}
 \end{equation}
 
-To construct a basis of tensor structures $v_n$ we can decompose each of the spinor chains entering it
+To construct a basis of tensor structures $v_n$ we can decompose each spinor chain
 into the standard basis of anti-symmetrized products of gamma-matrices (see e.g.\ \cite{Veltman:1988au}),
 \begin{align}\label{eq:basisGammaChainDs}
 \gamma_{[D_s-4]}^{\mu_1 \ldots \mu_n} = \frac{1}{n!} \sum_{ \sigma\in S_n} \sgn(\sigma) \gamma_{[D_s-4]}^{\mu_{\sigma(1)}} \ldots \gamma_{[D_s-4]}^{\mu_{\sigma(n)}}\,,
@@ -345,14 +346,14 @@ For instance we have $n^{(0)}=0$, $n^{(1)}=3$ and $n^{(2)}=5$.
 Each coefficient $A_n$ in the decomposition of \cref{eq:tensorDecomposition} satisfies our desiderata 
 of the HV amplitudes from \cref{sec:HV_helicity_amplitudes}, so, in principle, we need to determine all of them to obtain the full amplitude.
 In the next section we argue that, at least to NNLO, it is not the case, 
-and all physically-relevant information can be extracted from just one coefficient.  
+and all physically-relevant information can be extracted from a single coefficient.  
 
 \subsection{Relevant Coefficients}
 \label{sec:relevant_tensors}
 
 It was shown in \cite{Weinzierl:2011uz} that for NNLO computations only the $\order{\eps^0}$ terms of the 
 \emph{finite remainders} $\mathcal{F}^{(1)}$ and $\mathcal{F}^{(2)}$ of one- and two-loop amplitudes are required.
-They are defined by subtracting the universal divergent structure of one- and two-loop amplitudes, 
+They are defined by subtracting the universal divergence of one- and two-loop amplitudes, 
 \begin{subequations}
   \begin{align}
     \label{eq:F0}
@@ -367,7 +368,7 @@ The operators $\mathbf{I}^{(1)}$ and $\mathbf{I}^{(2)}$ can be found in \cite{Ca
   We also include renormalization into these operators, which is possible in massless QCD.
   Alternatively we simply consider $\mathcal{A}^{(L)}$ to denote renormalized amplitudes in this section.
 }
-Here for convenience we also introduced a finite remainder for tree amplitudes, which is simply an alias for the amplitude itself.
+For convenience we also introduced a finite remainder for tree amplitudes, which is simply an alias for the amplitude itself.
 We can expand both sides of \cref{eq:F0,eq:F1,eq:F2} in terms of tensor structures of \cref{eq:tensorDecomposition}
 to get the corresponding coefficients $\mathcal{F}^{(i)}_n$ of the finite remainders.
 The cross section is obtained by squaring the finite remainders, possibly multiplied by some
@@ -430,7 +431,7 @@ As another interesting application of these observations, we can explain why
 two different results for the two-loop helicity amplitudes of the four-quark scattering in QCD
 from \cite{Glover:2004si} and \cite{DeFreitas:2004kmi} give the same
 value for the finite remainder\footnote{The fact that the finite remainders agree was recognized by the authors of \cite{DeFreitas:2004kmi}.}.
-The author of the former computed 
+The author of the former paper computed 
 \[
   \mathcal{P}_0\qty[\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q})],
 \]
@@ -540,13 +541,13 @@ It turns out, that the amplitudes computed in the two different schemes can be c
 
 \paragraph{3.}
 In some places in our argument we referenced the little-group scaling 
-of particles' states, which, strictly speaking, applies only when these states
+of particle states, which, strictly speaking, applies only when these states
 are massless.
 The helicity eigenstates can, of course, also be constructed for
 massive particles as well, relative to some light-like reference spinor $\ket{q}$.
 In this case the notion of the little-group scaling can be considered with respect
 to this reference spinor \cite{Cohen:2010mi}.
-Then all considerations in this chapter apply without any modifications.
+Then all considerations in this chapter apply without modifications.
 
  
 
@@ -570,8 +571,8 @@ The coefficients $A^{(L)}_n$ in \cref{eq:tensorDecomposition} are polynomials in
 \end{equation}
 where $N$ is determined by the number of loops, tensor structure,
 and a particular scattering process. 
-In QCD we normally have $N=L - \#_f$ for $A^{(L)}_0$, 
-where $\#_f$ is the number of closed fermion loops.
+In QCD we normally have $N=L - L_f$ for $A^{(L)}_0$, 
+where $L_f$ is the number of closed fermion loops.
 
 One way to obtain the coefficients $\mathcal{K}_i$ 
 is with dimensional reconstruction (see \cref{sec:dimensional_reconstruction}).

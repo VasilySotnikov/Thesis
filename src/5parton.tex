@@ -19,7 +19,7 @@ and discuss their validation in \cref{sec:Validation-5parton}.
 Finally, in \cref{sec:AnalyticForm} we explain how we obtain the analytic expressions from numerical samples,
 and analyze their structure.
 
-\section{Introduction}
+\section{Overview of Results}
 \label{5parton:sec:intro}
 
 As we discussed in \cref{sec:fixed_order}, the full NNLO cross section 
@@ -44,7 +44,7 @@ obtained~\cite{Dunbar:2016gjb,Dunbar:2017nfy}.
 By now all leading-color
 two-loop five-parton amplitudes (i.e., with external gluons and/or
 massless quarks) have been computed
-numerically~\cite{Badger:2017jhb, Abreu:2017hqn, Badger:2018gip, Abreu:2018jgq},
+numerically~\cite{Badger:2017jhb, Abreu:2017hqn, Badger:2018gip, Abreu:2018jgq}.
 The numerical algorithms have later been combined with
 function-interpolation techniques~\cite{Peraro:2019svx,Peraro:2016wsq,Klappert:2019emp} to obtain
 analytic expressions for the planar two-loop five-gluon single-minus helicity
@@ -64,10 +64,10 @@ were obtained at the same time.
 Shortly afterwards, the analytic result for the full-color five-gluon all-positive helicity amplitude
 followed \cite{Badger:2019djh}.
 
-Going beyond pure QCD, the first numerical benchmark evaluation of the leading-color helicity amplitudes for the production of $W$ boson and two jets 
-have been performed very recently \cite{Hartanto:2019uvl}, where some of the required master integral were evaluated numerically.
+Going beyond pure QCD, the first numerical benchmark evaluation of the leading-color helicity amplitudes for the production of a $W$ boson and two jets 
+have been performed very recently \cite{Hartanto:2019uvl}, where some of the required master integrals were evaluated numerically.
 
-We contribute to the extreme challenge of $2\to 3$ NNLO QCD phenomenology by
+We contribute to the challenge of $2\to 3$ NNLO QCD phenomenology by
 making an important step towards the automation of the calculation of two-loop five-point amplitudes.
 In particular, we focus on the two-loop five-parton amplitude in leading-color approximation,
 which are required for the production of three jets at hadron colliders.
@@ -75,7 +75,7 @@ From a rather simple analysis, one can expect that the subleading-color contribu
 and their contribution to all observables is negligible.
 This is also confirmed by the NLO analysis.
 We obtain compact analytic expressions for these amplitudes from their numerical evaluations over finite fields.
-These expression can be employed for stable and efficient numerical evaluation.
+These expressions can be employed for stable and efficient numerical evaluation.
 
 \section{Setup}
 \label{5parton:sec:amplitudes}
@@ -96,7 +96,7 @@ Some representative diagrams are given in \cref{fig_parents5g,fig_parents2q3g,fi
 For the $\mathcal{A}^{(2)}(q,\bar{q},Q,\bar{Q},g)$ amplitude, we explicitly provide results for the case 
 of different flavors. The case of identical flavors can be obtained through anti-symmetrization over flavors.
 
-For each process we consider a full set of helicity amplitudes, which we 
+For each process we consider the full set of helicity amplitudes, which we 
 define as described in \cref{chap:dshel}.
 We take into account charge and parity transformations to reduce
 the number of independent helicity amplitudes.
@@ -678,7 +678,7 @@ This has an important implication for the evaluations over finite fields, where
 we cannot take square roots originating from the quadratic equations.
 We work around this complication by allowing the off-shell currents to
 take values in an algebraic extension of the finite field.
-We consider this in more detail in \cref{sec:muij_square_roots}.
+We explain this step in \cref{sec:muij_square_roots}.
 However, since the cuts of properly defined (normalized) helicity amplitudes are Lorentz scalars,
 we can still solve the cut equations \eqref{eq:cut_equations} in non-extended finite fields.
 For the same reason, the signature of the metric tensor is non-essential, as long as values 
@@ -806,7 +806,7 @@ them~\cite{Goncharov:2010jf,Duhr:2011zq,Duhr:2012fh,Duhr:2019tlz}. One can then
 construct a basis for the space of MPLs relevant for five-parton
 scattering amplitudes, and this was achieved in~\cite{Gehrmann:2018yef}
 where the so-called pentagon functions were introduced.
-Further, MPLs are equipped with a notion of weight, which can
+Furthermore, MPLs are equipped with a notion of weight, which can
 be used to organize the pentagon functions. Indeed, there are
 no relations between pentagon functions of different weight so we can
 separate the space of pentagon functions into subspaces of different 
@@ -825,8 +825,9 @@ where we use the fact that the poles in $\epsilon$ of two-loop amplitudes are at
 Here we denote the pentagon functions by $\{h_i\}_{i\in B}$, and the associated set of labels $B$. 
 For convenience we use the convention that the set of pentagon functions $\{h_i\}_{i\in B}$
 not only includes genuine functions, such as $\log(-s_{12})$, but also
-constants with weight, such as $\pi^2$, that correspond to the pentagon 
-functions evaluated at specific points. These are boundary conditions that
+constants with weight, such as $\pi^2$, that are related to the pentagon 
+functions evaluated at specific points.
+Constant of this type often appear as boundary conditions of differential equations and
 are specific to the kinematic region where the amplitude is evaluated.
 
 We carried out an independent computation of all master integrals in terms of the pentagon functions, and
@@ -1207,7 +1208,7 @@ We have carried out an extensive set of checks on our computational setup and re
 \cite{Smirnov:2008iw,Smirnov:2014hma,Smirnov:2019qkx} on a fixed numerical kinematic
 point.
 \item
-After the cut equations \cref{eq:cut_equations} are solved for the coefficients, we evaluate
+After the cut equations \eqref{eq:cut_equations} are solved for the coefficients, we evaluate
 the left-hand side on a new point, and compare it to the results obtained using the known values of coefficients on the right-hand side.
 This is known as ``$N=N$ test''.
 \item The whole computation of coefficients is performed either with floating point, or with finite fields (recombined into rational numbers).
@@ -1249,8 +1250,10 @@ configurations we have validated the results of
 \cite{Badger:2017jhb} with our implementation.
 We also find agreement with the numerical results of the $\NF^0$ terms
 of the two-quark three-gluon and four-quark one-gluon two-loop
-amplitudes which have been presented in the revised version of
-ref.~\cite{Badger:2018gip}.
+amplitudes which have been presented in the revised version
+of ref.~\cite{Badger:2018gip}\footnote{
+  The original version of this publication had an error, which we had identified from our evaluation.
+}.
 
 
 \section{Reconstruction of Analytic Form}
@@ -1318,7 +1321,7 @@ p_{1\mu} p_{2\nu} p_{3\rho} p_{4\sigma}\, ,
 with the Levi-Civita symbol $\varepsilon_{\mu\nu\rho\sigma}$, achieves lower total degree.
 The reason why we have to introduce the variable $\trFive$, is that 
 it is not rationally-parametrizable in terms of the Mandelstam variables.
-It's square, however, is, since it is equal to the five-point Gram determinant.
+Its square, however, is, since it is equal to the five-point Gram determinant.
 The Mandelstam variables 
 make manifest the dependence on
 the external momenta, and therefore also any possible symmetries related to 

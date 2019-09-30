@@ -650,16 +650,16 @@ For this, we will need to know the explicit components of loop momenta solving t
 Given any topology $\Gamma$ with $N$ external momenta $\{p_1,\ldots{},p_N\}$, $L$ loops and $N_p$ propagators, our aim
 is to find the components of $L$ loop momenta such that  
 the cut conditions,
-\[
+\begin{equation} \label{eq:on-shell_conditions}
   \rho_j = 0, \quad \forall j\in P_\Gamma,
-\]
-are satisfied. 
+\end{equation}
+are satisfied and the loop momenta are embedded in a space of minimal dimensions.
 In principle, the equations can be solved case by case given any initial choice of degrees of freedom.
 However, we would like the solution to be universal so that we can easily
 implement it in a computer program once and for all. 
 Furthermore, to be able to use it for both floating-point and exact (finite field) numerical evaluations, 
 we would like to avoid non-rational operations as much as possible.
-The latter is in general non-trivial since the cut conditions are quadratic, and
+The latter is in general non-trivial since the on-shell conditions \eqref{eq:on-shell_conditions} are quadratic, and
 define an algebraic variety in a $(D\cdot L)$-dimensional space.
 To this end, we closely follow the construction of ``natural'' coordinates described in \cite{Ita:2015tya, Abreu:2017xsl, Abreu:2017hqn}.
 
@@ -675,12 +675,12 @@ First, we separate four-dimensional part and $(D-4)$-dimensional parts as
 \begin{equation}
   \ell^l = \ell_{[4]}^l + \sum_{i\in \tilde{B}} \tilde{n}_i~\mu^l_{i}, \qquad \sp(\ell^l_{[4]},\tilde{n}) = 0, 
 \end{equation}
-where $\tilde{n}_i$ is some basis in $\mathsf{S}_{[D-4]}$.
+where $\tilde{n}_i$ is some basis in extra dimensions $\mathsf{S}_{[D-4]}$.
 For each strand $l$ we construct a van Neerven-Vermaseren basis (see \cref{sec:vNV_basis})
 in $D=4$ with respect to the set $B^l = B^l_p \cup B^l_t$ of $\max(4,N-1)$ external momenta selected in the following order:
 \begin{enumerate}
-  \item momenta flowing out of strand $l$ (added to $B^l_p$),
-  \item any other external momenta until $\max(4,N-1)$ of them is collected (added to $B^l_t$)
+  \item external momenta $p_i$ flowing out of strand $l$ are added to $B^l_p$,
+  \item any other external momenta until $\max(4,N-1)$ of them is collected are added to $B^l_t$.
 \end{enumerate}
 Then for $\ell^l_{[4]}$ we get
 \begin{subequations}
@@ -718,7 +718,9 @@ and the only remaining constraints are for the components of $\va{\mu}_l \colone
   \va{\mu}_i \cdot \va{\mu}_j  \equiv  \mu_{ij} (\vb*{\rho},\vb*{\alpha}) = \ell_i\cdot \ell_j - \ell_{i[4]}\cdot \ell_{j[4]},
 \end{equation}
 which can be easily solved once and for all.
-It is also possible to work around the square roots appearing from these equations (see \cref{sec:muij_square_roots} for details),
+It is also possible to work around the square roots appearing from these equations\footnote{
+  The scalar products $\mu_{ij}$ are rational by construction, but the components of loop-momenta are algebraic.
+} (see \cref{sec:muij_square_roots} for details),
 so the parametrization can be employed for computations with finite fields.
 
 We conclude this section with a remark.
@@ -731,7 +733,7 @@ This can be rather tedious already at one loop.
 \subsection{Evaluation of Tree Amplitudes}
 \label{sec:evaluation_of_tree_amplitudes}
 
-With the on-shell loop-momenta components available
+With the on-shell loop momenta available
 we can evaluate the cuts in \cref{eq:cut_amplitude} as products
 of tree amplitudes. It is worth noting, that the gauge invariance here is explicit, so 
 there is no need to worry about ghosts.
@@ -739,7 +741,8 @@ there is no need to worry about ghosts.
 In \cref{eq:unitarity_ansatz} we have constructed  the basis of numerator insertions using Lorentz-invariants, and
 the only explicit trace of the dimensional regularization was the presence of rational functions in $D$.
 The evaluation of cuts in $D$ dimensions is much more involved since we need to treat the particles' states accordingly.
-And a numerical evaluation is only possible if a finite (and preferably) small representation for these states exists.
+
+In addition, a numerical evaluation is only possible if a finite (and preferably) small representation for these states exists.
 In \cref{sec:osm} we found that thanks to Lorentz symmetry we can embed loop
 momenta into a space with finite integer dimension $D^{(L)}$.
 Taking advantage of this fact, we can embed the states of particles in a space of finite integer dimension $D_s\geq D^{(L)}$ as well.
@@ -834,7 +837,7 @@ that these evaluations reproduce correctly the corresponding limits from the for
 }
 
 We do however need to know the full analytic dependence on both $D$ and $D_s$ to be able
-to set them to $4-2\epsilon$ eventually.
+to set them both to $4-2\epsilon$ eventually.
 To this end, we employ the function interpolation techniques (see \cref{sec:func_reconstruction})
 and reconstruct the rational dependence on $D$ and polynomial dependence on $D_s$ for each coefficient from numerical samples.
 This idea is known by the name of
@@ -880,7 +883,7 @@ Or one can consider the basis of simple monomials but with transverse ISPs trace
 This was analyzed in \cite{Mastrolia:2016dhn}.
 In this way, only the IBP reduction of non-transverse ISPs remains to be carried out.
 The latter \textit{is} frequently the hardest part of the reduction of multi-loop amplitudes. 
-So the fact that the master/surface basis mitigates significantly it's difficulty is the main argument for our choice.
+So the fact that the master/surface basis mitigates significantly its difficulty is the main argument for our choice.
 
 It is also worth mentioning that the evaluation of cuts through the 
 factorization property of \cref{eq:cut_amplitude} is not essential in our approach. 
