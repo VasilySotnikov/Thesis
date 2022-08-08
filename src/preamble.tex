@@ -67,38 +67,32 @@
 %\ #1}%
 }
 
+\usepackage{blindtext, color} 
 
-\usepackage{titlesec, blindtext, color} 
+\usepackage[Sonny]{fncychap}
+\ChNameVar{\Large\bfseries}
+\ChTitleVar{\raggedright\Large\bfseries}
 
-%\definecolor{gray75}{gray}{0.75}
-%\newcommand{\hsp}{\hspace{20pt}}
-%\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
-
-%\renewcommand{\thechapter}{\Roman{chapter}}
-\titleformat{\chapter}[display]
-{\bfseries\Large}
-{\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter}
-{2ex}
-{\titlerule
-  \vspace{1ex}%
-\filright}
-[\vspace{2ex}%
-\titlerule]
-
-\titlespacing{\chapter}{0cm}{-1cm}{0.5cm}[0cm]
-
-\titlespacing{\paragraph}{%
-  0pt}{%              left margin
-  0.5\baselineskip}{% space before (vertical)
-  1em}%               space after (horizontal)
-
-
-%\titleformat{\chapter}[display]
-%  {\bfseries\Large}
-%  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
-%  {1ex}
-%  {\titlerule\vspace{1ex}\filleft}
-%  [\vspace{1ex}\titlerule]
+\makeatletter
+  \renewcommand{\DOCH}{%
+    \raggedleft
+    \CNV\FmN{\@chapapp}\space \CNoV\thechapter
+    \par\nobreak
+    \vskip -7\p@}
+  \renewcommand{\DOTI}[1]{%
+    \CTV\raggedleft\mghrulefill{\RW}\par\nobreak
+    %\vskip 5\p@
+    \CTV\FmTi{#1}\par\nobreak
+    \vskip -10\p@
+    \mghrulefill{\RW}\par\nobreak
+    \vskip 6\p@}
+  \renewcommand{\DOTIS}[1]{%
+    \CTV\raggedleft\mghrulefill{\RW}\par\nobreak
+    \CTV\FmTi{#1}\par\nobreak
+    \vskip -10\p@
+    \mghrulefill{\RW}\par\nobreak
+    \vskip 6\p@}
+\makeatother
 
 %%% Seitennumerierung vor dem eigentlichen Inhalt in römischen Zahlen
 \pagenumbering{roman}
