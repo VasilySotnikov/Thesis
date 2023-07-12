@@ -105,8 +105,8 @@ Contracting both sides with $\tau^\mu_j$ and using the orthogonality condition $
   \Dmeasure{}~ f(\vb*{\vb*{x},\vb*{\rho}},D) ~ \alpha^{\tau}_{k j} \; = \; 0,
 \end{equation}
 where we used the definition $ \alpha^{\tau}_{k j} \coloneqq  \sp(\ell_k,\tau_j)$.
-Following the same argument, it is easy to see that all monomials $\vb*{\alpha}^{\va{i}}$ with at least
-one of the transverse ISPs taken to an odd power are vanishing upon integration and thus can be taken as surface terms as it is.
+Similarly, it is easy to see that all monomials $\vb*{\alpha}^{\va{i}}$ that are odd under the change of sign of at least one
+of the transverse directions $\tau_j^\mu$ are vanishing upon integration. They can therefore be taken as surface terms as is.
 
 Next, we consider a rank 2 tensor integral
 \begin{equation}
@@ -142,12 +142,31 @@ As an example, we list all traceless completions sufficient for the computation 
   \label{eq:traceless_completion_replacements}
   \addtolength{\jot}{2ex}
   \begin{aligned}
-    (\alpha_{kj}^{\tau})^2 &\to (\alpha_{kj}^{\tau})^2 - \frac{1}{D-4}\;\mu_{kk}, \\
+    \alpha_{k j}^{\tau} \alpha_{k^\prime j}^{\tau} &\to \alpha_{k j}^{\tau} \alpha_{k^\prime j}^{\tau} - \frac{1}{D-4}\;\mu_{k k^\prime}, \\
+    %
+    (\alpha_{kj}^{\tau})^3 \alpha_{k^\prime j}^{\tau} &\to (\alpha_{k j}^{\tau})^3 \alpha_{k^\prime j}^{\tau} -
+    \frac{3}{2} \frac{1}{D-4}
+    \qty\Big(
+      (\alpha_{k j}^{\tau})^2 \mu_{k k^\prime} ~+~ \alpha_{k j}^{\tau}\alpha_{k^\prime j}^{\tau} \, \mu_{k k}
+    ), \\ 
+    %
     (\alpha_{kj}^{\tau})^2(\alpha_{k^\prime j}^{\tau})^2 &\to (\alpha_{kj}^{\tau})^2(\alpha_{k^\prime j}^{\tau})^2 - \\
     \frac{1}{2} \frac{1}{D-4} &
     \qty\Big(
     (\alpha_{kj}^{\tau})^2 \mu_{k^\prime k^\prime} ~+~ 4 \alpha_{kj}^{\tau}\alpha_{k^\prime j}^{\tau} \, \mu_{k k^\prime} + (\alpha_{k^\prime j}^{\tau})^2 \mu_{k k}
     ), \\ 
+    %
+    (\alpha_{kj}^{\tau})^5 \alpha_{k^\prime j}^{\tau} &\to (\alpha_{k j}^{\tau})^3 \alpha_{k^\prime j}^{\tau} -
+    \frac{5}{3} \frac{1}{D-4}
+    \qty\Big(
+      (\alpha_{k j}^{\tau})^4 \mu_{k k^\prime} ~+~ 2 (\alpha_{k j}^{\tau})^3 \alpha_{k^\prime j}^{\tau} \, \mu_{k k}
+    ), \\ 
+    %
+    (\alpha_{k  j}^{\tau})^3(\alpha_{k^\prime j}^{\tau})^3 &\to (\alpha_{k  j}^{\tau})^3(\alpha_{k^\prime j}^{\tau})^3 - \\ 
+    \frac{1}{D-4} & 
+    \qty\Big((\alpha_{kj}^{\tau})^3 \alpha_{k^\prime j}^{\tau} \mu_{k^\prime k^\prime} ~+~ 3 (\alpha_{kj}^{\tau})^2 (\alpha_{k^\prime j}^{\tau})^2 \, \mu_{k k^\prime} + \alpha_{k j}^{\tau} (\alpha_{k^\prime j}^{\tau})^3 \mu_{k k}
+    ), \\ 
+    %
     (\alpha_{k_1j}^{\tau})^2(\alpha_{k_2 j}^{\tau})^2 (\alpha_{k_3 j}^{\tau})^2&\to (\alpha_{k_1j}^{\tau})^2(\alpha_{k_2 j}^{\tau})^2 (\alpha_{k_3 j}^{\tau})^2 - \\ 
     \frac{1}{3}\frac{1}{D-4} 
     \Big(
